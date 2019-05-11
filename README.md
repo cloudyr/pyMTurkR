@@ -13,7 +13,7 @@ You'll also need to configure an AWS credentials file.
   1. Find your AWS credentials (Key and Secret Key) in the [IAM Console](https://console.aws.amazon.com/iam/home)
   2. Use [AWS CLI](http://aws.amazon.com/cli) to configure the credentials file, or manually create a credentials file ([see "Configuration" here](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html#configuration))
 
-## Why Make This? ##
+## Why make this? ##
 
 pyMTurkR was started because Amazon decided to [deprecate the API](https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI-legacy/Welcome.html) that MTurkR was using (meaning MTurkR would stop working). The goal of this project is to create a package that functions in a way that will be familiar to MTurkR users, making the transition easier.
 
@@ -22,6 +22,15 @@ Unlike MTurkR, pyMTurkR is not a native R-language package. This is because it u
 Because this package relies on python and boto3, this might create some additional work for the user. Namely, in addition to updating R and the R packages that pyMTurkR depends on, there is the potential additional work of updating Python and the boto3 module, should those require updating in the future. 
 
 For a deeper dive on issues related to dependencies, see [Dependency Hell on Wikipedia](https://en.wikipedia.org/wiki/Dependency_hell).
+
+## What can it do? ##
+
+Not much — yet.
+
+The following verbs have been implemented so far:
+
+- AccountBalance()
+- ApproveAssignment()
 
 ## Installation ##
 
@@ -39,7 +48,7 @@ library("pyMTurkR")
 AccountBalance()
 ```
 
-## Development Status ##
+## Development status ##
 
 For development updates see the [Changelog](https://github.com/cloudyr/pyMTurkR/blob/master/CHANGELOG.md)
 
