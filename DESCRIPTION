@@ -2,7 +2,7 @@ Package: pyMTurkR
 Type: Package
 Title: R Client for the MTurk Requester API using the AWS SDK for Python (Boto3)
 Version: 0.1.0
-Authors@R: c(person("Tyler Burleigh",
+Authors@R: c(person("Tyler", "Burleigh",
                     role = c("aut", "cre"), 
                     email = "tylerburleigh@gmail.com",
                     comment = c(twitter = "https://twitter.com/tylerburleigh")),
