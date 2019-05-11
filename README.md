@@ -21,7 +21,7 @@ Unlike MTurkR, pyMTurkR is not a native R-language package. This is because it u
 
 Because this package relies on python and boto3, this might create some additional work for the user. Namely, in addition to updating R and the R packages that pyMTurkR depends on, there is the potential additional work of updating Python and the boto3 module, should those require updating in the future. 
 
-For a deeper dive on issues related to dependencies, see ["Dependency Hell" on Wikipedia](https://en.wikipedia.org/wiki/Dependency_hell).
+For a deeper dive on issues related to dependencies, see [Dependency Hell on Wikipedia](https://en.wikipedia.org/wiki/Dependency_hell).
 
 ## Installation ##
 
@@ -29,7 +29,7 @@ The development version of pyMTurkR can be installed from this repo using `devto
 
 ```R
 library(devtools)
-install_github("tylerburleigh/pyMTurkR")
+install_github("cloudyr/pyMTurkR")
 ```
 
 ## Usage ##
@@ -41,7 +41,7 @@ AccountBalance()
 
 ## Development Status ##
 
-For development updates see the [Changelog](https://github.com/tylerburleigh/pyMTurkR/blob/master/CHANGELOG.md)
+For development updates see the [Changelog](https://github.com/cloudyr/pyMTurkR/blob/master/CHANGELOG.md)
 
 ## Troubleshooting ##
 
