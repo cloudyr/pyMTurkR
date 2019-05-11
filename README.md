@@ -66,18 +66,20 @@ python versions found:
  C:\Python36\\python.exe
 ```
 
-For example, here I see that it's using an install of python that's located in my users folder, and it found 3 different python installs in my system. If I try to load the boto3 module, it might complain that it can't find it.
+For example, here I see that it's using an install of python that's located in my users folder, and it found 3 different python installs in my system. 
+
+If I try to load the boto3 module, `reticulate` might complain that it can't find it because it's pointing to a different install path.
 
 This can be solved in one of two ways.
 
-1. The python path can be manually changed after loading pyMTurkR, to specify an install that has the boto3 module. However, note that you will have to set this path at the very beginning of your script. There's a quirk in reticulate that doesn't allow it to be changed after python commands have been invoked.
+1. Change the python path: The python path can be manually changed after loading pyMTurkR, to specify an install that has the boto3 module. However, note that you will have to set this path at the very beginning of your script. There's a quirk in reticulate that doesn't allow it to be changed after python commands have been invoked.
 
 ```
 library("pyMTurkR")
 reticulate::use_python("C:\\Python36\\python.exe")
 ```
 
-2. You can install the boto3 module for whatever python install `reticulate` happens to be using by issuing a system command through the R console, with the same pip install code as before.
+2. Install the boto3 module for the python it defaults to: You can install the boto3 module for whatever python install `reticulate` happens to be using by issuing a system command through the R console, with the same pip install code as before.
 
 ```
 system("pip install boto3")
