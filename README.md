@@ -43,3 +43,42 @@ AccountBalance()
 
 For development updates see the [Changelog](https://github.com/tylerburleigh/pyMTurkR/blob/master/CHANGELOG.md)
 
+## Troubleshooting ##
+
+One of the issues you might encounter, especially if you maintain multiple installs of python on your system, is that when `reticulate` loads python it loads a version that you didn't install the `boto3` module into. 
+
+After loading pyMTurkR, or manually loading `reticulate`, you can check the version and system path of the python install that it's using
+
+```
+> reticulate::py_config()
+
+python:         C:\Users\tyler\AppData\Local\Programs\Python\Python37\\python.exe
+libpython:      C:/Users/tyler/AppData/Local/Programs/Python/Python37/python37.dll
+pythonhome:     C:\Users\tyler\AppData\Local\Programs\Python\Python37
+version:        3.7.1 (v3.7.1:260ec2c36a, Oct 20 2018, 14:57:15) [MSC v.1915 64 bit (AMD64)]
+Architecture:   64bit
+numpy:          C:\Users\tyler\AppData\Roaming\Python\Python37\site-packages\numpy
+numpy_version:  1.15.4
+
+python versions found: 
+ C:\Users\tyler\AppData\Local\Programs\Python\Python37\\python.exe
+ C:\Python27\\python.exe
+ C:\Python36\\python.exe
+```
+
+For example, here I see that it's using an install of python that's located in my users folder, and it found 3 different python installs in my system. If I try to load the boto3 module, it might complain that it can't find it.
+
+This can be solved in one of two ways.
+
+1. The python path can be manually changed after loading pyMTurkR, to specify an install that has the boto3 module. However, note that you will have to set this path at the very beginning of your script. There's a quirk in reticulate that doesn't allow it to be changed after python commands have been invoked.
+
+```
+library("pyMTurkR")
+reticulate::use_python("C:\\Python36\\python.exe")
+```
+
+2. You can install the boto3 module for whatever python install `reticulate` happens to be using by issuing a system command through the R console, with the same pip install code as before.
+
+```
+system("pip install boto3")
+```
