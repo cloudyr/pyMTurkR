@@ -100,6 +100,6 @@ reticulate::use_python("C:\\Python36\\python.exe")
 system("pip install boto3")
 ```
 
-## Migration Guide ##
+## Migration / Key API differences ##
 
 For information about API differences, including new operations, or operations that were renamed or deprecated see the [MTurk Requester API Migration Guide](https://medium.com/@mechanicalturk/mturk-requester-api-migration-guide-3497398ba37f).
