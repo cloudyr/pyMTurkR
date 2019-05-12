@@ -1,5 +1,6 @@
 # R Client for the MTurk Requester API using the AWS SDK for Python (Boto3) #
 
+![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
 ![version](https://img.shields.io/badge/version-0.1.1-blue.svg?cacheSeconds=2592000)
 ![coverage](https://img.shields.io/badge/coverage-7%25-yellowgreen.svg?cacheSeconds=2592000)
 
