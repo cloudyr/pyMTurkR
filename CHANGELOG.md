@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.1] - 2019-05-12
+### Added
+- CreateQualificationType()
+
 ## [0.1.0] - 2019-05-11
 ### Added
 - Initialized repo with R package ingredients
