@@ -31,6 +31,7 @@ The following verbs have been implemented so far:
 
 - AccountBalance()
 - ApproveAssignment()
+- AssignQualification()
 - CreateQualificationType()
 
 ## Installation ##

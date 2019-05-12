@@ -2,6 +2,7 @@
 
 ## [0.1.1] - 2019-05-12
 ### Added
+- AssignQualification()
 - CreateQualificationType()
 
 ## [0.1.0] - 2019-05-11
