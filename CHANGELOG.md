@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.2] - 2019-05-14
+### Added
+- BlockWorker()
+
 ## [0.1.1] - 2019-05-12
 ### Added
 - AssignQualification()

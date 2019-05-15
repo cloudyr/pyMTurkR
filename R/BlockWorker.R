@@ -1,0 +1,87 @@
+#' Block Worker(s)
+#'
+#' Block a worker. This prevents a worker from completing any HITs
+#' for you while they are blocked, but does not affect their ability to
+#' complete work for other requesters or affect their worker statistics.
+#'
+#' \code{BlockWorker} prevents the specified worker from completing any of your
+#' HITs.
+#'
+#' \code{BlockWorkers()}, \code{block()}, \code{CreateWorkerBlock()},
+#' and \code{create_worker_block()} are aliases for \code{BlockWorker}.
+#'
+#' @aliases BlockWorker BlockWorkers block CreateWorkerBlock create_worker_block
+#' @param workers A character string containing a WorkerId, or a vector of
+#' character strings containing multiple WorkerIds.
+#' @param reasons A character string containing a reason for blocking a worker.
+#' This must have length 1 or length equal to the number of workers.
+#' @return \code{BlockWorker} returns a data frame containing the list of workers,
+#' reasons (for blocking them), and whether the request to block was valid.
+#'
+#' @author Tyler Burleigh, Thomas J. Leeper
+#' @references
+#' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_CreateWorkerBlockOperation.html}{API
+#' Reference: Block}
+#' @keywords Workers
+#' @examples
+#'
+#' \dontrun{
+#' BlockWorker("A1RO9UJNWXMU65", reasons="Did not follow HIT instructions.")
+#' }
+#'
+
+BlockWorker <-
+block <-
+BlockWorkers <-
+CreateWorkerBlock <-
+create_worker_block <-
+function (workers, reasons, sandbox = TRUE, profile = 'default', verbose = TRUE){
+
+  client <- GetClient(sandbox, profile) # Boto3 client
+
+  if (is.factor(workers)) {
+    workers <- as.character(workers)
+  }
+  if (is.null(reasons)) {
+    stop("Must specify one reason for block for all workers or one reason per worker")
+  }
+  if (is.factor(reasons)) {
+    reasons <- as.character(reasons)
+  }
+  if (length(workers) > 1) {
+    if (length(reasons) == 1) {
+      reasons <- rep(reasons, length(workers))
+    } else if (!length(workers) == length(reasons)) {
+      stop("length(reasons) must equal length(workers) or 1")
+    }
+  }
+
+  Workers <- emptydf(length(workers), 3, c("WorkerId", "Reason", "Valid"))
+
+  for (i in 1:length(workers)) {
+
+    response <- try(client$create_worker_block(
+      WorkerId = workers[i],
+      Reason = reasons[i]
+    ))
+
+    # Validity check
+    if(class(response) == "try-error") {
+      return(data.frame(valid = FALSE))
+    }
+    else response$valid = TRUE
+
+    Workers[i, ] <- c(workers[i], reasons[i], response$valid)
+
+    if (response$valid == TRUE & verbose) {
+      message(i, ": Worker ", workers[i], " Blocked")
+    } else if (request$valid == FALSE & verbose) {
+      warning(i,": Invalid Request for worker ",workers[i])
+    }
+
+  }
+
+  Workers$Valid <- factor(Workers$Valid, levels=c('TRUE','FALSE'))
+  return(Workers)
+
+}
