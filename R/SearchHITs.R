@@ -97,5 +97,5 @@ function (return.all = TRUE, results = as.integer(10),
   if (verbose) {
     message(runningtotal, " HITs Retrieved")
   }
-  return(x[c("HITs", "QualificationRequirements")])
+  return(to.return[c("HITs", "QualificationRequirements")])
 }
