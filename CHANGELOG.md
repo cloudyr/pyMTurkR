@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.2] - 2019-05-16
+### Added
+- SearchHITs()
+
 ## [0.1.2] - 2019-05-14
 ### Added
 - BlockWorker()
