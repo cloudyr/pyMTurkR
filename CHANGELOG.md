@@ -3,6 +3,7 @@
 ## [0.1.4] - 2019-05-18
 ### Added
 - RegisterHITType()
+- ChangeHITType()
 
 ## [0.1.3] - 2019-05-16
 ### Added
