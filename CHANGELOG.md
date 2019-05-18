@@ -1,6 +1,10 @@
 # Changelog
 
-## [0.1.2] - 2019-05-16
+## [0.1.4] - 2019-05-18
+### Added
+- RegisterHITType()
+
+## [0.1.3] - 2019-05-16
 ### Added
 - SearchHITs()
 
