@@ -18,10 +18,11 @@ as.data.frame.HITs <- function(hits) {
     HITs[i, 4] <- reticulate::py_to_r(hit$CreationTime)
     HITs[i, 5] <- hit$Title
     HITs[i, 6] <- hit$Description
-    HITs[i, 7] <- hit$Keywords
+    if (!is.null(hit$Keywords)) {
+      HITs[i, 7] <- hit$Keywords
+    }
     HITs[i, 8] <- hit$HITStatus
     HITs[i, 9] <- hit$MaxAssignments
-    HITs[i, 9] <- hit$Reward
     if (!is.null(hit$Reward)) {
       HITs[i, 10] <- hit$Reward
     }
@@ -29,7 +30,9 @@ as.data.frame.HITs <- function(hits) {
     HITs[i, 12] <- reticulate::py_to_r(hit$Expiration)
     HITs[i, 13] <- hit$AssignmentDurationInSeconds
     HITs[i, 14] <- hit$HITReviewStatus
-    HITs[i, 15] <- hit$RequesterAnnotation
+    if (!is.null(hit$RequesterAnnotation)) {
+      HITs[i, 15] <- hit$RequesterAnnotation
+    }
     HITs[i, 16] <- hit$NumberOfAssignmentsPending
     HITs[i, 17] <- hit$NumberOfAssignmentsAvailable
     HITs[i, 18] <- hit$NumberOfAssignmentsCompleted
@@ -54,9 +57,9 @@ as.data.frame.QualificationRequirements <- function(hits, sandbox = TRUE, profil
     hitid <- hit$HITId
     quals <- hit$QualificationRequirements
 
-    if(length(quals > 0)) {
+    Quals <- emptydf(length(quals), 5, c('HITId', 'QualificationTypeId', 'Name', 'Comparator', 'Value'))
 
-      Quals <- emptydf(length(quals), 5, c('HITId', 'QualificationTypeId', 'Name', 'Comparator', 'Value'))
+    if(length(quals) > 0) {
 
       for (k in 1:length(quals)) {
 
