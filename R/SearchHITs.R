@@ -7,13 +7,12 @@
 #' \code{searchhits()}, \code{ListHITs()}, and \code{listhits()} are aliases
 #'
 #' @aliases SearchHITs searchhits ListHITs listhits
-#' @param return.all A logical indicating whether all HITs (as opposed to a
-#' small subjset) should be returned. Default is \code{TRUE}.
+#' @param return.pages An integer indicating how many pages of results should
+#' be returned.
 #' @param pagetoken An optional character string indicating which page of
-#' search results should be returned. Most users can ignore this.
-#' @param results An optional character string indicating how many search
-#' results should be returned by each request, between 1 and 100. Most users
-#' can ignore this.
+#' search results to start at. Most users can ignore this.
+#' @param results An optional character string indicating how many results to
+#' fetch per page. Must be between 1 and 100. Most users can ignore this.
 #' @return A list containing data frames of HITs and Qualification Requirements
 #' @author Tyler Burleigh, Thomas J. Leeper
 #' @references
@@ -31,7 +30,7 @@ SearchHITs <-
 searchhits <-
 ListHITs <-
 listhits <-
-function (return.all = TRUE, results = as.integer(10),
+function (return.pages = NULL, results = as.integer(100),
           pagetoken = NULL, sandbox = TRUE,
           profile = 'default', verbose = TRUE) {
 
@@ -66,19 +65,19 @@ function (return.all = TRUE, results = as.integer(10),
   runningtotal <- response$NumResults
   pages <- 1
 
-  if (return.all & !is.null(response$NextToken)) { # If user wants all results
-                    # continue to fetch pages
+  if (!is.null(response$NextToken)) { # continue to fetch pages
 
       # Starting with the next page, identified using NextToken
       pagetoken <- response$NextToken
 
       # Fetch while the number of results is equal to max results per page
-      while (results.found == results) {
+      while (results.found == results &
+             (is.null(return.pages) || pages < return.pages)) {
 
           # Fetch next batch
           response <- batch(pagetoken)
 
-          # If user wants HIT df, add to that
+          # Add to HIT DF
           to.return$HITs <- rbind(to.return$HITs, response$HITs)
 
           to.return$QualificationRequirements <- rbind(to.return$QualificationRequirements,
@@ -89,7 +88,9 @@ function (return.all = TRUE, results = as.integer(10),
           results.found <- response$NumResults
 
           # Update page token
-          pagetoken <- response$NextToken
+          if(!is.null(response$NextToken)){
+            pagetoken <- response$NextToken
+          }
           pages <- pages + 1
       }
   }

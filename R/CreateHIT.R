@@ -26,21 +26,18 @@
 #' appropriate ExternalQuestion data structure specified for the
 #' \code{question} parameter.
 #'
-#' \code{createhit()} and \code{create()} are aliases. \code{\link{BulkCreate}}
-#' can be used to create multiple HITs in a single call.
+#' \code{createhit()}, \code{create()}, \code{create_hit()},
+#' \code{CreateHITWithHITType()}, \code{create_hit_with_hit_type()} are aliases.
 #'
-#' @aliases CreateHIT createhit create
+#' @aliases CreateHIT createhit create create_hit CreateHITWithHITType
+#' create_hit_with_hit_type
 #' @param hit.type An optional character string specifying the HITTypeId that
-#' this HIT should be visibly grouped with (and whose properties, e.g. reward
-#' amount, this HIT should inherit).
+#' this HIT should be generated from. If used, the HIT will inherit title,
+#' description, keywords, reward, and other properties of the HIT.
 #' @param question A mandatory (unless layoutid is specified) character string
 #' containing a QuestionForm, HTMLQuestion, or ExternalQuestion data structure.
 #' In lieu of a question parameter, a \code{hitlayoutid} and, optionally,
 #' \code{hitlayoutparameters} can be specified.
-#' @param validate.question A logical specifying whether the \code{question}
-#' parameter should be validated against the relevant MTurk schema prior to
-#' creating the HIT (operation will fail if it does not validate, and will
-#' return validation information). Default is \code{FALSE}.
 #' @param expiration The time (in seconds) that the HIT should be available to
 #' workers. Must be between 30 and 31536000 seconds.
 #' @param assignments A character string specifying the number of assignments
@@ -99,6 +96,9 @@
 create <-
   CreateHIT <-
   createhit <-
+  create_hit <-
+  CreateHITWithHITType <-
+  create_hit_with_hit_type <-
   function (hit.type = NULL, question = NULL, expiration, assignments = NULL,
             assignment.review.policy = NULL, hit.review.policy = NULL,
             annotation = NULL, unique.request.token = NULL, title = NULL,
@@ -109,9 +109,6 @@ create <-
 
     client <- GetClient(sandbox, profile) # Boto3 client
 
-    # Build request as string
-    request <- "client$create_hit("
-
     if (!is.null(hit.type)) {
       if (is.factor(hit.type)) {
         hit.type <- as.character(hit.type)
@@ -121,35 +118,27 @@ create <-
         warning("HITType specified, HITType parameters (title, description, reward, duration) ignored")
       }
 
-      # First fetch HITs
-      hitlist <- SearchHITs()
-      hitlist <- hitlist$HITs
-      # Next check if hit.type exists
-      targethit <- subset(hitlist, HITTypeId == hit.type)
-      # If it does, use its parameters
-      if(nrow(targethit) > 0) {
-        request <- paste0(request, "Title = '", targethit[1,]$Title, "'")
-        request <- paste0(request, ", Description = '", targethit[1,]$Description, "'")
-        if(!is.na(targethit[1,]$Keywords)){
-          request <- paste0(request, "Keywords = '", targethit[1,]$Keywords, "'")
+      # Build create_hit_with_hit_type() request
+      request <- "client$create_hit_with_hit_type("
+
+      request <- paste0(request, "HITTypeId = '", hit.type, "'")
+
+      # Assignments, if specified
+      if(!is.null(assignments)) {
+        if (as.integer(assignments) < 1 | as.integer(assignments) > 1e+09) {
+          stop("MaxAssignments must be between 1 and 1000000000")
+        } else {
+          request <- paste0(request, ", MaxAssignments = as.integer(", assignments, ")")
         }
-        request <- paste0(request, ", AssignmentDurationInSeconds = as.integer(", targethit[1,]$AssignmentDurationInSeconds, ")")
-        request <- paste0(request, ", Reward = '", targethit[1,]$Amount, "'")
-        request <- paste0(request, ", MaxAssignments = as.integer(", targethit[1,]$MaxAssignments, ")")
-        request <- paste0(request, ", Question = ", "'", gsub("\'","\\\"", targethit[1,]$Question), "'") # Escape chars
-        request <- paste0(request, ", AutoApprovalDelayInSeconds = as.integer(", targethit[1,]$AutoApprovalDelayInSeconds, ")")
-        if(!is.na(targethit[1,]$RequesterAnnotation)){
-          request <- paste0(request, ", RequesterAnnotation = ", annotation)
-        }
-      } else {
-        stop("HITType specified could not be found when searching HITs")
       }
 
     } else { # No hit.type specified, use other params
-
       if (is.null(title) || is.null(description) || is.null(reward) || is.null(duration)) {
         stop("Must specify HITType xor HITType parameters (title, description, reward, duration)")
       } else { # Use other params
+
+        # Build create_hit() request
+        request <- "client$create_hit("
 
         # Title
         if (nchar(title) > 128) {
@@ -188,43 +177,36 @@ create <-
           }
         }
 
-        # Must contain one of: QuestionForm, HTMLQuestion,
-        #   ExternalQuestion for 'question' parameter; or a 'hitlayoutid'
-        if (is.null(question)) {
-          if (!is.null(hitlayoutid)) {
-            request <- paste0(request, ", HITLayoutId = '", hitlayoutid, "'")
-            if (!is.null(hitlayoutparameters)) {
-              # Write this after GenerateHITLayoutParameter.R
-              #request <- paste0(request, "HITLayoutParameter = ", hitlayoutparameters)
-            }
-          } else {
-            stop("Must specify QuestionForm, HTMLQuestion, or ExternalQuestion for 'question' parameter; or a 'hitlayoutid'")
-          }
-        } else {
-          if (class(question) %in% c('HTMLQuestion','ExternalQuestion')) {
-            question <- question$string
-          }
-          request <- paste0(request, ", Question = ", question)
-        }
-
         # Assignments
         if (is.null(assignments)) {
           stop("Number of Assignments must be specified")
         } else if (as.integer(assignments) < 1 | as.integer(assignments) > 1e+09) {
           stop("MaxAssignments must be between 1 and 1000000000")
         } else {
-          assignments <- as.integer(assignments)
           request <- paste0(request, ", MaxAssignments = as.integer(", assignments, ")")
         }
 
-        # Annotation
-        if (!is.null(annotation) && nchar(annotation) > 255) {
-          stop("Annotation must be <= 255 characters")
-        } else if (!is.null(annotation)) {
-          request <- paste0(request, ", RequesterAnnotation = ", annotation)
-        }
-
       }
+    }
+
+    # Common to both methods
+
+    # Must contain one of: QuestionForm, HTMLQuestion,
+    #   ExternalQuestion for 'question' parameter; or a 'hitlayoutid'
+    if (is.null(question)) {
+      if (!is.null(hitlayoutid)) {
+        request <- paste0(request, ", HITLayoutId = '", hitlayoutid, "'")
+        if (!is.null(hitlayoutparameters)) {
+          request <- paste0(request, "HITLayoutParameter = ", hitlayoutparameters)
+        }
+      } else {
+        stop("Must specify QuestionForm, HTMLQuestion, or ExternalQuestion for 'question' parameter; or a 'hitlayoutid'")
+      }
+    } else {
+      if (class(question) %in% c('HTMLQuestion','ExternalQuestion')) {
+        question <- question$string
+      }
+      request <- paste0(request, ", Question = ", question)
     }
 
     # Expiration
@@ -234,6 +216,13 @@ create <-
       stop("HIT LifetimeInSeconds/expiration must be between 30 and 31536000 seconds")
     } else {
       request <- paste0(request, ", LifetimeInSeconds = as.integer(", expiration, ")")
+    }
+
+    # Annotation
+    if (!is.null(annotation) && nchar(annotation) > 255) {
+      stop("Annotation must be <= 255 characters")
+    } else if (!is.null(annotation)) {
+      request <- paste0(request, ", RequesterAnnotation = ", annotation)
     }
 
     # Assignment review policy

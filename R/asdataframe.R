@@ -39,17 +39,17 @@ as.data.frame.HITs <- function(hits) {
     HITs[i, 19] <- hit$Question
   }
 
-  return(HITs)
+  invisible(return(HITs))
 }
 
 
 
 # QUALIFICATION STRUCTURES
 
-as.data.frame.QualificationRequirements <- function(hits, sandbox = TRUE, profile = 'default') {
+as.data.frame.QualificationRequirements <- function(hits) {
 
-  return.quals <- emptydf(nrow = 0, ncol = 5,
-                   c("HITId", "QualificationTypeId", "Name", "Comparator", "Value"))
+  return.quals <- emptydf(nrow = 0, ncol = 6, c('HITId', 'QualificationTypeId',  'Comparator',
+                                                'Value', 'RequiredToPreview', 'ActionsGuarded'))
 
   for (i in 1:length(hits)) {
 
@@ -57,22 +57,34 @@ as.data.frame.QualificationRequirements <- function(hits, sandbox = TRUE, profil
     hitid <- hit$HITId
     quals <- hit$QualificationRequirements
 
-    Quals <- emptydf(length(quals), 5, c('HITId', 'QualificationTypeId', 'Name', 'Comparator', 'Value'))
+    Quals <- emptydf(length(quals), 6, c('HITId', 'QualificationTypeId',  'Comparator',
+                                         'Value', 'RequiredToPreview', 'ActionsGuarded'))
 
     if(length(quals) > 0) {
 
       for (k in 1:length(quals)) {
 
           qual <- quals[[k]]
-          # Get name
-          client <- GetClient(sandbox, profile) # Boto3 client
-          qual.lookup <- client$get_qualification_type(QualificationTypeId = qual$QualificationTypeId)
 
           Quals[k, 1] <- hitid
           Quals[k, 2] <- qual$QualificationTypeId
-          Quals[k, 3] <- qual.lookup$QualificationType$Name
-          Quals[k, 4] <- qual$Comparator
-          Quals[k, 5] <- qual$Value
+          Quals[k, 3] <- qual$Comparator
+
+          # This may need more testing and more conditions
+          if (!is.null(qual$IntegerValues)) {
+            Quals[k, 4] <- qual$IntegerValues
+          } else if (!is.null(qual$LocaleValues)) { # Country quals
+            Quals[k, 4] <- qual$LocaleValues[[1]]$Country
+            if(length(qual$LocaleValues) > 1) {
+              for (j in 2:length(qual$LocaleValues)) {
+                Quals[k, 4] <- paste(Quals[k, 4], ", ", qual$LocaleValues[[j]]$Country)
+              }
+            }
+          }
+
+          Quals[k, 5] <- qual$RequiredToPreview
+          Quals[k, 6] <- qual$ActionsGuarded
+
       }
     } else {
       Quals[1, 1] <- hitid
@@ -82,6 +94,99 @@ as.data.frame.QualificationRequirements <- function(hits, sandbox = TRUE, profil
   }
 
   return(return.quals)
+
+}
+
+
+
+
+
+
+# ASSIGNMENTS
+
+as.data.frame.Assignment <- function(assignment) {
+
+  Assignment <- emptydf(nrow = 1, ncol = 10, c('AssignmentId', 'WorkerId', 'HITId',
+                                                'AssignmentStatus', 'AutoApprovalTime',
+                                                'AcceptTime', 'SubmitTime', 'ApprovalTime',
+                                                'RejectionTime', 'RequesterFeedback'))
+
+  return.answers <- list()
+
+    Assignment[1] <- assignment$AssignmentId
+    Assignment[2] <- assignment$WorkerId
+    Assignment[3] <- assignment$HITId
+    Assignment[4] <- assignment$AssignmentStatus
+    Assignment[5] <- reticulate::py_to_r(assignment$AutoApprovalTime)
+    if (!is.null(assignment$AcceptTime)) {
+      Assignment[6] <- reticulate::py_to_r(assignment$AcceptTime)
+    }
+    Assignment[7] <- reticulate::py_to_r(assignment$SubmitTime)
+    if (!is.null(assignment$ApprovalTime)) {
+      Assignment[8] <- reticulate::py_to_r(assignment$ApprovalTime)
+    }
+    if (!is.null(assignment$RejectionTime)) {
+      Assignment[9] <- reticulate::py_to_r(assignment$RejectionTime)
+    }
+    if (!is.null(assignment$RequesterFeedback)) {
+      Assignment[10] <- assignment$RequesterFeedback
+    }
+
+    answers <- as.data.frame.QuestionFormAnswers(Assignment, assignment$Answer)
+    return.answers <- rbind(return.answers, answers)
+
+
+  return(list(assignments = Assignment, questions = return.answers))
+}
+
+
+
+
+
+
+# QUESTION FORM ANSWERS
+
+as.data.frame.QuestionFormAnswers <- function(assignment, answers) {
+
+  # Parse XML
+  nsDefs <- xmlNamespaceDefinitions(xmlParse(answers))
+  ns <- structure(sapply(nsDefs, function(x) x$uri), names = names(nsDefs))
+  names(ns)[1] <- "x"
+  xmlAnswers <- xpathSApply(xmlParse(answers), "//x:Answer", namespaces=ns)
+
+  questions <- length(xmlChildren(xmlAnswers[[1]][["QuestionIdentifier"]]))
+  return.answers <- emptydf(nrow = 0, 9, c("AssignmentId", "WorkerId", "HITId", "QuestionIdentifier",
+                                       "FreeText", "SelectionIdentifier", "OtherSelectionField",
+                                       "UploadedFileKey", "UploadedFileSizeInBytes"))
+
+  for (i in 1:length(questions)) {
+
+    Answer <- emptydf(1, 9, c("AssignmentId", "WorkerId", "HITId", "QuestionIdentifier",
+                               "FreeText", "SelectionIdentifier", "OtherSelectionField",
+                               "UploadedFileKey", "UploadedFileSizeInBytes"))
+
+    question <- xmlAnswers[[i]]
+
+    Answer[1] <- assignment$AssignmentId
+    Answer[2] <- assignment$WorkerId
+    Answer[3] <- assignment$HITId
+    Answer[4] <- xmlValue(question[["QuestionIdentifier"]][[1]])
+    if (!is.null(question[["FreeText"]]))
+      Answer[5] <- xmlValue(question[["FreeText"]][[1]])
+    if (!is.null(question[["SelectionIdentifier"]]))
+      Answer[6] <- xmlValue(question[["SelectionIdentifier"]][[1]])
+    if (!is.null(question[["OtherSelectionField"]]))
+      Answer[7] <- xmlValue(question[["OtherSelectionField"]][[1]])
+    if (!is.null(question[["UploadedFileKey"]]))
+      Answer[8] <- xmlValue(question[["UploadedFileKey"]][[1]])
+    if (!is.null(question[["UploadedFileSizeInBytes"]]))
+      Answer[9] <- xmlValue(question[["UploadedFileSizeInBytes"]][[1]])
+
+    return.answers <- rbind(Answer, return.answers)
+
+  }
+
+  return(return.answers)
 
 }
 

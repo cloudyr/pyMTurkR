@@ -7,20 +7,19 @@
 \alias{listhits}
 \title{Search your HITs}
 \usage{
-SearchHITs(return.all = TRUE, results = as.integer(10),
+SearchHITs(return.pages = NULL, results = as.integer(100),
   pagetoken = NULL, sandbox = TRUE, profile = "default",
   verbose = TRUE)
 }
 \arguments{
-\item{return.all}{A logical indicating whether all HITs (as opposed to a
-small subjset) should be returned. Default is \code{TRUE}.}
+\item{return.pages}{An integer indicating how many pages of results should
+be returned.}
 
-\item{results}{An optional character string indicating how many search
-results should be returned by each request, between 1 and 100. Most users
-can ignore this.}
+\item{results}{An optional character string indicating how many results to
+fetch per page. Must be between 1 and 100. Most users can ignore this.}
 
 \item{pagetoken}{An optional character string indicating which page of
-search results should be returned. Most users can ignore this.}
+search results to start at. Most users can ignore this.}
 }
 \value{
 A list containing data frames of HITs and Qualification Requirements
