@@ -37,7 +37,7 @@ Approve assignments, by AssignmentId (as returned by
 \code{\link{GetAssignment}} or by HITId or HITTypeId. Must specify
 \code{assignments}.
 
-\code{ApproveAssignments()},  \code{approve_assignment()} and \code{approve()}
+\code{ApproveAssignments()}, \code{approve_assignment()} and \code{approve()}
 are aliases for \code{ApproveAssignment}.
 }
 \examples{

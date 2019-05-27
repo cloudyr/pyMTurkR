@@ -149,12 +149,12 @@ as.data.frame.Assignment <- function(assignment) {
 as.data.frame.QuestionFormAnswers <- function(assignment, answers) {
 
   # Parse XML
-  nsDefs <- xmlNamespaceDefinitions(xmlParse(answers))
+  nsDefs <- XML::xmlNamespaceDefinitions(XML::xmlParse(answers))
   ns <- structure(sapply(nsDefs, function(x) x$uri), names = names(nsDefs))
   names(ns)[1] <- "x"
-  xmlAnswers <- xpathSApply(xmlParse(answers), "//x:Answer", namespaces=ns)
+  xmlAnswers <- XML::xpathSApply(XML::xmlParse(answers), "//x:Answer", namespaces=ns)
 
-  questions <- length(xmlChildren(xmlAnswers[[1]][["QuestionIdentifier"]]))
+  questions <- length(XML::xmlChildren(xmlAnswers[[1]][["QuestionIdentifier"]]))
   return.answers <- emptydf(nrow = 0, 9, c("AssignmentId", "WorkerId", "HITId", "QuestionIdentifier",
                                        "FreeText", "SelectionIdentifier", "OtherSelectionField",
                                        "UploadedFileKey", "UploadedFileSizeInBytes"))
@@ -170,17 +170,17 @@ as.data.frame.QuestionFormAnswers <- function(assignment, answers) {
     Answer[1] <- assignment$AssignmentId
     Answer[2] <- assignment$WorkerId
     Answer[3] <- assignment$HITId
-    Answer[4] <- xmlValue(question[["QuestionIdentifier"]][[1]])
+    Answer[4] <- XML::xmlValue(question[["QuestionIdentifier"]][[1]])
     if (!is.null(question[["FreeText"]]))
-      Answer[5] <- xmlValue(question[["FreeText"]][[1]])
+      Answer[5] <- XML::xmlValue(question[["FreeText"]][[1]])
     if (!is.null(question[["SelectionIdentifier"]]))
-      Answer[6] <- xmlValue(question[["SelectionIdentifier"]][[1]])
+      Answer[6] <- XML::xmlValue(question[["SelectionIdentifier"]][[1]])
     if (!is.null(question[["OtherSelectionField"]]))
-      Answer[7] <- xmlValue(question[["OtherSelectionField"]][[1]])
+      Answer[7] <- XML::xmlValue(question[["OtherSelectionField"]][[1]])
     if (!is.null(question[["UploadedFileKey"]]))
-      Answer[8] <- xmlValue(question[["UploadedFileKey"]][[1]])
+      Answer[8] <- XML::xmlValue(question[["UploadedFileKey"]][[1]])
     if (!is.null(question[["UploadedFileSizeInBytes"]]))
-      Answer[9] <- xmlValue(question[["UploadedFileSizeInBytes"]][[1]])
+      Answer[9] <- XML::xmlValue(question[["UploadedFileSizeInBytes"]][[1]])
 
     return.answers <- rbind(Answer, return.answers)
 

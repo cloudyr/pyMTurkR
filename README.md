@@ -1,8 +1,8 @@
 # R Client for the MTurk Requester API using the AWS SDK for Python (Boto3) #
 
 ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
-![version](https://img.shields.io/badge/version-0.1.6-blue.svg)
-![progress](https://img.shields.io/badge/progress-20%25-yellowgreen.svg)
+![version](https://img.shields.io/badge/version-0.1.7-blue.svg)
+![progress](https://img.shields.io/badge/progress-22%25-yellowgreen.svg)
 
 **pyMTurkR** is a successor to [MTurkR](https://github.com/cloudyr/MTurkR), and a work in progress. pyMTurkR provides access to the Amazon Mechanical Turk [Amazon Mechanical Turk](https://requester.mturk.com) (MTurk) [Requester API](http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/Welcome.html), by wrapping around the [AWS SDK for Python (Boto3)](https://aws.amazon.com/sdk-for-python) [MTurk Client](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mturk.html).
 
@@ -29,12 +29,11 @@ For a deeper dive on issues related to dependencies, see [Dependency Hell on Wik
 
 ## What can it do? ##
 
-Not much — yet.
-
 The following verbs have been implemented so far:
 
 - AccountBalance()
 - ApproveAssignment()
+- ApproveAllAssignments()
 - AssignQualification()
 - BlockWorker()
 - ContactWorker()

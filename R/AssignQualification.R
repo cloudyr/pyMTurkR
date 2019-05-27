@@ -83,102 +83,91 @@
 #'
 
 AssignQualification <-
-assignqual <-
-AssignQualifications <-
-associate_qualification_with_worker <-
-function (qual = NULL,
-          workers,
-          value = as.integer(1),
-          notify = FALSE,
-          name = NULL,
-          description = NULL,
-          keywords = NULL,
-          status = NULL,
-          retry.delay = NULL,
-          test = NULL,
-          answerkey = NULL,
-          test.duration = NULL,
-          auto = NULL,
-          auto.value = NULL,
-          sandbox = TRUE,
-          profile = 'default',
-          verbose = TRUE) {
+  assignqual <-
+  AssignQualifications <-
+  associate_qualification_with_worker <-
+  function (qual = NULL, workers, value = as.integer(1),
+            notify = FALSE, name = NULL, description = NULL,
+            keywords = NULL, status = NULL, retry.delay = NULL,
+            test = NULL, answerkey = NULL, test.duration = NULL,
+            auto = NULL, auto.value = NULL, sandbox = TRUE,
+            profile = 'default', verbose = TRUE) {
 
-  client <- GetClient(sandbox, profile) # Boto3 client
+    client <- GetClient(sandbox, profile) # Boto3 client
 
-  if (!is.null(qual) & is.factor(qual)) {
+    if (!is.null(qual) & is.factor(qual)) {
       qual <- as.character(qual)
-  }
-  if (is.factor(workers)) {
-      workers <- as.character(workers)
-  }
-  if (is.factor(value)) {
-      value <- as.character(value)
-  }
-  if (as.logical(notify) != TRUE & as.logical(notify) != FALSE) {
-    stop("SendNotification must be TRUE or FALSE.")
-  }
-  for (i in 1:length(value)) {
-      if (is.null(value[i]) || is.na(value[i]) || value[i]=='') {
-          warning("Value ", i," not assigned; value assumed to be 1")
-          value[i] <- as.integer(1)
-      } else if(is.na(as.integer(value[i]))) {
-          stop("value ", i," is not or cannot be coerced to integer")
-      }
-  }
-
-  worker <- NULL
-
-  # Function to batch process
-  batch <- function(worker, value) {
-    response <- try(client$associate_qualification_with_worker(
-      QualificationTypeId = qual,
-      WorkerId = worker,
-      IntegerValue = as.integer(value),
-      SendNotification = as.logical(notify)
-    ))
-
-    # Validity check
-    if(class(response) == "try-error") {
-      return(data.frame(valid = FALSE))
     }
-    else response$valid = TRUE
+    if (is.factor(workers)) {
+      workers <- as.character(workers)
+    }
+    if (is.factor(value)) {
+      value <- as.character(value)
+    }
+    if (as.logical(notify) != TRUE & as.logical(notify) != FALSE) {
+      stop("SendNotification must be TRUE or FALSE.")
+    }
+    for (i in 1:length(value)) {
+      if (is.null(value[i]) || is.na(value[i]) || value[i]=='') {
+        warning("Value ", i," not assigned; value assumed to be 1")
+        value[i] <- as.integer(1)
+      } else if(is.na(as.integer(value[i]))) {
+        stop("value ", i," is not or cannot be coerced to integer")
+      }
+    }
 
-    if(verbose)
-      message("Qualification (", qual, ") Assigned to worker ", worker)
-    return(invisible(response))
-  }
+    worker <- NULL
 
-  # Create a new Qualification Type, if defined atomically
-  if (!is.null(name)) {
+    # Function to batch process
+    batch <- function(worker, value) {
+      response <- try(client$associate_qualification_with_worker(
+        QualificationTypeId = qual,
+        WorkerId = worker,
+        IntegerValue = as.integer(value),
+        SendNotification = as.logical(notify)
+      ))
+
+      # Validity check
+      if(class(response) == "try-error") {
+        return(data.frame(valid = FALSE))
+      }
+      else response$valid = TRUE
+
+      if(verbose)
+        message("Qualification (", qual, ") Assigned to worker ", worker)
+      return(invisible(response))
+    }
+
+    # Create a new Qualification Type, if defined atomically
+    if (!is.null(name)) {
       if (!is.null(qual))
-          stop("Cannot specify QualificationTypeId and properties of new QualificationType")
+        stop("Cannot specify QualificationTypeId and properties of new QualificationType")
       if (is.null(description))
-          stop("No Description provided for QualificationType")
+        stop("No Description provided for QualificationType")
       if (is.null(status) || !status == "Active") {
-          warning("QualificationTypeStatus set to 'Active'")
-          status <- "Active"
+        warning("QualificationTypeStatus set to 'Active'")
+        status <- "Active"
       }
       type <- CreateQualificationType(name = name, description = description,
-          keywords = keywords, status = status, retry.delay = retry.delay,
-          test = test, answerkey = answerkey, test.duration = test.duration,
-          auto = auto, auto.value = auto.value, sandbox = sandbox,
-          profile = profile)
+                                      keywords = keywords, status = status, retry.delay = retry.delay,
+                                      test = test, answerkey = answerkey, test.duration = test.duration,
+                                      auto = auto, auto.value = auto.value, sandbox = sandbox,
+                                      profile = profile)
       qual <- as.character(type$QualificationTypeId)
-  }
+    }
 
-  qual.value <- value
-  Qualifications <- emptydf(length(workers), 5, c("WorkerId", "QualificationTypeId", "Value", "Notified", "Valid"))
+    qual.value <- value
+    Qualifications <- emptydf(length(workers), 5, c("WorkerId", "QualificationTypeId", "Value", "Notified", "Valid"))
 
-  for (i in 1:length(workers)) {
+    for (i in 1:length(workers)) {
       x <- batch(workers[i], value)
       if (is.null(x$valid)) {
-          return(request)
+        return(request)
       }
       Qualifications[i, ] = c(workers[i], qual, value, notify, x$valid)
-  }
+    }
 
-  Qualifications$Valid <- factor(Qualifications$Valid, levels=c('TRUE','FALSE'))
-  return(Qualifications)
-}
+    Qualifications$Valid <- factor(Qualifications$Valid, levels=c('TRUE','FALSE'))
+    return(Qualifications)
+  }
 

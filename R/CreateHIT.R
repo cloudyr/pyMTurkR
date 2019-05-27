@@ -93,8 +93,8 @@
 #' @keywords HITs
 #'
 
-create <-
-  CreateHIT <-
+CreateHIT <-
+  create <-
   createhit <-
   create_hit <-
   CreateHITWithHITType <-

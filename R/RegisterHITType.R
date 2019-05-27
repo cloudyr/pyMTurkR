@@ -13,7 +13,7 @@
 #' \code{hittype()}, \code{CreateHITType()}, \code{createhittype()},
 #' and \code{create_hit_type()} are aliases.
 #'
-#' @aliases RegisterHITType hittype CreateHITType createhittype create_hit_type
+#' @aliases RegisterHITType hittype CreateHITType create_hit_type
 #' @param title A character string containing the title for the HITType. All
 #' HITs of this HITType will be visibly grouped to workers according to this
 #' title. Maximum of 128 characters.
@@ -99,6 +99,8 @@ RegisterHITType <-
     }
 
     HITType <- emptydf(1, 2, c("HITTypeId", "Valid"))
+
+    # Create HIT with or without qual.req
     if(!is.null(qual.req)) {
       response <- try(client$create_hit_type(
         AutoApprovalDelayInSeconds = auto.approval.delay,

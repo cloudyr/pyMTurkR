@@ -4,7 +4,6 @@
 \alias{RegisterHITType}
 \alias{hittype}
 \alias{CreateHITType}
-\alias{createhittype}
 \alias{create_hit_type}
 \title{Register a HITType}
 \usage{

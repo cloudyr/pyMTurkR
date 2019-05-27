@@ -141,63 +141,73 @@ assignment <-
         stop("No HITs found for HITType")
       }
 
-
-      # Batch process function
-      batch <- function(batchhit, pagetoken = NULL) {
-
-        if (!is.null(status)) {
-          if (!all(status %in% c("Approved", "Rejected", "Submitted"))) {
-            stop("Status must be vector containing one or more of: 'Approved', 'Rejected', 'Submitted'")
-          } else {
-            status <- c("Approved", "Rejected", "Submitted")
-          }
-        } else {
-          status <- c("Approved", "Rejected", "Submitted")
+      if (!is.null(status)) {
+        if (!all(status %in% c("Approved", "Rejected", "Submitted"))) {
+          stop("Status must be vector containing one or more of: 'Approved', 'Rejected', 'Submitted'")
         }
+      } else {
+        status <- c("Approved", "Rejected", "Submitted")
+      }
 
-        # Use page token if given
-        if(!is.null(pagetoken)){
-          response1 <- try(client$list_assignments_for_hit(HITId = batchhit,
+
+
+      batch_helper_list_assignments <- function(batchhit, pagetoken = NULL, num_retries = 1) {
+
+        if(!is.null(pagetoken)){ # Use page token if given
+          response <- try(client$list_assignments_for_hit(HITId = batchhit,
                                                            NextToken = pagetoken,
                                                            MaxResults = as.integer(results),
-                                                           AssignmentStatuses = status))
+                                                           AssignmentStatuses = as.list(status)))
         } else {
-          response1 <- try(client$list_assignments_for_hit(HITId = batchhit,
+          response <- try(client$list_assignments_for_hit(HITId = batchhit,
                                                            MaxResults = as.integer(results),
-                                                           AssignmentStatuses = status))
+                                                           AssignmentStatuses = as.list(status)))
         }
 
         # Validity check response
         if(class(response) == "try-error") {
-          stop(paste0("Failed when trying to fetch list of assignments for HIT: ", batchhit))
+          # If the response was an error, then we should try again
+          # but stop after 5 attempts
+          message("  Error. Trying again. Attempt #", num_retries, " for HIT: ", batchhit)
+          message("  Waiting a few seconds before retrying...")
+          Sys.sleep(5)
+          num_retries <- num_retries + 1
+          response <- batch_helper_list_assignments(batchhit = batchhit,
+                                                    pagetoken = pagetoken,
+                                                    num_retries = num_retries)
+          if(num_retries >= 5){
+            stop(paste0("Failed after 5 attempts to fetch list of assignments for HIT: ", batchhit))
+          }
+        } else {
+          return(response)
         }
 
-        assignments <- response1$Assignments
+      }
+
+
+      # Batch process function
+      batch <- function(batchhit, pagetoken = NULL) {
+
+        response <- batch_helper_list_assignments(batchhit = batchhit, pagetoken = pagetoken)
+        assignments <- response$Assignments
 
         # For each assignment...
-        for (i in 1:length(assignments)) {
-          response2 <- try(client$get_assignment(AssignmentId = assignments[[i]]$AssignmentId))
-          QualificationRequirements <- list()
-          if (class(response2) != "try-error") {
-            a <- as.data.frame.Assignment(response2$Assignment)$assignments
-            a$Answer <- NULL
-            if (i == 1) {
-              Assignments <- a
-            } else {
-              Assignments <- rbind(Assignments, a)
-            }
-            if (isTRUE(verbose)) {
-              message(i, ": Assignment ", assignments[[i]]$AssignmentId, " Retrieved")
-            }
+        if(length(assignments) > 0){
+          for (i in 1:length(assignments)) {
+            Assignments <- rbind(Assignments, as.data.frame.Assignment(assignments[[i]])$assignments)
+            message("\nAssignment ", assignments[[i]]$AssignmentId, " Retrieved")
           }
+        } else {
+          return(NULL)
+        }
+
+        # Update page token
+        if(!is.null(response$NextToken)){
+          pagetoken <- response$NextToken
         }
         # Update page token
-        if(!is.null(response1$NextToken)){
-          pagetoken <- response1$NextToken
-        }
-        # Update page token
-        if(!is.null(response1$NumResults)){
-          numresults <- response1$NumResults
+        if(!is.null(response$NumResults)){
+          numresults <- response$NumResults
         } else {
           numresults <- 0
         }
@@ -208,6 +218,7 @@ assignment <-
 
       }
 
+
       # Keep a running total of all Assignments fetched
       runningtotal <- 0
       pages <- 1
@@ -217,41 +228,45 @@ assignment <-
                                                     'AcceptTime', 'SubmitTime', 'ApprovalTime',
                                                     'RejectionTime', 'RequesterFeedback'))
 
+      # Progress bar because this can take a while
+      pb <- progress::progress_bar$new(total = length(hitlist))
+      message("\nSearching for Assignments...")
+
       # Run batch over hitlist
       for (i in 1:length(hitlist)) {
 
-        response <- batch(hitlist[i])
-        results.found <- response$NumResults
-        to.return <- response
+        hit <- hitlist[i]
+        pagetoken <- NULL
+        results.found <- NULL
 
-        # Keep a running total of all HITs returned
-        runningtotal <- response$NumResults
-        pages <- 1
-
-        while (results.found == results &
+        while ((is.null(results.found) || results.found == results) &
                (is.null(return.pages) || pages < return.pages)) {
 
-          # Starting with the next page, identified using NextToken
-          pagetoken <- response$NextToken
-
-          # Fetch next batch
           response <- batch(hitlist[i], pagetoken)
-
-          to.return$Assignments <- rbind(to.return$Assignments, response$Assignments)
-
-          # Add to running total
-          runningtotal <- runningtotal + response$NumResults
           results.found <- response$NumResults
+          to.return <- response
+
+          # Update if response found results
+          if(!is.null(response)) {
+            runningtotal <- runningtotal + response$NumResults
+            results.found <- response$NumResults
+            pagetoken <- response$NextToken
+          } else {
+            results.found <- 0
+          }
 
         }
 
+        pages <- pages + 1
         Assignments <- rbind(Assignments, to.return$Assignments)
+        pb$tick()
 
       }
+
     }
 
     if (verbose) {
-      message(runningtotal, " Assignments Retrieved")
+      message("\n", runningtotal, " Assignments Retrieved")
     }
     return(Assignments)
 

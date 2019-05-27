@@ -8,7 +8,7 @@
 #' \code{\link{GetAssignment}} or by HITId or HITTypeId. Must specify
 #' \code{assignments}.
 #'
-#' \code{ApproveAssignments()},  \code{approve_assignment()} and \code{approve()}
+#' \code{ApproveAssignments()}, \code{approve_assignment()} and \code{approve()}
 #' are aliases for \code{ApproveAssignment}.
 #'
 #' @aliases ApproveAssignment ApproveAssignments approve approve_assignment
@@ -83,16 +83,18 @@ function (assignments,
 
     a <- assignments[i]
     f <- feedback[i]
-    result <- try(client$approve_assignment(AssignmentId = a,
-                                       RequesterFeedback = f,
-                                       OverrideRejection = rejected), silent = TRUE)
+    result <- try(client$approve_assignment(
+      AssignmentId = a,
+      RequesterFeedback = f,
+      OverrideRejection = rejected
+    ), silent = TRUE)
 
     # Validity check
     if(class(result) == "try-error") valid = FALSE
     else valid = TRUE
 
     # Add to data frame
-    results <- rbind(results, data.frame(AssignmentId = assignment, Feedback = feedback, Valid = valid))
+    results <- rbind(results, data.frame(AssignmentId = a, Feedback = f, Valid = valid))
   }
 
   # Return results

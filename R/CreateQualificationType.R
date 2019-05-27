@@ -148,7 +148,7 @@ function(client, qual, answerkey, test, test.duration){
     print(auto)
     client$update_qualification_type(
       QualificationTypeId = qual,
-      AutoGranted = as.logical(auto),
+      AutoGranted = auto,
       AutoGrantedValue = as.integer(auto.value)
     )
 }
