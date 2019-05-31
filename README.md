@@ -77,6 +77,9 @@ getOption("pyMTurkR.sandbox") # Show current value (NULL if unset)
 
 ```R
 library("pyMTurkR")
+Sys.setenv(AWS_ACCESS_KEY_ID = "ABCD1234")
+Sys.setenv(AWS_SECRET_ACCESS_KEY = "EFGH5678")
+R.utils::setOption("pyMTurkR.sandbox", FALSE) # Run in live environment
 AccountBalance()
 ```
 
