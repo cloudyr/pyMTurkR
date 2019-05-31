@@ -12,10 +12,7 @@ Because pyMTurkR uses Python, it requires some additional setup and configuratio
   2. Install `pip` for Python ([see "Installing with get-pip.py" here](https://pip.pypa.io/en/stable/installing))
   3. Use `pip` to install boto3 ([see "Installation" here](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html#installation))
   
-You'll also need to configure an AWS credentials file.
-
-  1. Find your AWS credentials (Key and Secret Key) in the [IAM Console](https://console.aws.amazon.com/iam/home)
-  2. Use [AWS CLI](http://aws.amazon.com/cli) to configure the credentials file, or manually create a credentials file ([see "Configuration" here](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html#configuration))
+In case you run into problems, see the Troubleshooting section at the end of this readme file.
 
 ## Why make this? ##
 
@@ -53,6 +50,21 @@ install_github("cloudyr/pyMTurkR")
 ```
 
 ## Usage ##
+
+### Set AWS Access Key / Secret Access Keys ###
+
+pyMTurkR will look for your AWS keys in two locations.
+
+Keys can be set as R environment variables:
+
+```R
+Sys.setenv(AWS_ACCESS_KEY_ID = "my access key")
+Sys.setenv(AWS_SECRET_ACCESS_KEY = "my secret key")
+```
+
+Or keys can be set in an AWS credentials file using the [AWS CLI](http://aws.amazon.com/cli) ([see "Configuration" here](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html#configuration)).
+
+### Usage Examples ###
 
 ```R
 library("pyMTurkR")

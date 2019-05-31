@@ -46,11 +46,11 @@ function(sandbox = getOption('pyMTurkR.sandbox'), profile = getOption('pyMTurkR.
     tryCatch({ # Try starting client
       .helper_mturk_client(sandbox, profile, boto3) # If the module loaded, start the client
     }, error = function(e) {
-      message(paste(e, "Unable to authenticate with credentials."))
+      message(paste(e, "    Unable to authenticate with credentials."))
     })
 
   }, error = function(e) {
-    message(paste(e, "Unable to start boto3 client."))
+    message(paste(e, "    Unable to start boto3 client."))
   })
 
 }
@@ -93,6 +93,6 @@ function(sandbox = getOption('pyMTurkR.sandbox'), profile = getOption('pyMTurkR.
     invisible(client$get_account_balance()) # Test the credentials using a call to get_account_balance()
     invisible(client)
   }, error = function(e) {
-    message(paste(e, "Check your AWS credentials."))
+    message(paste(e, "    Check your AWS credentials."))
   })
 }
