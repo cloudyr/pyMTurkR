@@ -34,15 +34,23 @@ GetClient <-
 StartClient <-
 Client <-
 client <-
-function(sandbox = options('pyMTurkR.sandbox'), profile = options('pyMTurkR.profile')){
+function(sandbox = getOption('pyMTurkR.sandbox'), profile = getOption('pyMTurkR.profile')){
 
   if(is.null(profile)) profile <- "default"
+  if(is.null(sandbox)) sandbox <- TRUE
 
   tryCatch({ # Try loading boto3 module
+
     boto3 <- reticulate::import("boto3")
-    .helper_mturk_client(sandbox, profile, boto3) # If the module loaded, start the client
+
+    tryCatch({ # Try starting client
+      .helper_mturk_client(sandbox, profile, boto3) # If the module loaded, start the client
+    }, error = function(e) {
+      message(paste(e, "Unable to authenticate with credentials."))
+    })
+
   }, error = function(e) {
-    message(paste(e, "Did you install boto3 for this python environment? Run py_config() to see the python environment you're in."))
+    message(paste(e, "Unable to start boto3 client."))
   })
 
 }
