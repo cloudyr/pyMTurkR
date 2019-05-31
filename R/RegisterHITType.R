@@ -65,10 +65,9 @@ RegisterHITType <-
   createhittype <-
   create_hit_type <-
   function (title, description, reward, duration, keywords = NULL,
-            auto.approval.delay = as.integer(2592000), qual.req = NULL, sandbox = TRUE,
-            profile = 'default', verbose = TRUE) {
+            auto.approval.delay = as.integer(2592000), qual.req = NULL, verbose = TRUE) {
 
-    client <- GetClient(sandbox, profile) # Boto3 client
+    client <- GetClient() # Boto3 client
 
     # Validate fields
     if (nchar(title) > 128) {

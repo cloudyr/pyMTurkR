@@ -79,10 +79,9 @@ ContactWorker <-
   NotifyWorkers <-
   NotifyWorker <-
   notify <-
-  function (subjects, msgs, workers, batch = FALSE,
-            sandbox = TRUE, profile = 'default', verbose = TRUE){
+  function (subjects, msgs, workers, batch = FALSE, verbose = TRUE){
 
-    client <- GetClient(sandbox, profile) # Boto3 client
+    client <- GetClient() # Boto3 client
 
     if (is.factor(subjects)) {
       subjects <- as.character(subjects)

@@ -35,9 +35,9 @@ block <-
 BlockWorkers <-
 CreateWorkerBlock <-
 create_worker_block <-
-function (workers, reasons, sandbox = TRUE, profile = 'default', verbose = TRUE){
+function (workers, reasons, verbose = TRUE){
 
-  client <- GetClient(sandbox, profile) # Boto3 client
+  client <- GetClient() # Boto3 client
 
   if (is.factor(workers)) {
     workers <- as.character(workers)

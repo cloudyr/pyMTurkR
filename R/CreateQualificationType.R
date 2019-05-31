@@ -77,11 +77,9 @@ function (name,
           answerkey = NULL,
           test.duration = NULL,
           auto = NULL,
-          auto.value = NULL,
-          sandbox = TRUE,
-          profile = 'default') {
+          auto.value = NULL) {
 
-  client <- GetClient(sandbox, profile) # Boto3 client
+  client <- GetClient() # Boto3 client
 
   # Check status is valid
   if(!status %in% c("Active", "Inactive"))

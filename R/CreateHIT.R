@@ -104,10 +104,9 @@ CreateHIT <-
             annotation = NULL, unique.request.token = NULL, title = NULL,
             description = NULL, reward = NULL, duration = NULL, keywords = NULL,
             auto.approval.delay = NULL, qual.req = NULL, hitlayoutid = NULL,
-            hitlayoutparameters = NULL, sandbox = TRUE, profile = 'default',
-            verbose = TRUE) {
+            hitlayoutparameters = NULL, verbose = TRUE) {
 
-    client <- GetClient(sandbox, profile) # Boto3 client
+    client <- GetClient() # Boto3 client
 
     if (!is.null(hit.type)) {
       if (is.factor(hit.type)) {

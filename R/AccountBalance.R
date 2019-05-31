@@ -28,10 +28,9 @@ AccountBalance <-
 accountbalance <-
 getbalance <-
 get_account_balance <-
-function(sandbox = TRUE,
-         profile = 'default') {
+function() {
 
-  client <- GetClient(sandbox, profile) # Boto3 client
+  client <- GetClient() # Boto3 client
 
   result <- client$get_account_balance()
   message(paste("Balance: $", result$AvailableBalance, "\n", sep = ""))

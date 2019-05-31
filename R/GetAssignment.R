@@ -82,11 +82,9 @@ assignment <-
            return.pages = NULL,
            results = as.integer(100),
            pagetoken = NULL,
-           sandbox = TRUE,
-           profile = 'default',
            verbose = TRUE) {
 
-    client <- GetClient(sandbox, profile) # Boto3 client
+    client <- GetClient() # Boto3 client
 
     if (as.numeric(results) < 1 || as.numeric(results) > 100) {
       stop("'pagesize' must be in range (1 to 100)")
@@ -128,13 +126,13 @@ assignment <-
           hit.type <- as.character(hit.type)
         }
         message("Searching for HITs matching HITTypeId...")
-        hitsearch <- SearchHITs(sandbox = sandbox, profile = profile)
+        hitsearch <- SearchHITs()
         hitlist <- hitsearch$HITs$HITId[hitsearch$HITs$HITTypeId %in% hit.type]
       } else if (!is.null(annotation)) { # Search by HIT Annotation
         if (is.factor(annotation)) {
           annotation <- as.character(annotation)
         }
-        hitsearch <- SearchHITs(sandbox = sandbox, profile = profile)
+        hitsearch <- SearchHITs()
         hitlist <- hitsearch$HITs$HITId[hitsearch$HITs$RequesterAnnotation %in% annotation]
       }
       if (length(hitlist) == 0) {

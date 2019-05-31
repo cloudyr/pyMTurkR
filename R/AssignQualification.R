@@ -89,10 +89,9 @@ AssignQualification <-
             notify = FALSE, name = NULL, description = NULL,
             keywords = NULL, status = NULL, retry.delay = NULL,
             test = NULL, answerkey = NULL, test.duration = NULL,
-            auto = NULL, auto.value = NULL, sandbox = TRUE,
-            profile = 'default', verbose = TRUE) {
+            auto = NULL, auto.value = NULL, verbose = TRUE) {
 
-    client <- GetClient(sandbox, profile) # Boto3 client
+    client <- GetClient() # Boto3 client
 
     if (!is.null(qual) & is.factor(qual)) {
       qual <- as.character(qual)

@@ -112,10 +112,9 @@ ChangeHITType <-
   function (hit = NULL, old.hit.type = NULL, new.hit.type = NULL,
             title = NULL, description = NULL, reward = NULL, duration = NULL,
             keywords = NULL, auto.approval.delay = as.integer(2592000),
-            qual.req = NULL, old.annotation = NULL, sandbox = TRUE,
-            profile = 'default', verbose = TRUE) {
+            qual.req = NULL, old.annotation = NULL, verbose = TRUE) {
 
-    client <- GetClient(sandbox, profile) # Boto3 client
+    client <- GetClient() # Boto3 client
 
     # Make sure the function call is specifying only one of hit, old.hit.type,
     # old.annotation

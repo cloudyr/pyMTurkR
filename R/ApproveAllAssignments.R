@@ -4,12 +4,10 @@ approveall <-
            hit.type = NULL,
            annotation = NULL,
            feedback = NULL,
-           sandbox = TRUE,
            rejected = FALSE,
-           status = NULL,
-           profile = 'default') {
+           status = NULL) {
 
-    client <- GetClient(sandbox, profile) # Boto3 client
+    client <- GetClient() # Boto3 client
 
     # Validate feedback parameter
     if (!is.null(feedback)) {
@@ -24,21 +22,15 @@ approveall <-
       stop("Must provide 'hit' xor 'hit.type' xor 'annotation'")
     } else if (!is.null(hit)) {
       assignments <- GetAssignments(hit = hit,
-                                    status = status,
-                                    sandbox = sandbox,
-                                    profile = profile)$AssignmentId
+                                    status = status)$AssignmentId
 
     } else if (!is.null(hit.type)) {
       assignments <- GetAssignments(hit.type = hit.type,
-                                    status = status,
-                                    sandbox = sandbox,
-                                    profile = profile)$AssignmentId
+                                    status = status)$AssignmentId
 
     } else if (!is.null(annotation)) {
       assignments <- GetAssignments(annotation = annotation,
-                                    status = status,
-                                    sandbox = sandbox,
-                                    profile = profile)$AssignmentId
+                                    status = status)$AssignmentId
 
     }
 
@@ -47,9 +39,7 @@ approveall <-
     } else {
       request <- ApproveAssignments(assignments = assignments,
                                     rejected = rejected,
-                                    feedback = feedback,
-                                    sandbox = sandbox,
-                                    profile = profile)
+                                    feedback = feedback)
       return(request)
     }
   }

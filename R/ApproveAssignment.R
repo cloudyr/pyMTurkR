@@ -51,9 +51,7 @@ approve <-
 approve_assignment <-
 function (assignments,
           feedback = "",
-          rejected = FALSE,
-          sandbox = TRUE,
-          profile = 'default') {
+          rejected = FALSE) {
 
   client <- GetClient(sandbox, profile) # Boto3 client
 
