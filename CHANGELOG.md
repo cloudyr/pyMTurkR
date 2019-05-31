@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.8] - 2019-05-27
+### Changed
+- User can now set access keys using more familiar environment variables
+	Sys.setenv(AWS_ACCESS_KEY_ID = "my access key")
+	Sys.setenv(AWS_SECRET_ACCESS_KEY = "my secret key")
+- User can now set sandbox parameter as option
+	R.utils::setOption("pyMTurkR.sandbox", TRUE)
+- User can now set AWS profile parameter as option (most users won't need to do this)
+	R.utils::setOption("pyMTurkR.profile", TRUE)
+
 ## [0.1.7] - 2019-05-27
 ### Added
 - ApproveAllAssignments()
