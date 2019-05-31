@@ -7,7 +7,7 @@
 \alias{get_account_balance}
 \title{Retrieve MTurk account balance}
 \usage{
-AccountBalance(sandbox = TRUE, profile = "default")
+AccountBalance()
 }
 \value{
 Returns a list of length 2: \dQuote{AvailableBalance}, the balance of

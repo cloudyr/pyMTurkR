@@ -9,7 +9,7 @@
 \usage{
 RegisterHITType(title, description, reward, duration, keywords = NULL,
   auto.approval.delay = as.integer(2592000), qual.req = NULL,
-  sandbox = TRUE, profile = "default", verbose = TRUE)
+  verbose = TRUE)
 }
 \arguments{
 \item{title}{A character string containing the title for the HITType. All

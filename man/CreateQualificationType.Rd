@@ -8,8 +8,7 @@
 \usage{
 CreateQualificationType(name, description = "", status, keywords = "",
   retry.delay = NULL, test = NULL, answerkey = NULL,
-  test.duration = NULL, auto = NULL, auto.value = NULL,
-  sandbox = TRUE, profile = "default")
+  test.duration = NULL, auto = NULL, auto.value = NULL)
 }
 \arguments{
 \item{name}{A name for the QualificationType. This is visible to workers. It

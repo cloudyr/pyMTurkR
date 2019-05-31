@@ -15,8 +15,7 @@ CreateHIT(hit.type = NULL, question = NULL, expiration,
   unique.request.token = NULL, title = NULL, description = NULL,
   reward = NULL, duration = NULL, keywords = NULL,
   auto.approval.delay = NULL, qual.req = NULL, hitlayoutid = NULL,
-  hitlayoutparameters = NULL, sandbox = TRUE, profile = "default",
-  verbose = TRUE)
+  hitlayoutparameters = NULL, verbose = TRUE)
 }
 \arguments{
 \item{hit.type}{An optional character string specifying the HITTypeId that

@@ -11,7 +11,7 @@ AssignQualification(qual = NULL, workers, value = as.integer(1),
   notify = FALSE, name = NULL, description = NULL, keywords = NULL,
   status = NULL, retry.delay = NULL, test = NULL, answerkey = NULL,
   test.duration = NULL, auto = NULL, auto.value = NULL,
-  sandbox = TRUE, profile = "default", verbose = TRUE)
+  verbose = TRUE)
 }
 \arguments{
 \item{qual}{A character string containing a QualificationTypeId.}

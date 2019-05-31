@@ -7,14 +7,15 @@
 \alias{client}
 \title{Creates an MTurk Client using the AWS SDK for Python (Boto3)}
 \usage{
-GetClient(sandbox = TRUE, profile = "default")
+GetClient(sandbox = options("pyMTurkR.sandbox"),
+  profile = options("pyMTurkR.profile"))
 }
 \arguments{
 \item{sandbox}{A logical indicating whether the client should be in the
-sandbox environment or the live environment.}
+sandbox environment or the live environment. Set with}
 
 \item{profile}{A character string that specifies the profile to use
-from the .aws/credentials file.}
+from the .aws/credentials file, optional.}
 }
 \value{
 An object with the classes \dQuote{botocore.client.MTurk},
@@ -25,6 +26,10 @@ is used as an MTurk client
 Approve assignments, by AssignmentId (as returned by
 \code{\link{GetAssignment}} or by HITId or HITTypeId. Must specify
 \code{assignments}.
+}
+\details{
+\code{StartClient()}, \code{Client()} and \code{client()} are aliases for
+\code{GetClient}.
 }
 \examples{
 \dontrun{

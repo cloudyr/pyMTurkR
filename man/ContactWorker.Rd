@@ -8,8 +8,7 @@
 \alias{notify}
 \title{Contact Worker(s)}
 \usage{
-ContactWorker(subjects, msgs, workers, batch = FALSE, sandbox = TRUE,
-  profile = "default", verbose = TRUE)
+ContactWorker(subjects, msgs, workers, batch = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{subjects}{A character string containing subject line of an email, or a

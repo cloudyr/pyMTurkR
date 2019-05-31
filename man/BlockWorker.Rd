@@ -8,8 +8,7 @@
 \alias{create_worker_block}
 \title{Block Worker(s)}
 \usage{
-BlockWorker(workers, reasons, sandbox = TRUE, profile = "default",
-  verbose = TRUE)
+BlockWorker(workers, reasons, verbose = TRUE)
 }
 \arguments{
 \item{workers}{A character string containing a WorkerId, or a vector of

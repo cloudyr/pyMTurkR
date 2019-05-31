@@ -7,8 +7,7 @@
 \alias{approve_assignment}
 \title{Approve Assignment(s)}
 \usage{
-ApproveAssignment(assignments, feedback = "", rejected = FALSE,
-  sandbox = TRUE, profile = "default")
+ApproveAssignment(assignments, feedback = "", rejected = FALSE)
 }
 \arguments{
 \item{assignments}{A character string containing an AssignmentId, or a

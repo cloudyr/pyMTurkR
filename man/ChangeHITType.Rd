@@ -10,8 +10,7 @@
 ChangeHITType(hit = NULL, old.hit.type = NULL, new.hit.type = NULL,
   title = NULL, description = NULL, reward = NULL, duration = NULL,
   keywords = NULL, auto.approval.delay = as.integer(2592000),
-  qual.req = NULL, old.annotation = NULL, sandbox = TRUE,
-  profile = "default", verbose = TRUE)
+  qual.req = NULL, old.annotation = NULL, verbose = TRUE)
 }
 \arguments{
 \item{hit}{An optional character string containing the HITId whose HITTypeId
