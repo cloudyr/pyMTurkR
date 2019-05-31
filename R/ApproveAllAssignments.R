@@ -37,7 +37,6 @@ approveall <-
     } else if (!is.null(annotation)) {
       assignments <- GetAssignments(annotation = annotation,
                                     status = status,
-                                    rejected = rejected,
                                     sandbox = sandbox,
                                     profile = profile)$AssignmentId
 
