@@ -59,8 +59,7 @@
 #' valid.
 #' @author Tyler Burleigh, Thomas J. Leeper
 #' @references
-#' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_AssignQualificationOperation.htmlAPI
-#' Reference}
+#' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_AssignQualificationOperation.html}{API Reference}
 #' @keywords Qualifications
 #' @examples
 #'
@@ -80,7 +79,7 @@
 #'                     description = "This qualification is for people who have worked for me before",
 #'                     status = "Active",
 #'                     keywords = "Worked for me before")
-#'
+#'}
 
 AssignQualification <-
   assignqual <-

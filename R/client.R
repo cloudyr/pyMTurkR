@@ -21,14 +21,14 @@
 #' \href{https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mturk.html}{Boto3 Docs}
 #'
 #' @keywords client, start
-#' @examples
 #'
+#' @examples
 #' \dontrun{
 #' GetClient()
 #'
 #' myclient <- GetClient()
 #' myclient$get_account_balance()
-#'
+#' }
 
 GetClient <-
 StartClient <-

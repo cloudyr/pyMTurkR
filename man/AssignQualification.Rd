@@ -87,9 +87,28 @@ qualification created in the MTurk RUI.
 \code{AssignQualifications()}, \code{assignqual()} and
 \code{associate_qualification_with_worker()} are aliases.
 }
+\examples{
+
+\dontrun{
+qual1 <-
+CreateQualificationType(name="Worked for me before",
+    description="This qualification is for people who have worked for me before",
+    status = "Active",
+    keywords="Worked for me before")
+
+# assign qualification to single worker
+AssignQualification(qual1$QualificationTypeId, "A1RO9UJNWXMU65", value = "50")
+
+# assign a new qualification (defined atomically)
+AssignQualification(workers = "A1RO9UJNWXMU65",
+                    name = "Worked for me before",
+                    description = "This qualification is for people who have worked for me before",
+                    status = "Active",
+                    keywords = "Worked for me before")
+}
+}
 \references{
-\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_AssignQualificationOperation.htmlAPI
-Reference}
+\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_AssignQualificationOperation.html}{API Reference}
 }
 \author{
 Tyler Burleigh, Thomas J. Leeper
