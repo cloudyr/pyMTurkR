@@ -64,6 +64,15 @@ Sys.setenv(AWS_SECRET_ACCESS_KEY = "my secret key")
 
 Or keys can be set in an AWS credentials file using the [AWS CLI](http://aws.amazon.com/cli) ([see "Configuration" here](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html#configuration)).
 
+### Set run environment ##
+
+By default, pyMTurkR will run in "sandbox" mode. To change this setting, the `pyMTurkR.sandbox` option must be set to `FALSE` before running any commands.
+
+```R
+R.utils::setOption("pyMTurkR.sandbox", FALSE)
+getOption("pyMTurkR.sandbox") # Show current value (NULL if unset)
+```
+
 ### Usage Examples ###
 
 ```R
