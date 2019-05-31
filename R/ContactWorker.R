@@ -35,8 +35,7 @@
 #' @param msgs A character string containing body text of an email, or a vector
 #' of character strings of of length equal to the number of workers to be
 #' contacted containing the body text of the email for each worker. Maximum of
-#' 4096 characters. Newlines can be specified with \code{\n} and tabs can be
-#' specified with \code{\t} in the message body.
+#' 4096 characters.
 #' @param workers A character string containing a WorkerId, or a vector of
 #' character strings containing multiple WorkerIds.
 #' @param batch A logical (default is \code{FALSE}), indicating whether workers
