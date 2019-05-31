@@ -7,8 +7,8 @@
 \alias{client}
 \title{Creates an MTurk Client using the AWS SDK for Python (Boto3)}
 \usage{
-GetClient(sandbox = options("pyMTurkR.sandbox"),
-  profile = options("pyMTurkR.profile"))
+GetClient(sandbox = getOption("pyMTurkR.sandbox"),
+  profile = getOption("pyMTurkR.profile"))
 }
 \arguments{
 \item{sandbox}{A logical indicating whether the client should be in the

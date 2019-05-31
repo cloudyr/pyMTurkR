@@ -57,8 +57,8 @@ function(sandbox = getOption('pyMTurkR.sandbox'), profile = getOption('pyMTurkR.
 
 .helper_mturk_client <- function(sandbox, profile, boto3){
 
-  if(sandbox) endpoint_url = 'https://mturk-requester-sandbox.us-east-1.amazonaws.com'
-  else endpoint_url = 'https://mturk-requester.us-east-1.amazonaws.com'
+  if(sandbox) endpoint_url <- 'https://mturk-requester-sandbox.us-east-1.amazonaws.com'
+  else endpoint_url <- 'https://mturk-requester.us-east-1.amazonaws.com'
 
   # Check if AWS credentials can be found in an environment variable
   # else check .aws/credentials
