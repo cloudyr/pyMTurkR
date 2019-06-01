@@ -205,7 +205,7 @@ CreateHIT <-
       if (class(question) %in% c('HTMLQuestion','ExternalQuestion')) {
         question <- question$string
       }
-      request <- paste0(request, ", Question = ", question)
+      request <- paste0(request, ", Question = \"", question, "\"")
     }
 
     # Expiration
