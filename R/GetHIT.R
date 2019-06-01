@@ -33,17 +33,17 @@ GetHIT <-
     response <- try(client$get_hit(HITId = hit))
 
     if (class(response) != "try-error") {
-      hit <- list(response$HIT) # Hack for 1 result
       if (verbose) {
         message("HIT (", hit, ") Retrieved")
       }
+      hitdetails <- list(response$HIT) # Hack for 1 result
       if (return.hit.dataframe == TRUE & return.qual.dataframe == TRUE) {
-        return.list <- list(HITs = as.data.frame.HITs(hit),
-                            QualificationRequirements = as.data.frame.QualificationRequirements(hit))
+        return.list <- list(HITs = as.data.frame.HITs(hitdetails),
+                            QualificationRequirements = as.data.frame.QualificationRequirements(hitdetails))
       } else if (return.hit.dataframe == TRUE & return.qual.dataframe == FALSE) {
-        return.list <- list(HITs = as.data.frame.HITs(hit))
+        return.list <- list(HITs = as.data.frame.HITs(hitdetails))
       } else if (return.hit.dataframe == FALSE & return.qual.dataframe == TRUE) {
-        return.list <- list(QualificationRequirements = as.data.frame.QualificationRequirements(hit))
+        return.list <- list(QualificationRequirements = as.data.frame.QualificationRequirements(hitdetails))
       } else {
         return.list <- list()
       }
