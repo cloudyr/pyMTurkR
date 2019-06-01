@@ -87,6 +87,26 @@ AccountBalance()
 
 For development updates see the [Changelog](https://github.com/cloudyr/pyMTurkR/blob/master/CHANGELOG.md)
 
+
+## Help! I want to do [thing] but you haven't written that function yet ##
+
+Not all functions that existed in MTurkR or in the MTurk API have been written yet. However, because this package is a wrapper to the `boto3` SDK, you can access those functions in the meantime.
+
+### Example ###
+
+For example, in MTurkR if you wanted to add assignments to a HIT, you would use `ExtendHIT()`. But as of version 0.1.8 of pyMTurkR, that function had not been written. As an alternative, the user could access the create_additional_assignments_for_hit() function as follows:
+
+```R
+my_client <- GetClient()
+my_client$create_additional_assignments_for_hit(
+    HITId = 'myHITId',
+    NumberOfAdditionalAssignments = as.integer(1)
+)
+```
+
+See the [boto3 documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mturk.html) for all functions available. This documentation is for python, and there are some quirks about it. For example, notice how `NumberOfAdditionalAssignments` was cast as an integer? Reticulated functions seem to be stricter than native R about parameter types.
+
+
 ## Troubleshooting ##
 
 One of the issues you might encounter, especially if you maintain multiple installs of python on your system, is that when `reticulate` loads python it loads a version that you didn't install the `boto3` module into. 
