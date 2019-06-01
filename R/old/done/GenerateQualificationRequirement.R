@@ -44,8 +44,8 @@ function (qual, comparator, value, preview = NULL, qual.number = NULL) {
         } else if(comparator[i] == "!=") {
             comparator[i] <- "NotEqualTo"
         }
-        if (!comparator[i] %in% c("LessThan", "LessThanOrEqualTo", 
-                "GreaterThan", "GreaterThanOrEqualTo", "EqualTo", 
+        if (!comparator[i] %in% c("LessThan", "LessThanOrEqualTo",
+                "GreaterThan", "GreaterThanOrEqualTo", "EqualTo",
                 "NotEqualTo", "Exists", "DoesNotExist", "In", "NotIn")) {
             stop("Inappropriate comparator specified for QualificationRequirement")
         }
@@ -62,7 +62,7 @@ function (qual, comparator, value, preview = NULL, qual.number = NULL) {
             warning("Categorization/Moderation Masters Qualifications have been removed.\nUsing generic Masters Qualification instead.")
             qual[i] <- "2F1QJWKUDD8XADTFD2Q0G6UTO95ALH"
         }
-        if (qual[i] %in% c("2ARFPLSP75KLA8M8DH1HTEQVJT3SY6", "2F1QJWKUDD8XADTFD2Q0G6UTO95ALH") && 
+        if (qual[i] %in% c("2ARFPLSP75KLA8M8DH1HTEQVJT3SY6", "2F1QJWKUDD8XADTFD2Q0G6UTO95ALH") &&
                         (!comparator %in% c("Exists","DoesNotExist"))) {
             stop("Masters qualifications can only accept 'Exists' comparator")
         }
@@ -79,34 +79,34 @@ function (qual, comparator, value, preview = NULL, qual.number = NULL) {
             }
         }
     }
-    
+
     # handle multiple LocaleValue
-    ltmp <- unname(mapply(function(x = NULL, qn) { 
+    ltmp <- unname(mapply(function(x = NULL, qn) {
         v <- strsplit(x,',')[[1]]
         paste0('QualificationRequirement.',qn,'.LocaleValue.',seq_along(v),
-               '.Country', '=', regmatches(v, gregexpr("^[[:alpha:]]{2}", v)), 
+               '.Country', '=', regmatches(v, gregexpr("^[[:alpha:]]{2}", v)),
                       # paste in subdivisions, if present
-                      ifelse(grepl("-", v), 
+                      ifelse(grepl("-", v),
                              paste0('&QualificationRequirement.',qn,'.LocaleValue.',seq_along(v),
-                                    '.Subdivision=', 
-                                    regmatches(v, regexpr("(?<=[-])[[:alpha:]]{2}$", v, perl=TRUE))), 
-                             ""), 
+                                    '.Subdivision=',
+                                    regmatches(v, regexpr("(?<=[-])[[:alpha:]]{2}$", v, perl=TRUE))),
+                             ""),
                collapse='&')
     }, value, qual.number))
     # handle multiple IntegerValue
-    itmp <- unname(mapply(function(x = NULL, qn) { 
+    itmp <- unname(mapply(function(x = NULL, qn) {
         v <- strsplit(x,',')[[1]]
         paste0('QualificationRequirement.',qn,'.IntegerValue.', seq_along(v),'=', v, collapse='&')
     }, value, qual.number))
-    
-    out <- 
-    paste(paste("&QualificationRequirement.", qual.number, 
-            ".QualificationTypeId=", qual, "&QualificationRequirement.", 
+
+    out <-
+    paste(paste("&QualificationRequirement.", qual.number,
+            ".QualificationTypeId=", qual, "&QualificationRequirement.",
             qual.number, ".Comparator=", comparator, sep = ""),
             ifelse(comparator %in% c("Exists","DoesNotExist"), "",
           ifelse(qual == "00000000000000000071", paste0("&", ltmp),
                                                  paste0("&", itmp))),
-          ifelse(!is.na(preview), paste("&QualificationRequirement.", qual.number, 
+          ifelse(!is.na(preview), paste("&QualificationRequirement.", qual.number,
                                         ".RequiredToPreview=", preview, sep=""), ""),
           sep = "")
     structure(paste(out, collapse =""), class = "QualificationRequirement")

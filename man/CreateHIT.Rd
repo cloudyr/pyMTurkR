@@ -15,7 +15,7 @@ CreateHIT(hit.type = NULL, question = NULL, expiration,
   unique.request.token = NULL, title = NULL, description = NULL,
   reward = NULL, duration = NULL, keywords = NULL,
   auto.approval.delay = NULL, qual.req = NULL, hitlayoutid = NULL,
-  hitlayoutparameters = NULL, verbose = TRUE)
+  verbose = TRUE)
 }
 \arguments{
 \item{hit.type}{An optional character string specifying the HITTypeId that
@@ -82,11 +82,6 @@ retrieved from a HIT \dQuote{project} template generated in the Requester
 User Interface at \samp{https://requester.mturk.com/create/projects}. If the
 HIT template includes variable placeholders, must also specify
 \code{hitlayoutparameters}.}
-
-\item{hitlayoutparameters}{An optional character string containing URL query
-parameter-formatted HITLayout parameters, for example returned by
-\code{\link{GenerateHITLayoutParameter}}. Must be specified along with a
-\code{hitlayoutid}.}
 }
 \value{
 A data frame containing the HITId and other details of the newly

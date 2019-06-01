@@ -80,10 +80,6 @@
 #' User Interface at \samp{https://requester.mturk.com/create/projects}. If the
 #' HIT template includes variable placeholders, must also specify
 #' \code{hitlayoutparameters}.
-#' @param hitlayoutparameters An optional character string containing URL query
-#' parameter-formatted HITLayout parameters, for example returned by
-#' \code{\link{GenerateHITLayoutParameter}}. Must be specified along with a
-#' \code{hitlayoutid}.
 #' @return A data frame containing the HITId and other details of the newly
 #' created HIT.
 #' @author Tyler Burleigh, Thomas J. Leeper
@@ -104,7 +100,7 @@ CreateHIT <-
             annotation = NULL, unique.request.token = NULL, title = NULL,
             description = NULL, reward = NULL, duration = NULL, keywords = NULL,
             auto.approval.delay = NULL, qual.req = NULL, hitlayoutid = NULL,
-            hitlayoutparameters = NULL, verbose = TRUE) {
+            verbose = TRUE) {
 
     client <- GetClient() # Boto3 client
 
@@ -195,9 +191,6 @@ CreateHIT <-
     if (is.null(question)) {
       if (!is.null(hitlayoutid)) {
         request <- paste0(request, ", HITLayoutId = '", hitlayoutid, "'")
-        if (!is.null(hitlayoutparameters)) {
-          request <- paste0(request, "HITLayoutParameter = ", hitlayoutparameters)
-        }
       } else {
         stop("Must specify QuestionForm, HTMLQuestion, or ExternalQuestion for 'question' parameter; or a 'hitlayoutid'")
       }
@@ -241,8 +234,14 @@ CreateHIT <-
       request <- paste0(request, ", UniqueRequestToken = ", unique.request.token)
     }
 
+    # Qualification Requirements
+    if (!is.null(qual.req)){
+      request <- paste0(request, ", QualificationRequirements = ", qual.req, "")
+    }
+
     # Close request string
     request <- paste0(request, ")")
+    print(request)
     # Send request
     response <- try(
       eval(parse(text = request))

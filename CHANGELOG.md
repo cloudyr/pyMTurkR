@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.2] - 2019-06-01
+### Added
+- GenerateQualificationRequirement()
+- GenerateHITsFromTemplate()
+- GenerateHTMLQuestion()
+
 ## [0.2.1] - 2019-06-01
 ### Added
 - DisableHIT() and synonyms DisposeHIT(), DeleteHIT(), ExpireHIT()
