@@ -37,6 +37,7 @@ The following verbs have been implemented so far:
 - CreateHIT()
 - CreateQualificationType()
 - GetAssignment()
+- GetHIT()
 - RegisterHITType()
 - SearchHITs()
 
