@@ -52,8 +52,7 @@
 #' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_GetAssignmentOperation.html}{API
 #' Reference: GetAssignment}
 #'
-#' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ListAssignmentsForHITOperation.html}{API
-#' Reference: ListAssignmentsForHIT}
+#' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ListAssignmentsForHITOperation.html}{API Reference: ListAssignmentsForHIT}
 #' @keywords Assignments
 #' @examples
 #'
@@ -69,9 +68,9 @@
 #' }
 #'
 
-assignment <-
+GetAssignment <-
+  assignment <-
   assignments <-
-  GetAssignment <-
   GetAssignments <-
   ListAssignmentsForHIT <-
   function(assignment = NULL,

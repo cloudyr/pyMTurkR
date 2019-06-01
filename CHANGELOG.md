@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.0] - 2019-06-01
+### Added
+- ExtendHIT()
+### Changed
+Small bug fix for GetHIT()
+
 ## [0.1.9] - 2019-05-31
 ### Added
 - GetHIT()
