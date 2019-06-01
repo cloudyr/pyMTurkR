@@ -1,6 +1,10 @@
 # Changelog
 
-## [0.1.8] - 2019-05-27
+## [0.1.9] - 2019-05-31
+### Added
+- GetHIT()
+
+## [0.1.8] - 2019-05-31
 ### Changed
 - User can now set access keys using more familiar environment variables
 	Sys.setenv(AWS_ACCESS_KEY_ID = "my access key")

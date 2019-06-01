@@ -107,7 +107,7 @@ assignment <-
           } else {
             Assignments <- rbind(Assignments, a, all=TRUE)
           }
-          if (isTRUE(verbose)) {
+          if (verbose) {
             message(i, ": Assignment ", assignment[i], " Retrieved")
           }
         }

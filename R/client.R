@@ -34,10 +34,8 @@ GetClient <-
 StartClient <-
 Client <-
 client <-
-function(sandbox = getOption('pyMTurkR.sandbox'), profile = getOption('pyMTurkR.profile')){
-
-  if(is.null(profile)) profile <- "default"
-  if(is.null(sandbox)) sandbox <- TRUE
+function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
+         profile = getOption('pyMTurkR.profile', 'default')){
 
   tryCatch({ # Try loading boto3 module
 
