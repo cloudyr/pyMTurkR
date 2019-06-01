@@ -89,7 +89,7 @@ Not all functions that existed in MTurkR or in the MTurk API have been written y
 
 ### Example ###
 
-For example, in MTurkR if you wanted to add assignments to a HIT, you would use `ExtendHIT()`. But as of version 0.1.8 of pyMTurkR, that function had not been written. As an alternative, the user could access the reticulated create_additional_assignments_for_hit() function as follows:
+For example, in MTurkR if you wanted to add assignments to a HIT, you would use `ExtendHIT()`. But as in pyMTurkR 0.1.8, that function was not written. Instead, the user could access the `boto3` function that pyMTurkR would eventually wrap around, by doing the following:
 
 ```R
 my_client <- GetClient()
@@ -99,7 +99,7 @@ my_client$create_additional_assignments_for_hit(
 )
 ```
 
-See the [boto3 documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mturk.html) for all functions that are available to access in this manner. This documentation is for python, and there are some quirks about accessing these functions. For example, notice how `NumberOfAdditionalAssignments` was cast as an integer? Reticulated functions seem to be stricter than native R about parameter types.
+See the [boto3 documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mturk.html) for all functions that are available to access in this manner. This documentation is for python and there are some quirks about accessing these functions. For example, notice how `NumberOfAdditionalAssignments` was cast as an integer? Reticulated functions seem to be stricter than native R about parameter types.
 
 ## Development status ##
 
