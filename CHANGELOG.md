@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.1] - 2019-06-01
+### Added
+- DisableHIT() and synonyms DisposeHIT(), DeleteHIT(), ExpireHIT()
+
 ## [0.2.0] - 2019-06-01
 ### Added
 - ExtendHIT()

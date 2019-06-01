@@ -5,7 +5,8 @@ approveall <-
            annotation = NULL,
            feedback = NULL,
            rejected = FALSE,
-           status = NULL) {
+           status = NULL,
+           verbose = TRUE) {
 
     client <- GetClient() # Boto3 client
 
