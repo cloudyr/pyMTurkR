@@ -83,18 +83,13 @@ R.utils::setOption("pyMTurkR.sandbox", FALSE) # Run in live environment
 AccountBalance()
 ```
 
-## Development status ##
+## Help! I want to do [thing] but you haven't written that function yet! ##
 
-For development updates see the [Changelog](https://github.com/cloudyr/pyMTurkR/blob/master/CHANGELOG.md)
-
-
-## Help! I want to do [thing] but you haven't written that function yet ##
-
-Not all functions that existed in MTurkR or in the MTurk API have been written yet. However, because this package is a wrapper to the `boto3` SDK, you can access those functions in the meantime.
+Not all functions that existed in MTurkR or in the MTurk API have been written yet. However! Because this package is a wrapper to the `boto3` SDK, you also have the option to access those functions.
 
 ### Example ###
 
-For example, in MTurkR if you wanted to add assignments to a HIT, you would use `ExtendHIT()`. But as of version 0.1.8 of pyMTurkR, that function had not been written. As an alternative, the user could access the create_additional_assignments_for_hit() function as follows:
+For example, in MTurkR if you wanted to add assignments to a HIT, you would use `ExtendHIT()`. But as of version 0.1.8 of pyMTurkR, that function had not been written. As an alternative, the user could access the reticulated create_additional_assignments_for_hit() function as follows:
 
 ```R
 my_client <- GetClient()
@@ -104,8 +99,11 @@ my_client$create_additional_assignments_for_hit(
 )
 ```
 
-See the [boto3 documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mturk.html) for all functions available. This documentation is for python, and there are some quirks about it. For example, notice how `NumberOfAdditionalAssignments` was cast as an integer? Reticulated functions seem to be stricter than native R about parameter types.
+See the [boto3 documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mturk.html) for all functions that are available to access in this manner. This documentation is for python, and there are some quirks about accessing these functions. For example, notice how `NumberOfAdditionalAssignments` was cast as an integer? Reticulated functions seem to be stricter than native R about parameter types.
 
+## Development status ##
+
+For development updates see the [Changelog](https://github.com/cloudyr/pyMTurkR/blob/master/CHANGELOG.md)
 
 ## Troubleshooting ##
 
