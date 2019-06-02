@@ -241,7 +241,6 @@ CreateHIT <-
 
     # Close request string
     request <- paste0(request, ")")
-    print(request)
     # Send request
     response <- try(
       eval(parse(text = request))
