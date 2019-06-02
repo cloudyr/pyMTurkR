@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.3] - 2019-06-02
+### Added
+- DisposeQualificationType()
+
 ## [0.2.2] - 2019-06-01
 ### Added
 - GenerateQualificationRequirement()

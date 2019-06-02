@@ -6,7 +6,7 @@
 \alias{create_qualification_type}
 \title{Create QualificationType}
 \usage{
-CreateQualificationType(name, description = "", status, keywords = "",
+CreateQualificationType(name, description, status, keywords = NULL,
   retry.delay = NULL, test = NULL, answerkey = NULL,
   test.duration = NULL, auto = NULL, auto.value = NULL)
 }
