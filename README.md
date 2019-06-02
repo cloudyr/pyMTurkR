@@ -1,12 +1,12 @@
-# R Client for the MTurk Requester API using the AWS SDK for Python (Boto3) #
+# R Client for the MTurk Requester API
 
 ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
 ![version](https://img.shields.io/badge/version-0.2.5-blue.svg)
 ![progress](https://img.shields.io/badge/progress-46%25-yellowgreen.svg)
 
-**pyMTurkR** is a successor to [MTurkR](https://github.com/cloudyr/MTurkR), and a work in progress. pyMTurkR provides access to the Amazon Mechanical Turk [Amazon Mechanical Turk](https://requester.mturk.com) (MTurk) [Requester API](http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/Welcome.html), by wrapping around the [AWS SDK for Python (Boto3)](https://aws.amazon.com/sdk-for-python) [MTurk Client](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mturk.html).
+**pyMTurkR** is a successor to [MTurkR](https://github.com/cloudyr/MTurkR), and a work in progress. pyMTurkR provides access to the Amazon Mechanical Turk [Amazon Mechanical Turk](https://requester.mturk.com) (MTurk) [Requester API](http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/Welcome.html), using [`reticulate`](https://rstudio.github.io/reticulate) to extend the [AWS SDK for Python (Boto3)](https://aws.amazon.com/sdk-for-python) [MTurk Client](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mturk.html).
 
-Because pyMTurkR uses Python, it requires some additional setup and configuration:
+Because pyMTurkR uses Python, it requires some Python setup:
 
   1. Install Python 2 (>= 2.7) or Python 3 (>= 3.3) ([download page](https://www.python.org/downloads))
   2. Install `pip` for Python ([see "Installing with get-pip.py" here](https://pip.pypa.io/en/stable/installing))
@@ -18,11 +18,7 @@ In case you run into problems, see the Troubleshooting section at the end of thi
 
 pyMTurkR was started because Amazon decided to [deprecate the API](https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI-legacy/Welcome.html) that MTurkR was using (meaning MTurkR would stop working). The goal of this project is to create a package that functions in a way that will be familiar to MTurkR users, making the transition easier.
 
-Unlike MTurkR, pyMTurkR is not a native R-language package. This is because it uses Python and the `boto3` module for Python. This is not necessarily a bad thing, and from the user perspective there is probably in most cases little difference. With recent developments in R, such as the [`reticulate`](https://rstudio.github.io/reticulate) package which this package depends on, R can interface with Python relatively seamlessly, and in the case of this package there shouldn't be any noticeable issues with speed or performance. 
-
-Because this package relies on python and boto3, this might create some additional work for the user. Namely, in addition to updating R and the R packages that pyMTurkR depends on, there is the potential additional work of updating Python and the boto3 module, should those require updating in the future. 
-
-For a deeper dive on issues related to dependencies, see [Dependency Hell on Wikipedia](https://en.wikipedia.org/wiki/Dependency_hell).
+Unlike MTurkR, pyMTurkR is not purely a native R-language package. Instead, it uses [`reticulate`](https://rstudio.github.io/reticulate) to import the `boto3` module for Python. This is not necessarily a bad thing, and from the user perspective there is probably in most cases little difference.
 
 ## What can it do? ##
 
