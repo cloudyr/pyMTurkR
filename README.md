@@ -4,7 +4,7 @@
 ![version](https://img.shields.io/badge/version-0.2.5-blue.svg)
 ![progress](https://img.shields.io/badge/progress-46%25-yellowgreen.svg)
 
-**pyMTurkR** is a successor to [MTurkR](https://github.com/cloudyr/MTurkR), and a work in progress. pyMTurkR provides access to the [Amazon Mechanical Turk](https://requester.mturk.com) (MTurk) [Requester API](http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/Welcome.html), using [`reticulate`](https://rstudio.github.io/reticulate) to extend the [SDK for Python (Boto3)](https://aws.amazon.com/sdk-for-python).
+**pyMTurkR** is a successor to [MTurkR](https://github.com/cloudyr/MTurkR), and a work in progress. pyMTurkR provides access to the [Amazon Mechanical Turk](https://requester.mturk.com) (MTurk) [Requester API](http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/Welcome.html), using [`reticulate`](https://rstudio.github.io/reticulate) to extend the [`boto3` SDK for Python](https://aws.amazon.com/sdk-for-python).
 
 Because pyMTurkR uses Python, it requires some Python setup:
 
@@ -18,7 +18,7 @@ In case you run into problems, see the Troubleshooting section at the end of thi
 
 pyMTurkR was started because Amazon decided to [deprecate the API](https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI-legacy/Welcome.html) that MTurkR was using (meaning MTurkR would stop working). The goal of this project is to create a package that functions in a way that will be familiar to MTurkR users, making the transition easier.
 
-Unlike MTurkR, pyMTurkR is not purely a native R-language package. Instead, it uses [`reticulate`](https://rstudio.github.io/reticulate) to import the `boto3` module for Python. This is not necessarily a bad thing, and from the user perspective there is probably in most cases little difference.
+Unlike MTurkR, pyMTurkR is not purely a native R-language package. Instead, it uses [`reticulate`](https://rstudio.github.io/reticulate) to import the [`boto3`](https://aws.amazon.com/sdk-for-python) module for Python. This is not necessarily a bad thing, and from the user perspective there is probably in most cases little difference.
 
 ## What can it do? ##
 
