@@ -115,6 +115,8 @@ See the [boto3 documentation](https://boto3.amazonaws.com/v1/documentation/api/l
 
 For development updates see the [Changelog](https://github.com/cloudyr/pyMTurkR/blob/master/CHANGELOG.md)
 
+You can also follow [@py_mturk](https://twitter.com/py_turk) on Twitter for updates there.
+
 ## Troubleshooting ##
 
 One of the issues you might encounter, especially if you maintain multiple installs of python on your system, is that when `reticulate` loads python it loads a version that you didn't install the `boto3` module into. 
