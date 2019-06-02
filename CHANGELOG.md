@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.6] - 2019-06-02
+### Added
+- GetHITsForQualificationType()
+
 ## [0.2.5] - 2019-06-02
 ### Added
 - SearchQualificationTypes()

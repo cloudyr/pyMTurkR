@@ -1,7 +1,7 @@
 Package: pyMTurkR
 Type: Package
 Title: R Client for the MTurk Requester API using the AWS SDK for Python (Boto3)
-Version: 0.2.5
+Version: 0.2.6
 Authors@R: c(person("Tyler", "Burleigh",
                     role = c("aut", "cre"), 
                     email = "tylerburleigh@gmail.com",
@@ -15,7 +15,7 @@ Authors@R: c(person("Tyler", "Burleigh",
              person("Jonathan", "Chang", role = "ctb"),
              person("Andrew", "Brown", role = "ctb"))
 Maintainer: Tyler Burleigh <tylerburleigh@gmail.com>
-Description: Provides programmatic access to the Amazon Mechanical Turk (MTurk) <https://www.mturk.com/mturk/welcome> Requester API, by wrapping around the AWS Python Boto3 SDK.
+Description: Provides programmatic access to the Amazon Mechanical Turk (MTurk) <https://www.mturk.com> Requester API, by wrapping around the AWS Python Boto3 SDK.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
