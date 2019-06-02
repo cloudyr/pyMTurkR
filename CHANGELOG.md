@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.5] - 2019-06-02
+### Added
+- SearchQualificationTypes()
+
 ## [0.2.4] - 2019-06-02
 ### Added
 - GenerateHITReviewPolicy()
