@@ -18,7 +18,7 @@ In case you run into problems, see the Troubleshooting section at the end of thi
 
 pyMTurkR was started because Amazon decided to [deprecate the API](https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI-legacy/Welcome.html) that MTurkR was using (meaning MTurkR would stop working). The goal of this project is to create a package that functions in a way that will be familiar to MTurkR users, making the transition easier.
 
-Unlike MTurkR, pyMTurkR is not purely a native R-language package. Instead, it uses [`reticulate`](https://rstudio.github.io/reticulate) to import the [`boto3`](https://aws.amazon.com/sdk-for-python) module for Python. This is not necessarily a bad thing, and from the user perspective there is probably in most cases little difference.
+Unlike MTurkR, pyMTurkR is not purely a native R-language package. Instead, it uses [`reticulate`](https://rstudio.github.io/reticulate) to import the [`boto3`](https://aws.amazon.com/sdk-for-python) module for Python. Having a cross-language dependency is not necessarily a bad thing and from the user perspective there is probably no difference, besides the extra install steps mentioned above.
 
 ## What can it do? ##
 
