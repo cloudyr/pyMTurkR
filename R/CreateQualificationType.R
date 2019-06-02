@@ -69,9 +69,9 @@ CreateQualificationType <-
 createqual <-
 create_qualification_type <-
 function (name,
-          description = '',
+          description,
           status,
-          keywords = '',
+          keywords = NULL,
           retry.delay = NULL,
           test = NULL,
           answerkey = NULL,
@@ -85,86 +85,64 @@ function (name,
   if(!status %in% c("Active", "Inactive"))
     stop("QualificationTypeStatus must be Active or Inactive")
 
-  # Create Qualification
-  response <- try(client$create_qualification_type(
-    Name = name,
-    Description = description,
-    Keywords = keywords,
-    QualificationTypeStatus = status
-  ), silent = TRUE)
+  # Start building request
+  request <- "client$create_qualification_type("
+
+  # Add required fields
+  request <- paste0(request, "Name = '", name,
+                    "', Description = '", description,
+                    "', QualificationTypeStatus = '", status, "'")
+
+  # Add optional fields
+  if(!is.null(keywords)){
+    request <- paste0(request, ", Keywords = '", keywords, "'")
+  }
+  if(!is.null(test) & is.null(test.duration)){
+    stop("If test is specified then test.duration must be too")
+  } else if(is.null(test) & !is.null(test.duration)){
+    stop("If test.duration is specified then test must be too")
+  } else if(!is.null(test) & !is.null(test.duration)){
+    request <- paste0(request, ", Test = '", test,
+                      "', TestDurationInSeconds = '", test.duration, "'")
+  }
+  if(is.null(test) & !is.null(answerkey)){
+    stop("If answerkey is specified then test must be too")
+  } else if(!is.null(test) & !is.null(test.duration) & !is.null(answerkey)){
+    request <- paste0(request, ", AnswerKey = '", answerkey, "'")
+  }
+  if(!is.null(auto)){
+    if(is.na(as.logical(auto))){
+      stop("auto must be TRUE or FALSE")
+    }
+    request <- paste0(request, ", AutoGranted = as.logical(", auto, ")")
+  }
+  if(!is.null(auto.value)){
+    if(is.na(as.integer(auto.value))){
+      stop("auto.value must be an integer")
+    }
+    request <- paste0(request, ", AutoGrantedValue = as.integer(", auto.value, ")")
+  }
+  if(!is.null(retry.delay)){
+    if(is.na(as.integer(retry.delay)) | as.integer(retry.delay) < 0){
+      stop("retry.delay must be a positive integer")
+    }
+    request <- paste0(request, ", RetryDelayInSeconds = as.integer(", retry.delay, ")")
+  }
+
+  # Close request string
+  request <- paste0(request, ")")
+  # Send request
+  response <- try(
+    eval(parse(text = request))
+  )
 
   # Update Qualification with any other parameters,
   # but only if we've just created it
-  if(class(response) == "try-error") stop("A Qualfication with this name already exists.")
-  else {
+  if(class(response) == "try-error") {
+    stop("Unable to create qualification")
+  } else {
 
-    qual <- response$QualificationType$QualificationTypeId
-
-    # Add Test
-    if(!is.null(test) & !is.null(test.duration)) .helper_createqual_add_test(client, qual, test, test.duration)
-
-    # Add AnswerKey
-    if(!is.null(test) &
-       !is.null(answerkey) &
-       !is.null(test.duration)) .helper_createqual_add_answerkey(client, qual, answerkey, test, test.duration)
-
-    # Add AutoGranted
-    if(!is.null(auto) & !is.null(auto.value) & is.null(test)) .helper_createqual_add_auto(client, qual, auto, auto.value)
-
-    # Add RetryDelay
-    if(!is.null(retry.delay)) .helper_createqual_add_retry(client, qual, retry.delay)
-
-    # Return stuff
-    message("QualificationType Created: ", qual)
-    invisible(.helper_createqual_get_qual_info(client, qual))
-
-  }
-
-}
-
-.helper_createqual_add_test <-
-function(client, qual, test, test.duration) {
-  client$update_qualification_type(
-    QualificationTypeId = qual,
-    Test = test,
-    TestDurationInSeconds = as.integer(test.duration)
-  )
-}
-
-.helper_createqual_add_answerkey <-
-function(client, qual, answerkey, test, test.duration){
-  client$update_qualification_type(
-    QualificationTypeId = qual,
-    AnswerKey = answerkey,
-    Test = test,
-    TestDurationInSeconds = as.integer(test.duration)
-  )
-}
-
-.helper_createqual_add_auto <-
-  function(client, qual, auto, auto.value){
-    print(auto)
-    client$update_qualification_type(
-      QualificationTypeId = qual,
-      AutoGranted = auto,
-      AutoGrantedValue = as.integer(auto.value)
-    )
-}
-
-.helper_createqual_add_retry <-
-  function(client, qual, answerkey, retry.delay){
-    client$update_qualification_type(
-      QualificationTypeId = qual,
-      RetryDelayInSeconds = as.integer(test.duration)
-    )
-  }
-
-.helper_createqual_get_qual_info <-
-  function(client, qual){
-
-    response <- client$get_qualification_type(
-      QualificationTypeId = qual
-    )
+    qualid <- response$QualificationType$QualificationTypeId
 
     info <- emptydf(0, 13, c("QualificationTypeId", "CreationTime", "Name", "Description", "Keywords",
                              "QualificationTypeStatus", "AutoGranted", "AutoGrantedValue", "IsRequestable",
@@ -174,15 +152,32 @@ function(client, qual, answerkey, test, test.duration){
     info[1,]$CreationTime <- reticulate::py_to_r(response$QualificationType$CreationTime)
     info[1,]$Name <- response$QualificationType$Name
     info[1,]$Description <- response$QualificationType$Description
-    info[1,]$Keywords <- response$QualificationType$Keywords
+    if(!is.null(keywords)){
+      info[1,]$Keywords <- keywords
+    }
     info[1,]$QualificationTypeStatus <- response$QualificationType$QualificationTypeStatus
     info[1,]$AutoGranted <- response$QualificationType$AutoGranted
-    info[1,]$AutoGrantedValue <- response$QualificationType$AutoGrantedValue
+    if(!is.null(auto.value)){
+      info[1,]$AutoGrantedValue <- auto.value
+    }
     info[1,]$IsRequestable <- response$QualificationType$IsRequestable
-    info[1,]$RetryDelayInSeconds <- response$QualificationType$RetryDelayInSeconds
-    info[1,]$TestDurationInSeconds <- response$QualificationType$TestDurationInSeconds
-    info[1,]$Test <- response$QualificationType$Test
-    info[1,]$AnswerKey <- response$QualificationType$AnswerKey
+    if(!is.null(retry.delay)){
+      info[1,]$RetryDelayInSeconds <- retry.delay
+    }
+    if(!is.null(test)){
+      info[1,]$Test <- test
+    }
+    if(!is.null(answerkey)){
+      info[1,]$AnswerKey <- answerkey
+    }
+    if(!is.null(test.duration)){
+      info[1,]$TestDurationInSeconds <- test.duration
+    }
 
-    info
+    message("QualificationType Created: ", response$QualificationType$QualificationTypeId)
+
+    return(info)
+
+  }
+
 }
