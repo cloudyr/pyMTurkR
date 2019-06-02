@@ -1,18 +1,8 @@
 GenerateHITReviewPolicy <-
-function(policies) {
+function(...) {
+    l <- list(...)
+    h <- list()
 
-    return.policy <- list()
-
-    # SimplePlurality/2011-09-01 is a HIT Review policy
-    # https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_HITReviewPolicies.html
-    return.policy$PolicyName <- "SimplePlurality/2011-09-01"
-
-    for(i in 1:length(policies)){
-
-    this.policy <- list()
-    l <- policies[[i]]
-
-    # Check params
     if (("ExtendIfHITAgreementScoreIsLessThan" %in% names(l)) &&
        ((!"ExtendMaximumAssignments" %in% names(l)) |
         (!"ExtendMinimumTimeInSeconds" %in% names(l)) ) ) {
@@ -24,6 +14,11 @@ function(policies) {
         as.numeric(l$ExtendIfHITAgreementScoreIsLessThan) < 1)) {
         stop("ExtendIfHITAgreementScoreIsLessThan must be between 0 and 100")
     }
+    # if("ExtendMaximumAssignments" %in% names(l) &&
+       # (as.numeric(l$ExtendMaximumAssignments) > 25 |
+        # as.numeric(l$ExtendMaximumAssignments) < 2)) {
+        # stop("ExtendMaximumAssignments must be between 2 and 25")
+    # }
     if ("ExtendMinimumTimeInSeconds" %in% names(l) &&
        (as.numeric(l$ExtendMinimumTimeInSeconds) > 31536000 |
         as.numeric(l$ExtendMinimumTimeInSeconds) < 3600)) {
@@ -33,6 +28,8 @@ function(policies) {
        (!as.character(l$DisregardAssignmentIfRejected) %in% c("TRUE","FALSE"))) {
         stop("DisregardAssignmentIfRejected must be TRUE or FALSE")
     }
+
+    h$PolicyName <- curl_escape("SimplePlurality/2011-09-01")
 
     if (length(l$QuestionIds) > 15) {
         stop("Max number of 'QuestionIds' is 15")

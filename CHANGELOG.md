@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.4] - 2019-06-02
+### Added
+- GenerateHITReviewPolicy()
+- GenerateAssignmentReviewPolicy()
+
 ## [0.2.3] - 2019-06-02
 ### Added
 - DisposeQualificationType()
