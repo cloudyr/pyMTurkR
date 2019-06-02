@@ -4,7 +4,7 @@
 ![version](https://img.shields.io/badge/version-0.2.5-blue.svg)
 ![progress](https://img.shields.io/badge/progress-46%25-yellowgreen.svg)
 
-**pyMTurkR** is a successor to [MTurkR](https://github.com/cloudyr/MTurkR), and a work in progress. pyMTurkR provides access to the Amazon Mechanical Turk [Amazon Mechanical Turk](https://requester.mturk.com) (MTurk) [Requester API](http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/Welcome.html), using [`reticulate`](https://rstudio.github.io/reticulate) to extend the [AWS SDK for Python (Boto3)](https://aws.amazon.com/sdk-for-python) [MTurk Client](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mturk.html).
+**pyMTurkR** is a successor to [MTurkR](https://github.com/cloudyr/MTurkR), and a work in progress. pyMTurkR provides access to the [Amazon Mechanical Turk](https://requester.mturk.com) (MTurk) [Requester API](http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/Welcome.html), using [`reticulate`](https://rstudio.github.io/reticulate) to extend the [SDK for Python (Boto3)](https://aws.amazon.com/sdk-for-python).
 
 Because pyMTurkR uses Python, it requires some Python setup:
 
