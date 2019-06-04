@@ -132,7 +132,7 @@ GetAssignment <-
           annotation <- as.character(annotation)
         }
         hitsearch <- SearchHITs()
-        hitlist <- hitsearch$HITs$HITId[hitsearch$HITs$RequesterAnnotation %in% annotation]
+        hitlist <- hitsearch$HITs$HITId[grepl(annotation, hitsearch$HITs$RequesterAnnotation)]
       }
       if (length(hitlist) == 0) {
         stop("No HITs found for HITType")

@@ -166,14 +166,14 @@ ChangeHITType <-
       }
       message("Hang on while I search your HITs by HIT Type ID...")
       hitsearch <- SearchHITs()
-      hitlist <- subset(x$HITs, old.hit.type %in% HITTypeId, select = 'HITId')
+      hitlist <- hitsearch$HITs$HITId[hitsearch$HITs$HITTypeId %in% old.hit.type]
     } else if (!is.null(old.annotation)) { # old.annotation
       if (is.factor(old.annotation)) {
         old.annotation <- as.character(old.annotation)
       }
       message("Hang on while I search your HITs by annotation...")
       hitsearch <- SearchHITs()
-      hitlist <- subset(x$HITs, old.annotation %in% RequesterAnnotation, select = 'HITId')
+      hitlist <- hitsearch$HITs$HITId[grepl(old.annotation, hitsearch$HITs$RequesterAnnotation)]
     }
     if (length(hitlist) == 0) {
       stop("No HITs found for HITType")

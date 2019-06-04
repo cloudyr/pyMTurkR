@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.7] - 2019-06-03
+### Fix
+- Fix for search by annotation
+
 ## [0.2.6] - 2019-06-02
 ### Added
 - GetHITsForQualificationType()

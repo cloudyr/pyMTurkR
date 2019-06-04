@@ -122,8 +122,8 @@ ExtendHIT <-
         annotation <- as.character(annotation)
       }
       hitsearch <- SearchHITs(verbose = FALSE, return.qual.dataframe = FALSE, ...)
-      hitlist <- hitsearch$HITs$HITId[hitsearch$HITs$RequesterAnnotation %in% annotation]
-      expirations <- as.integer(hitsearch$HITs$Expiration[hitsearch$HITs$RequesterAnnotation %in% annotation])
+      hitlist <- hitsearch$HITs$HITId[grepl(annotation, hitsearch$HITs$RequesterAnnotation)]
+      expirations <- as.integer(hitsearch$HITs$Expiration[grepl(annotation, hitsearch$HITs$RequesterAnnotation)])
     }
     if (length(hitlist) == 0 || is.null(hitlist)) {
       stop("No HITs found for HITType")
