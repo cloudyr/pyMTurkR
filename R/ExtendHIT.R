@@ -121,7 +121,7 @@ ExtendHIT <-
       if (is.factor(annotation)) {
         annotation <- as.character(annotation)
       }
-      hitsearch <- SearchHITs(verbose = FALSE, return.qual.dataframe = FALSE, ...)
+      hitsearch <- SearchHITs(verbose = FALSE)
       hitlist <- hitsearch$HITs$HITId[grepl(annotation, hitsearch$HITs$RequesterAnnotation)]
       expirations <- as.integer(hitsearch$HITs$Expiration[grepl(annotation, hitsearch$HITs$RequesterAnnotation)])
     }
