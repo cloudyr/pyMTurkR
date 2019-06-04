@@ -214,7 +214,7 @@ CreateHIT <-
     if (!is.null(annotation) && nchar(annotation) > 255) {
       stop("Annotation must be <= 255 characters")
     } else if (!is.null(annotation)) {
-      request <- paste0(request, ", RequesterAnnotation = ", annotation)
+      request <- paste0(request, ", RequesterAnnotation = '", annotation, "'")
     }
 
     # Assignment review policy

@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.9] - 2019-06-04
+### Fix
+- Fix for annotation parameter in CreateHIT()
+
 ## [0.2.8] - 2019-06-03
 ### Added
 - HITStatus()
