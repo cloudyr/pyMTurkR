@@ -8,13 +8,10 @@
 #' is helpful for checking on the progress of currently available HITs.
 #'
 #' \code{gethit()} and \code{hit()} are aliases for \code{GetHIT}.
-#' @aliases GetHIT gethit hit
+#' \code{status()} is an alias for \code{HITStatus}.
+#'
+#' @aliases GetHIT gethit hit HITStatus status
 #' @param hit A character string specifying the HITId of the HIT to be retrieved.
-#' @param return.hit.dataframe A logical indicating whether the data frame of
-#' HITs should be returned. Default is \code{TRUE}.
-#' @param return.qual.dataframe A logical indicating whether the list of each
-#' HIT's QualificationRequirements (stored as data frames in that list) should
-#' be returned. Default is \code{TRUE}.
 #' @author Tyler Burleigh, Thomas J. Leeper
 #' @references
 #' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_GetHITOperation.html}{API Reference}
@@ -24,10 +21,7 @@
 GetHIT <-
   gethit <-
   hit <-
-  function(hit,
-           return.hit.dataframe = TRUE,
-           return.qual.dataframe = TRUE,
-           verbose = TRUE){
+  function(hit, verbose = TRUE){
 
     client <- GetClient() # Boto3 client
     response <- try(client$get_hit(HITId = hit))
@@ -37,16 +31,8 @@ GetHIT <-
         message("HIT (", hit, ") Retrieved")
       }
       hitdetails <- list(response$HIT) # Hack for 1 result
-      if (return.hit.dataframe == TRUE & return.qual.dataframe == TRUE) {
-        return.list <- list(HITs = as.data.frame.HITs(hitdetails),
+      return.list <- list(HITs = as.data.frame.HITs(hitdetails),
                             QualificationRequirements = as.data.frame.QualificationRequirements(hitdetails))
-      } else if (return.hit.dataframe == TRUE & return.qual.dataframe == FALSE) {
-        return.list <- list(HITs = as.data.frame.HITs(hitdetails))
-      } else if (return.hit.dataframe == FALSE & return.qual.dataframe == TRUE) {
-        return.list <- list(QualificationRequirements = as.data.frame.QualificationRequirements(hitdetails))
-      } else {
-        return.list <- list()
-      }
     } else {
       if (verbose) {
         message("No HITs Retrieved")

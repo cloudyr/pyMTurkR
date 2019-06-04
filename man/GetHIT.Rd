@@ -4,20 +4,14 @@
 \alias{GetHIT}
 \alias{gethit}
 \alias{hit}
+\alias{HITStatus}
+\alias{status}
 \title{Get HIT}
 \usage{
-GetHIT(hit, return.hit.dataframe = TRUE, return.qual.dataframe = TRUE,
-  verbose = TRUE)
+GetHIT(hit, verbose = TRUE)
 }
 \arguments{
 \item{hit}{A character string specifying the HITId of the HIT to be retrieved.}
-
-\item{return.hit.dataframe}{A logical indicating whether the data frame of
-HITs should be returned. Default is \code{TRUE}.}
-
-\item{return.qual.dataframe}{A logical indicating whether the list of each
-HIT's QualificationRequirements (stored as data frames in that list) should
-be returned. Default is \code{TRUE}.}
 }
 \description{
 Retrieve various details of a HIT as a data frame.
@@ -29,6 +23,7 @@ Assignments Available, Number of Assignments Completed for the HIT(s), which
 is helpful for checking on the progress of currently available HITs.
 
 \code{gethit()} and \code{hit()} are aliases for \code{GetHIT}.
+\code{status()} is an alias for \code{HITStatus}.
 }
 \references{
 \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_GetHITOperation.html}{API Reference}

@@ -3,11 +3,8 @@ status <-
 function (hit = NULL,
           hit.type = NULL,
           annotation = NULL,
-          verbose = getOption('MTurkR.verbose', TRUE),
-          ...){
-    hitsearch <- SearchHITs(verbose = TRUE,
-                            return.all = TRUE,
-                            return.qual.dataframe = FALSE, ...)
+          verbose = getOption('pyMTurkR.verbose', TRUE)){
+    hitsearch <- SearchHITs(verbose = TRUE)
     HITs <- hitsearch$HITs
     if (is.null(HITs)) {
         return(HITs) # return if NULL
@@ -33,7 +30,7 @@ function (hit = NULL,
             if (is.factor(annotation)) {
                 hit <- as.character(annotation)
             }
-            HITs <- HITs[HITs$RequesterAnnotation %in% annotation, ]
+            HITs <- HITs[grepl(annotation, HITs$RequesterAnnotation), ]
         }
         if (dim(HITs)[1] == 0) {
             warning("No HITs found!")
