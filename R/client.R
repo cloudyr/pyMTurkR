@@ -74,8 +74,8 @@ function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
 
   # Start client
   client <- boto3$client('mturk', region_name='us-east-1',
-                                aws_access_key_id = aws.signature::read_credentials()[[profile]]$AWS_ACCESS_KEY_ID,
-                                aws_secret_access_key = aws.signature::read_credentials()[[profile]]$AWS_SECRET_ACCESS_KEY,
+                                aws_access_key_id = key,
+                                aws_secret_access_key = secret_key,
                                 endpoint_url = endpoint_url)
 
   # Test credentials with a simple API call
