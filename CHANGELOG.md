@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.0] - 2019-06-08
+### Added
+- GetBlockedWorkers()
+
 ## [0.2.9] - 2019-06-04
 ### Fix
 - Fix for annotation parameter in CreateHIT()
