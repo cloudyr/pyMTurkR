@@ -229,3 +229,21 @@ as.data.frame.QuestionFormAnswers <- function(assignment, answers) {
 
 }
 
+
+
+# BLOCKED WORKER
+
+as.data.frame.WorkerBlock <- function(workers) {
+
+  return.workers <- emptydf(0, 2, c("WorkerId", "Reason"))
+
+  for (i in 1:length(workers)) {
+    worker <- workers[[i]]
+    this.worker <- emptydf(1, 2, c("WorkerId", "Reason"))
+    this.worker[1] <- worker$WorkerId
+    this.worker[2] <- worker$Reason
+    return.workers <- rbind(return.workers, this.worker)
+  }
+
+  return.workers
+}
