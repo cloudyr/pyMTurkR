@@ -45,6 +45,7 @@ The following verbs have been implemented so far:
 - GenerateHTMLQuestion()
 - GetAssignment()
 - GetBlockedWorkers()
+- GetBonuses()
 - GetHIT()
 - GetHITsForQualificationType()
 - HITStatus()

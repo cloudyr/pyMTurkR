@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.1] - 2019-06-09
+### Added
+- GetBonuses()
+
 ## [0.3.0] - 2019-06-08
 ### Added
 - GetBlockedWorkers()

@@ -1,6 +1,7 @@
 GetBlockedWorkers <-
   blockedworkers <-
-  list_worker_blocks <-
+  ListWorkerBlocks <-
+  listworkerblocks <-
   function(return.pages = NULL, results = as.integer(100),
            pagetoken = NULL, verbose = TRUE) {
 

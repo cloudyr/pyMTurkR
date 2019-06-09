@@ -231,7 +231,7 @@ as.data.frame.QuestionFormAnswers <- function(assignment, answers) {
 
 
 
-# BLOCKED WORKER
+# BLOCKED WORKERS
 
 as.data.frame.WorkerBlock <- function(workers) {
 
@@ -247,3 +247,32 @@ as.data.frame.WorkerBlock <- function(workers) {
 
   return.workers
 }
+
+
+
+# BONUS PAYMENTS
+
+as.data.frame.BonusPayments <- function(bonuses){
+
+
+  return.bonuses <- emptydf(0, 5, c("AssignmentId", "WorkerId",
+                                    "BonusAmount", "Reason",
+                                    "GrantTime"))
+
+  for (i in 1:length(bonuses)) {
+    bonus <- bonuses[[i]]
+    this.bonus <- emptydf(1, 5, c("AssignmentId", "WorkerId",
+                                  "BonusAmount", "Reason",
+                                  "GrantTime"))
+    this.bonus[1] <- bonus$AssignmentId
+    this.bonus[2] <- bonus$WorkerId
+    this.bonus[3] <- bonus$BonusAmount
+    this.bonus[4] <- bonus$Reason
+    this.bonus[5] <- reticulate::py_to_r(bonus$GrantTime)
+    return.bonuses <- rbind(return.bonuses, this.bonus)
+  }
+
+  return.bonuses
+}
+
+

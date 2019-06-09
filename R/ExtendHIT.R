@@ -113,7 +113,7 @@ ExtendHIT <-
       if (is.factor(hit.type)) {
         hit.type <- as.character(hit.type)
       }
-      hitsearch <- SearchHITs()
+      hitsearch <- SearchHITs(verbose = FALSE)
       hitlist <- hitsearch$HITs$HITId[hitsearch$HITs$HITTypeId %in% hit.type]
       expirations <- as.integer(hitsearch$HITs$Expiration[hitsearch$HITs$HITTypeId %in% hit.type])
 
