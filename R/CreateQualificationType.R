@@ -103,7 +103,7 @@ function (name,
     stop("If test.duration is specified then test must be too")
   } else if(!is.null(test) & !is.null(test.duration)){
     request <- paste0(request, ", Test = '", test,
-                      "', TestDurationInSeconds = '", test.duration, "'")
+                      "', TestDurationInSeconds = as.integer(", test.duration, ")")
   }
   if(is.null(test) & !is.null(answerkey)){
     stop("If answerkey is specified then test must be too")
