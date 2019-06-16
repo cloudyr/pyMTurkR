@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.3] - 2019-06-16
+### Fix
+- Fixes test.duration type issue in CreateQualificationType()
+
 ## [0.3.2] - 2019-06-16
 ### Added
 - GetQualificationRequests()
