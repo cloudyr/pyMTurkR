@@ -3,12 +3,12 @@
 as.data.frame.HITs <- function(hits) {
 
   HITs <- emptydf(length(hits), 19, c("HITId", "HITTypeId", "HITGroupId",
-                                         "CreationTime", "Title", "Description", "Keywords", "HITStatus",
-                                         "MaxAssignments", "Amount", "AutoApprovalDelayInSeconds",
-                                         "Expiration", "AssignmentDurationInSeconds",
-                                         "HITReviewStatus", "RequesterAnnotation", "NumberOfAssignmentsPending",
-                                         "NumberOfAssignmentsAvailable", "NumberOfAssignmentsCompleted",
-                                         "Question"))
+                                      "CreationTime", "Title", "Description", "Keywords", "HITStatus",
+                                      "MaxAssignments", "Amount", "AutoApprovalDelayInSeconds",
+                                      "Expiration", "AssignmentDurationInSeconds",
+                                      "HITReviewStatus", "RequesterAnnotation", "NumberOfAssignmentsPending",
+                                      "NumberOfAssignmentsAvailable", "NumberOfAssignmentsCompleted",
+                                      "Question"))
   for (i in 1:length(hits)) {
 
     hit <- hits[[i]]
@@ -64,26 +64,26 @@ as.data.frame.QualificationRequirements <- function(hits) {
 
       for (k in 1:length(quals)) {
 
-          qual <- quals[[k]]
+        qual <- quals[[k]]
 
-          Quals[k, 1] <- hitid
-          Quals[k, 2] <- qual$QualificationTypeId
-          Quals[k, 3] <- qual$Comparator
+        Quals[k, 1] <- hitid
+        Quals[k, 2] <- qual$QualificationTypeId
+        Quals[k, 3] <- qual$Comparator
 
-          # This may need more testing and more conditions
-          if (!is.null(qual$IntegerValues)) {
-            Quals[k, 4] <- qual$IntegerValues
-          } else if (!is.null(qual$LocaleValues)) { # Country quals
-            Quals[k, 4] <- qual$LocaleValues[[1]]$Country
-            if(length(qual$LocaleValues) > 1) {
-              for (j in 2:length(qual$LocaleValues)) {
-                Quals[k, 4] <- paste(Quals[k, 4], ", ", qual$LocaleValues[[j]]$Country)
-              }
+        # This may need more testing and more conditions
+        if (!is.null(qual$IntegerValues)) {
+          Quals[k, 4] <- qual$IntegerValues
+        } else if (!is.null(qual$LocaleValues)) { # Country quals
+          Quals[k, 4] <- qual$LocaleValues[[1]]$Country
+          if(length(qual$LocaleValues) > 1) {
+            for (j in 2:length(qual$LocaleValues)) {
+              Quals[k, 4] <- paste(Quals[k, 4], ", ", qual$LocaleValues[[j]]$Country)
             }
           }
+        }
 
-          Quals[k, 5] <- qual$RequiredToPreview
-          Quals[k, 6] <- qual$ActionsGuarded
+        Quals[k, 5] <- qual$RequiredToPreview
+        Quals[k, 6] <- qual$ActionsGuarded
 
       }
     } else {
@@ -108,8 +108,8 @@ as.data.frame.QualificationTypes <- function(quals) {
   for (i in 1:length(quals)) {
 
     Quals <- emptydf(1, 9, c('QualificationTypeId', 'CreationTime', 'Name',
-                                         'Description', 'Keywords', 'QualificationTypeStatus',
-                                         'RetryDelayInSeconds', 'IsRequestable', 'AutoGranted'))
+                             'Description', 'Keywords', 'QualificationTypeStatus',
+                             'RetryDelayInSeconds', 'IsRequestable', 'AutoGranted'))
 
     qual <- quals[[i]]
 
@@ -146,33 +146,33 @@ as.data.frame.QualificationTypes <- function(quals) {
 as.data.frame.Assignment <- function(assignment) {
 
   Assignment <- emptydf(nrow = 1, ncol = 10, c('AssignmentId', 'WorkerId', 'HITId',
-                                                'AssignmentStatus', 'AutoApprovalTime',
-                                                'AcceptTime', 'SubmitTime', 'ApprovalTime',
-                                                'RejectionTime', 'RequesterFeedback'))
+                                               'AssignmentStatus', 'AutoApprovalTime',
+                                               'AcceptTime', 'SubmitTime', 'ApprovalTime',
+                                               'RejectionTime', 'RequesterFeedback'))
 
   return.answers <- list()
 
-    Assignment[1] <- assignment$AssignmentId
-    Assignment[2] <- assignment$WorkerId
-    Assignment[3] <- assignment$HITId
-    Assignment[4] <- assignment$AssignmentStatus
-    Assignment[5] <- reticulate::py_to_r(assignment$AutoApprovalTime)
-    if (!is.null(assignment$AcceptTime)) {
-      Assignment[6] <- reticulate::py_to_r(assignment$AcceptTime)
-    }
-    Assignment[7] <- reticulate::py_to_r(assignment$SubmitTime)
-    if (!is.null(assignment$ApprovalTime)) {
-      Assignment[8] <- reticulate::py_to_r(assignment$ApprovalTime)
-    }
-    if (!is.null(assignment$RejectionTime)) {
-      Assignment[9] <- reticulate::py_to_r(assignment$RejectionTime)
-    }
-    if (!is.null(assignment$RequesterFeedback)) {
-      Assignment[10] <- assignment$RequesterFeedback
-    }
+  Assignment[1] <- assignment$AssignmentId
+  Assignment[2] <- assignment$WorkerId
+  Assignment[3] <- assignment$HITId
+  Assignment[4] <- assignment$AssignmentStatus
+  Assignment[5] <- reticulate::py_to_r(assignment$AutoApprovalTime)
+  if (!is.null(assignment$AcceptTime)) {
+    Assignment[6] <- reticulate::py_to_r(assignment$AcceptTime)
+  }
+  Assignment[7] <- reticulate::py_to_r(assignment$SubmitTime)
+  if (!is.null(assignment$ApprovalTime)) {
+    Assignment[8] <- reticulate::py_to_r(assignment$ApprovalTime)
+  }
+  if (!is.null(assignment$RejectionTime)) {
+    Assignment[9] <- reticulate::py_to_r(assignment$RejectionTime)
+  }
+  if (!is.null(assignment$RequesterFeedback)) {
+    Assignment[10] <- assignment$RequesterFeedback
+  }
 
-    answers <- as.data.frame.QuestionFormAnswers(Assignment, assignment$Answer)
-    return.answers <- rbind(return.answers, answers)
+  answers <- as.data.frame.QuestionFormAnswers(Assignment, assignment$Answer)
+  return.answers <- rbind(return.answers, answers)
 
 
   return(list(assignments = Assignment, questions = return.answers))
@@ -195,14 +195,14 @@ as.data.frame.QuestionFormAnswers <- function(assignment, answers) {
 
   questions <- length(XML::xmlChildren(xmlAnswers[[1]][["QuestionIdentifier"]]))
   return.answers <- emptydf(nrow = 0, 9, c("AssignmentId", "WorkerId", "HITId", "QuestionIdentifier",
-                                       "FreeText", "SelectionIdentifier", "OtherSelectionField",
-                                       "UploadedFileKey", "UploadedFileSizeInBytes"))
+                                           "FreeText", "SelectionIdentifier", "OtherSelectionField",
+                                           "UploadedFileKey", "UploadedFileSizeInBytes"))
 
   for (i in 1:length(questions)) {
 
     Answer <- emptydf(1, 9, c("AssignmentId", "WorkerId", "HITId", "QuestionIdentifier",
-                               "FreeText", "SelectionIdentifier", "OtherSelectionField",
-                               "UploadedFileKey", "UploadedFileSizeInBytes"))
+                              "FreeText", "SelectionIdentifier", "OtherSelectionField",
+                              "UploadedFileKey", "UploadedFileSizeInBytes"))
 
     question <- xmlAnswers[[i]]
 
@@ -275,4 +275,41 @@ as.data.frame.BonusPayments <- function(bonuses){
   return.bonuses
 }
 
+
+
+# QUALIFICATIONS
+
+as.data.frame.QualificationRequests <- function(requests){
+
+  return.requests <- emptydf(0, 6, c("QualificationRequestId",
+                                    "QualificationTypeId", "WorkerId",
+                                    "Test", "Answer",
+                                    "SubmitTime"))
+
+  if(length(requests) == 0){
+    return(return.requests)
+  } else {
+    for (i in 1:length(requests)) {
+      request <- requests[[i]]
+      this.request <- emptydf(1, 6, c("QualificationRequestId",
+                                    "QualificationTypeId", "WorkerId",
+                                    "Test", "Answer",
+                                    "SubmitTime"))
+
+      this.request[1] <- request$QualificationRequestId
+      this.request[2] <- request$QualificationTypeId
+      this.request[3] <- request$WorkerId
+      if(!is.null(request$Test)){
+        this.request[4] <- request$Test
+      }
+      if(!is.null(request$Answer)){
+        this.request[5] <- request$Answer
+      }
+      this.request[6] <- reticulate::py_to_r(request$SubmitTime)
+      return.requests <- rbind(return.requests, this.request)
+    }
+
+    return.requests
+  }
+}
 

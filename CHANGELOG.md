@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.2] - 2019-06-16
+### Added
+- GetQualificationRequests()
+
 ## [0.3.1] - 2019-06-09
 ### Added
 - GetBonuses()
