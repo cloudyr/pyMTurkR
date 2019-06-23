@@ -313,3 +313,35 @@ as.data.frame.QualificationRequests <- function(requests){
   }
 }
 
+
+
+as.data.frame.Qualifications <- function(quals){
+
+  return.quals <- emptydf(0, 5, c("QualificationTypeId",
+                                     "WorkerId", "GrantTime",
+                                     "Value", "Status"))
+
+  if(length(quals) == 0){
+    return(return.quals)
+  } else {
+    for (i in 1:length(quals)) {
+      qual <- quals[[i]]
+      this.qual <- emptydf(1, 5, c("QualificationTypeId",
+                                      "WorkerId", "GrantTime",
+                                      "Value", "Status"))
+
+      this.qual[1] <- qual$QualificationTypeId
+      this.qual[2] <- qual$WorkerId
+      this.qual[3] <- reticulate::py_to_r(qual$GrantTime)
+      if(!is.null(qual$IntegerValue)){
+        this.qual[4] <- qual$IntegerValue
+      }
+      this.qual[5] <- qual$Status
+
+      return.quals <- rbind(return.quals, this.qual)
+    }
+
+    return.quals
+  }
+}
+
