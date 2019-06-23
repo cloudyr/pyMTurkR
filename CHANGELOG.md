@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.5] - 2019-06-23
+### Added
+- GetQualificationScore()
+
 ## [0.3.4] - 2019-06-23
 ### Added
 - GetQualifications()

@@ -1,8 +1,8 @@
 # R Client for the MTurk Requester API
 
 ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
-![version](https://img.shields.io/badge/version-0.3.4-blue.svg)
-![progress](https://img.shields.io/badge/progress-58%25-yellowgreen.svg)
+![version](https://img.shields.io/badge/version-0.3.5-blue.svg)
+![progress](https://img.shields.io/badge/progress-60%25-green.svg)
 
 **pyMTurkR** is a successor to [MTurkR](https://github.com/cloudyr/MTurkR), and a work in progress. pyMTurkR provides access to the [Amazon Mechanical Turk](https://requester.mturk.com) (MTurk) [Requester API](http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/Welcome.html), using [`reticulate`](https://rstudio.github.io/reticulate) to extend the [`boto3` SDK for Python](https://aws.amazon.com/sdk-for-python).
 
@@ -48,8 +48,9 @@ The following verbs have been implemented so far:
 - GetBonuses()
 - GetHIT()
 - GetHITsForQualificationType()
-- GetQualifications()
 - GetQualificationRequests()
+- GetQualifications()
+- GetQualificationScore()
 - HITStatus()
 - RegisterHITType()
 - SearchHITs()
