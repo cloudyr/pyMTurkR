@@ -198,7 +198,7 @@ CreateHIT <-
       if (class(question) %in% c('HTMLQuestion','ExternalQuestion')) {
         question <- question$string
       }
-      request <- paste0(request, ", Question = \"", question, "\"")
+      request <- paste0(request, ", Question = '", question, "'")
     }
 
     # Expiration
@@ -236,7 +236,7 @@ CreateHIT <-
 
     # Qualification Requirements
     if (!is.null(qual.req)){
-      request <- paste0(request, ", QualificationRequirements = ", qual.req, "")
+      request <- paste0(request, ", QualificationRequirements = ", qual.req)
     }
 
     # Close request string
@@ -259,5 +259,5 @@ CreateHIT <-
       return(HITs)
     }
 
-}
+  }
 

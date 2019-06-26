@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.5] - 2019-06-26
+### Fixed
+Fixing a nasty bug in CreateHIT() when specifying Qualification Requirements and an HTML Question
+
 ## [0.3.5] - 2019-06-23
 ### Added
 - GetQualificationScore()
