@@ -1,8 +1,12 @@
 # Changelog
 
-## [0.3.5] - 2019-06-26
+## [0.3.7] - 2019-06-27
+### Changed
+- GetAssignment() now returns an "Answer" column with XML
+
+## [0.3.6] - 2019-06-26
 ### Fixed
-Fixing a nasty bug in CreateHIT() when specifying Qualification Requirements and an HTML Question
+- Fixing a nasty bug in CreateHIT() when specifying Qualification Requirements and an HTML Question
 
 ## [0.3.5] - 2019-06-23
 ### Added

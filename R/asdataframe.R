@@ -145,10 +145,11 @@ as.data.frame.QualificationTypes <- function(quals) {
 
 as.data.frame.Assignment <- function(assignment) {
 
-  Assignment <- emptydf(nrow = 1, ncol = 10, c('AssignmentId', 'WorkerId', 'HITId',
+  Assignment <- emptydf(nrow = 1, ncol = 11, c('AssignmentId', 'WorkerId', 'HITId',
                                                'AssignmentStatus', 'AutoApprovalTime',
                                                'AcceptTime', 'SubmitTime', 'ApprovalTime',
-                                               'RejectionTime', 'RequesterFeedback'))
+                                               'RejectionTime', 'RequesterFeedback',
+                                               'Answer'))
 
   return.answers <- list()
 
@@ -169,6 +170,9 @@ as.data.frame.Assignment <- function(assignment) {
   }
   if (!is.null(assignment$RequesterFeedback)) {
     Assignment[10] <- assignment$RequesterFeedback
+  }
+  if (!is.null(assignment$Answer)) {
+    Assignment[11] <- assignment$Answer
   }
 
   answers <- as.data.frame.QuestionFormAnswers(Assignment, assignment$Answer)

@@ -220,10 +220,11 @@ GetAssignment <-
       runningtotal <- 0
       pages <- 1
 
-      Assignments <- emptydf(nrow = 0, ncol = 10, c('AssignmentId', 'WorkerId', 'HITId',
+      Assignments <- emptydf(nrow = 0, ncol = 11, c('AssignmentId', 'WorkerId', 'HITId',
                                                     'AssignmentStatus', 'AutoApprovalTime',
                                                     'AcceptTime', 'SubmitTime', 'ApprovalTime',
-                                                    'RejectionTime', 'RequesterFeedback'))
+                                                    'RejectionTime', 'RequesterFeedback',
+                                                    'Answer'))
 
       # Progress bar because this can take a while
       pb <- progress::progress_bar$new(total = length(hitlist))
