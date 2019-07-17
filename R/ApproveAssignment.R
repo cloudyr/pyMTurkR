@@ -53,7 +53,7 @@ function (assignments,
           feedback = "",
           rejected = FALSE) {
 
-  client <- GetClient(sandbox, profile) # Boto3 client
+  client <- GetClient() # Boto3 client
 
   if (is.factor(assignments)) {
       assignments <- as.character(assignments)
