@@ -10,7 +10,8 @@
 \usage{
 GetAssignment(assignment = NULL, hit = NULL, hit.type = NULL,
   annotation = NULL, status = NULL, return.pages = NULL,
-  results = as.integer(100), pagetoken = NULL, verbose = TRUE)
+  results = as.integer(100), pagetoken = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{assignment}{An optional character string specifying the AssignmentId
