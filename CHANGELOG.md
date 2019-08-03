@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.9] - 2019-08-03
+### Added
+- GetQualificationType()
+
 ## [0.3.8] - 2019-08-03
 ### Bug fix
 - GetAssignment() now returns the proper results when using hit.type parameter

@@ -364,3 +364,40 @@ as.data.frame.Qualifications <- function(quals){
   }
 }
 
+
+as.data.frame.QualificationTypes <- function(qual) {
+
+  this.qual <- emptydf(1, 13, c("QualificationTypeId", "CreationTime", "Name", "Description",
+                                 "Keywords", "QualificationTypeStatus", "AutoGranted", "AutoGrantedValue",
+                                 "IsRequestable", "RetryDelayInSeconds", "TestDurationInSeconds",
+                                 "Test","AnswerKey"))
+
+  this.qual[1] <- qual$QualificationTypeId
+  this.qual[2] <- reticulate::py_to_r(qual$CreationTime)
+  this.qual[3] <- qual$Name
+  this.qual[4] <- qual$Description
+  this.qual[5] <- qual$Keywords
+  this.qual[6] <- qual$QualificationTypeStatus
+  this.qual[7] <- qual$AutoGranted
+  if(!is.null(qual$AutoGrantedValue)){
+    this.qual[8] <- qual$AutoGrantedValue
+  }
+  if(!is.null(qual$IsRequestable)){
+    this.qual[9] <- qual$IsRequestable
+  }
+  if(!is.null(qual$RetryDelayInSeconds)){
+    this.qual[10] <- qual$RetryDelayInSeconds
+  }
+  if(!is.null(qual$TestDurationInSeconds)){
+    this.qual[11] <- qual$TestDurationInSeconds
+  }
+  if(!is.null(qual$Test)){
+    this.qual[12] <- qual$Test
+  }
+  if(!is.null(qual$AnswerKey)){
+    this.qual[13] <- qual$AnswerKey
+  }
+
+  return(this.qual)
+}
+
