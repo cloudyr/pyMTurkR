@@ -219,7 +219,6 @@ GetAssignment <-
 
       # Keep a running total of all Assignments fetched
       runningtotal <- 0
-      pages <- 1
 
       Assignments <- emptydf(nrow = 0, ncol = 11, c('AssignmentId', 'WorkerId', 'HITId',
                                                     'AssignmentStatus', 'AutoApprovalTime',
@@ -237,6 +236,7 @@ GetAssignment <-
         hit <- hitlist[i]
         pagetoken <- NULL
         results.found <- NULL
+        pages <- 1
 
         while ((is.null(results.found) || results.found == results) &
                (is.null(return.pages) || pages < return.pages)) {
@@ -254,10 +254,10 @@ GetAssignment <-
             results.found <- 0
           }
 
-        }
+          pages <- pages + 1
+          Assignments <- rbind(Assignments, to.return$Assignments)
 
-        pages <- pages + 1
-        Assignments <- rbind(Assignments, to.return$Assignments)
+        }
         pb$tick()
 
       }
