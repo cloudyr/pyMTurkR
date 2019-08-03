@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.4.1] - 2019-08-03
+### Added
+- GenerateExternalQuestion()
+
 ## [0.4.0] - 2019-08-03
 ### Added
 - GetReviewableHITs()
