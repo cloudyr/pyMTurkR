@@ -1,3 +1,5 @@
+#' REVIEW POLICIES NOT SUPPORTED
+#'
 #' Generate HIT and/or Assignment ReviewPolicies
 #'
 #' Generate a HIT ReviewPolicy and/or Assignment ReviewPolicy data structure

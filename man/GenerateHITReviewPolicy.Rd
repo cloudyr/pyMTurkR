@@ -3,7 +3,7 @@
 \name{GenerateHITReviewPolicy}
 \alias{GenerateHITReviewPolicy}
 \alias{GenerateAssignmentReviewPolicy}
-\title{Generate HIT and/or Assignment ReviewPolicies}
+\title{REVIEW POLICIES NOT SUPPORTED}
 \usage{
 GenerateHITReviewPolicy(...)
 }
@@ -15,10 +15,12 @@ A character string that reflects the URL-encoded
 \code{HITReviewPolicy} or \code{AssignmentReviewPolicy}.
 }
 \description{
-Generate a HIT ReviewPolicy and/or Assignment ReviewPolicy data structure
-for use in \code{\link{CreateHIT}}.
+Generate HIT and/or Assignment ReviewPolicies
 }
 \details{
+Generate a HIT ReviewPolicy and/or Assignment ReviewPolicy data structure
+for use in \code{\link{CreateHIT}}.
+
 Converts a list of ReviewPolicy parameters into a ReviewPolicy data
 structure.
 

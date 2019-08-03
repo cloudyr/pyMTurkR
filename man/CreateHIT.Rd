@@ -32,13 +32,12 @@ workers. Must be between 30 and 31536000 seconds.}
 
 \item{assignments}{A character string specifying the number of assignments}
 
-\item{assignment.review.policy}{An optional character string containing an
+\item{assignment.review.policy}{(NOT SUPPORTED) An optional character string containing an
 Assignment-level ReviewPolicy data structure as returned by
 \code{\link{GenerateAssignmentReviewPolicy}}.}
 
-\item{hit.review.policy}{An optional character string containing a HIT-level
-ReviewPolicy data structure as returned by
-\code{\link{GenerateHITReviewPolicy}}.}
+\item{hit.review.policy}{(NOT SUPPORTED) An optional character string containing a HIT-level
+ReviewPolicy data structure as returned by \code{\link{GenerateHITReviewPolicy}}.}
 
 \item{annotation}{An optional character string annotating the HIT. This is
 not visible to workers, but can be used as a label by which to identify the
@@ -114,6 +113,8 @@ HIT .html files (that would also have to be uploaded to a web server) and
 executing \code{CreateHIT} for each of these external files with an
 appropriate ExternalQuestion data structure specified for the
 \code{question} parameter.
+
+Note that HIT and Assignment Review Policies are not currently supported.
 
 \code{createhit()}, \code{create()}, \code{create_hit()},
 \code{CreateHITWithHITType()}, \code{create_hit_with_hit_type()} are aliases.
