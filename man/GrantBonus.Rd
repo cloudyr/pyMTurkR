@@ -2,94 +2,89 @@
 % Please edit documentation in R/GrantBonus.R
 \name{GrantBonus}
 \alias{GrantBonus}
-\alias{ContactWorker}
-\alias{ContactWorkers}
-\alias{contact}
-\alias{NotifyWorkers}
-\alias{notify}
-\title{Contact Worker(s)}
+\alias{bonus}
+\alias{paybonus}
+\alias{sendbonux}
+\title{Pay Bonus to Worker}
 \usage{
-GrantBonus(workers, assignments, amounts, reasons, verbose = TRUE)
+GrantBonus(workers, assignments, amounts, reasons,
+  unique.request.token = NULL, verbose = getOption("pyMTurkR.verbose",
+  TRUE))
 }
 \arguments{
 \item{workers}{A character string containing a WorkerId, or a vector of
 character strings containing multiple WorkerIds.}
 
-\item{subjects}{A character string containing subject line of an email, or a
-vector of character strings of of length equal to the number of workers to
-be contacted containing the subject line of the email for each worker.
-Maximum of 200 characters.}
+\item{assignments}{A character string containing an AssignmentId for an
+assignment performed by that worker, or a vector of character strings
+containing the AssignmentId for an assignment performed by each of the
+workers specified in \code{workers}.}
 
-\item{msgs}{A character string containing body text of an email, or a vector
-of character strings of of length equal to the number of workers to be
-contacted containing the body text of the email for each worker. Maximum of
-4096 characters.}
+\item{amounts}{A character string containing an amount (in U.S. Dollars) to
+bonus the worker(s), or a vector (of length equal to the number of workers)
+of character strings containing the amount to be paid to each worker.}
 
-\item{batch}{A logical (default is \code{FALSE}), indicating whether workers
-should be contacted in batches of 100 (the maximum allowed by the API). This
-significantly reduces the time required to contact workers, but eliminates
-the ability to send customized messages to each worker.}
+\item{reasons}{A character string containing a reason for bonusing the
+worker(s), or a vector (of length equal to the number of workers) of
+character strings containing the reason to bonus each worker. The reason is
+visible to each worker and is sent via email. Newlines can be specified with
+\code{\n} and tabs can be specified with \code{\t} in the message body.}
+
+\item{unique.request.token}{An optional character string, included only for
+advanced users. It can be used to prevent resending a bonus. A bonus will
+not be granted if a bonus was previously granted (within a short time
+window) using the same \code{unique.request.token}.}
+
+\item{verbose}{Optionally print the results of the API request to the
+standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+TRUE)}.}
 }
 \value{
-A data frame containing the list of workers, subjects, and messages,
-and whether the request to contact each of them was valid.
+A data frame containing the WorkerId, AssignmentId, amount, reason,
+and whether each request to bonus was valid.
 }
 \description{
-Contact one or more workers. This sends an email with specified subject line
-and body text to one or more workers. This can be used to recontact workers
-in panel/longitudinal research or to send follow-up work.
+Pay a bonus to one or more workers. This function spends money from your
+MTurk account and will fail if insufficient funds are available.
 }
 \details{
-Send an email to one or more workers, either with a common subject and body
-text or subject and body customized for each worker.
+A simple function to grant a bonus to one or more workers. The function is
+somewhat picky in that it requires a WorkerId, the AssignmentId for an
+assignment that worker has completed, an amount, and a reason for the bonus,
+for each bonus to be paid. Optionally, the amount and reason can be
+specified as single (character string) values, which will be used for each
+bonus.
 
-In batch mode (when \code{batch=TRUE}), workers are contacted in batches of
-100 with a single identical email. If one email fails (e.g., for one worker)
-the other emails should be sent successfully. That is to say, the request as
-a whole will be valid but will return additional information about which
-workers were not contacted. This information can be found in the MTurkR log
-file and viewing the XML responses directly.
-
-Note: It is only possible to contact workers who have performed work for you
-previously. When attempting to contact a worker who has not worked for you
-before, this function will indicate that the request was successful even
-though the email is not sent. The function will return a value of
-\dQuote{HardFailure} for \code{Valid} when this occurs. The printed results
-may therefore appear contradictory because MTurk reports that requests to
-contact these workers are \code{Valid}, but they are not actually contacted.
-In batch, this means that a batch will be valid but individual ineligible
-workers will be reported as not contacted.
-
-\code{ContactWorkers()}, \code{contact()}, \code{NotifyWorkers},
-\code{NotifyWorker()}, and \code{notify()} are aliases.
+\code{bonus()}, \code{paybonus()}, and \code{sendbonus()} are aliases.
 }
 \examples{
 
 \dontrun{
-a <- "Complete a follow-up survey for $.50"
-b <- "Thanks for completing my HIT!
-I will pay a $.50 bonus if you complete a follow-up survey by Friday at 5:00pm.
-The survey can be completed at
-http://www.surveymonkey.com/s/pssurvey?c=A1RO9UEXAMPLE."
-
-# contact one worker
-c1 <- "A1RO9UEXAMPLE"
-d <- ContactWorker(subjects = a,
-                   msgs = b,
-                   workers = c1)
-
-# contact multiple workers in batch
-c2 <- c("A1RO9EXAMPLE1","A1RO9EXAMPLE2","A1RO9EXAMPLE3")
-e <- ContactWorker(subjects = a,
-                   msgs = b,
-                   workers = c2,
-                   batch = TRUE)
+# Grant a single bonus
+a <- "A1RO9UEXAMPLE"
+b <- "26XXH0JPPSI23H54YVG7BKLEXAMPLE"
+c <- ".50"
+d <- "Thanks for your great work on my HITs!\\nHope to work with you, again!"
+GrantBonus(workers=a, assignments=b, amounts=c, reasons=d)
+}
+\dontrun{
+# Grant bonuses to multiple workers
+a <- c("A1RO9EXAMPLE1","A1RO9EXAMPLE2","A1RO9EXAMPLE3")
+b <-
+c("26XXH0JPPSI23H54YVG7BKLEXAMPLE1",
+"26XXH0JPPSI23H54YVG7BKLEXAMPLE2",
+"26XXH0JPPSI23H54YVG7BKLEXAMPLE3")
+c <- c(".50",".10",".25")
+d <- "Thanks for your great work on my HITs!"
+GrantBonus(workers=a, assignments=b, amounts=c, reasons=d)
 }
 
 }
 \references{
-\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_NotifyWorkersOperation.html}{API
-Reference}
+\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_SendBonusOperation.html}{API Reference}
+}
+\seealso{
+\code{\link{GetBonuses}}
 }
 \author{
 Tyler Burleigh, Thomas J. Leeper
