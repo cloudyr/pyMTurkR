@@ -1,16 +1,19 @@
-#' Get HITs by Qualification
+#' Get Reviewable HITs
 #'
-#' Retrieve HITs according to the QualificationTypes that are required to
-#' complete those HITs.
+#' Get HITs that are currently reviewable.
 #'
-#' A function to retrieve HITs that require the specified QualificationType.
+#' A simple function to return the HITIds of HITs currently in
+#' \dQuote{Reviewable} or \dQuote{Reviewing} status. To retrieve additional
+#' details about each of these HITs, see \code{\link{GetHIT}}. This is an
+#' alternative to \code{\link{SearchHITs}}.
 #'
-#' \code{gethitsbyqual()}, \code{ListHITsForQualificationType()},
-#' \code{listhitsbyqual()} are aliases.
+#' \code{reviewable()} is an alias.
 #'
-#' @aliases GetHITsForQualificationType ListHITsForQualificationType gethitsbyqual
-#' listhitsbyqual
-#' @param qual A character string containing a QualificationTypeId.
+#' @aliases GetReviewableHITs reviewable
+#' @param hit.type An optional character string containing a HITTypeId to
+#' consider when looking for reviewable HITs.
+#' @param status An optional character string of either \dQuote{Reviewable} or
+#' \dQuote{Reviewing} limiting the search to HITs of with either status.
 #' @param return.pages An integer indicating how many pages of results should
 #' be returned.
 #' @param pagetoken An optional character string indicating which page of
@@ -20,42 +23,51 @@
 #' @param verbose Optionally print the results of the API request to the
 #' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
 #' TRUE)}.
-#' @return A data frame containing the HITId and other requested
-#' characteristics of the qualifying HITs.
+#' @return A data frame containing HITIds and Requester Annotations.
 #' @author Tyler Burleigh, Thomas J. Leeper
 #' @references
-#' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ListHITsForQualificationTypeOperation.html}{API Reference}
-#' @keywords HITs Qualifications
+#' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_GetReviewableHITsOperation.html}{API Reference}
+#' @keywords HITs
 #' @examples
 #'
 #' \dontrun{
-#' GetHITsForQualificationType()
+#' GetReviewableHITs()
 #' }
 #'
 
-GetHITsForQualificationType <-
-  ListHITsForQualificationType <-
-  gethitsbyqual <-
-  listhitsbyqual <-
-  function (qual,
+GetReviewableHITs <-
+  reviewable <-
+  function(hit.type = NULL,
+            status = "Reviewable",
             return.pages = NULL,
             results = as.integer(100),
             pagetoken = NULL,
-            verbose = getOption('MTurkR.verbose', TRUE)) {
+            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
 
     batch <- function(pagetoken = NULL) {
 
       # Use page token if given
-      if(!is.null(pagetoken)){
-        response <- try(client$list_hits_for_qualification_type(QualificationTypeId = qual,
-                                                                NextToken = pagetoken,
-                                                                MaxResults = as.integer(results)))
-      } else {
-        response <- try(client$list_hits_for_qualification_type(QualificationTypeId = qual,
-                                                                MaxResults = as.integer(results)))
+      # Build create_hit_with_hit_type() request
+      request <- "client$list_reviewable_hits("
+
+      request <- paste0(request, "Status = '", status, "', ", "MaxResults = ", "as.integer(", results, ")")
+      if(!is.null(pagetoken)) {
+        request <- paste0(request, ", NextToken = '", pagetoken, "'")
       }
+      if(!is.null(pagetoken)) {
+        request <- paste0(request, ", NextToken = '", pagetoken, "'")
+      }
+      if(!is.null(hit.type)) {
+        request <- paste0(request, ", HITTypeId = '", hit.type, "'")
+      }
+      # Close request string
+      request <- paste0(request, ")")
+      # Send request
+      response <- try(
+        eval(parse(text = request))
+      )
 
       # Validity check response
       if(class(response) == "try-error") {
@@ -63,8 +75,7 @@ GetHITsForQualificationType <-
       }
 
       if(length(response$HITs) > 0){
-        response$QualificationRequirements <- as.data.frame.QualificationRequirements(response$HITs)
-        response$HITs <- as.data.frame.HITs(response$HITs)
+        response <- as.data.frame.Reviewable.HITs(response$HITs)
         return(response)
       } else {
         stop("No HITs found")
@@ -93,10 +104,7 @@ GetHITsForQualificationType <-
         response <- batch(pagetoken)
 
         # Add to HIT DF
-        to.return$HITs <- rbind(to.return$HITs, response$HITs)
-
-        to.return$QualificationRequirements <- rbind(to.return$QualificationRequirements,
-                                                     response$QualificationRequirements)
+        to.return <- rbind(to.return, response)
 
         # Add to running total
         runningtotal <- runningtotal + response$NumResults
@@ -113,6 +121,5 @@ GetHITsForQualificationType <-
     if (verbose) {
       message(runningtotal, " HITs Retrieved")
     }
-    return(to.return[c("HITs", "QualificationRequirements")])
+    return(to.return)
   }
-

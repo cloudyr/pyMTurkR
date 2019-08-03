@@ -44,6 +44,23 @@ as.data.frame.HITs <- function(hits) {
 
 
 
+as.data.frame.Reviewable.HITs <- function(hits) {
+
+  HITs <- emptydf(length(hits), 2, c("HITId", "RequesterAnnotation"))
+  for (i in 1:length(hits)) {
+
+    hit <- hits[[i]]
+    HITs[i, 1] <- hit$HITId
+    if (!is.null(hit$RequesterAnnotation)) {
+      HITs[i, 2] <- hit$RequesterAnnotation
+    }
+  }
+
+  invisible(return(HITs))
+}
+
+
+
 # QUALIFICATION STRUCTURES
 
 as.data.frame.QualificationRequirements <- function(hits) {

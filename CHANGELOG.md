@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.4.0] - 2019-08-03
+### Added
+- GetReviewableHITs()
+
 ## [0.3.9] - 2019-08-03
 ### Added
 - GetQualificationType()

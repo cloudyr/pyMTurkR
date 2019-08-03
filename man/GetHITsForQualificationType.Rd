@@ -24,7 +24,7 @@ fetch per page. Must be between 1 and 100. Most users can ignore this.}
 search results to start at. Most users can ignore this.}
 
 \item{verbose}{Optionally print the results of the API request to the
-standard output. Default is taken from \code{getOption('MTurkR.verbose',
+standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
 TRUE)}.}
 }
 \value{
