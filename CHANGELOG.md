@@ -3,6 +3,7 @@
 ## [0.3.8] - 2019-08-03
 ### Bug fix
 - GetAssignment() now returns the proper results when using hit.type parameter
+- GenerateHTMLQuestion() now escapes the HTML quotes and doublequotes
 
 ## [0.3.7] - 2019-06-27
 ### Changed
