@@ -59,7 +59,6 @@ GenerateQualificationRequirement <-
         integers <- list(qual$IntegerValues)
       } else if(exists('LocaleValues', where = qual)){
         locales <- qual$LocaleValues
-        rm(integers)
       }
       if(exists('RequiredToPreview', where = qual))
         preview <- qual$RequiredToPreview

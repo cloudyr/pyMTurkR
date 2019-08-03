@@ -81,7 +81,7 @@ GetAssignment <-
            return.pages = NULL,
            results = as.integer(100),
            pagetoken = NULL,
-           verbose = TRUE) {
+           verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
 
@@ -187,11 +187,12 @@ GetAssignment <-
 
         response <- batch_helper_list_assignments(batchhit = batchhit, pagetoken = pagetoken)
         assignments <- response$Assignments
+        tmp <- NULL
 
         # For each assignment...
         if(length(assignments) > 0){
           for (i in 1:length(assignments)) {
-            Assignments <- rbind(Assignments, as.data.frame.Assignment(assignments[[i]])$assignments)
+            tmp <- rbind(tmp, as.data.frame.Assignment(assignments[[i]])$assignments)
             message("\nAssignment ", assignments[[i]]$AssignmentId, " Retrieved")
           }
         } else {
@@ -209,7 +210,7 @@ GetAssignment <-
           numresults <- 0
         }
 
-        return(list(Assignments = Assignments,
+        return(list(Assignments = tmp,
                     NumResults = numresults,
                     NextToken = pagetoken))
 
@@ -240,7 +241,7 @@ GetAssignment <-
         while ((is.null(results.found) || results.found == results) &
                (is.null(return.pages) || pages < return.pages)) {
 
-          response <- batch(hitlist[i], pagetoken)
+          response <- batch(hit, pagetoken)
           results.found <- response$NumResults
           to.return <- response
 
