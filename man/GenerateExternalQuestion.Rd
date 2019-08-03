@@ -35,9 +35,7 @@ able to submit those parameters plus any assignment data to
 or \url{https://workersandbox.mturk.com/mturk/externalSubmit} (for the
 sandbox site), using either the HTTP GET or POST methods.
 
-Note: \code{url} must be HTTPS. See
-\href{http://en.wikipedia.org/wiki/HTTP_SecureWikipedia:HTTP Secure} for
-details.
+Note: \code{url} must be HTTPS.
 }
 \examples{
 
