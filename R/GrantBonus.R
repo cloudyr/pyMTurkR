@@ -25,8 +25,7 @@
 #' @param reasons A character string containing a reason for bonusing the
 #' worker(s), or a vector (of length equal to the number of workers) of
 #' character strings containing the reason to bonus each worker. The reason is
-#' visible to each worker and is sent via email. Newlines can be specified with
-#' \code{\n} and tabs can be specified with \code{\t} in the message body.
+#' visible to each worker and is sent via email.
 #' @param unique.request.token An optional character string, included only for
 #' advanced users. It can be used to prevent resending a bonus. A bonus will
 #' not be granted if a bonus was previously granted (within a short time
