@@ -2,7 +2,7 @@
 
 ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
 ![version](https://img.shields.io/badge/version-0.3.9-blue.svg)
-![progress](https://img.shields.io/badge/progress-66%25-green.svg)
+![progress](https://img.shields.io/badge/progress-68%25-green.svg)
 
 **pyMTurkR** is a successor to [MTurkR](https://github.com/cloudyr/MTurkR), and a work in progress. pyMTurkR provides access to the [Amazon Mechanical Turk](https://requester.mturk.com) (MTurk) [Requester API](http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/Welcome.html), using [`reticulate`](https://rstudio.github.io/reticulate) to extend the [`boto3` SDK for Python](https://aws.amazon.com/sdk-for-python).
 
@@ -52,6 +52,7 @@ The following verbs have been implemented so far:
 - GetQualificationType()
 - GetQualifications()
 - GetQualificationScore()
+- GrantBonus()
 - HITStatus()
 - RegisterHITType()
 - SearchHITs()
