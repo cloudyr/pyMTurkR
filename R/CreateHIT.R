@@ -26,6 +26,8 @@
 #' appropriate ExternalQuestion data structure specified for the
 #' \code{question} parameter.
 #'
+#' Note that HIT and Assignment Review Policies are not currently supported.
+#'
 #' \code{createhit()}, \code{create()}, \code{create_hit()},
 #' \code{CreateHITWithHITType()}, \code{create_hit_with_hit_type()} are aliases.
 #'
@@ -41,12 +43,10 @@
 #' @param expiration The time (in seconds) that the HIT should be available to
 #' workers. Must be between 30 and 31536000 seconds.
 #' @param assignments A character string specifying the number of assignments
-#' @param assignment.review.policy An optional character string containing an
-#' Assignment-level ReviewPolicy data structure as returned by
-#' \code{\link{GenerateAssignmentReviewPolicy}}.
-#' @param hit.review.policy An optional character string containing a HIT-level
-#' ReviewPolicy data structure as returned by
-#' \code{\link{GenerateHITReviewPolicy}}.
+#' @param assignment.review.policy (NOT SUPPORTED) An optional character string containing an
+#' Assignment-level ReviewPolicy data structure as returned by \code{\link{GenerateAssignmentReviewPolicy}}.
+#' @param hit.review.policy (NOT SUPPORTED) An optional character string containing a HIT-level
+#' ReviewPolicy data structure as returned by \code{\link{GenerateHITReviewPolicy}}.
 #' @param annotation An optional character string annotating the HIT. This is
 #' not visible to workers, but can be used as a label by which to identify the
 #' HIT from the API.
@@ -88,21 +88,35 @@
 #' Reference}
 #' @keywords HITs
 #'
+#' \dontrun{
+#'
+#' CreateHIT(title = "Survey",
+#'          description = "5 question survey",
+#'          reward = "0.10",
+#'          assignments = 1,
+#'          expiration = seconds(days = 4),
+#'          duration = seconds(hours = 1),
+#'          keywords = "survey, questionnaire",
+#'          question = GenerateExternalQuestion("https://www.example.com/","400"))
+#' }
+#'
 
 CreateHIT <-
+  CreateHITWithHITType <-
   create <-
   createhit <-
-  create_hit <-
-  CreateHITWithHITType <-
-  create_hit_with_hit_type <-
+  createhitwithhittype <-
   function (hit.type = NULL, question = NULL, expiration, assignments = NULL,
             assignment.review.policy = NULL, hit.review.policy = NULL,
             annotation = NULL, unique.request.token = NULL, title = NULL,
             description = NULL, reward = NULL, duration = NULL, keywords = NULL,
             auto.approval.delay = NULL, qual.req = NULL, hitlayoutid = NULL,
-            verbose = TRUE) {
+            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
+
+    # List to store arguments
+    args <- list()
 
     if (!is.null(hit.type)) {
       if (is.factor(hit.type)) {
@@ -113,17 +127,19 @@ CreateHIT <-
         warning("HITType specified, HITType parameters (title, description, reward, duration) ignored")
       }
 
-      # Build create_hit_with_hit_type() request
-      request <- "client$create_hit_with_hit_type("
+      # Set the function to use later (this one has a hit type)
+      fun <- client$create_hit_with_hit_type
 
-      request <- paste0(request, "HITTypeId = '", hit.type, "'")
+      # Add to args list
+      args <- c(args, list(HITTypeId = hit.type))
 
       # Assignments, if specified
       if(!is.null(assignments)) {
         if (as.integer(assignments) < 1 | as.integer(assignments) > 1e+09) {
           stop("MaxAssignments must be between 1 and 1000000000")
         } else {
-          request <- paste0(request, ", MaxAssignments = as.integer(", assignments, ")")
+
+          args <- c(args, list(MaxAssignments = as.integer(assignments)))
         }
       }
 
@@ -132,35 +148,39 @@ CreateHIT <-
         stop("Must specify HITType xor HITType parameters (title, description, reward, duration)")
       } else { # Use other params
 
-        # Build create_hit() request
-        request <- "client$create_hit("
+        # Set the function to use later (this one doesn't have a hit type)
+        fun <- client$create_hit
 
         # Title
         if (nchar(title) > 128) {
           stop("Title too long (128 char max)")
         } else {
-          request <- paste0(request, "Title = '", title, "'")
+          args <- c(args, list(Title = as.character(title)))
         }
 
         # Description
         if (nchar(description) > 2000) {
           stop("Description too long (2000 char max)")
         } else {
-          request <- paste0(request, ", Description = '", description, "'")
+          args <- c(args, list(Description = as.character(description)))
         }
 
         # Duration
         if (as.numeric(duration) < 30 || as.numeric(duration) > 3153600) {
           stop("Duration must be between 30 (30 seconds) and 3153600 (365 days)")
         } else {
-          request <- paste0(request, ", AssignmentDurationInSeconds = as.integer(", duration, ")")
+          args <- c(args, list(AssignmentDurationInSeconds = as.integer(duration)))
         }
 
         # Rewards
         if (is.null(reward)) {
           stop("Reward must be set")
         } else {
-          request <- paste0(request, ", Reward = '", reward, "'")
+          # If it's a fraction of a dollar, then it must have a leading zero
+          if(grepl('^\\.', reward)){
+            reward <- paste0('0', reward)
+          }
+          args <- c(args, list(Reward = as.character(reward)))
         }
 
         # Keywords
@@ -168,7 +188,7 @@ CreateHIT <-
           if (nchar(keywords) > 1000) {
             stop("Keywords too long (1000 char max)")
           } else {
-            request <- paste0(request, ", Keywords = '", keywords, "'")
+            args <- c(args, list(Keywords = as.character(keywords)))
           }
         }
 
@@ -178,7 +198,7 @@ CreateHIT <-
         } else if (as.integer(assignments) < 1 | as.integer(assignments) > 1e+09) {
           stop("MaxAssignments must be between 1 and 1000000000")
         } else {
-          request <- paste0(request, ", MaxAssignments = as.integer(", assignments, ")")
+          args <- c(args, list(MaxAssignments = as.integer(assignments)))
         }
 
       }
@@ -190,7 +210,7 @@ CreateHIT <-
     #   ExternalQuestion for 'question' parameter; or a 'hitlayoutid'
     if (is.null(question)) {
       if (!is.null(hitlayoutid)) {
-        request <- paste0(request, ", HITLayoutId = '", hitlayoutid, "'")
+        args <- c(args, list(HITLayoutId = as.character(hitlayoutid)))
       } else {
         stop("Must specify QuestionForm, HTMLQuestion, or ExternalQuestion for 'question' parameter; or a 'hitlayoutid'")
       }
@@ -198,7 +218,7 @@ CreateHIT <-
       if (class(question) %in% c('HTMLQuestion','ExternalQuestion')) {
         question <- question$string
       }
-      request <- paste0(request, ", Question = '", question, "'")
+      args <- c(args, list(Question = as.character(question)))
     }
 
     # Expiration
@@ -207,43 +227,40 @@ CreateHIT <-
     } else if (as.integer(expiration) < 30 | as.integer(expiration) > 31536000) {
       stop("HIT LifetimeInSeconds/expiration must be between 30 and 31536000 seconds")
     } else {
-      request <- paste0(request, ", LifetimeInSeconds = as.integer(", expiration, ")")
+      args <- c(args, list(LifetimeInSeconds = as.integer(expiration)))
     }
 
     # Annotation
     if (!is.null(annotation) && nchar(annotation) > 255) {
       stop("Annotation must be <= 255 characters")
     } else if (!is.null(annotation)) {
-      request <- paste0(request, ", RequesterAnnotation = '", annotation, "'")
+      args <- c(args, list(RequesterAnnotation = as.character(annotation)))
     }
 
     # Assignment review policy
     if (!is.null(assignment.review.policy)) {
-      request <- paste0(request, ", AssignmentReviewPolicy = ", assignment.review.policy)
+      args <- c(args, list(AssignmentReviewPolicy = assignment.review.policy))
     }
 
     # HIT review policy
     if (!is.null(hit.review.policy)) {
-      request <- paste0(request, ", HITReviewPolicy = ", hit.review.policy)
+      args <- c(args, list(HITReviewPolicy = hit.review.policy))
     }
 
     # Unique request token
     if (!is.null(unique.request.token) && nchar(curl_escape(unique.request.token)) > 64) {
       stop("UniqueRequestToken must be <= 64 characters")
     } else if (!is.null(unique.request.token)) {
-      request <- paste0(request, ", UniqueRequestToken = ", unique.request.token)
+      args <- c(args, list(UniqueRequestToken = as.character(unique.request.token)))
     }
 
     # Qualification Requirements
     if (!is.null(qual.req)){
-      request <- paste0(request, ", QualificationRequirements = ", qual.req)
+      args <- c(args, list(QualificationRequirements = qual.req))
     }
 
-    # Close request string
-    request <- paste0(request, ")")
-    # Send request
     response <- try(
-      eval(parse(text = request))
+      do.call('fun', args)
     )
 
     # Validity check

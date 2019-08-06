@@ -15,7 +15,7 @@ CreateHIT(hit.type = NULL, question = NULL, expiration,
   unique.request.token = NULL, title = NULL, description = NULL,
   reward = NULL, duration = NULL, keywords = NULL,
   auto.approval.delay = NULL, qual.req = NULL, hitlayoutid = NULL,
-  verbose = TRUE)
+  verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{hit.type}{An optional character string specifying the HITTypeId that
@@ -33,8 +33,7 @@ workers. Must be between 30 and 31536000 seconds.}
 \item{assignments}{A character string specifying the number of assignments}
 
 \item{assignment.review.policy}{(NOT SUPPORTED) An optional character string containing an
-Assignment-level ReviewPolicy data structure as returned by
-\code{\link{GenerateAssignmentReviewPolicy}}.}
+Assignment-level ReviewPolicy data structure as returned by \code{\link{GenerateAssignmentReviewPolicy}}.}
 
 \item{hit.review.policy}{(NOT SUPPORTED) An optional character string containing a HIT-level
 ReviewPolicy data structure as returned by \code{\link{GenerateHITReviewPolicy}}.}
@@ -126,4 +125,27 @@ Reference}
 \author{
 Tyler Burleigh, Thomas J. Leeper
 }
+\keyword{"0.10",}
+\keyword{"5}
+\keyword{"Survey",}
+\keyword{"survey,}
+\keyword{1),}
+\keyword{1,}
+\keyword{4),}
+\keyword{=}
+\keyword{CreateHIT(title}
+\keyword{GenerateExternalQuestion("https://www.example.com/","400"))}
 \keyword{HITs}
+\keyword{\dontrun{}
+\keyword{assignments}
+\keyword{description}
+\keyword{duration}
+\keyword{expiration}
+\keyword{keywords}
+\keyword{question}
+\keyword{questionnaire",}
+\keyword{reward}
+\keyword{seconds(days}
+\keyword{seconds(hours}
+\keyword{survey",}
+\keyword{}}

@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.4.2] - 2019-08-06
+### Fixes
+Overhaul of CreateHIT() using do.call() instead of eval(parse())
+	now with better support for HIT and Assignment Review Policies.
+
 ## [0.4.1] - 2019-08-03
 ### Added
 - GenerateExternalQuestion()

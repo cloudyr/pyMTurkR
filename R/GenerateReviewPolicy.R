@@ -70,7 +70,7 @@
 #'
 #' @aliases GenerateHITReviewPolicy GenerateAssignmentReviewPolicy
 #' @param ... ReviewPolicy parameters passed as named arguments.
-#' @return A character string that reflects the URL-encoded
+#' @return A dictionary object
 #' \code{HITReviewPolicy} or \code{AssignmentReviewPolicy}.
 #' @author Tyler Burleigh, Thomas J. Leeper
 #' @references
@@ -78,9 +78,93 @@
 #'
 #' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ReviewPoliciesArticle.html}{API Reference (ReviewPolicies)}
 #'
-#' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_HITReviewPolicyDataStructureArticle.htmlAPI}{Reference (Data Structure)}
+#' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_HITReviewPolicyDataStructureArticle.html}{APIReference (Data Structure)}
 #' @keywords HITs
 #'
+#' \dontrun{
+#'
+#'
+#' # Generate a HIT Review Policy with GenerateHITReviewPolicy
+#'
+#' lista <- list(QuestionIds = c("Question1", "Question2"),
+#'               QuestionAgreementThreshold = 75,
+#'               ApproveIfWorkerAgreementScoreIsAtLeast = 75,
+#'               RejectIfWorkerAgreementScoreIsLessThan = 25)
+#' policya <- do.call(GenerateHITReviewPolicy, lista)
+#'
+#'
+#' # Manually define a HIT Review Policy
+#'
+#' policya <- dict(
+#'			list(
+#'				'PolicyName' = 'SimplePlurality/2011-09-01',
+#'				'Parameters' = list(
+#'				  dict(
+#'					  'Key' = 'QuestionIds',
+#'					  'Values' = list(
+#'					    'Question1',
+#'					    'Question2'
+#'				  	)
+#'				  ),
+#'				  dict(
+#'				  	'Key' = 'QuestionAgreementThreshold',
+#'				  	'Values' = list(
+#'				  	  '75'
+#'				  	)
+#'				  ),
+#'				  dict(
+#'				  	'Key' = 'ApproveIfWorkerAgreementScoreIsAtLeast',
+#'				  	'Values' = list(
+#'				  	  '75'
+#'				  	)
+#'				  ),
+#'				  dict(
+#'				  	'Key' = 'RejectIfWorkerAgreementScoreIsLessThan',
+#'				  	'Values' = list(
+#'				  	  '25'
+#'				  	)
+#'				  )
+#'				)
+#'			))
+#'
+#'
+#'
+#' # Generate an Assignment Review Policy with GenerateAssignmentReviewPolicy
+#'
+#' listb <- list(AnswerKey = list("QuestionId1" = "B", "QuestionId2" = "A"),
+#'               ApproveIfKnownAnswerScoreIsAtLeast = 99)
+#' policyb <- do.call(GenerateAssignmentReviewPolicy, listb)
+#'
+#'
+#' # Manually define an Assignment Review Policy
+#'
+#' policyb <- dict(
+#'			list(
+#'				'PolicyName' = 'ScoreMyKnownAnswers/2011-09-01',
+#'				'Parameters' = list(
+#'				  dict(
+#'					  'Key' = 'AnswerKey',
+#'					  'MapEntries' = list(
+#'						dict(
+#'							'Key' = 'QuestionId1',
+#'							'Values' = list('B')
+#'						),
+#'						dict(
+#'							'Key' = 'QuestionId2',
+#'							'Values' = list('A')
+#'						)
+#'				  	)
+#'				  ),
+#'				  dict(
+#'				  	'Key' = 'ApproveIfKnownAnswerScoreIsAtLeast',
+#'				  	'Values' = list(
+#'				  	  '99'
+#'				  	)
+#'				  )
+#'				)
+#'			))
+#'
+#'}
 
 GenerateHITReviewPolicy <-
   function(...) {
@@ -121,6 +205,7 @@ GenerateHITReviewPolicy <-
     for (i in 1:length(l$QuestionIds)) {
       h$Parameters[[1]]$Values[[length(h$Parameters[[1]]$Values) + 1]] <- as.character(l$QuestionIds[i])
     }
+
     l$QuestionIds <- NULL
 
     if(length(l) == 0){
@@ -140,11 +225,12 @@ GenerateHITReviewPolicy <-
 
       key <- names(l)[i]
       values <- l[[i]]
-      h$Parameters[[i+1]] <- list("Key" = key, "Values" = list())
+      h$Parameters[[i+1]] <- list("Key" = key, "Values" = list(as.character(values)))
+    }
 
-      for (i in 1:length(values)) {
-        h$Parameters[[i+1]]$Values[[length(h$Parameters[[i+1]]$Values) + 1]] <- as.character(values[i])
-      }
+    # Convert to dictionary objects
+    for (i in 1:length(h$Parameters)) {
+      h$Parameters[[i]] <- reticulate::dict(h$Parameters[[i]])
     }
 
     h <- reticulate::dict(h)
@@ -191,14 +277,16 @@ GenerateAssignmentReviewPolicy <-
       stop("AnswerKey is missing")
     }
 
-    # Build QuestionIds list
+    # Build AnswerKey MapEntries
     a$Parameters[[1]] <- list("Key" = "AnswerKey", "MapEntries" = list())
-    maps <- l$AnswerKey$MapEntries
+    maps <- l$AnswerKey
+
+    a$Parameters[[1]]$MapEntries <- list()
 
     for (i in 1:length(maps)) {
       key <- names(maps)[i]
       values <- maps[[i]]
-      a$Parameters[[1]]$MapEntries[[i]] <- list("Key" = key, "Values" = values)
+      a$Parameters[[1]]$MapEntries[[i]] <- dict("Key" = key, "Values" = list(as.character(values)))
     }
     l$AnswerKey <- NULL
 
@@ -218,11 +306,12 @@ GenerateAssignmentReviewPolicy <-
 
       key <- names(l)[i]
       values <- l[[i]]
-      a$Parameters[[i+1]] <- list("Key" = key, "Values" = list())
+      a$Parameters[[i+1]] <- list("Key" = key, "Values" = list(as.character(values)))
+    }
 
-      for (i in 1:length(values)) {
-        a$Parameters[[i+1]]$Values[[length(a$Parameters[[i+1]]$Values) + 1]] <- as.character(values[i])
-      }
+    # Convert to dictionary objects
+    for (i in 1:length(a$Parameters)) {
+      a$Parameters[[i]] <- reticulate::dict(a$Parameters[[i]])
     }
 
     a <- reticulate::dict(a)

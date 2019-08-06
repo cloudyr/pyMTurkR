@@ -46,6 +46,10 @@ GetReviewableHITs <-
 
     client <- GetClient() # Boto3 client
 
+    if (is.factor(hit.type)) {
+      hit.type <- as.character(hit.type)
+    }
+
     batch <- function(pagetoken = NULL) {
 
       # Use page token if given
@@ -53,9 +57,6 @@ GetReviewableHITs <-
       request <- "client$list_reviewable_hits("
 
       request <- paste0(request, "Status = '", status, "', ", "MaxResults = ", "as.integer(", results, ")")
-      if(!is.null(pagetoken)) {
-        request <- paste0(request, ", NextToken = '", pagetoken, "'")
-      }
       if(!is.null(pagetoken)) {
         request <- paste0(request, ", NextToken = '", pagetoken, "'")
       }

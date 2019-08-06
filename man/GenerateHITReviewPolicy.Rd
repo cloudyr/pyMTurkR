@@ -11,7 +11,7 @@ GenerateHITReviewPolicy(...)
 \item{...}{ReviewPolicy parameters passed as named arguments.}
 }
 \value{
-A character string that reflects the URL-encoded
+A dictionary object
 \code{HITReviewPolicy} or \code{AssignmentReviewPolicy}.
 }
 \description{
@@ -89,9 +89,76 @@ Assignment-level ReviewPolicy.
 
 \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ReviewPoliciesArticle.html}{API Reference (ReviewPolicies)}
 
-\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_HITReviewPolicyDataStructureArticle.htmlAPI}{Reference (Data Structure)}
+\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_HITReviewPolicyDataStructureArticle.html}{APIReference (Data Structure)}
 }
 \author{
 Tyler Burleigh, Thomas J. Leeper
 }
+\keyword{"A"),}
+\keyword{"B",}
+\keyword{"Question2"),}
+\keyword{"QuestionId2"}
+\keyword{#}
+\keyword{'25'}
+\keyword{'75'}
+\keyword{'99'}
+\keyword{'AnswerKey',}
+\keyword{'ApproveIfKnownAnswerScoreIsAtLeast',}
+\keyword{'ApproveIfWorkerAgreementScoreIsAtLeast',}
+\keyword{'Key'}
+\keyword{'MapEntries'}
+\keyword{'Parameters'}
+\keyword{'PolicyName'}
+\keyword{'Question1',}
+\keyword{'Question2'}
+\keyword{'QuestionAgreementThreshold',}
+\keyword{'QuestionId1',}
+\keyword{'QuestionId2',}
+\keyword{'QuestionIds',}
+\keyword{'RejectIfWorkerAgreementScoreIsLessThan',}
+\keyword{'ScoreMyKnownAnswers/2011-09-01',}
+\keyword{'SimplePlurality/2011-09-01',}
+\keyword{'Values'}
+\keyword{)}
+\keyword{))}
+\keyword{),}
+\keyword{25)}
+\keyword{75,}
+\keyword{99)}
+\keyword{<-}
+\keyword{=}
+\keyword{ApproveIfKnownAnswerScoreIsAtLeast}
+\keyword{ApproveIfWorkerAgreementScoreIsAtLeast}
+\keyword{Assignment}
+\keyword{Generate}
+\keyword{GenerateAssignmentReviewPolicy}
+\keyword{GenerateHITReviewPolicy}
+\keyword{HIT}
 \keyword{HITs}
+\keyword{Manually}
+\keyword{Policy}
+\keyword{QuestionAgreementThreshold}
+\keyword{RejectIfWorkerAgreementScoreIsLessThan}
+\keyword{Review}
+\keyword{\dontrun{}
+\keyword{a}
+\keyword{an}
+\keyword{c("Question1",}
+\keyword{define}
+\keyword{dict(}
+\keyword{do.call(GenerateAssignmentReviewPolicy,}
+\keyword{do.call(GenerateHITReviewPolicy,}
+\keyword{list(}
+\keyword{list("QuestionId1"}
+\keyword{list('A')}
+\keyword{list('B')}
+\keyword{list(AnswerKey}
+\keyword{list(QuestionIds}
+\keyword{lista}
+\keyword{lista)}
+\keyword{listb}
+\keyword{listb)}
+\keyword{policya}
+\keyword{policyb}
+\keyword{with}
+\keyword{}}
