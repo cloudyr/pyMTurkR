@@ -32,10 +32,10 @@ workers. Must be between 30 and 31536000 seconds.}
 
 \item{assignments}{A character string specifying the number of assignments}
 
-\item{assignment.review.policy}{(NOT SUPPORTED) An optional character string containing an
+\item{assignment.review.policy}{An optional character string containing an
 Assignment-level ReviewPolicy data structure as returned by \code{\link{GenerateAssignmentReviewPolicy}}.}
 
-\item{hit.review.policy}{(NOT SUPPORTED) An optional character string containing a HIT-level
+\item{hit.review.policy}{An optional character string containing a HIT-level
 ReviewPolicy data structure as returned by \code{\link{GenerateHITReviewPolicy}}.}
 
 \item{annotation}{An optional character string annotating the HIT. This is
@@ -118,34 +118,25 @@ Note that HIT and Assignment Review Policies are not currently supported.
 \code{createhit()}, \code{create()}, \code{create_hit()},
 \code{CreateHITWithHITType()}, \code{create_hit_with_hit_type()} are aliases.
 }
+\examples{
+
+\dontrun{
+
+CreateHIT(title = "Survey",
+         description = "5 question survey",
+         reward = "0.10",
+         assignments = 1,
+         expiration = seconds(days = 4),
+         duration = seconds(hours = 1),
+         keywords = "survey, questionnaire",
+         question = GenerateExternalQuestion("https://www.example.com/","400"))
+}
+
+}
 \references{
-\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_CreateHITOperation.html}{API
-Reference}
+\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_CreateHITOperation.html}{API Reference}
 }
 \author{
 Tyler Burleigh, Thomas J. Leeper
 }
-\keyword{"0.10",}
-\keyword{"5}
-\keyword{"Survey",}
-\keyword{"survey,}
-\keyword{1),}
-\keyword{1,}
-\keyword{4),}
-\keyword{=}
-\keyword{CreateHIT(title}
-\keyword{GenerateExternalQuestion("https://www.example.com/","400"))}
 \keyword{HITs}
-\keyword{\dontrun{}
-\keyword{assignments}
-\keyword{description}
-\keyword{duration}
-\keyword{expiration}
-\keyword{keywords}
-\keyword{question}
-\keyword{questionnaire",}
-\keyword{reward}
-\keyword{seconds(days}
-\keyword{seconds(hours}
-\keyword{survey",}
-\keyword{}}

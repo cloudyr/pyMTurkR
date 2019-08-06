@@ -43,9 +43,9 @@
 #' @param expiration The time (in seconds) that the HIT should be available to
 #' workers. Must be between 30 and 31536000 seconds.
 #' @param assignments A character string specifying the number of assignments
-#' @param assignment.review.policy (NOT SUPPORTED) An optional character string containing an
+#' @param assignment.review.policy An optional character string containing an
 #' Assignment-level ReviewPolicy data structure as returned by \code{\link{GenerateAssignmentReviewPolicy}}.
-#' @param hit.review.policy (NOT SUPPORTED) An optional character string containing a HIT-level
+#' @param hit.review.policy An optional character string containing a HIT-level
 #' ReviewPolicy data structure as returned by \code{\link{GenerateHITReviewPolicy}}.
 #' @param annotation An optional character string annotating the HIT. This is
 #' not visible to workers, but can be used as a label by which to identify the
@@ -84,9 +84,9 @@
 #' created HIT.
 #' @author Tyler Burleigh, Thomas J. Leeper
 #' @references
-#' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_CreateHITOperation.html}{API
-#' Reference}
+#' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_CreateHITOperation.html}{API Reference}
 #' @keywords HITs
+#' @examples
 #'
 #' \dontrun{
 #'

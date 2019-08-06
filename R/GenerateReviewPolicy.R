@@ -1,5 +1,3 @@
-#' REVIEW POLICIES NOT SUPPORTED
-#'
 #' Generate HIT and/or Assignment ReviewPolicies
 #'
 #' Generate a HIT ReviewPolicy and/or Assignment ReviewPolicy data structure
@@ -80,6 +78,7 @@
 #'
 #' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_HITReviewPolicyDataStructureArticle.html}{APIReference (Data Structure)}
 #' @keywords HITs
+#' @examples
 #'
 #' \dontrun{
 #'

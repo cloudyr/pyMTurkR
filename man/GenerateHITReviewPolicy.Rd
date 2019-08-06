@@ -3,7 +3,7 @@
 \name{GenerateHITReviewPolicy}
 \alias{GenerateHITReviewPolicy}
 \alias{GenerateAssignmentReviewPolicy}
-\title{REVIEW POLICIES NOT SUPPORTED}
+\title{Generate HIT and/or Assignment ReviewPolicies}
 \usage{
 GenerateHITReviewPolicy(...)
 }
@@ -15,12 +15,10 @@ A dictionary object
 \code{HITReviewPolicy} or \code{AssignmentReviewPolicy}.
 }
 \description{
-Generate HIT and/or Assignment ReviewPolicies
-}
-\details{
 Generate a HIT ReviewPolicy and/or Assignment ReviewPolicy data structure
 for use in \code{\link{CreateHIT}}.
-
+}
+\details{
 Converts a list of ReviewPolicy parameters into a ReviewPolicy data
 structure.
 
@@ -84,6 +82,93 @@ excludes assignments if those assignments score below a specified
 \dQuote{known} answers threshold as determined by a separate
 Assignment-level ReviewPolicy.
 }
+\examples{
+
+\dontrun{
+
+
+# Generate a HIT Review Policy with GenerateHITReviewPolicy
+
+lista <- list(QuestionIds = c("Question1", "Question2"),
+              QuestionAgreementThreshold = 75,
+              ApproveIfWorkerAgreementScoreIsAtLeast = 75,
+              RejectIfWorkerAgreementScoreIsLessThan = 25)
+policya <- do.call(GenerateHITReviewPolicy, lista)
+
+
+# Manually define a HIT Review Policy
+
+policya <- dict(
+		list(
+			'PolicyName' = 'SimplePlurality/2011-09-01',
+			'Parameters' = list(
+			  dict(
+				  'Key' = 'QuestionIds',
+				  'Values' = list(
+				    'Question1',
+				    'Question2'
+			  	)
+			  ),
+			  dict(
+			  	'Key' = 'QuestionAgreementThreshold',
+			  	'Values' = list(
+			  	  '75'
+			  	)
+			  ),
+			  dict(
+			  	'Key' = 'ApproveIfWorkerAgreementScoreIsAtLeast',
+			  	'Values' = list(
+			  	  '75'
+			  	)
+			  ),
+			  dict(
+			  	'Key' = 'RejectIfWorkerAgreementScoreIsLessThan',
+			  	'Values' = list(
+			  	  '25'
+			  	)
+			  )
+			)
+		))
+
+
+
+# Generate an Assignment Review Policy with GenerateAssignmentReviewPolicy
+
+listb <- list(AnswerKey = list("QuestionId1" = "B", "QuestionId2" = "A"),
+              ApproveIfKnownAnswerScoreIsAtLeast = 99)
+policyb <- do.call(GenerateAssignmentReviewPolicy, listb)
+
+
+# Manually define an Assignment Review Policy
+
+policyb <- dict(
+		list(
+			'PolicyName' = 'ScoreMyKnownAnswers/2011-09-01',
+			'Parameters' = list(
+			  dict(
+				  'Key' = 'AnswerKey',
+				  'MapEntries' = list(
+					dict(
+						'Key' = 'QuestionId1',
+						'Values' = list('B')
+					),
+					dict(
+						'Key' = 'QuestionId2',
+						'Values' = list('A')
+					)
+			  	)
+			  ),
+			  dict(
+			  	'Key' = 'ApproveIfKnownAnswerScoreIsAtLeast',
+			  	'Values' = list(
+			  	  '99'
+			  	)
+			  )
+			)
+		))
+
+}
+}
 \references{
 \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_QuestionFormDataStructureArticle.html}{API Reference: QuestionForm}
 
@@ -94,71 +179,4 @@ Assignment-level ReviewPolicy.
 \author{
 Tyler Burleigh, Thomas J. Leeper
 }
-\keyword{"A"),}
-\keyword{"B",}
-\keyword{"Question2"),}
-\keyword{"QuestionId2"}
-\keyword{#}
-\keyword{'25'}
-\keyword{'75'}
-\keyword{'99'}
-\keyword{'AnswerKey',}
-\keyword{'ApproveIfKnownAnswerScoreIsAtLeast',}
-\keyword{'ApproveIfWorkerAgreementScoreIsAtLeast',}
-\keyword{'Key'}
-\keyword{'MapEntries'}
-\keyword{'Parameters'}
-\keyword{'PolicyName'}
-\keyword{'Question1',}
-\keyword{'Question2'}
-\keyword{'QuestionAgreementThreshold',}
-\keyword{'QuestionId1',}
-\keyword{'QuestionId2',}
-\keyword{'QuestionIds',}
-\keyword{'RejectIfWorkerAgreementScoreIsLessThan',}
-\keyword{'ScoreMyKnownAnswers/2011-09-01',}
-\keyword{'SimplePlurality/2011-09-01',}
-\keyword{'Values'}
-\keyword{)}
-\keyword{))}
-\keyword{),}
-\keyword{25)}
-\keyword{75,}
-\keyword{99)}
-\keyword{<-}
-\keyword{=}
-\keyword{ApproveIfKnownAnswerScoreIsAtLeast}
-\keyword{ApproveIfWorkerAgreementScoreIsAtLeast}
-\keyword{Assignment}
-\keyword{Generate}
-\keyword{GenerateAssignmentReviewPolicy}
-\keyword{GenerateHITReviewPolicy}
-\keyword{HIT}
 \keyword{HITs}
-\keyword{Manually}
-\keyword{Policy}
-\keyword{QuestionAgreementThreshold}
-\keyword{RejectIfWorkerAgreementScoreIsLessThan}
-\keyword{Review}
-\keyword{\dontrun{}
-\keyword{a}
-\keyword{an}
-\keyword{c("Question1",}
-\keyword{define}
-\keyword{dict(}
-\keyword{do.call(GenerateAssignmentReviewPolicy,}
-\keyword{do.call(GenerateHITReviewPolicy,}
-\keyword{list(}
-\keyword{list("QuestionId1"}
-\keyword{list('A')}
-\keyword{list('B')}
-\keyword{list(AnswerKey}
-\keyword{list(QuestionIds}
-\keyword{lista}
-\keyword{lista)}
-\keyword{listb}
-\keyword{listb)}
-\keyword{policya}
-\keyword{policyb}
-\keyword{with}
-\keyword{}}
