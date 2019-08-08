@@ -52,22 +52,26 @@ GetReviewableHITs <-
 
     batch <- function(pagetoken = NULL) {
 
-      # Use page token if given
-      # Build create_hit_with_hit_type() request
-      request <- "client$list_reviewable_hits("
+      # List to store arguments
+      args <- list()
 
-      request <- paste0(request, "Status = '", status, "', ", "MaxResults = ", "as.integer(", results, ")")
+      # Set the function to use later
+      fun <- client$list_reviewable_hits
+
+      # Add required arguments
+      args <- c(args, list(Status = status,
+                           MaxResults = as.integer(results)))
+
       if(!is.null(pagetoken)) {
-        request <- paste0(request, ", NextToken = '", pagetoken, "'")
+        args <- c(args, list(NextToken = pagetoken))
       }
       if(!is.null(hit.type)) {
-        request <- paste0(request, ", HITTypeId = '", hit.type, "'")
+        args <- c(args, list(HITTypeId = hit.type))
       }
-      # Close request string
-      request <- paste0(request, ")")
-      # Send request
+
+      # Execute the API call
       response <- try(
-        eval(parse(text = request))
+        do.call('fun', args)
       )
 
       # Validity check response

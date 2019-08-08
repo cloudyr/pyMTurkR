@@ -53,26 +53,27 @@ SearchQualificationTypes <-
 
     batch <- function(pagetoken = NULL) {
 
-      # Start building request
-      request <- "client$list_qualification_types("
+      # List to store arguments
+      args <- list()
 
-      # Add required fields
-      request <- paste0(request, "MustBeRequestable = as.logical(", must.be.requestable, ')',
-                        ", MustBeOwnedByCaller = as.logical(", must.be.owner, ')',
-                        ", MaxResults = as.integer(", results, ")")
+      # Set the function to use later
+      fun <- client$list_qualification_types
+
+      # Add required arguments
+      args <- c(args, list(MustBeRequestable = as.logical(must.be.requestable),
+                           MustBeOwnedByCaller = as.logical(must.be.owner),
+                           MaxResults = as.integer(results)))
 
       if(!is.null(search.query)){
-        request <- paste0(request, ", Query = '", search.query, "'")
+        args <- c(args, list(Query = search.query))
       }
       if(!is.null(pagetoken)){
-        request <- paste0(request, ", NextToken = '", pagetoken, "'")
+        args <- c(args, list(NextToken = pagetoken))
       }
 
-      # Close request string
-      request <- paste0(request, ")")
-      # Send request
+      # Execute the API call
       response <- try(
-        eval(parse(text = request))
+        do.call('fun', args)
       )
 
       # Validity check response

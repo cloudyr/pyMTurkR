@@ -259,6 +259,7 @@ CreateHIT <-
       args <- c(args, list(QualificationRequirements = qual.req))
     }
 
+    # Execute the API call
     response <- try(
       do.call('fun', args)
     )

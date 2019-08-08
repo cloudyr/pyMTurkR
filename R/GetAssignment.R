@@ -146,8 +146,6 @@ GetAssignment <-
         status <- c("Approved", "Rejected", "Submitted")
       }
 
-
-
       batch_helper_list_assignments <- function(batchhit, pagetoken = NULL, num_retries = 1) {
 
         if(!is.null(pagetoken)){ # Use page token if given

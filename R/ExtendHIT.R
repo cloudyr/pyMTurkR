@@ -134,21 +134,24 @@ ExtendHIT <-
       hit <- hitlist[i]
       if(!is.null(add.assignments)){
 
-        # Build create_additional_assignments_for_hit() request
-        request <- "client$create_additional_assignments_for_hit("
-        request <- paste0(request,
-                          "HITId = '", hit, "'",
-                          ", NumberOfAdditionalAssignments = as.integer(", add.assignments, ')')
+        # List to store arguments
+        args <- list()
 
+        # Set the function to use later
+        fun <- client$create_additional_assignments_for_hit
+
+        # Add required arguments
+        args <- c(args, list(HITId = hit,
+                             NumberOfAdditionalAssignments = as.integer(add.assignments)))
+
+        # Add request token if applicable
         if(!is.null(unique.request.token)){
-          request <- paste0(request, ", UniqueRequestToken = '", unique.request.token, "'")
+          args <- c(args, list(UniqueRequestToken = unique.request.token))
         }
 
-        # Close request string
-        request <- paste0(request, ")")
-        # Send request
+        # Execute the API call
         response <- try(
-          eval(parse(text = request))
+          do.call('fun', args)
         )
 
         if(class(response) == "try-error") {
