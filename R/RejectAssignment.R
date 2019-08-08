@@ -89,6 +89,6 @@ RejectAssignment <-
     }
 
     # Return results
-    message(sum(Assignments$Valid), " Assignments Approved")
+    message(sum(Assignments$Valid), " Assignments Rejected")
     return(Assignments)
   }
