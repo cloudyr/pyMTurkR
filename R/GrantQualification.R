@@ -23,11 +23,11 @@
 #' Qualification.
 #'
 #' \code{GrantQualifications()}, \code{grantqual()}, \code{AcceptQualificationRequest()}
-#' and \code{acceptqualrequest()} are aliases; \code{RejectQualifications()} and
+#' and \code{acceptrequest()} are aliases; \code{RejectQualifications()} and
 #' \code{rejectrequest()} are aliases.
 #'
 #' @aliases GrantQualification GrantQualifications grantqual
-#' AcceptQualificationRequest acceptqualrequest
+#' AcceptQualificationRequest acceptrequest
 #' RejectQualification RejectQualifications rejectrequest
 #' @param qual A character string containing a QualificationTypeId
 #' @param workers A character string containing a WorkerId, or a vector of
@@ -57,7 +57,7 @@ GrantQualification <-
   GrantQualifications <-
   grantqual <-
   AcceptQualificationRequest <-
-  acceptqualrequest <-
+  acceptrequest <-
   function(qual.requests,
            values,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
