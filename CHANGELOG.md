@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.4.3] - 2019-08-09
+### Added
+- GrantQualification()
+
 ## [0.4.2] - 2019-08-06
 ### Fixes
 Overhaul of CreateHIT() using do.call() instead of eval(parse())

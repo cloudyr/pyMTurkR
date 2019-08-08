@@ -4,7 +4,7 @@
 \alias{GrantBonus}
 \alias{bonus}
 \alias{paybonus}
-\alias{sendbonux}
+\alias{sendbonus}
 \title{Pay Bonus to Worker}
 \usage{
 GrantBonus(workers, assignments, amounts, reasons,

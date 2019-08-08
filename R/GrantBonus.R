@@ -12,7 +12,7 @@
 #'
 #' \code{bonus()}, \code{paybonus()}, and \code{sendbonus()} are aliases.
 #'
-#' @aliases GrantBonus bonus paybonus sendbonux
+#' @aliases GrantBonus bonus paybonus sendbonus
 #' @param workers A character string containing a WorkerId, or a vector of
 #' character strings containing multiple WorkerIds.
 #' @param assignments A character string containing an AssignmentId for an
