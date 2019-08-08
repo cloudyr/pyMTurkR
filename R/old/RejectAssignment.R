@@ -1,53 +1,94 @@
+#' Reject Assignment
+#'
+#' Reject a Worker's assignment (or multiple assignments) submitted for a HIT.
+#' Feedback should be provided for why an assignment was rejected.
+#'
+#' Reject assignments, by AssignmentId (as returned by
+#' \code{\link{GetAssignment}}). More advanced functionality to quickly reject
+#' many or all assignments (ala \code{\link{ApproveAllAssignments}}) is
+#' intentionally not provided.
+#'
+#' \code{RejectAssignments()} and \code{reject()} are aliases.
+#'
+#' @aliases RejectAssignment RejectAssignments reject
+#' @param assignments A character string containing an AssignmentId, or a
+#' vector of multiple character strings containing multiple AssignmentIds, to
+#' reject.
+#' @param feedback An optional character string containing any feedback for a
+#' worker. This must have length 1 or length equal to the number of workers.
+#' @param verbose Optionally print the results of the API request to the
+#' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+#' TRUE)}.
+#' @return A data frame containing the list of AssignmentIds, feedback (if
+#' any), and whether or not each rejection request was valid.
+#' @author Tyler Burleigh, Thomas J. Leeper
+#' @seealso \code{\link{ApproveAssignment}}
+#' @references
+#' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_RejectAssignmentOperation.html}{API Reference}
+#' @keywords Assignments
+#' @examples
+#'
+#' \dontrun{
+#' RejectAssignment(assignments = "26XXH0JPPSI23H54YVG7BKLEXAMPLE")
+#' }
+#'
+
 RejectAssignment <-
-RejectAssignments <-
-reject <-
-function (assignments, feedback = NULL, verbose = getOption('MTurkR.verbose', TRUE), ...){
-    operation <- "RejectAssignment"
+  RejectAssignments <-
+  reject <-
+  function (assignments,
+            feedback = "",
+            verbose = getOption('pyMTurkR.verbose', TRUE)){
+
+    client <- GetClient() # Boto3 client
+
     if (is.factor(assignments)) {
-        assignments <- as.character(assignments)
+      assignments <- as.character(assignments)
     }
     if (!is.null(feedback)) {
-        if (is.factor(feedback)) {
-            feedback <- as.character(feedback)
-        }
-        for (i in 1:length(feedback)) {
-            if (!is.null(feedback[i]) && nchar(curl_escape(feedback[i])) > 1024) {
-                warning("Feedback ", i, " is too long (1024 char max)")
-            }
-        }
-        if (length(feedback) == 1) {
-            feedback <- rep(feedback[1], length(assignments))
-        } else if(!length(feedback) == length(assignments)) {
-            stop("Number of feedback is not 1 nor length(assignments)")
-        }
+      if (is.factor(feedback)) {
+        feedback <- as.character(feedback)
+      }
+      for (i in 1:length(feedback)) {
+        if (!is.null(feedback[i]) && nchar(feedback[i]) > 1024)
+          warning("Feedback ", i, " is too long (1024 char max)")
+      }
+      if (length(feedback) == 1) {
+        feedback <- rep(feedback[1], length(assignments))
+      } else if (!length(feedback) == length(assignments)) {
+        stop("Number of feedback is not 1 nor length(assignments)")
+      }
     }
+
+    # Data frame to hold results
     Assignments <- emptydf(length(assignments), 3, c("AssignmentId", "Feedback", "Valid"))
-    for (i in 1:length(assignments)) {
-        GETparameters <- paste("&AssignmentId=", assignments[i], sep = "")
-        if (!is.null(feedback[i])) {
-            GETparameters <- paste(GETparameters, "&RequesterFeedback=", 
-                                   curl_escape(feedback[i]), sep = "")        
+
+    # Loop through assignments and approve
+    for (i in 1:length(assignments)){
+
+      response <- try(client$reject_assignment(
+        AssignmentId = assignments[i],
+        RequesterFeedback = feedback[i]
+      ))
+
+      # Check if failure
+      if (response$ResponseMetadata$HTTPStatusCode == 200) {
+        valid <- TRUE
+        if (verbose) {
+          message(i, ": Assignment (", assignments[i], ") Rejected")
         }
-        request <- request(operation, GETparameters = GETparameters, ...)
-        if (is.null(request$valid)) {
-            return(request)
+      } else {
+        valid <- FALSE
+        if (verbose) {
+          warning(i, ": Invalid request for assignment ",assignments[i])
         }
-        if (!is.null(feedback)) {
-            Assignments[i, ] <- c(assignments[i], feedback[i], request$valid)
-        } else {
-            Assignments[i, ] <- c(assignments[i], "", request$valid)
-        }
-        if (request$valid == TRUE) {
-            if (verbose) {
-                message(i, ": Assignment (", assignments[i], ") Rejected")
-            }
-        }
-        if (request$valid == FALSE) {
-            if (verbose) {
-                warning(i, ": Invalid request for assignment ",assignments[i])
-            }
-        }
+      }
+
+      # Add to data frame
+      Assignments <- rbind(Assignments, data.frame(AssignmentId = assignments[i], Feedback = feedback[i], Valid = valid))
     }
-    Assignments$Valid <- factor(Assignments$Valid, levels=c('TRUE','FALSE'))
+
+    # Return results
+    message(sum(Assignments$Valid), " Assignments Approved")
     return(Assignments)
-}
+  }

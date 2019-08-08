@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.4.5] - 2019-08-09
+### Added
+- RejectAssignment()
+
 ## [0.4.4] - 2019-08-09
 ### Added
 - RejectQualification()

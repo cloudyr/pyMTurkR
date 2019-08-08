@@ -5,7 +5,7 @@
 \alias{GrantQualifications}
 \alias{grantqual}
 \alias{AcceptQualificationRequest}
-\alias{acceptqualrequest}
+\alias{acceptrequest}
 \alias{RejectQualification}
 \alias{RejectQualifications}
 \alias{rejectrequest}
@@ -63,7 +63,7 @@ place. Use \code{\link{RevokeQualification}} to entirely remove a worker's
 Qualification.
 
 \code{GrantQualifications()}, \code{grantqual()}, \code{AcceptQualificationRequest()}
-and \code{acceptqualrequest()} are aliases; \code{RejectQualifications()} and
+and \code{acceptrequest()} are aliases; \code{RejectQualifications()} and
 \code{rejectrequest()} are aliases.
 }
 \references{

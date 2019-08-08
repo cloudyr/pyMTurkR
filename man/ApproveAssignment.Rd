@@ -7,7 +7,8 @@
 \alias{approve_assignment}
 \title{Approve Assignment(s)}
 \usage{
-ApproveAssignment(assignments, feedback = "", rejected = FALSE)
+ApproveAssignment(assignments, feedback = "", rejected = FALSE,
+  verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{assignments}{A character string containing an AssignmentId, or a
@@ -19,12 +20,12 @@ worker. This must have length 1 or length equal to the number of workers.
 Maximum of 1024 characters.}
 
 \item{rejected}{A logical indicating whether the assignment(s) had
-previously been rejected (default \code{FALSE}). Approval of previously
-rejected assignments must be conducted separately from other approvals.}
+previously been rejected (default \code{FALSE}), or a vector of logicals.}
 }
 \value{
 A data frame containing the list of AssignmentIds, feedback (if
-any), and whether or not each approval request was valid.
+any), whether previous rejections were to be overriden,
+and whether or not each approval request was valid.
 }
 \description{
 Approve one or more submitted assignments, or approve all assignments for a

@@ -19,10 +19,10 @@
 #' worker. This must have length 1 or length equal to the number of workers.
 #' Maximum of 1024 characters.
 #' @param rejected A logical indicating whether the assignment(s) had
-#' previously been rejected (default \code{FALSE}). Approval of previously
-#' rejected assignments must be conducted separately from other approvals.
+#' previously been rejected (default \code{FALSE}), or a vector of logicals.
 #' @return A data frame containing the list of AssignmentIds, feedback (if
-#' any), and whether or not each approval request was valid.
+#' any), whether previous rejections were to be overriden,
+#' and whether or not each approval request was valid.
 #' @author Tyler Burleigh, Thomas J. Leeper
 #' @seealso \code{\link{RejectAssignment}}
 #' @references
@@ -48,10 +48,10 @@
 ApproveAssignment <-
 ApproveAssignments <-
 approve <-
-approve_assignment <-
 function (assignments,
           feedback = "",
-          rejected = FALSE) {
+          rejected = FALSE,
+          verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
   client <- GetClient() # Boto3 client
 
@@ -72,30 +72,50 @@ function (assignments,
         stop("Number of feedback is not 1 nor length(assignments)")
     }
   }
+  if (!length(rejected) == length(assignments)) {
+    if (length(rejected) == 1) {
+      rejected <- rep(rejected[1], length(assignments))
+    } else {
+      stop("Number of rejected is not 1 or number of Values")
+    }
+  }
 
   # Data frame to hold results
-  results <- data.frame(AssignmentId = character(), Feedback = character(), Valid = logical())
+  Assignments <- emptydf(length(assignments), 3, c("AssignmentId",
+                                                   "Feedback",
+                                                   "OverrideRejection",
+                                                   "Valid"))
 
   # Loop through assignments and approve
   for (i in 1:length(assignments)){
 
-    a <- assignments[i]
-    f <- feedback[i]
-    result <- try(client$approve_assignment(
-      AssignmentId = a,
-      RequesterFeedback = f,
-      OverrideRejection = rejected
-    ), silent = TRUE)
+    response <- try(client$approve_assignment(
+      AssignmentId = assignments[i],
+      RequesterFeedback = feedback[i],
+      OverrideRejection = rejected[i]
+    ))
 
-    # Validity check
-    if(class(result) == "try-error") valid = FALSE
-    else valid = TRUE
+    # Check if failure
+    if (response$ResponseMetadata$HTTPStatusCode == 200) {
+      valid <- TRUE
+      if (verbose) {
+        message(i, ": Assignment (", assignments[i], ") Approved")
+      }
+    } else {
+      valid <- FALSE
+      if (verbose) {
+        warning(i, ": Invalid request for assignment ", assignments[i])
+      }
+    }
 
     # Add to data frame
-    results <- rbind(results, data.frame(AssignmentId = a, Feedback = f, Valid = valid))
+    Assignments <- rbind(Assignments, data.frame(AssignmentId = assignments[i],
+                                                 Feedback = feedback[i],
+                                                 OverrideRejection = rejected[i],
+                                                 Valid = valid))
   }
 
   # Return results
-  message(sum(results$Valid), " Assignments Approved")
-  results
+  message(sum(Assignments$Valid), " Assignments Approved")
+  return(Assignments)
 }
