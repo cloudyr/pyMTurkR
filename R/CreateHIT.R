@@ -80,6 +80,9 @@
 #' User Interface at \samp{https://requester.mturk.com/create/projects}. If the
 #' HIT template includes variable placeholders, must also specify
 #' \code{hitlayoutparameters}.
+#' @param verbose Optionally print the results of the API request to the
+#' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+#' TRUE)}.
 #' @return A data frame containing the HITId and other details of the newly
 #' created HIT.
 #' @author Tyler Burleigh, Thomas J. Leeper

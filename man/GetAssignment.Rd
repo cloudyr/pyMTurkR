@@ -11,6 +11,7 @@
 GetAssignment(assignment = NULL, hit = NULL, hit.type = NULL,
   annotation = NULL, status = NULL, return.pages = NULL,
   results = as.integer(100), pagetoken = NULL,
+  answers.as.separate.list = TRUE,
   verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
@@ -50,6 +51,14 @@ fetch per page. Must be between 1 and 100. Most users can ignore this.}
 
 \item{pagetoken}{An optional character string indicating which page of
 search results to start at. Most users can ignore this.}
+
+\item{answers.as.separate.list}{An optional logical indicating whether the
+assignment answers should be returned in a separate list, or as a column in
+the Assignments data frame.}
+
+\item{verbose}{Optionally print the results of the API request to the
+standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+TRUE)}.}
 }
 \value{
 Optionally a data frame containing Assignment data, including

@@ -44,6 +44,12 @@
 #' search results to start at. Most users can ignore this.
 #' @param results An optional character string indicating how many results to
 #' fetch per page. Must be between 1 and 100. Most users can ignore this.
+#' @param answers.as.separate.list An optional logical indicating whether the
+#' assignment answers should be returned in a separate list, or as a column in
+#' the Assignments data frame.
+#' @param verbose Optionally print the results of the API request to the
+#' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+#' TRUE)}.
 #' @return Optionally a data frame containing Assignment data, including
 #' workers responses to any questions specified in the \code{question}
 #' parameter of the \code{CreateHIT} function.
@@ -81,6 +87,7 @@ GetAssignment <-
            return.pages = NULL,
            results = as.integer(100),
            pagetoken = NULL,
+           answers.as.separate.list = TRUE,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
@@ -99,19 +106,22 @@ GetAssignment <-
         response <- try(client$get_assignment(AssignmentId = assignment[i]))
         QualificationRequirements <- list()
         if (class(response) != "try-error") {
-          a <- as.data.frame.Assignment(response$Assignment)$assignments
-          a$Answer <- NULL
+          tmp <- as.data.frame.Assignment(response$Assignment)
+          a <- tmp$assignments
+          ans <- tmp$answers
           if (i == 1) {
             Assignments <- a
+            Answers <- ans
           } else {
             Assignments <- rbind(Assignments, a, all=TRUE)
+            Answers <- rbind(Answers, ans, all=TRUE)
           }
           if (verbose) {
             message(i, ": Assignment ", assignment[i], " Retrieved")
           }
         }
       }
-      return(Assignments)
+      return(list(Assignments = Assignments, Answers = Answers))
 
 
     } else { # Search for HITs that match criteria given
@@ -185,12 +195,15 @@ GetAssignment <-
 
         response <- batch_helper_list_assignments(batchhit = batchhit, pagetoken = pagetoken)
         assignments <- response$Assignments
-        tmp <- NULL
+        tmpAssignments <- NULL
+        tmpAnswers <- NULL
 
         # For each assignment...
         if(length(assignments) > 0){
           for (i in 1:length(assignments)) {
-            tmp <- rbind(tmp, as.data.frame.Assignment(assignments[[i]])$assignments)
+            tmp <- as.data.frame.Assignment(assignments[[i]])
+            tmpAssignments <- rbind(tmpAssignments, tmp$assignments)
+            tmpAnswers <- rbind(tmpAnswers, tmp$answers)
             message("\nAssignment ", assignments[[i]]$AssignmentId, " Retrieved")
           }
         } else {
@@ -208,7 +221,8 @@ GetAssignment <-
           numresults <- 0
         }
 
-        return(list(Assignments = tmp,
+        return(list(Assignments = tmpAssignments,
+                    Answers = tmpAnswers,
                     NumResults = numresults,
                     NextToken = pagetoken))
 
@@ -223,6 +237,10 @@ GetAssignment <-
                                                     'AcceptTime', 'SubmitTime', 'ApprovalTime',
                                                     'RejectionTime', 'RequesterFeedback',
                                                     'Answer'))
+
+      Answers <- emptydf(0, 9, c("AssignmentId", "WorkerId", "HITId", "QuestionIdentifier",
+                                "FreeText", "SelectionIdentifier", "OtherSelectionField",
+                                "UploadedFileKey", "UploadedFileSizeInBytes"))
 
       # Progress bar because this can take a while
       pb <- progress::progress_bar$new(total = length(hitlist))
@@ -254,6 +272,7 @@ GetAssignment <-
 
           pages <- pages + 1
           Assignments <- rbind(Assignments, to.return$Assignments)
+          Answers <- rbind(Answers, to.return$Answers)
 
         }
         pb$tick()
@@ -265,6 +284,14 @@ GetAssignment <-
     if (verbose) {
       message("\n", runningtotal, " Assignments Retrieved")
     }
-    return(Assignments)
+    if(answers.as.separate.list == TRUE){
+      Assignments$Answer <- NULL
+      return(list(Assignments = Assignments, Answers = Answers))
+    } else {
+      for(i in 1:nrow(Assignments)){
+        Assignments[i,]$Answer <- list(XML::xmlToList(Assignments[i,]$Answer))
+      }
+      return(Assignments)
+    }
 
   }

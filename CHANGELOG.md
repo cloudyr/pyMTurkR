@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.4.6] - 2019-08-10
+### Updated
+- GetAssignment() now has the ability to return Answers as a separate list using the answers.as.separate.list parameter
+
 ## [0.4.5] - 2019-08-09
 ### Added
 - RejectAssignment()

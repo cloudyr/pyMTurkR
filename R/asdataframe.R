@@ -190,13 +190,14 @@ as.data.frame.Assignment <- function(assignment) {
   }
   if (!is.null(assignment$Answer)) {
     Assignment[11] <- assignment$Answer
+    answers <- as.data.frame.QuestionFormAnswers(Assignment, assignment$Answer)
+    return.answers <- rbind(return.answers, answers)
+  } else {
+    return.answers = NULL
   }
 
-  answers <- as.data.frame.QuestionFormAnswers(Assignment, assignment$Answer)
-  return.answers <- rbind(return.answers, answers)
 
-
-  return(list(assignments = Assignment, questions = return.answers))
+  return(list(assignments = Assignment, answers = return.answers))
 }
 
 
@@ -417,4 +418,10 @@ as.data.frame.QualificationTypes <- function(qual) {
 
   return(this.qual)
 }
+
+
+
+
+# REVIEW RESULTS
+
 
