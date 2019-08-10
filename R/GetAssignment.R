@@ -46,7 +46,7 @@
 #' fetch per page. Must be between 1 and 100. Most users can ignore this.
 #' @param answers.as.separate.df An optional logical indicating whether the
 #' assignment answers should be returned in a separate data frame, or as a
-#' column in the Assignments data frame.
+#' column in the Assignments data frame. Defaults to FALSE.
 #' @param verbose Optionally print the results of the API request to the
 #' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
 #' TRUE)}.
@@ -87,7 +87,7 @@ GetAssignment <-
            return.pages = NULL,
            results = as.integer(100),
            pagetoken = NULL,
-           answers.as.separate.df = TRUE,
+           answers.as.separate.df = FALSE,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client

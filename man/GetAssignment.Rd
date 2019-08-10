@@ -11,7 +11,7 @@
 GetAssignment(assignment = NULL, hit = NULL, hit.type = NULL,
   annotation = NULL, status = NULL, return.pages = NULL,
   results = as.integer(100), pagetoken = NULL,
-  answers.as.separate.df = TRUE,
+  answers.as.separate.df = FALSE,
   verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
@@ -54,7 +54,7 @@ search results to start at. Most users can ignore this.}
 
 \item{answers.as.separate.df}{An optional logical indicating whether the
 assignment answers should be returned in a separate data frame, or as a
-column in the Assignments data frame.}
+column in the Assignments data frame. Defaults to FALSE.}
 
 \item{verbose}{Optionally print the results of the API request to the
 standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
