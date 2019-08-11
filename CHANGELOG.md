@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.3] - 2019-08-11
+### Added
+- SetHITTypeNotification()
+
 ## [0.5.2] - 2019-08-11
 ### Change
 - Changing GetAssignment() parameter answers.as.separate.df to get.answers. Removing default behavior of returning Answers in Assignment data.frame.

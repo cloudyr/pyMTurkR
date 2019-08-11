@@ -96,16 +96,11 @@ SetHITAsReviewing <-
     for (i in 1:length(hitlist)) {
 
       hit <- hitlist[i]
-      if(verbose == FALSE){
-        silence = TRUE
-      } else {
-        silence = FALSE
-      }
+
       response <- try(client$update_hit_review_status(
         HITId = hit,
         Revert = revert
-      ), silent = silence)
-
+      ), silent = !verbose)
 
       if (revert == FALSE) {
         status <- "Reviewing"
