@@ -277,7 +277,7 @@ GetAssignment <-
     }
 
     if (verbose) {
-      message("\n", runningtotal, " Assignments Retrieved")
+      message("\n", nrow(Assignments), " Assignments Retrieved")
     }
     Assignments$Answer <- NULL
     if(get.answers == TRUE){
