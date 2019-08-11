@@ -172,7 +172,7 @@ GenerateHITReviewPolicy <-
     h <- list("PolicyName" = "SimplePlurality/2011-09-01",
               "Parameters" = list())
 
-    if (("ExtendIfHITAgreementScoreIsLessThan" %in% names(l)) &&
+    if(("ExtendIfHITAgreementScoreIsLessThan" %in% names(l)) &&
         ((!"ExtendMaximumAssignments" %in% names(l)) |
          (!"ExtendMinimumTimeInSeconds" %in% names(l)) ) ) {
       stop(paste0("ExtendMaximumAssignments and ExtendMinimumTimeInSeconds required",
@@ -183,12 +183,12 @@ GenerateHITReviewPolicy <-
         as.numeric(l$ExtendIfHITAgreementScoreIsLessThan) < 1)) {
       stop("ExtendIfHITAgreementScoreIsLessThan must be between 0 and 100")
     }
-    if ("ExtendMinimumTimeInSeconds" %in% names(l) &&
+    if("ExtendMinimumTimeInSeconds" %in% names(l) &&
         (as.numeric(l$ExtendMinimumTimeInSeconds) > 31536000 |
          as.numeric(l$ExtendMinimumTimeInSeconds) < 3600)) {
       stop("ExtendMinimumTimeInSeconds must be between one hour and one year")
     }
-    if ("DisregardAssignmentIfRejected" %in% names(l) &&
+    if("DisregardAssignmentIfRejected" %in% names(l) &&
         (!as.character(l$DisregardAssignmentIfRejected) %in% c("TRUE","FALSE"))) {
       stop("DisregardAssignmentIfRejected must be TRUE or FALSE")
     }
@@ -285,7 +285,7 @@ GenerateAssignmentReviewPolicy <-
     for (i in 1:length(maps)) {
       key <- names(maps)[i]
       values <- maps[[i]]
-      a$Parameters[[1]]$MapEntries[[i]] <- dict("Key" = key, "Values" = list(as.character(values)))
+      a$Parameters[[1]]$MapEntries[[i]] <- reticulate::dict("Key" = key, "Values" = list(as.character(values)))
     }
     l$AnswerKey <- NULL
 
