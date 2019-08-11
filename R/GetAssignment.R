@@ -44,15 +44,11 @@
 #' search results to start at. Most users can ignore this.
 #' @param results An optional character string indicating how many results to
 #' fetch per page. Must be between 1 and 100. Most users can ignore this.
-#' @param answers.as.separate.df An optional logical indicating whether the
-#' assignment answers should be returned in a separate data frame, or as a
-#' column in the Assignments data frame. Defaults to FALSE.
+#' @param get.answers An optional logical indicating whether to also get the
+#' answers. If TRUE, the returned object is a list with Assignments and Answers.
 #' @param verbose Optionally print the results of the API request to the
 #' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
 #' TRUE)}.
-#' @return Optionally a data frame containing Assignment data, including
-#' workers responses to any questions specified in the \code{question}
-#' parameter of the \code{CreateHIT} function.
 #' @author Tyler Burleigh, Thomas J. Leeper
 #' @references
 #' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_GetAssignmentOperation.html}{API
@@ -87,7 +83,7 @@ GetAssignment <-
            return.pages = NULL,
            results = as.integer(100),
            pagetoken = NULL,
-           answers.as.separate.df = FALSE,
+           get.answers = FALSE,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
@@ -121,7 +117,6 @@ GetAssignment <-
           }
         }
       }
-      return(list(Assignments = Assignments, Answers = Answers))
 
 
     } else { # Search for HITs that match criteria given
@@ -284,18 +279,10 @@ GetAssignment <-
     if (verbose) {
       message("\n", runningtotal, " Assignments Retrieved")
     }
-    if(answers.as.separate.df == TRUE){
-      Assignments$Answer <- NULL
+    Assignments$Answer <- NULL
+    if(get.answers == TRUE){
       return(list(Assignments = Assignments, Answers = Answers))
     } else {
-      for(i in 1:nrow(Assignments)){
-        if(i == 1){
-          Assignments[i,]$Answer <- XML::xmlToList(Assignments[i,]$Answer)
-        }
-        if(i > 1){
-          Assignments[i,]$Answer <- XML::xmlToList(Assignments[i,]$Answer[[1]][1])
-        }
-      }
       return(Assignments)
     }
 

@@ -189,7 +189,6 @@ as.data.frame.Assignment <- function(assignment) {
     Assignment[10] <- assignment$RequesterFeedback
   }
   if (!is.null(assignment$Answer)) {
-    Assignment[11] <- assignment$Answer
     answers <- as.data.frame.QuestionFormAnswers(Assignment, assignment$Answer)
     return.answers <- rbind(return.answers, answers)
   } else {
