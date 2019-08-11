@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.4.9] - 2019-08-11
+### Added
+- SetHITAsReviewing()
+
 ## [0.4.8] - 2019-08-11
 ### Added
 - RevokeQualification()
