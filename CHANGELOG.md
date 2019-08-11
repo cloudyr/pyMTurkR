@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.4.7] - 2019-08-11
+### Added
+- GenerateNotification()
+- SendTestEventNotification()
+
 ## [0.4.6] - 2019-08-10
 ### Updated
 - GetAssignment() now has the ability to return Answers as a separate list using the answers.as.separate.list parameter
