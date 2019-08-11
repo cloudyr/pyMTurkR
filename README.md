@@ -61,6 +61,7 @@ The following verbs have been implemented so far:
 - RegisterHITType()
 - RejectAssignment()
 - RejectQualification()
+- RevokeQualification()
 - SearchHITs()
 - SearchQualificationTypes()
 - SendTestEventNotification()

@@ -141,7 +141,6 @@ CreateHIT <-
         if (as.integer(assignments) < 1 | as.integer(assignments) > 1e+09) {
           stop("MaxAssignments must be between 1 and 1000000000")
         } else {
-
           args <- c(args, list(MaxAssignments = as.integer(assignments)))
         }
       }

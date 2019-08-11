@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.4.8] - 2019-08-11
+### Added
+- RevokeQualification()
+
 ## [0.4.7] - 2019-08-11
 ### Added
 - GenerateNotification()

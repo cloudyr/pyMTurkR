@@ -15,7 +15,7 @@
 #' qualification created in the MTurk RUI.
 #'
 #' \code{AssignQualifications()}, \code{assignqual()} and
-#' \code{associate_qualification_with_worker()} are aliases.
+#' \code{AssociateQualificationWithWorker()} are aliases.
 #'
 #' @aliases AssignQualification AssignQualifications assignqual
 #' associate_qualification_with_worker
@@ -84,7 +84,7 @@
 AssignQualification <-
   assignqual <-
   AssignQualifications <-
-  associate_qualification_with_worker <-
+  AssociateQualificationWithWorker <-
   function (qual = NULL, workers, value = as.integer(1),
             notify = FALSE, name = NULL, description = NULL,
             keywords = NULL, status = NULL, retry.delay = NULL,

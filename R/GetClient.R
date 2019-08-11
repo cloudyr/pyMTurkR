@@ -1,20 +1,19 @@
 #' Creates an MTurk Client using the AWS SDK for Python (Boto3)
 #'
-#' Approve assignments, by AssignmentId (as returned by
-#' \code{\link{GetAssignment}} or by HITId or HITTypeId. Must specify
-#' \code{assignments}.
+#' Create an API client. Only advanced users will likely need to use this
+#' function.
 #'
 #' \code{StartClient()}, \code{Client()} and \code{client()} are aliases for
 #' \code{GetClient}.
 #'
 #' @aliases GetClient StartClient Client client
 #' @param sandbox A logical indicating whether the client should be in the
-#' sandbox environment or the live environment. Set with
+#' sandbox environment or the live environment.
 #' @param profile A character string that specifies the profile to use
 #' from the .aws/credentials file, optional.
 #' @return An object with the classes \dQuote{botocore.client.MTurk},
 #' \dQuote{botocore.client.BaseClient}, \dQuote{python.builtin.object}, that
-#' is used as an MTurk client
+#' is used as an MTurk client.
 #' @author Tyler Burleigh
 #' @references
 #' \href{https://aws.amazon.com/sdk-for-python/}{AWS SDK for Python (Boto3)}
@@ -24,8 +23,6 @@
 #'
 #' @examples
 #' \dontrun{
-#' GetClient()
-#'
 #' myclient <- GetClient()
 #' myclient$get_account_balance()
 #' }
