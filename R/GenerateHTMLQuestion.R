@@ -68,14 +68,10 @@ function (character = NULL, file = NULL, frame.height = 450) {
     } else if (!is.null(file)) {
         html <- paste0(readLines(file, warn = FALSE), collapse="\n")
     }
-    # Escape quotes and double quotes
-    html <- gsub("'", "\\\\'", html)
-    html <- gsub('"', '\\\\"', html)
 
     string <- paste0(
         "<HTMLQuestion xmlns=\"http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2011-11-11/HTMLQuestion.xsd\"><HTMLContent><![CDATA[", html, "]]></HTMLContent><FrameHeight>",frame.height,"</FrameHeight></HTMLQuestion>")
     return(structure(list(xml.parsed = XML::xmlParse(string),
-                          string = string,
-                          url.encoded = curl::curl_escape(string)),
+                          string = string),
                      class='HTMLQuestion'))
 }
