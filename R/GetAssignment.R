@@ -113,8 +113,8 @@ GetAssignment <-
             Assignments <- a
             Answers <- ans
           } else {
-            Assignments <- rbind(Assignments, a, all=TRUE)
-            Answers <- rbind(Answers, ans, all=TRUE)
+            Assignments <- rbind(Assignments, a)
+            Answers <- rbind(Answers, ans)
           }
           if (verbose) {
             message(i, ": Assignment ", assignment[i], " Retrieved")
@@ -289,7 +289,12 @@ GetAssignment <-
       return(list(Assignments = Assignments, Answers = Answers))
     } else {
       for(i in 1:nrow(Assignments)){
-        Assignments[i,]$Answer <- list(XML::xmlToList(Assignments[i,]$Answer))
+        if(i == 1){
+          Assignments[i,]$Answer <- XML::xmlToList(Assignments[i,]$Answer)
+        }
+        if(i > 1){
+          Assignments[i,]$Answer <- XML::xmlToList(Assignments[i,]$Answer[[1]][1])
+        }
       }
       return(Assignments)
     }

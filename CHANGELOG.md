@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.1] - 2019-08-11
+### Fixed
+- Fix for GetAssignment() return of Answers in Assignment data.frame
+
 ## [0.5.0] - 2019-08-11
 ### Fixed
 - Fixed a bug in GenerateHTMLQuestion() related to the escaping of strings introduced in 0.3.8. String escaping is now not necessary after update 0.4.2. (Yay!)
