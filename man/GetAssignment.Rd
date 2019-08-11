@@ -10,8 +10,7 @@
 \usage{
 GetAssignment(assignment = NULL, hit = NULL, hit.type = NULL,
   annotation = NULL, status = NULL, return.pages = NULL,
-  results = as.integer(100), pagetoken = NULL,
-  answers.as.separate.df = FALSE,
+  results = as.integer(100), pagetoken = NULL, get.answers = FALSE,
   verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
@@ -52,18 +51,12 @@ fetch per page. Must be between 1 and 100. Most users can ignore this.}
 \item{pagetoken}{An optional character string indicating which page of
 search results to start at. Most users can ignore this.}
 
-\item{answers.as.separate.df}{An optional logical indicating whether the
-assignment answers should be returned in a separate data frame, or as a
-column in the Assignments data frame. Defaults to FALSE.}
+\item{get.answers}{An optional logical indicating whether to also get the
+answers. If TRUE, the returned object is a list with Assignments and Answers.}
 
 \item{verbose}{Optionally print the results of the API request to the
 standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
 TRUE)}.}
-}
-\value{
-Optionally a data frame containing Assignment data, including
-workers responses to any questions specified in the \code{question}
-parameter of the \code{CreateHIT} function.
 }
 \description{
 Get an assignment or multiple assignments for one or more HITs (or a
