@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.4] - 2019-08-13
+### Added
+- GetReviewResultsForHIT()
+
 ## [0.5.3] - 2019-08-11
 ### Added
 - SetHITTypeNotification()

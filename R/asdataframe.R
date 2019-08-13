@@ -422,5 +422,114 @@ as.data.frame.QualificationTypes <- function(qual) {
 
 
 # REVIEW RESULTS
+as.data.frame.ReviewResults <- function(results) {
 
+  out <- list(AssignmentReviewResult = NULL,
+              AssignmentReviewAction = NULL,
+              HITReviewResult = NULL,
+              HITReviewAction = NULL)
+
+  if (length(results$AssignmentReviewReport) > 0) {
+
+    out$AssignmentReviewResult <- emptydf(0, 8, c("HITId", "AssignmentReviewPolicy",
+                                                  "ActionId", "SubjectId",
+                                                  "SubjectType", "QuestionId",
+                                                  "Key", "Value"))
+
+
+    out$AssignmentReviewAction <- emptydf(0, 8, c("HITId", "AssignmentReviewPolicy",
+                                                  "ActionId", "SubjectId",
+                                                  "SubjectType", "QuestionId",
+                                                  "Key", "Value"))
+
+    review.results <- results$AssignmentReviewReport$ReviewResults
+    review.actions <- results$AssignmentReviewReport$ReviewActions
+    review.policy <- results$AssignmentReviewPolicy$PolicyName
+    hit <- results$HITId
+
+    for(i in 1:length(review.results)){
+      result <- emptydf(1, 8, c("HITId", "AssignmentReviewPolicy", "ActionId", "SubjectId",
+                                "SubjectType", "QuestionId", "Key", "Value"))
+      result$HITId <- hit
+      result$AssignmentReviewPolicy <- review.policy
+      result$ActionId <- review.results[[i]]$ActionId
+      result$SubjectId <- review.results[[i]]$SubjectId
+      result$SubjectType <- review.results[[i]]$SubjectType
+      result$QuestionId <- review.results[[i]]$QuestionId
+      result$Key <- review.results[[i]]$Key
+      result$Value <- review.results[[i]]$Value
+      out$AssignmentReviewResult <- rbind(out$AssignmentReviewResult, result)
+    }
+
+    for(i in 1:length(review.actions)){
+      action <- emptydf(1, 8, c("HITId", "AssignmentReviewPolicy", "ActionId", "ActionName",
+                                "TargetId", "TargetType", "Status", "Result"))
+      action$HITId <- hit
+      action$AssignmentReviewPolicy <- review.policy
+      action$ActionId <- review.actions[[i]]$ActionId
+      action$ActionName <- review.actions[[i]]$ActionName
+      action$TargetId <- review.actions[[i]]$TargetId
+      action$TargetType <- review.actions[[i]]$TargetType
+      action$Status <- review.actions[[i]]$Status
+      if(!is.null(review.actions[[i]]$Result)){
+        action$Result <- review.actions[[i]]$Result
+      }
+      out$AssignmentReviewAction <- rbind(out$AssignmentReviewAction, action)
+    }
+
+  }
+
+
+  if (length(results$HITReviewReport) > 0) {
+
+    out$HITReviewResult <- emptydf(0, 8, c("HITId", "HITReviewPolicy",
+                                                  "ActionId", "SubjectId",
+                                                  "SubjectType", "QuestionId",
+                                                  "Key", "Value"))
+
+
+    out$HITReviewAction <- emptydf(0, 8, c("HITId", "HITReviewPolicy",
+                                                  "ActionId", "SubjectId",
+                                                  "SubjectType", "QuestionId",
+                                                  "Key", "Value"))
+
+    review.results <- results$HITReviewReport$ReviewResults
+    review.actions <- results$HITReviewReport$ReviewActions
+    review.policy <- results$HITReviewPolicy$PolicyName
+    hit <- results$HITId
+
+    for(i in 1:length(review.results)){
+      result <- emptydf(1, 8, c("HITId", "HITReviewPolicy", "ActionId", "SubjectId",
+                                "SubjectType", "QuestionId", "Key", "Value"))
+      result$HITId <- hit
+      result$HITReviewPolicy <- review.policy
+      result$ActionId <- review.results[[i]]$ActionId
+      result$SubjectId <- review.results[[i]]$SubjectId
+      result$SubjectType <- review.results[[i]]$SubjectType
+      result$QuestionId <- review.results[[i]]$QuestionId
+      result$Key <- review.results[[i]]$Key
+      result$Value <- review.results[[i]]$Value
+      out$HITReviewResult <- rbind(out$HITReviewResult, result)
+    }
+
+    for(i in 1:length(review.actions)){
+      action <- emptydf(1, 8, c("HITId", "HITReviewPolicy", "ActionId", "ActionName",
+                                "TargetId", "TargetType", "Status", "Result"))
+      action$HITId <- hit
+      action$HITReviewPolicy <- review.policy
+      action$ActionId <- review.actions[[i]]$ActionId
+      action$ActionName <- review.actions[[i]]$ActionName
+      action$TargetId <- review.actions[[i]]$TargetId
+      action$TargetType <- review.actions[[i]]$TargetType
+      action$Status <- review.actions[[i]]$Status
+      if(!is.null(review.actions[[i]]$Result)){
+        action$Result <- review.actions[[i]]$Result
+      }
+      out$HITReviewAction <- rbind(out$HITReviewAction, action)
+    }
+
+  }
+
+  return(out)
+}
 
