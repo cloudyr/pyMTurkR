@@ -4,7 +4,7 @@
 \alias{AssignQualification}
 \alias{AssignQualifications}
 \alias{assignqual}
-\alias{associate_qualification_with_worker}
+\alias{AssociateQualificationWithWorker}
 \title{Assign Qualification}
 \usage{
 AssignQualification(qual = NULL, workers, value = as.integer(1),

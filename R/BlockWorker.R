@@ -7,10 +7,14 @@
 #' \code{BlockWorker} prevents the specified worker from completing any of your
 #' HITs.
 #'
-#' \code{BlockWorkers()}, \code{block()}, \code{CreateWorkerBlock()},
-#' and \code{create_worker_block()} are aliases for \code{BlockWorker}.
+#' \code{BlockWorkers()}, \code{block()} and \code{CreateWorkerBlock()},
+#' are aliases for \code{BlockWorker}. \code{UnblockWorkers()},
+#' \code{unblock()}, and \code{DeleteWorkerBlock()} are aliases for
+#' \code{UnblockWorker}. \code{blockedworkers()} is an alias for
+#' \code{GetBlockedWorkers}.
 #'
-#' @aliases BlockWorker BlockWorkers block CreateWorkerBlock create_worker_block
+#' @aliases BlockWorker BlockWorkers block CreateWorkerBlock UnblockWorker
+#' UnblockWorkers unblock DeleteWorkerBlock GetBlockedWorkers blockedworkers
 #' @param workers A character string containing a WorkerId, or a vector of
 #' character strings containing multiple WorkerIds.
 #' @param reasons A character string containing a reason for blocking a worker.
@@ -27,61 +31,65 @@
 #'
 #' \dontrun{
 #' BlockWorker("A1RO9UJNWXMU65", reasons="Did not follow HIT instructions.")
+#' UnblockWorker("A1RO9UJNWXMU65")
 #' }
 #'
 
 BlockWorker <-
-block <-
-BlockWorkers <-
-CreateWorkerBlock <-
-create_worker_block <-
-function (workers, reasons, verbose = TRUE){
+  block <-
+  BlockWorkers <-
+  CreateWorkerBlock <-
+  function (workers,
+            reasons = NULL,
+            verbose = getOption('pyMTurkR.verbose', TRUE)){
 
-  client <- GetClient() # Boto3 client
+    client <- GetClient() # Boto3 client
 
-  if (is.factor(workers)) {
-    workers <- as.character(workers)
-  }
-  if (is.null(reasons)) {
-    stop("Must specify one reason for block for all workers or one reason per worker")
-  }
-  if (is.factor(reasons)) {
-    reasons <- as.character(reasons)
-  }
-  if (length(workers) > 1) {
-    if (length(reasons) == 1) {
-      reasons <- rep(reasons, length(workers))
-    } else if (!length(workers) == length(reasons)) {
-      stop("length(reasons) must equal length(workers) or 1")
+    if (is.factor(workers)) {
+      workers <- as.character(workers)
     }
-  }
-
-  Workers <- emptydf(length(workers), 3, c("WorkerId", "Reason", "Valid"))
-
-  for (i in 1:length(workers)) {
-
-    response <- try(client$create_worker_block(
-      WorkerId = workers[i],
-      Reason = reasons[i]
-    ))
-
-    # Validity check
-    if(class(response) == "try-error") {
-      return(data.frame(valid = FALSE))
+    if (is.null(reasons)) {
+      stop("Must specify one reason for block for all workers or one reason per worker")
     }
-    else response$valid = TRUE
-
-    Workers[i, ] <- c(workers[i], reasons[i], response$valid)
-
-    if (response$valid == TRUE & verbose) {
-      message(i, ": Worker ", workers[i], " Blocked")
-    } else if (request$valid == FALSE & verbose) {
-      warning(i,": Invalid Request for worker ",workers[i])
+    if (is.factor(reasons)) {
+      reasons <- as.character(reasons)
+    }
+    if (length(workers) > 1) {
+      if (length(reasons) == 1) {
+        reasons <- rep(reasons, length(workers))
+      } else if (!length(workers) == length(reasons)) {
+        stop("length(reasons) must equal length(workers) or 1")
+      }
     }
 
+    Workers <- emptydf(length(workers), 3, c("WorkerId", "Reason", "Valid"))
+
+    for (i in 1:length(workers)) {
+
+      response <- try(client$create_worker_block(
+        WorkerId = workers[i],
+        Reason = reasons[i]
+      ))
+
+      # Validity check
+      if(class(response) == "try-error") {
+        valid = FALSE
+      }
+      else {
+        valid = TRUE
+      }
+
+      Workers[i, ] <- c(workers[i], reasons[i], valid)
+
+      if (valid == TRUE & verbose) {
+        message(i, ": Worker ", workers[i], " Blocked")
+      } else if (valid == FALSE & verbose) {
+        warning(i,": Invalid Request for worker ",workers[i])
+      }
+
+    }
+
+    Workers$Valid <- factor(Workers$Valid, levels=c('TRUE','FALSE'))
+    return(Workers)
+
   }
-
-  Workers$Valid <- factor(Workers$Valid, levels=c('TRUE','FALSE'))
-  return(Workers)
-
-}

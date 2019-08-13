@@ -5,10 +5,16 @@
 \alias{BlockWorkers}
 \alias{block}
 \alias{CreateWorkerBlock}
-\alias{create_worker_block}
+\alias{UnblockWorker}
+\alias{UnblockWorkers}
+\alias{unblock}
+\alias{DeleteWorkerBlock}
+\alias{GetBlockedWorkers}
+\alias{blockedworkers}
 \title{Block Worker(s)}
 \usage{
-BlockWorker(workers, reasons, verbose = TRUE)
+BlockWorker(workers, reasons = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{workers}{A character string containing a WorkerId, or a vector of
@@ -30,13 +36,17 @@ complete work for other requesters or affect their worker statistics.
 \code{BlockWorker} prevents the specified worker from completing any of your
 HITs.
 
-\code{BlockWorkers()}, \code{block()}, \code{CreateWorkerBlock()},
-and \code{create_worker_block()} are aliases for \code{BlockWorker}.
+\code{BlockWorkers()}, \code{block()} and \code{CreateWorkerBlock()},
+are aliases for \code{BlockWorker}. \code{UnblockWorkers()},
+\code{unblock()}, and \code{DeleteWorkerBlock()} are aliases for
+\code{UnblockWorker}. \code{blockedworkers()} is an alias for
+\code{GetBlockedWorkers}.
 }
 \examples{
 
 \dontrun{
 BlockWorker("A1RO9UJNWXMU65", reasons="Did not follow HIT instructions.")
+UnblockWorker("A1RO9UJNWXMU65")
 }
 
 }

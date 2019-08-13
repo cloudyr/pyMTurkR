@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.5] - 2019-08-13
+### Added
+- UnblockWorker()
+
 ## [0.5.4] - 2019-08-13
 ### Added
 - GetReviewResultsForHIT()

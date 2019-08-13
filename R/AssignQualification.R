@@ -18,7 +18,7 @@
 #' \code{AssociateQualificationWithWorker()} are aliases.
 #'
 #' @aliases AssignQualification AssignQualifications assignqual
-#' associate_qualification_with_worker
+#' AssociateQualificationWithWorker
 #' @param qual A character string containing a QualificationTypeId.
 #' @param workers A character string containing a WorkerId, or a vector of
 #' character strings containing multiple WorkerIds.
