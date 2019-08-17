@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.6] - 2019-08-17
+### Added
+- UpdateQualificationScore()
+
 ## [0.5.5] - 2019-08-13
 ### Added
 - UnblockWorker()

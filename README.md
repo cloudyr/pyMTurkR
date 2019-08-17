@@ -1,9 +1,9 @@
 # R Client for the MTurk Requester API
 
 ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
-![version](https://img.shields.io/badge/version-0.5.5-blue.svg)
-![progress](https://img.shields.io/badge/progress-92%25-green.svg)
-![downloads](https://img.shields.io/badge/downloads-49-brightgreen)
+![version](https://img.shields.io/badge/version-0.5.6-blue.svg)
+![progress](https://img.shields.io/badge/progress-94%25-green.svg)
+![downloads](https://img.shields.io/badge/downloads-52-brightgreen)
 
 <a href="https://twitter.com/intent/follow?screen_name=tylerburleigh"><img src="https://img.shields.io/twitter/follow/tylerburleigh?style=social&logo=twitter" alt="follow on Twitter"></a>
 
@@ -73,6 +73,7 @@ The following verbs have been implemented so far:
 - SetHITAsReviewing()
 - SetHITTypeNotification()
 - UnblockWorker()
+- UpdateQualificationScore()
 
 ## Installation ##
 
