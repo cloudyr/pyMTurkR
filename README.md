@@ -25,14 +25,12 @@ See the [pyMTurkR documentation](pyMTurkR_0.5.7.pdf) for a full list of operatio
 
 # Installation
 
-## Pre-package installation
-
 Windows users should install [Anaconda](https://conda.io/projects/conda/en/latest/user-guide/install/windows.html).
 
 1. Install the `reticulate` R package if you don't have it already
 
 ```
-install.packages('reticulate')
+install.packages("reticulate")
 ```
 
 2. Use reticulate to install python with the boto3 python library
