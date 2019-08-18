@@ -25,7 +25,7 @@ See the [pyMTurkR documentation](pyMTurkR_0.5.7.pdf) for a full list of operatio
 
 # Installation
 
-Windows users should install [Anaconda](https://conda.io/projects/conda/en/latest/user-guide/install/windows.html).
+0. (WINDOWS USERS) Install [Anaconda](https://conda.io/projects/conda/en/latest/user-guide/install/windows.html)
 
 1. Install the `reticulate` R package if you don't have it already
 
