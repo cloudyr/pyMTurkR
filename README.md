@@ -89,7 +89,7 @@ For development updates see the [changelog](https://github.com/cloudyr/pyMTurkR/
 
 # Package maintainer / author
 
-pyMTurkR is written and maintained by [Tyler Burleigh](https://www.tylerburleigh.com).
+pyMTurkR is written and maintained by [Tyler Burleigh](https://tylerburleigh.com).
 
 <a href="https://twitter.com/intent/follow?screen_name=tylerburleigh"><img src="https://img.shields.io/twitter/follow/tylerburleigh?style=social&logo=twitter" alt="follow on Twitter"></a>
 
