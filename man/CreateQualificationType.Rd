@@ -8,7 +8,8 @@
 \usage{
 CreateQualificationType(name, description, status, keywords = NULL,
   retry.delay = NULL, test = NULL, answerkey = NULL,
-  test.duration = NULL, auto = NULL, auto.value = NULL)
+  test.duration = NULL, auto = NULL, auto.value = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{name}{A name for the QualificationType. This is visible to workers. It
@@ -49,6 +50,10 @@ granted to workers who request it. Default is \code{NULL} meaning
 \item{auto.value}{An optional parameter specifying the value that is
 automatically assigned to workers when they request it (if the Qualification
 is automatically granted).}
+
+\item{verbose}{Optionally print the results of the API request to the
+standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+TRUE)}.}
 }
 \value{
 A data frame containing the QualificationTypeId and other details of

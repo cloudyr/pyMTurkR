@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.7] - 2019-08-18
+### Added
+- UpdateQualificationType()
+
 ## [0.5.6] - 2019-08-17
 ### Added
 - UpdateQualificationScore()
