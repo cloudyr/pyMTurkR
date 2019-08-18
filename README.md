@@ -89,12 +89,14 @@ For development updates see the [changelog](https://github.com/cloudyr/pyMTurkR/
 
 # Package maintainer / author
 
-MTurkR was written by [Thomas J. Leeper](https://thomasleeper.com) and is the basis of pyMTurkR.
-
 pyMTurkR is written and maintained by [Tyler Burleigh](https://www.tylerburleigh.com).
 
 <a href="https://twitter.com/intent/follow?screen_name=tylerburleigh"><img src="https://img.shields.io/twitter/follow/tylerburleigh?style=social&logo=twitter" alt="follow on Twitter"></a>
 
 # Additional credits
+
+MTurkR was primarily written by [Thomas J. Leeper](https://thomasleeper.com) and is the basis of pyMTurkR.
+
+<a href="https://twitter.com/intent/follow?screen_name=tylerburleigh"><img src="https://img.shields.io/twitter/follow/thosjleeper?style=social&logo=twitter" alt="follow on Twitter"></a>
 
 The pyMTurkR logo borrows elements from Amazon, R, and python logos; the "three people" element is thanks to Muammark / Freepik.
