@@ -82,6 +82,13 @@ AccountBalance()
 
 # Development status
 
+![functions coded](https://img.shields.io/badge/functions_coded-100%25-brightgreen.svg)
+![unit tests](https://img.shields.io/badge/unit_tests-0%25-red.svg)
+
+This package is `experimental` because it has not been fully tested.
+
+All of the functions have been written and unit tests are now in progress.
+
 For development updates see the [changelog](https://github.com/cloudyr/pyMTurkR/blob/master/CHANGELOG.md).
 
 # Package maintainer / author
