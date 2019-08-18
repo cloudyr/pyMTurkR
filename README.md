@@ -2,7 +2,7 @@
 
 # An R package to interface with the MTurk requester API
 
-![experimental](https://img.shields.io/badge/status-experimental-lightgrey.svg)
+![alpha](https://img.shields.io/badge/status-alpha-lightgrey.svg)
 ![version](https://img.shields.io/badge/version-0.5.7-blue.svg)
 ![downloads](https://img.shields.io/badge/downloads-52-brightgreen)
 
