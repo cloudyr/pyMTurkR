@@ -11,9 +11,9 @@
 
 ## Why make this?
 
-pyMTurkR was created because Amazon [deprecated the API](https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI-legacy/Welcome.html) that MTurkR was using, rendering it obsolete. This package was created to maintain MTurk access for R users.
+pyMTurkR was created because on June 1, 2019 Amazon [deprecated the MTurk API (version '2014-08-15')](https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI-legacy/Welcome.html) that MTurkR was using, rendering it obsolete. This package was created to maintain MTurk access for R users while migrating to the new MTurk API (version '2017–01–17').
 
-Unlike MTurkR, pyMTurkR is not a native R language package. It uses [`reticulate`](https://rstudio.github.io/reticulate) to access the [`boto3`](https://aws.amazon.com/sdk-for-python) module for Python. Having a cross-language dependency is not necessarily a bad thing and from the user perspective there is probably no difference, besides a few extra installation steps.
+pyMTurkR is not a native R language package. It uses [`reticulate`](https://rstudio.github.io/reticulate) to import and wrap the [`boto3`](https://aws.amazon.com/sdk-for-python) module for Python. Cross-language dependency is not necessarily a bad thing, and from the user perspective there is probably no difference, besides a few extra installation steps. Welcome to the wonderful world of R-python interoperability.
 
 
 ## What can it do?
