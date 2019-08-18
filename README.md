@@ -4,10 +4,8 @@
 
 ![experimental](https://img.shields.io/badge/stability-experimental-lightgrey.svg)
 ![version](https://img.shields.io/badge/version-0.5.7-blue.svg)
-
 ![functions coded](https://img.shields.io/badge/functions_coded-100%25-brightgreen.svg)
 ![unit tests](https://img.shields.io/badge/unit_tests-0%25-red.svg)
-
 ![downloads](https://img.shields.io/badge/downloads-52-9cf)
 
 **pyMTurkR** is a replacement for the now obsolete [MTurkR](https://github.com/cloudyr/MTurkR). pyMTurkR provides access to the latest Amazon Mechanical Turk (MTurk) <https://www.mturk.com> Requester API (version '2017–01–17'), using `reticulate` to wrap the `boto3` SDK for Python.
