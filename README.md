@@ -1,4 +1,4 @@
-# R Client for the MTurk Requester API
+# An R package to interface with the MTurk requester API
 
 ![experimental](https://img.shields.io/badge/stability-experimental-lightgrey.svg)
 ![version](https://img.shields.io/badge/version-0.5.7-blue.svg)
