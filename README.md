@@ -6,7 +6,7 @@
 ![version](https://img.shields.io/badge/version-0.5.7-blue.svg)
 ![downloads](https://img.shields.io/badge/downloads-52-brightgreen)
 
-**pyMTurkR** is a replacement for the now obsolete [MTurkR](https://github.com/cloudyr/MTurkR). pyMTurkR provides access to the latest Amazon Mechanical Turk (MTurk) <https://www.mturk.com> Requester API (version '2017–01–17'), using `reticulate` to wrap the `boto3` SDK for Python.
+**pyMTurkR** is a replacement for the now obsolete [MTurkR](https://github.com/cloudyr/MTurkR). pyMTurkR provides access to the latest Amazon Mechanical Turk (<a href='https://www.mturk.com'>MTurk</a>) Requester API (version '2017–01–17'), using `reticulate` to wrap the `boto3` SDK for Python.
 
 
 ## Why make this?
@@ -50,7 +50,7 @@ devtools::install_github("cloudyr/pyMTurkR")
 
 ## Set AWS keys
 
-AWS keys can be set as environment variables
+AWS keys can be set as environment variables.
 
 ```R
 Sys.setenv(AWS_ACCESS_KEY_ID = "my access key")
