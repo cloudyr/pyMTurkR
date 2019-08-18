@@ -1,6 +1,6 @@
 <img src="logo.png" alt="pyMTurkR logo" width="250" />
 
-# An R package to interface with the MTurk requester API
+# An R package to interface with the MTurk's Requester API
 
 ![alpha](https://img.shields.io/badge/status-alpha-lightgrey.svg)
 ![version](https://img.shields.io/badge/version-0.5.7-blue.svg)
