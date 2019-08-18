@@ -149,8 +149,7 @@ AssignQualification <-
       type <- CreateQualificationType(name = name, description = description,
                                       keywords = keywords, status = status, retry.delay = retry.delay,
                                       test = test, answerkey = answerkey, test.duration = test.duration,
-                                      auto = auto, auto.value = auto.value, sandbox = sandbox,
-                                      profile = profile)
+                                      auto = auto, auto.value = auto.value)
       qual <- as.character(type$QualificationTypeId)
     }
 

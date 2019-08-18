@@ -147,7 +147,7 @@ ChangeHITType <-
         # Create a new HIT Type for the user
         register <- try(RegisterHITType(title, description, reward, duration,
                                     keywords = keywords, auto.approval.delay = auto.approval.delay,
-                                    qual.req = qual.req, sandbox = sandbox, profile = profile))
+                                    qual.req = qual.req))
 
         if (class(register) == "try-error") {
           stop("Could not RegisterHITType(), check parameters")

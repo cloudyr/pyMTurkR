@@ -102,7 +102,7 @@ DisableHIT <-
       if (is.factor(annotation)) {
         annotation <- as.character(annotation)
       }
-      hitsearch <- SearchHITs(verbose = FALSE, return.qual.dataframe = FALSE)
+      hitsearch <- SearchHITs(verbose = FALSE)
       hitlist <- hitsearch$HITs$HITId[grepl(annotation, hitsearch$HITs$RequesterAnnotation)]
     }
     if (length(hitlist) == 0 || is.null(hitlist)) {
