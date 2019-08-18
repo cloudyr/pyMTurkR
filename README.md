@@ -1,3 +1,5 @@
+<img src="logo.png" alt="pyMTurkR logo" width="250" />
+
 # An R package to interface with the MTurk requester API
 
 ![experimental](https://img.shields.io/badge/stability-experimental-lightgrey.svg)
@@ -5,8 +7,6 @@
 ![functions coded](https://img.shields.io/badge/functions_coded-100%25-brightgreen.svg)
 ![unit tests](https://img.shields.io/badge/unit_tests-0%25-red.svg)
 ![downloads](https://img.shields.io/badge/downloads-52-9cf)
-
-<a href="https://twitter.com/intent/follow?screen_name=tylerburleigh"><img src="https://img.shields.io/twitter/follow/tylerburleigh?style=social&logo=twitter" alt="follow on Twitter"></a>
 
 **pyMTurkR** is a replacement for the now obsolete [MTurkR](https://github.com/cloudyr/MTurkR). pyMTurkR provides access to the latest Amazon Mechanical Turk (MTurk) <https://www.mturk.com> Requester API (version '2017–01–17'), using `reticulate` to wrap the `boto3` SDK for Python.
 
@@ -82,5 +82,10 @@ AccountBalance()
 
 # Development status
 
-For development updates see the [Changelog](https://github.com/cloudyr/pyMTurkR/blob/master/CHANGELOG.md)
+For development updates see the [changelog](https://github.com/cloudyr/pyMTurkR/blob/master/CHANGELOG.md).
 
+# Package maintainer / author
+
+This package is written and maintained by [Tyler Burleigh](https://www.tylerburleigh.com).
+
+<a href="https://twitter.com/intent/follow?screen_name=tylerburleigh"><img src="https://img.shields.io/twitter/follow/tylerburleigh?style=social&logo=twitter" alt="follow on Twitter"></a>
