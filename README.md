@@ -1,8 +1,8 @@
 <img src="logo.png" alt="pyMTurkR logo" width="250" />
 
-# An R package to interface with the MTurk requester API
+# An R package to interface with MTurk's Requester API
 
-![experimental](https://img.shields.io/badge/status-experimental-lightgrey.svg)
+![alpha](https://img.shields.io/badge/status-alpha-lightgrey.svg)
 ![version](https://img.shields.io/badge/version-0.5.7-blue.svg)
 ![downloads](https://img.shields.io/badge/downloads-52-brightgreen)
 
@@ -89,6 +89,14 @@ For development updates see the [changelog](https://github.com/cloudyr/pyMTurkR/
 
 # Package maintainer / author
 
-This package is written and maintained by [Tyler Burleigh](https://www.tylerburleigh.com).
+pyMTurkR is written and maintained by [Tyler Burleigh](https://tylerburleigh.com).
 
 <a href="https://twitter.com/intent/follow?screen_name=tylerburleigh"><img src="https://img.shields.io/twitter/follow/tylerburleigh?style=social&logo=twitter" alt="follow on Twitter"></a>
+
+# Additional credits
+
+MTurkR was primarily written by [Thomas J. Leeper](https://thomasleeper.com) and is the basis of pyMTurkR.
+
+<a href="https://twitter.com/intent/follow?screen_name=tylerburleigh"><img src="https://img.shields.io/twitter/follow/thosjleeper?style=social&logo=twitter" alt="follow on Twitter"></a>
+
+The pyMTurkR logo borrows elements from Amazon, R, and python logos; the "three people" element is thanks to Muammark / Freepik.
