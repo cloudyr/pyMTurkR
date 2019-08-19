@@ -81,10 +81,10 @@ function (assignments,
   }
 
   # Data frame to hold results
-  Assignments <- emptydf(length(assignments), 3, c("AssignmentId",
-                                                   "Feedback",
-                                                   "OverrideRejection",
-                                                   "Valid"))
+  Assignments <- emptydf(0, 4, c("AssignmentId",
+                                 "Feedback",
+                                 "OverrideRejection",
+                                 "Valid"))
 
   # Loop through assignments and approve
   for (i in 1:length(assignments)){
@@ -93,10 +93,10 @@ function (assignments,
       AssignmentId = assignments[i],
       RequesterFeedback = feedback[i],
       OverrideRejection = rejected[i]
-    ))
+    ), silent = verbose)
 
     # Check if failure
-    if (response$ResponseMetadata$HTTPStatusCode == 200) {
+    if (class(response) != "try-error") {
       valid <- TRUE
       if (verbose) {
         message(i, ": Assignment (", assignments[i], ") Approved")
@@ -113,9 +113,10 @@ function (assignments,
                                                  Feedback = feedback[i],
                                                  OverrideRejection = rejected[i],
                                                  Valid = valid))
+
   }
 
   # Return results
-  message(sum(Assignments$Valid), " Assignments Approved")
+  message(as.integer(Assignments$Valid), " Assignments Approved")
   return(Assignments)
 }

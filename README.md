@@ -3,7 +3,7 @@
 # An R package to interface with MTurk's Requester API
 
 ![alpha](https://img.shields.io/badge/status-alpha-lightgrey.svg)
-![version](https://img.shields.io/badge/version-0.5.7-blue.svg)
+![version](https://img.shields.io/badge/version-0.5.8-blue.svg)
 ![downloads](https://img.shields.io/badge/downloads-52-brightgreen)
 
 **pyMTurkR** is a replacement for the now obsolete [MTurkR](https://github.com/cloudyr/MTurkR). pyMTurkR provides access to the latest Amazon Mechanical Turk (<a href='https://www.mturk.com'>MTurk</a>) Requester API (version '2017–01–17'), using `reticulate` to wrap the `boto3` SDK for Python.
@@ -96,7 +96,5 @@ pyMTurkR is written and maintained by [Tyler Burleigh](https://tylerburleigh.com
 # Additional credits
 
 MTurkR was primarily written by [Thomas J. Leeper](https://thomasleeper.com) and is the basis of pyMTurkR.
-
-<a href="https://twitter.com/intent/follow?screen_name=tylerburleigh"><img src="https://img.shields.io/twitter/follow/thosjleeper?style=social&logo=twitter" alt="follow on Twitter"></a>
 
 The pyMTurkR logo borrows elements from Amazon, R, and python logos; the "three people" element is thanks to Muammark / Freepik.
