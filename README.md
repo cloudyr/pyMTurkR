@@ -29,11 +29,15 @@ See the [pyMTurkR documentation](pyMTurkR_0.5.7.pdf) for a full list of operatio
 
 1. Install Python 2 (>= 2.7) or Python 3 (>= 3.3) ([download page](https://www.python.org/downloads))
 2. Install pip for Python ([see "Installing with get-pip.py" here](https://pip.pypa.io/en/stable/installing))
-3. Use pip to install boto3 -- this can be done in RStudio by running `system("pip install boto3")` in the console
+3. Use a `system` command in R to install boto3 via pip
+
+```
+system("pip install boto3")
+```
 
 ## Package installation
 
-```R
+```
 devtools::install_github("cloudyr/pyMTurkR")
 ```
 
