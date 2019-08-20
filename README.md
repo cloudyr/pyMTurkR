@@ -46,10 +46,11 @@ devtools::install_github("cloudyr/pyMTurkR")
 If you get a `ModuleNotFoundError: No module named 'boto3'` error, then you should check that you don't have more than one version of python installed on your system.
 
 ```
+# Check for multiple python installs
 reticulate::py_config()
 ```
 
-If this command returns multiple "python versions found" then you might have to specify which one to use.
+If this command returns multiple items under "python versions found" then you might have to specify which one to use.
 
 ```
 # Specify a python to use
