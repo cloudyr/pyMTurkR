@@ -25,7 +25,34 @@ See the [pyMTurkR documentation](pyMTurkR_0.5.7.pdf) for a full list of operatio
 
 # Installation
 
-0. Windows users should install [Anaconda](https://conda.io/projects/conda/en/latest/user-guide/install/windows.html)
+## First steps for Windows users
+
+Windows users should install [Miniconda](https://conda.io/projects/conda/en/latest/user-guide/install/windows.html) if it is not already installed.
+
+**Detailed instructions:** 
+
+- Pick "Miniconda installer for Windows" and then the latest version of Python for your system
+
+- During the install, when given the option choose "install for all users"
+
+<img src="screenshots/miniconda_1.png" width="400px">
+
+- The install path should be set to "C:\ProgramData\Miniconda3" by default, but change it if it isn't
+
+<img src="screenshots/miniconda_2.png" width="400px">
+
+- When asked, choose to add Anacoda to the PATH environment variable and register it as the system for Python
+
+<img src="screenshots/miniconda_3.png" width="400px">
+
+- After installation, open a command terminal (Windows Key + R, then type "cmd"). Then type "conda list" and it should output a path to Miniconda ("C:\ProgramData\Miniconda3") followed by a list of packages
+
+<img src="screenshots/cmd.png" width="400px">
+
+- Restart R/RStudio before moving on to the next steps
+
+
+## All users
 
 1. Install the `reticulate` R package if you don't have it already
 
