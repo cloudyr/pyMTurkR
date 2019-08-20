@@ -60,13 +60,19 @@ Windows users should install [Miniconda](https://conda.io/projects/conda/en/late
 install.packages("reticulate")
 ```
 
-2. Use reticulate to install python with the boto3 python library
+2. Create a conda environment
+
+```
+reticulate::conda_create("r-reticulate")
+```
+
+3. Use reticulate to install python with the boto3 python library
  
 ```
 reticulate::py_install("boto3")
 ```
   
-3. Install the `pyMTurkR` package
+4. Install the `pyMTurkR` package
 
 ```R
 devtools::install_github("cloudyr/pyMTurkR")
