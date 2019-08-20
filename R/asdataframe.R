@@ -219,7 +219,7 @@ as.data.frame.QuestionFormAnswers <- function(assignment, answers) {
                                            "FreeText", "SelectionIdentifier", "OtherSelectionField",
                                            "UploadedFileKey", "UploadedFileSizeInBytes"))
 
-  for (i in 1:length(questions)) {
+  for (i in 1:length(xmlAnswers)) {
 
     Answer <- emptydf(1, 9, c("AssignmentId", "WorkerId", "HITId", "QuestionIdentifier",
                               "FreeText", "SelectionIdentifier", "OtherSelectionField",
@@ -303,9 +303,9 @@ as.data.frame.BonusPayments <- function(bonuses){
 as.data.frame.QualificationRequests <- function(requests){
 
   return.requests <- emptydf(0, 6, c("QualificationRequestId",
-                                    "QualificationTypeId", "WorkerId",
-                                    "Test", "Answer",
-                                    "SubmitTime"))
+                                     "QualificationTypeId", "WorkerId",
+                                     "Test", "Answer",
+                                     "SubmitTime"))
 
   if(length(requests) == 0){
     return(return.requests)
@@ -313,9 +313,9 @@ as.data.frame.QualificationRequests <- function(requests){
     for (i in 1:length(requests)) {
       request <- requests[[i]]
       this.request <- emptydf(1, 6, c("QualificationRequestId",
-                                    "QualificationTypeId", "WorkerId",
-                                    "Test", "Answer",
-                                    "SubmitTime"))
+                                      "QualificationTypeId", "WorkerId",
+                                      "Test", "Answer",
+                                      "SubmitTime"))
 
       this.request[1] <- request$QualificationRequestId
       this.request[2] <- request$QualificationTypeId
@@ -339,8 +339,8 @@ as.data.frame.QualificationRequests <- function(requests){
 as.data.frame.Qualifications <- function(quals){
 
   return.quals <- emptydf(0, 5, c("QualificationTypeId",
-                                     "WorkerId", "GrantTime",
-                                     "Value", "Status"))
+                                  "WorkerId", "GrantTime",
+                                  "Value", "Status"))
 
   if(length(quals) == 0){
     return(return.quals)
@@ -363,8 +363,8 @@ as.data.frame.Qualifications <- function(quals){
     for (i in 1:length(quals)) {
       qual <- quals[[i]]
       this.qual <- emptydf(1, 5, c("QualificationTypeId",
-                                      "WorkerId", "GrantTime",
-                                      "Value", "Status"))
+                                   "WorkerId", "GrantTime",
+                                   "Value", "Status"))
 
       this.qual[1] <- qual$QualificationTypeId
       this.qual[2] <- qual$WorkerId
@@ -385,9 +385,9 @@ as.data.frame.Qualifications <- function(quals){
 as.data.frame.QualificationTypes <- function(qual) {
 
   this.qual <- emptydf(1, 13, c("QualificationTypeId", "CreationTime", "Name", "Description",
-                                 "Keywords", "QualificationTypeStatus", "AutoGranted", "AutoGrantedValue",
-                                 "IsRequestable", "RetryDelayInSeconds", "TestDurationInSeconds",
-                                 "Test","AnswerKey"))
+                                "Keywords", "QualificationTypeStatus", "AutoGranted", "AutoGrantedValue",
+                                "IsRequestable", "RetryDelayInSeconds", "TestDurationInSeconds",
+                                "Test","AnswerKey"))
 
   this.qual[1] <- qual$QualificationTypeId
   this.qual[2] <- reticulate::py_to_r(qual$CreationTime)
@@ -483,15 +483,15 @@ as.data.frame.ReviewResults <- function(results) {
   if (length(results$HITReviewReport) > 0) {
 
     out$HITReviewResult <- emptydf(0, 8, c("HITId", "HITReviewPolicy",
-                                                  "ActionId", "SubjectId",
-                                                  "SubjectType", "QuestionId",
-                                                  "Key", "Value"))
+                                           "ActionId", "SubjectId",
+                                           "SubjectType", "QuestionId",
+                                           "Key", "Value"))
 
 
     out$HITReviewAction <- emptydf(0, 8, c("HITId", "HITReviewPolicy",
-                                                  "ActionId", "SubjectId",
-                                                  "SubjectType", "QuestionId",
-                                                  "Key", "Value"))
+                                           "ActionId", "SubjectId",
+                                           "SubjectType", "QuestionId",
+                                           "Key", "Value"))
 
     review.results <- results$HITReviewReport$ReviewResults
     review.actions <- results$HITReviewReport$ReviewActions

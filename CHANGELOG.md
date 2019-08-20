@@ -1,7 +1,11 @@
 # Changelog
 
+## [0.5.9] - 2019-08-20
+### Fixed
+- Fix for bug in answer return with GetAssignment
+
 ## [0.5.8] - 2019-08-19
-### Added
+### Fixed
 - Fix misspecification of dataframe length in ApproveAssignment (thanks Brent Kaplan!)
 
 ## [0.5.7] - 2019-08-18
