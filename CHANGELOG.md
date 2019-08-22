@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.0] - 2019-08-22
+### Fixed
+- Fixed bug in GenerateQualificationRequirement introduced by overhaul of CreateHIT() in version 0.4.2
+
 ## [0.5.9] - 2019-08-20
 ### Fixed
 - Fix for bug in answer return with GetAssignment
