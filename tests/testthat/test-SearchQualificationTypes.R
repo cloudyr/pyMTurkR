@@ -11,5 +11,5 @@ test_that("SearchQuals two results", {
               results = 1,
               return.pages = 2) -> result
   expect_type(result, "list")
-  expect_length(result, 2)
+  expect_length(result$QualificationTypeId, 2)
 })
