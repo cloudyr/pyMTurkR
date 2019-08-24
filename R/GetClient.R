@@ -1,12 +1,13 @@
 #' Creates an MTurk Client using the AWS SDK for Python (Boto3)
 #'
 #' Create an API client. Only advanced users will likely need to use this
-#' function.
+#' function. \code{CheckAWSKeys()} is a helper function that checks if your
+#' AWS keys can be found.
 #'
 #' \code{StartClient()}, \code{Client()} and \code{client()} are aliases for
 #' \code{GetClient}.
 #'
-#' @aliases GetClient StartClient Client client
+#' @aliases GetClient StartClient Client client CheckAWSKeys
 #' @param sandbox A logical indicating whether the client should be in the
 #' sandbox environment or the live environment.
 #' @param profile A character string that specifies the profile to use
@@ -30,6 +31,7 @@
 #' @export StartClient
 #' @export Client
 #' @export client
+#' @export CheckAWSKeys
 
 GetClient <-
 StartClient <-
@@ -94,4 +96,15 @@ function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
   }, error = function(e) {
     message(paste(e, "    Check your AWS credentials."))
   })
+}
+
+CheckAWSKeys <- function(profile = getOption('pyMTurkR.profile', 'default')){
+  if(Sys.getenv("AWS_ACCESS_KEY_ID") != "" & Sys.getenv("AWS_SECRET_ACCESS_KEY") != ""){
+    return(TRUE)
+  } else if (length(aws.signature::read_credentials()[[profile]]$AWS_ACCESS_KEY_ID) > 0 &
+             length(aws.signature::read_credentials()[[profile]]$AWS_SECRET_ACCESS_KEY) > 0) {
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
 }

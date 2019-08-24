@@ -5,6 +5,7 @@
 \alias{StartClient}
 \alias{Client}
 \alias{client}
+\alias{CheckAWSKeys}
 \title{Creates an MTurk Client using the AWS SDK for Python (Boto3)}
 \usage{
 GetClient(sandbox = getOption("pyMTurkR.sandbox", TRUE),
@@ -24,7 +25,8 @@ is used as an MTurk client.
 }
 \description{
 Create an API client. Only advanced users will likely need to use this
-function.
+function. \code{CheckAWSKeys()} is a helper function that checks if your
+AWS keys can be found.
 }
 \details{
 \code{StartClient()}, \code{Client()} and \code{client()} are aliases for
