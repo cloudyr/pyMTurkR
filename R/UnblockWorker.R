@@ -29,10 +29,21 @@ UnblockWorker <-
 
     for (i in 1:length(workers)) {
 
-      response <- try(client$delete_worker_block(
-        WorkerId = workers[i],
-        Reason = reasons[i]
-      ))
+      fun <- client$delete_worker_block
+
+      args <- list(WorkerId = workers[i])
+
+      if(!is.null(reasons[i])){
+        args <- c(args, list(Reason = reasons[i]))
+        this.reason <- reasons[i]
+      } else {
+        this.reason <- NA
+      }
+
+      # Execute the API call
+      response <- try(
+        do.call('fun', args), silent = !verbose
+      )
 
       # Validity check
       if(class(response) == "try-error") {
@@ -42,12 +53,12 @@ UnblockWorker <-
         valid = TRUE
       }
 
-      Workers[i, ] <- c(workers[i], reasons[i], valid)
+      Workers[i, ] <- c(workers[i], this.reason, valid)
 
       if (valid == TRUE & verbose) {
         message(i, ": Worker ", workers[i], " Unblocked")
       } else if (valid == FALSE & verbose) {
-        warning(i,": Invalid Request for worker ",workers[i])
+        warning(i,": Invalid Request for worker ", workers[i])
       }
 
     }

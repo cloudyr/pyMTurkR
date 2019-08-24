@@ -28,8 +28,7 @@
 #'
 #' @author Tyler Burleigh, Thomas J. Leeper
 #' @references
-#' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_CreateWorkerBlockOperation.html}{API
-#' Reference: Block}
+#' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_CreateWorkerBlockOperation.html}{API Reference: Block}
 #' @keywords Workers
 #' @examples
 #'
@@ -73,9 +72,10 @@ BlockWorker <-
     if (length(workers) > 1) {
       if (length(reasons) == 1) {
         reasons <- rep(reasons, length(workers))
-      } else if (!length(workers) == length(reasons)) {
-        stop("length(reasons) must equal length(workers) or 1")
       }
+    }
+    if (!length(workers) == length(reasons)) {
+      stop("length(reasons) must equal length(workers) or 1")
     }
 
     Workers <- emptydf(length(workers), 3, c("WorkerId", "Reason", "Valid"))

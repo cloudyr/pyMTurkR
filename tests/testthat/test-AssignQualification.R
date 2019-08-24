@@ -14,7 +14,7 @@ test_that("AssignQualification parameter misspecification errors", {
 
   expect_type(class(try(AssignQualification(qual = 'x', workers = 'x', notify = 'x'))), "try-error")
   expect_type(class(try(AssignQualification(qual = 'x', workers = 'x', value = 'x'))), "try-error")
-  expect_type(class(try(AssignQualification(qual = 'x', workers = c('x','x','x'), value = c(1, 2)))), "try-error")
+  expect_type(class(try(AssignQualification(qual = 'x', workers = c('x','x','x'), value = c(1, 2, '')))), "try-error")
 })
 
 test_that("AssignQualification Qualification defined in function call", {

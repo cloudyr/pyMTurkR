@@ -76,6 +76,9 @@
 #' # assign qualification to single worker
 #' AssignQualification(qual1$QualificationTypeId, "A1RO9UJNWXMU65", value = "50")
 #'
+#' # delete the qualification
+#' DeleteQualificationType(qual1)
+#'
 #' # assign a new qualification (defined atomically)
 #' AssignQualification(workers = "A1RO9UJNWXMU65",
 #'                     name = "Worked for me before",
