@@ -117,47 +117,6 @@ ToDataFrameQualificationRequirements <- function(hits) {
 
 
 
-ToDataFrameQualificationTypes <- function(quals) {
-
-  return.quals <- emptydf(nrow = 0, ncol = 9, c('QualificationTypeId', 'CreationTime', 'Name',
-                                                'Description', 'Keywords', 'QualificationTypeStatus',
-                                                'RetryDelayInSeconds', 'IsRequestable', 'AutoGranted'))
-
-  for (i in 1:length(quals)) {
-
-    Quals <- emptydf(1, 9, c('QualificationTypeId', 'CreationTime', 'Name',
-                             'Description', 'Keywords', 'QualificationTypeStatus',
-                             'RetryDelayInSeconds', 'IsRequestable', 'AutoGranted'))
-
-    qual <- quals[[i]]
-
-    Quals[1] <- qual$QualificationTypeId
-    if(!is.null(qual$CreationTime)){
-      Quals[2] <- reticulate::py_to_r(qual$CreationTime)
-    }
-    Quals[3] <- qual$Name
-    Quals[4] <- qual$Description
-    if(!is.null(qual$Keywords)){
-      Quals[5] <- qual$Keywords
-    }
-    Quals[6] <- qual$QualificationTypeStatus
-    if(!is.null(qual$RetryDelayInSeconds)){
-      Quals[7] <- qual$RetryDelayInSeconds
-    }
-    Quals[8] <- qual$IsRequestable
-    Quals[9] <- qual$AutoGranted
-
-    return.quals <- rbind(Quals, return.quals)
-
-  }
-
-  return(return.quals)
-
-}
-
-
-
-
 
 
 # ASSIGNMENTS
@@ -392,7 +351,9 @@ ToDataFrameQualificationTypes <- function(qual) {
                                 "Test","AnswerKey"))
 
   this.qual[1] <- qual$QualificationTypeId
-  this.qual[2] <- reticulate::py_to_r(qual$CreationTime)
+  if(!is.null(qual$CreationTime)){
+    Quals[2] <- reticulate::py_to_r(qual$CreationTime)
+  }
   this.qual[3] <- qual$Name
   this.qual[4] <- qual$Description
   this.qual[5] <- qual$Keywords
@@ -419,6 +380,9 @@ ToDataFrameQualificationTypes <- function(qual) {
 
   return(this.qual)
 }
+
+
+
 
 
 

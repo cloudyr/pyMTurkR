@@ -2,10 +2,13 @@
 
 # An R package to interface with MTurk's Requester API
 
+<!-- badges: start -->
+[![Codecov test coverage](https://codecov.io/gh/cloudyr/pyMTurkR/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudyr/pyMTurkR?branch=master)
 ![travis-ci](https://travis-ci.org/cloudyr/pyMTurkR.svg?branch=master)
-![alpha](https://img.shields.io/badge/status-alpha-lightgrey.svg)
 ![version](https://img.shields.io/badge/version-0.6.3-blue.svg)
+![alpha](https://img.shields.io/badge/status-alpha-lightgrey.svg)
 ![downloads](https://img.shields.io/badge/downloads-79-brightgreen)
+<!-- badges: end -->
 
 **pyMTurkR** is a replacement for the now obsolete [MTurkR](https://github.com/cloudyr/MTurkR). pyMTurkR provides access to the latest Amazon Mechanical Turk (<a href='https://www.mturk.com'>MTurk</a>) Requester API (version '2017–01–17'), using `reticulate` to wrap the `boto3` SDK for Python.
 
@@ -88,14 +91,7 @@ options(pyMTurkR.sandbox = FALSE)
 AccountBalance()
 ```
 
-# Development status
-
-![functions coded](https://img.shields.io/badge/functions_coded-100%25-brightgreen.svg)
-![unit tests](https://img.shields.io/badge/unit_tests-0%25-red.svg)
-
-This package is `experimental` because it has not been fully tested.
-
-All of the functions have been written and unit tests are now in progress.
+# Changelog
 
 For development updates see the [changelog](https://github.com/cloudyr/pyMTurkR/blob/master/CHANGELOG.md).
 
@@ -105,8 +101,8 @@ pyMTurkR is written and maintained by [Tyler Burleigh](https://tylerburleigh.com
 
 <a href="https://twitter.com/intent/follow?screen_name=tylerburleigh"><img src="https://img.shields.io/twitter/follow/tylerburleigh?style=social&logo=twitter" alt="follow on Twitter"></a>
 
-# Additional credits
+## Additional credits
 
-MTurkR was primarily written by [Thomas J. Leeper](https://thomasleeper.com) and is the basis of pyMTurkR.
+pyMTurkR borrows code from MTurkR, written by [Thomas J. Leeper](https://thomasleeper.com).
 
-The pyMTurkR logo borrows elements from Amazon, R, and python logos; the "three people" element is thanks to Muammark / Freepik.
+pyMTurkR's logo borrows elements from Amazon, R, and python logos; the "three people" element is thanks to Muammark / Freepik.

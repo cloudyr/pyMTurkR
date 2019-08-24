@@ -34,5 +34,5 @@ function() {
   client <- GetClient() # Boto3 client
   result <- client$get_account_balance()
   message(paste("Balance: $", result$AvailableBalance, "\n", sep = ""))
-  invisible(result)
+  return(result$AvailableBalance)
 }

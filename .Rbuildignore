@@ -7,3 +7,4 @@ screenshots/*
 build/*
 traffic/*
 CHANGELOG.md
+^codecov\.yml$
