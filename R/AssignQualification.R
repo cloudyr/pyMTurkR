@@ -110,7 +110,7 @@ AssignQualification <-
     if (is.factor(value)) {
       value <- as.character(value)
     }
-    if (as.logical(notify) != TRUE & as.logical(notify) != FALSE) {
+    if (!is.logical(notify) == TRUE) {
       stop("SendNotification must be TRUE or FALSE.")
     }
     for (i in 1:length(value)) {
@@ -166,11 +166,11 @@ AssignQualification <-
                               c("WorkerId", "QualificationTypeId", "Value", "Notified", "Valid"))
 
     for (i in 1:length(workers)) {
-      x <- batch(workers[i], value)
+      x <- batch(workers[i], value[i])
       if (is.null(x$valid)) {
         x$valid <- FALSE
       }
-      Qualifications[i, ] = c(workers[i], qual, value, notify, x$valid)
+      Qualifications[i, ] = c(workers[i], qual, value[i], notify, x$valid)
     }
 
     Qualifications$Valid <- factor(Qualifications$Valid, levels=c('TRUE','FALSE'))
