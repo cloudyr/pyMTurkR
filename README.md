@@ -4,7 +4,7 @@
 
 ![travis-ci](https://travis-ci.org/cloudyr/pyMTurkR.svg?branch=master)
 ![alpha](https://img.shields.io/badge/status-alpha-lightgrey.svg)
-![version](https://img.shields.io/badge/version-0.6.0-blue.svg)
+![version](https://img.shields.io/badge/version-0.6.1-blue.svg)
 ![downloads](https://img.shields.io/badge/downloads-79-brightgreen)
 
 **pyMTurkR** is a replacement for the now obsolete [MTurkR](https://github.com/cloudyr/MTurkR). pyMTurkR provides access to the latest Amazon Mechanical Turk (<a href='https://www.mturk.com'>MTurk</a>) Requester API (version '2017–01–17'), using `reticulate` to wrap the `boto3` SDK for Python.

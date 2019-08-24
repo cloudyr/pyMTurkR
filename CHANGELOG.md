@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.1] - 2019-08-23
+### Fixed
+- Really fixed bug in GenerateQualificationRequirement
+
 ## [0.6.0] - 2019-08-22
 ### Fixed
 - Fixed bug in GenerateQualificationRequirement introduced by overhaul of CreateHIT() in version 0.4.2 (thanks for catching that Clara!)

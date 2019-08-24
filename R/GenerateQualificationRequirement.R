@@ -71,7 +71,7 @@ GenerateQualificationRequirement <-
       }
 
       # Check Comparator values
-      if (qualid =="2ARFPLSP75KLA8M8DH1HTEQVJT3SY6") {
+      if (qual$QualificationTypeId =="2ARFPLSP75KLA8M8DH1HTEQVJT3SY6") {
         message("A QualificationTypeId for a Sandbox Qualification has been used.")
       }
       if (qual$Comparator == "<") {
