@@ -45,6 +45,7 @@
 #' @export ListQuals
 
 SearchQualificationTypes <-
+  SearchQualifications <-
   SearchQuals <-
   searchquals <-
   ListQualificationTypes <-
