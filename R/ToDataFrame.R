@@ -131,9 +131,10 @@ ToDataFrameQualificationTypes <- function(quals) {
 
     qual <- quals[[i]]
 
-
     Quals[1] <- qual$QualificationTypeId
-    Quals[2] <- reticulate::py_to_r(qual$CreationTime)
+    if(!is.null(qual$CreationTime)){
+      Quals[2] <- reticulate::py_to_r(qual$CreationTime)
+    }
     Quals[3] <- qual$Name
     Quals[4] <- qual$Description
     if(!is.null(qual$Keywords)){

@@ -23,16 +23,15 @@
 #' AccountBalance()
 #' }
 #'
-#' @export
+#' @export AccountBalance
+#' @export accountbalance
+#' @export getbalance
 
 AccountBalance <-
 accountbalance <-
 getbalance <-
-get_account_balance <-
 function() {
-
   client <- GetClient() # Boto3 client
-
   result <- client$get_account_balance()
   message(paste("Balance: $", result$AvailableBalance, "\n", sep = ""))
   invisible(result)
