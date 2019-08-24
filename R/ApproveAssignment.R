@@ -60,7 +60,7 @@ ApproveAssignment <-
 ApproveAssignments <-
 approve <-
 function (assignments,
-          feedback = "",
+          feedback = NULL,
           rejected = FALSE,
           verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
@@ -100,11 +100,22 @@ function (assignments,
   # Loop through assignments and approve
   for (i in 1:length(assignments)){
 
-    response <- try(client$approve_assignment(
-      AssignmentId = assignments[i],
-      RequesterFeedback = feedback[i],
-      OverrideRejection = rejected[i]
-    ), silent = verbose)
+    fun <- client$approve_assignment
+
+    args <- list(AssignmentId = assignments[i],
+                 OverrideRejection = rejected[i])
+
+    if(!is.null(feedback[i])){
+      args <- c(args, list(RequesterFeedback = feedback[i]))
+      this.feedback <- feedback[i]
+    } else {
+      this.feedback <- ""
+    }
+
+    # Execute the API call
+    response <- try(
+      do.call('fun', args), silent = !verbose
+    )
 
     # Check if failure
     if (class(response) != "try-error") {
@@ -121,7 +132,7 @@ function (assignments,
 
     # Add to data frame
     Assignments <- rbind(Assignments, data.frame(AssignmentId = assignments[i],
-                                                 Feedback = feedback[i],
+                                                 Feedback = this.feedback,
                                                  OverrideRejection = rejected[i],
                                                  Valid = valid))
 

@@ -1,4 +1,4 @@
 library(testthat)
 library(pyMTurkR)
 
-test_check("pyMTurkR")
+test_dir("testthat")
