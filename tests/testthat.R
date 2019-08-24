@@ -1,4 +1,4 @@
 library(testthat)
-library(googleCloudStorageR)
+library(pyMTurkR)
 
-test_check("googleCloudStorageR")
+test_check("pyMTurkR")
