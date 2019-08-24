@@ -3,8 +3,8 @@
 # An R package to interface with MTurk's Requester API
 
 <!-- badges: start -->
-[![Codecov test coverage](https://codecov.io/gh/cloudyr/pyMTurkR/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudyr/pyMTurkR?branch=master)
 ![travis-ci](https://travis-ci.org/cloudyr/pyMTurkR.svg?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/cloudyr/pyMTurkR/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudyr/pyMTurkR?branch=master)
 ![version](https://img.shields.io/badge/version-0.6.3-blue.svg)
 ![alpha](https://img.shields.io/badge/status-alpha-lightgrey.svg)
 ![downloads](https://img.shields.io/badge/downloads-79-brightgreen)
