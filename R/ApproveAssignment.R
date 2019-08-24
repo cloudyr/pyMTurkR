@@ -6,12 +6,14 @@
 #'
 #' Approve assignments, by AssignmentId (as returned by
 #' \code{\link{GetAssignment}} or by HITId or HITTypeId. Must specify
-#' \code{assignments}.
+#' \code{assignments}. \code{ApproveAllAssignments} approves all assignments of a given HIT or
+#' HITType without first having to perform \code{\link{GetAssignment}}.
 #'
-#' \code{ApproveAssignments()}, \code{approve_assignment()} and \code{approve()}
-#' are aliases for \code{ApproveAssignment}.
+#' \code{ApproveAssignments()} and \code{approve()} are aliases for \code{ApproveAssignment}.
+#' \code{approveall()} is an alias for \code{ApproveAllAssignments}.
 #'
-#' @aliases ApproveAssignment ApproveAssignments approve approve_assignment
+#' @aliases ApproveAssignment ApproveAssignments approve approve ApproveAllAssignments
+#' approveall
 #' @param assignments A character string containing an AssignmentId, or a
 #' vector of multiple character strings containing multiple AssignmentIds, to
 #' approve.
@@ -20,6 +22,9 @@
 #' Maximum of 1024 characters.
 #' @param rejected A logical indicating whether the assignment(s) had
 #' previously been rejected (default \code{FALSE}), or a vector of logicals.
+#' @param verbose Optionally print the results of the API request to the
+#' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+#' TRUE)}.
 #' @return A data frame containing the list of AssignmentIds, feedback (if
 #' any), whether previous rejections were to be overriden,
 #' and whether or not each approval request was valid.

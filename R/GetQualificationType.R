@@ -33,8 +33,7 @@
 
 GetQualificationType <-
   qualtype <-
-  function(qual,
-           verbose = getOption('pyMTurkR.verbose', TRUE)) {
+  function(qual, verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
 
@@ -54,7 +53,7 @@ GetQualificationType <-
         warning("Invalid Request")
       }
     } else {
-      Qualifications <- as.data.frame.QualificationTypes(response$QualificationType)
+      Qualifications <- ToDataFrameQualificationTypes(response$QualificationType)
       if (verbose) {
         message("QualificationType Retrieved: ", qual)
       }

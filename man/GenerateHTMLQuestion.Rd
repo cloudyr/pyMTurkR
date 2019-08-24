@@ -74,8 +74,6 @@ DisposeHIT(hit1$HITId)
 \code{\link{CreateHIT}}
 
 \code{\link{GenerateExternalQuestion}}
-
-\code{\link{GenerateHITLayoutParameter}}
 }
 \author{
 Tyler Burleigh, Thomas J. Leeper

@@ -80,7 +80,7 @@ GetReviewableHITs <-
       }
 
       if(length(response$HITs) > 0){
-        response <- as.data.frame.Reviewable.HITs(response$HITs)
+        response <- ToDataFrameReviewableHITs(response$HITs)
         return(response)
       } else {
         stop("No HITs found")

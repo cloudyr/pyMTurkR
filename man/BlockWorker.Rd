@@ -11,6 +11,8 @@
 \alias{DeleteWorkerBlock}
 \alias{GetBlockedWorkers}
 \alias{blockedworkers}
+\alias{ListWorkerBlocks}
+\alias{listworkerblocks}
 \title{Block Worker(s)}
 \usage{
 BlockWorker(workers, reasons = NULL,
@@ -22,6 +24,10 @@ character strings containing multiple WorkerIds.}
 
 \item{reasons}{A character string containing a reason for blocking a worker.
 This must have length 1 or length equal to the number of workers.}
+
+\item{verbose}{Optionally print the results of the API request to the
+standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+TRUE)}.}
 }
 \value{
 \code{BlockWorker} returns a data frame containing the list of workers,

@@ -125,7 +125,7 @@ SetHITTypeNotification <-
           message("HITTypeNotification for ", hit.type, " Inactive")
         }
       }
-    } else if (!request$valid & verbose) {
+    } else if (!valid & verbose) {
       warning("Invalid Request")
     }
     Notification$Valid <- factor(Notification$Valid, levels=c('TRUE','FALSE'))

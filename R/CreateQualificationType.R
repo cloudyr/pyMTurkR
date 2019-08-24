@@ -36,8 +36,7 @@
 #' structure, used as a test a worker must complete before the
 #' QualificationType is granted to them.
 #' @param answerkey An optional character string consisting of an AnswerKey
-#' data structure, used to automatically score the test, perhaps as returned by
-#' \code{\link{GenerateAnswerKey}}.
+#' data structure, used to automatically score the test
 #' @param test.duration An optional time (in seconds) indicating how long
 #' workers have to complete the test.
 #' @param auto A logical indicating whether the Qualification is automatically

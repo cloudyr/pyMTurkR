@@ -47,9 +47,9 @@ GetReviewResultsForHIT <-
   function(hit,
            assignment = NULL,
            policy.level = NULL,
-           return.all = FALSE,
            return.pages = 1,
-           results = 400,
+           results = as.integer(100),
+           pagetoken = NULL,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
@@ -110,7 +110,7 @@ GetReviewResultsForHIT <-
       }
 
       if(length(response$AssignmentReviewReport) > 0 | length(response$HITReviewReport) > 0){
-        response <- as.data.frame.ReviewResults(response)
+        response <- ToDataFrameReviewResults(response)
         return(response)
       } else {
         return(NULL)
@@ -130,7 +130,7 @@ GetReviewResultsForHIT <-
       pagetoken <- response$NextToken
 
       # Fetch while the number of results is equal to max results per page
-      while (!is.null(results.found) &
+      while (!is.null(response) &
              (is.null(return.pages) || pages < return.pages)) {
 
         # Fetch next batch
@@ -149,7 +149,7 @@ GetReviewResultsForHIT <-
 
     if (verbose) {
       message("ReviewResults Retrieved: ", appendLF = FALSE)
-      if (is.null(request)) {
+      if (is.null(response)) {
         message("0\n")
       } else {
         message("\n")

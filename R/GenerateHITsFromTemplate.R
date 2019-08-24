@@ -26,7 +26,6 @@
 #' @return A list containing a character string for each HIT generated from the
 #' template.
 #' @author Thomas J. Leeper
-#' @seealso \code{\link{BulkCreateFromTemplate}}
 #' @references
 #' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/RequesterUI/CreatingaHITTemplate.html}{API Reference: Operation}
 #'

@@ -13,7 +13,7 @@
 SearchQualificationTypes(search.query = NULL,
   must.be.requestable = FALSE, must.be.owner = FALSE,
   results = as.integer(100), return.pages = NULL, pagetoken = NULL,
-  verbose = TRUE)
+  verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{search.query}{An optional character string to use as a search query}
@@ -21,18 +21,22 @@ SearchQualificationTypes(search.query = NULL,
 \item{must.be.requestable}{A boolean indicating whether the Qualification
 must be requestable by Workers or not.}
 
+\item{must.be.owner}{A boolean indicating whether to search only the
+Qualifications you own / created, or to search all Qualifications.
+Defaults to FALSE.}
+
 \item{results}{An optional character string indicating how many results to
 fetch per page. Must be between 1 and 100. Most users can ignore this.}
 
-\item{return.pages}{A boolean indicating whether to search only the
-Qualifications you own / created, or to search all Qualifications.
-Defaults to FALSE.}
+\item{return.pages}{An integer indicating how many pages of results should
+be returned.}
 
 \item{pagetoken}{An optional character string indicating which page of
 search results to start at. Most users can ignore this.}
 
-\item{return.pages}{An integer indicating how many pages of results should
-be returned.}
+\item{verbose}{Optionally print the results of the API request to the
+standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+TRUE)}.}
 }
 \value{
 A data frame of Qualification Types

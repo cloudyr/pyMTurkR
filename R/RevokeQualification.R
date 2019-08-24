@@ -56,7 +56,7 @@ RevokeQualification <-
   function (qual,
             workers,
             reasons = NULL,
-            verbose = getOption('pyMTurkR.verbose', TRUE), ...){
+            verbose = getOption('pyMTurkR.verbose', TRUE)){
 
 
     client <- GetClient() # Boto3 client

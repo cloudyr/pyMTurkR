@@ -7,7 +7,8 @@
 \title{Get Qualifications}
 \usage{
 GetQualifications(qual, status = NULL, return.pages = NULL,
-  results = as.integer(100), pagetoken = NULL, verbose = TRUE)
+  results = as.integer(100), pagetoken = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{qual}{A character string containing a QualificationTypeId for a custom
@@ -24,6 +25,10 @@ fetch per page. Must be between 1 and 100. Most users can ignore this.}
 
 \item{pagetoken}{An optional character string indicating which page of
 search results to start at. Most users can ignore this.}
+
+\item{verbose}{Optionally print the results of the API request to the
+standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+TRUE)}.}
 }
 \value{
 A data frame containing the QualificationTypeId, WorkerId, and

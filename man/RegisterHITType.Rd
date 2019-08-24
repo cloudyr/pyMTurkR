@@ -4,12 +4,12 @@
 \alias{RegisterHITType}
 \alias{hittype}
 \alias{CreateHITType}
-\alias{create_hit_type}
+\alias{createhittype}
 \title{Register a HITType}
 \usage{
 RegisterHITType(title, description, reward, duration, keywords = NULL,
   auto.approval.delay = as.integer(2592000), qual.req = NULL,
-  verbose = TRUE)
+  verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{title}{A character string containing the title for the HITType. All
@@ -39,6 +39,10 @@ granted. Maximum of 30 days.}
 \item{qual.req}{An optional character string containing one or more
 QualificationRequirements data structures, for example as returned by
 \code{\link{GenerateQualificationRequirement}}.}
+
+\item{verbose}{Optionally print the results of the API request to the
+standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+TRUE)}.}
 }
 \value{
 A two-column data frame containing the HITTypeId of the newly
@@ -57,8 +61,8 @@ used when creating individual HITs. If a requester wants to change these
 properties for a specific HIT, the HIT should be changed to a new HITType
 (see \code{\link{ChangeHITType}}).
 
-\code{hittype()}, \code{CreateHITType()}, \code{createhittype()},
-and \code{create_hit_type()} are aliases.
+\code{hittype()}, \code{CreateHITType()}, and \code{createhittype()}
+are aliases.
 }
 \examples{
 

@@ -27,7 +27,7 @@ Maintainer: Tyler Burleigh <tylerburleigh@gmail.com>
 \keyword{ package }
 \seealso{
 
-To get started using pyMTurkR, see the documentation for \code{\link{CreateHIT}} (for creating single tasks) and/or \code{\link{BulkCreate}} (for creating batches of tasks). For some tutorials on how to use MTurkR for specific use cases, see the following:
+To get started using pyMTurkR, see the documentation for \code{\link{CreateHIT}} (for creating single tasks). For some tutorials on how to use MTurkR for specific use cases, see the following:
 
 }
 %\examples{}

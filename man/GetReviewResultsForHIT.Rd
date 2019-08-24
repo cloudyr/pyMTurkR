@@ -7,7 +7,7 @@
 \title{Get ReviewPolicy Results for a HIT}
 \usage{
 GetReviewResultsForHIT(hit, assignment = NULL, policy.level = NULL,
-  return.all = FALSE, return.pages = 1, results = 400,
+  return.pages = 1, results = as.integer(100), pagetoken = NULL,
   verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
@@ -25,12 +25,12 @@ be returned.}
 \item{results}{An optional character string indicating how many results to
 fetch per page. Must be between 1 and 100. Most users can ignore this.}
 
+\item{pagetoken}{An optional character string indicating which page of
+search results to start at. Most users can ignore this.}
+
 \item{verbose}{Optionally print the results of the API request to the
 standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
 TRUE)}.}
-
-\item{pagetoken}{An optional character string indicating which page of
-search results to start at. Most users can ignore this.}
 }
 \value{
 A four-element list containing up to four named data frames,

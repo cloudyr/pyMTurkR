@@ -4,7 +4,8 @@
 \alias{ApproveAssignment}
 \alias{ApproveAssignments}
 \alias{approve}
-\alias{approve_assignment}
+\alias{ApproveAllAssignments}
+\alias{approveall}
 \title{Approve Assignment(s)}
 \usage{
 ApproveAssignment(assignments, feedback = "", rejected = FALSE,
@@ -21,6 +22,10 @@ Maximum of 1024 characters.}
 
 \item{rejected}{A logical indicating whether the assignment(s) had
 previously been rejected (default \code{FALSE}), or a vector of logicals.}
+
+\item{verbose}{Optionally print the results of the API request to the
+standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+TRUE)}.}
 }
 \value{
 A data frame containing the list of AssignmentIds, feedback (if
@@ -35,10 +40,11 @@ assignment. This function spends money from your MTurk account.
 \details{
 Approve assignments, by AssignmentId (as returned by
 \code{\link{GetAssignment}} or by HITId or HITTypeId. Must specify
-\code{assignments}.
+\code{assignments}. \code{ApproveAllAssignments} approves all assignments of a given HIT or
+HITType without first having to perform \code{\link{GetAssignment}}.
 
-\code{ApproveAssignments()}, \code{approve_assignment()} and \code{approve()}
-are aliases for \code{ApproveAssignment}.
+\code{ApproveAssignments()} and \code{approve()} are aliases for \code{ApproveAssignment}.
+\code{approveall()} is an alias for \code{ApproveAllAssignments}.
 }
 \examples{
 

@@ -27,7 +27,7 @@
 #' \code{ContactWorkers()}, \code{contact()}, \code{NotifyWorkers},
 #' \code{NotifyWorker()}, and \code{notify()} are aliases.
 #'
-#' @aliases ContactWorker ContactWorkers contact NotifyWorkers notify
+#' @aliases ContactWorker ContactWorkers contact NotifyWorkers notify NotifyWorker
 #' @param subjects A character string containing subject line of an email, or a
 #' vector of character strings of of length equal to the number of workers to
 #' be contacted containing the subject line of the email for each worker.
@@ -42,6 +42,9 @@
 #' should be contacted in batches of 100 (the maximum allowed by the API). This
 #' significantly reduces the time required to contact workers, but eliminates
 #' the ability to send customized messages to each worker.
+#' @param verbose Optionally print the results of the API request to the
+#' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+#' TRUE)}.
 #' @return A data frame containing the list of workers, subjects, and messages,
 #' and whether the request to contact each of them was valid.
 #' @author Tyler Burleigh, Thomas J. Leeper
@@ -79,7 +82,11 @@ ContactWorker <-
   NotifyWorkers <-
   NotifyWorker <-
   notify <-
-  function (subjects, msgs, workers, batch = FALSE, verbose = TRUE){
+  function (subjects,
+            msgs,
+            workers,
+            batch = FALSE,
+            verbose = getOption('pyMTurkR.verbose', TRUE)){
 
     client <- GetClient() # Boto3 client
 
@@ -136,7 +143,8 @@ ContactWorker <-
         if (class(response) != "try-error") {
           Notifications$Valid[Notifications$WorkerId %in% workerbatch[[i]]] <- TRUE
           if (verbose) {
-            message(i, ": Workers ", workerbatch[[i]][1], " to ", tail(workerbatch[[i]],1), " Notified")
+            message(i, ": Workers ", workerbatch[[i]][1], " to ",
+                    utils::tail(workerbatch[[i]],1), " Notified")
           }
           if (length(response$NotifyWorkersFailureStatuses) > 0) {
             for (k in 1:length(response$NotifyWorkersFailureStatuses)) {
@@ -148,7 +156,8 @@ ContactWorker <-
         } else {
           Notifications$Valid[Notifications$WorkerId %in% workerbatch[[i]]] <- FALSE
           if (verbose) {
-            warning(i,": Invalid Request for workers ", workerbatch[[i]][1], " to ", tail(workerbatch[[i]],1))
+            warning(i,": Invalid Request for workers ", workerbatch[[i]][1], " to ",
+                    utils::tail(workerbatch[[i]],1))
           }
         }
       }

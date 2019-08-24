@@ -4,6 +4,7 @@ function (hit = NULL,
           hit.type = NULL,
           annotation = NULL,
           verbose = getOption('pyMTurkR.verbose', TRUE)){
+
     hitsearch <- SearchHITs(verbose = TRUE)
     HITs <- hitsearch$HITs
     if (is.null(HITs)) {
@@ -59,7 +60,7 @@ function (hit = NULL,
                                  RequesterAnnotation = c("", ""))
             toprint <- rbind(toprint,totals)
         }
-        toprint <- setNames(toprint, c("HIT", "ReviewStatus", "Pending", "Available",
+        toprint <- stats::setNames(toprint, c("HIT", "ReviewStatus", "Pending", "Available",
                                        "Completed", "Expiration", "Annotation"))
     }
     if (all(toprint$Annotation == "")) {

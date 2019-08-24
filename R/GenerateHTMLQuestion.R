@@ -36,8 +36,6 @@
 #' @seealso \code{\link{CreateHIT}}
 #'
 #' \code{\link{GenerateExternalQuestion}}
-#'
-#' \code{\link{GenerateHITLayoutParameter}}
 #' @references
 #' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_HTMLQuestionArticle.html}{API Reference}
 #' @keywords HITs

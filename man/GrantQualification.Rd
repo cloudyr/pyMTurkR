@@ -11,27 +11,24 @@
 \alias{rejectrequest}
 \title{Grant/Accept or Reject a Qualification Request}
 \usage{
-GrantQualification(qual.requests, values,
+GrantQualification(qual.requests, values, reason = NULL,
   verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
+\item{qual.requests}{A character string containing a QualificationRequestId (for example, returned by \code{\link{GetQualificationRequests}}), or a vector of QualificationRequestIds.}
+
 \item{values}{A character string containing the value of the Qualification
 to be assigned to the worker, or a vector of values of length equal to the
 number of QualificationRequests.}
-
-\item{verbose}{Optionally print the results of the API request to the
-standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
-TRUE)}.}
-
-\item{qual}{A character string containing a QualificationTypeId}
-
-\item{workers}{A character string containing a WorkerId, or a vector of
-character strings containing multiple WorkerIds.}
 
 \item{reason}{An optional character string, or vector of character strings
 of length equal to length of the \code{qual.requests} parameter, supplying
 each worker with a reason for rejecting their request for the Qualification.
 Workers will see this message. Maximum of 1024 characters.}
+
+\item{verbose}{Optionally print the results of the API request to the
+standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+TRUE)}.}
 }
 \value{
 A data frame containing the QualificationRequestId, reason for

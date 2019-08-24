@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.3] - 2019-08-23
+### Cleanup
+- Code cleanup to pass build check without any warnings :)
+
 ## [0.6.2] - 2019-08-23
 ### Fixed
 - Fix for IntegerValues in GenerateQualificationRequirement, requires casting as.integer() (thanks Clara!)

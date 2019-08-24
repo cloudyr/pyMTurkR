@@ -98,7 +98,7 @@ GetBonuses <-
       }
 
       if(response$NumResults > 0){
-        response$BonusPayments <- as.data.frame.BonusPayments(response$BonusPayments)
+        response$BonusPayments <- ToDataFrameBonusPayments(response$BonusPayments)
         return(response)
       }
     }
@@ -149,7 +149,7 @@ GetBonuses <-
       to.return <- batch_helper(hit = hit)
     } else if(!is.null(assignment)) {
       response <- try(client$list_bonus_payments(AssignmentId = assignment))
-      to.return <- as.data.frame.BonusPayments(response$BonusPayments)
+      to.return <- ToDataFrameBonusPayments(response$BonusPayments)
     } else if (!is.null(hit.type)) {
 
       # Check / convert hit.type

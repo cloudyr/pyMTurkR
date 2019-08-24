@@ -6,7 +6,7 @@ approveall <-
            feedback = NULL,
            rejected = FALSE,
            status = NULL,
-           verbose = TRUE) {
+           verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
 

@@ -12,7 +12,7 @@
 \usage{
 DisableHIT(hit = NULL, hit.type = NULL, annotation = NULL,
   approve.pending.assignments = FALSE, delete.hit = FALSE,
-  verbose = TRUE)
+  verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{hit}{A character string containing a HITId or a vector of character
@@ -39,6 +39,10 @@ when the HIT is disabled. This will also delete the assignment data. Note
 that the HIT can only be deleted if it has a "Reviewing" or "Reviewable"
 status. In other words, you can't delete a HIT if someone is currently working
 on an assignment for it.}
+
+\item{verbose}{Optionally print the results of the API request to the
+standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+TRUE)}.}
 }
 \value{
 A data frame containing a list of HITs and whether the request to

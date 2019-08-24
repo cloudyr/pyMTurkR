@@ -7,8 +7,7 @@
 \usage{
 UpdateQualificationType(qual, description = NULL, status = NULL,
   retry.delay = NULL, test = NULL, answerkey = NULL,
-  test.duration = NULL, validate.test = FALSE,
-  validate.answerkey = FALSE, auto = NULL, auto.value = NULL,
+  test.duration = NULL, auto = NULL, auto.value = NULL,
   verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
@@ -31,8 +30,7 @@ structure, used as a test a worker must complete before the
 QualificationType is granted to them.}
 
 \item{answerkey}{An optional character string consisting of an AnswerKey
-data structure, used to automatically score the test, perhaps as returned by
-\code{\link{GenerateAnswerKey}}.}
+data structure, used to automatically score the test}
 
 \item{test.duration}{An optional time (in seconds) indicating how long
 workers have to complete the test.}

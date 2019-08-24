@@ -29,9 +29,7 @@
 #' @aliases GrantQualification GrantQualifications grantqual
 #' AcceptQualificationRequest acceptrequest
 #' RejectQualification RejectQualifications rejectrequest
-#' @param qual A character string containing a QualificationTypeId
-#' @param workers A character string containing a WorkerId, or a vector of
-#' character strings containing multiple WorkerIds.
+#' @param qual.requests A character string containing a QualificationRequestId (for example, returned by \code{\link{GetQualificationRequests}}), or a vector of QualificationRequestIds.
 #' @param values A character string containing the value of the Qualification
 #' to be assigned to the worker, or a vector of values of length equal to the
 #' number of QualificationRequests.
@@ -60,6 +58,7 @@ GrantQualification <-
   acceptrequest <-
   function(qual.requests,
            values,
+           reason = NULL,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client

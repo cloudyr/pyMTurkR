@@ -34,6 +34,9 @@
 #' that the HIT can only be deleted if it has a "Reviewing" or "Reviewable"
 #' status. In other words, you can't delete a HIT if someone is currently working
 #' on an assignment for it.
+#' @param verbose Optionally print the results of the API request to the
+#' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+#' TRUE)}.
 #' @return A data frame containing a list of HITs and whether the request to
 #' disable each of them was valid.
 #' @author Tyler Burleigh, Thomas J. Leeper
@@ -71,7 +74,7 @@ DisableHIT <-
            annotation = NULL,
            approve.pending.assignments = FALSE,
            delete.hit = FALSE,
-           verbose = TRUE) {
+           verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
 

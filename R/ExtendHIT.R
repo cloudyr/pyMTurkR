@@ -33,6 +33,9 @@
 #' \code{\link{seconds}}). Must be between 1 hour (3600 seconds) and 365 days.
 #' @param unique.request.token An optional character string, included only for
 #' advanced users.
+#' @param verbose Optionally print the results of the API request to the
+#' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+#' TRUE)}.
 #' @return A data frame containing the HITId, assignment increment, time
 #' increment, and whether each extension request was valid.
 #' @author Tyler Burleigh, Thomas J. Leeper
@@ -79,7 +82,7 @@ ExtendHIT <-
            add.assignments = NULL,
            add.seconds = NULL,
            unique.request.token = NULL,
-           verbose = TRUE) {
+           verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
 
@@ -130,6 +133,7 @@ ExtendHIT <-
     }
 
     HITs <- emptydf(length(hitlist), 4, c("HITId", "ExtendOperation", "ExtendValue", "Valid"))
+
     for (i in 1:length(hitlist)) {
       hit <- hitlist[i]
       if(!is.null(add.assignments)){
@@ -168,7 +172,7 @@ ExtendHIT <-
 
         response <- try(client$update_expiration_for_hit(
           HITId = hit,
-          ExpireAt = as.character(as.integer(expiration) + as.integer(add.seconds))
+          ExpireAt = as.character(as.integer(expirations[i]) + as.integer(add.seconds))
         ))
         if(class(response) == "try-error") {
           warning("Invalid Request")

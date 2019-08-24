@@ -1,6 +1,7 @@
+
 # HITs
 
-as.data.frame.HITs <- function(hits) {
+ToDataFrameHITs <- function(hits) {
 
   HITs <- emptydf(length(hits), 19, c("HITId", "HITTypeId", "HITGroupId",
                                       "CreationTime", "Title", "Description", "Keywords", "HITStatus",
@@ -44,7 +45,7 @@ as.data.frame.HITs <- function(hits) {
 
 
 
-as.data.frame.Reviewable.HITs <- function(hits) {
+ToDataFrameReviewableHITs <- function(hits) {
 
   HITs <- emptydf(length(hits), 2, c("HITId", "RequesterAnnotation"))
   for (i in 1:length(hits)) {
@@ -63,7 +64,7 @@ as.data.frame.Reviewable.HITs <- function(hits) {
 
 # QUALIFICATION STRUCTURES
 
-as.data.frame.QualificationRequirements <- function(hits) {
+ToDataFrameQualificationRequirements <- function(hits) {
 
   return.quals <- emptydf(nrow = 0, ncol = 6, c('HITId', 'QualificationTypeId',  'Comparator',
                                                 'Value', 'RequiredToPreview', 'ActionsGuarded'))
@@ -116,7 +117,7 @@ as.data.frame.QualificationRequirements <- function(hits) {
 
 
 
-as.data.frame.QualificationTypes <- function(quals) {
+ToDataFrameQualificationTypes <- function(quals) {
 
   return.quals <- emptydf(nrow = 0, ncol = 9, c('QualificationTypeId', 'CreationTime', 'Name',
                                                 'Description', 'Keywords', 'QualificationTypeStatus',
@@ -160,7 +161,7 @@ as.data.frame.QualificationTypes <- function(quals) {
 
 # ASSIGNMENTS
 
-as.data.frame.Assignment <- function(assignment) {
+ToDataFrameAssignment <- function(assignment) {
 
   Assignment <- emptydf(nrow = 1, ncol = 11, c('AssignmentId', 'WorkerId', 'HITId',
                                                'AssignmentStatus', 'AutoApprovalTime',
@@ -189,7 +190,7 @@ as.data.frame.Assignment <- function(assignment) {
     Assignment[10] <- assignment$RequesterFeedback
   }
   if (!is.null(assignment$Answer)) {
-    answers <- as.data.frame.QuestionFormAnswers(Assignment, assignment$Answer)
+    answers <- ToDataFrameQuestionFormAnswers(Assignment, assignment$Answer)
     return.answers <- rbind(return.answers, answers)
   } else {
     return.answers = NULL
@@ -206,7 +207,7 @@ as.data.frame.Assignment <- function(assignment) {
 
 # QUESTION FORM ANSWERS
 
-as.data.frame.QuestionFormAnswers <- function(assignment, answers) {
+ToDataFrameQuestionFormAnswers <- function(assignment, answers) {
 
   # Parse XML
   nsDefs <- XML::xmlNamespaceDefinitions(XML::xmlParse(answers))
@@ -254,7 +255,7 @@ as.data.frame.QuestionFormAnswers <- function(assignment, answers) {
 
 # BLOCKED WORKERS
 
-as.data.frame.WorkerBlock <- function(workers) {
+ToDataFrameWorkerBlock <- function(workers) {
 
   return.workers <- emptydf(0, 2, c("WorkerId", "Reason"))
 
@@ -273,7 +274,7 @@ as.data.frame.WorkerBlock <- function(workers) {
 
 # BONUS PAYMENTS
 
-as.data.frame.BonusPayments <- function(bonuses){
+ToDataFrameBonusPayments <- function(bonuses){
 
 
   return.bonuses <- emptydf(0, 5, c("AssignmentId", "WorkerId",
@@ -300,7 +301,7 @@ as.data.frame.BonusPayments <- function(bonuses){
 
 # QUALIFICATIONS
 
-as.data.frame.QualificationRequests <- function(requests){
+ToDataFrameQualificationRequests <- function(requests){
 
   return.requests <- emptydf(0, 6, c("QualificationRequestId",
                                      "QualificationTypeId", "WorkerId",
@@ -336,7 +337,7 @@ as.data.frame.QualificationRequests <- function(requests){
 
 
 
-as.data.frame.Qualifications <- function(quals){
+ToDataFrameQualifications <- function(quals){
 
   return.quals <- emptydf(0, 5, c("QualificationTypeId",
                                   "WorkerId", "GrantTime",
@@ -382,7 +383,7 @@ as.data.frame.Qualifications <- function(quals){
 }
 
 
-as.data.frame.QualificationTypes <- function(qual) {
+ToDataFrameQualificationTypes <- function(qual) {
 
   this.qual <- emptydf(1, 13, c("QualificationTypeId", "CreationTime", "Name", "Description",
                                 "Keywords", "QualificationTypeStatus", "AutoGranted", "AutoGrantedValue",
@@ -422,7 +423,7 @@ as.data.frame.QualificationTypes <- function(qual) {
 
 
 # REVIEW RESULTS
-as.data.frame.ReviewResults <- function(results) {
+ToDataFrameReviewResults <- function(results) {
 
   out <- list(AssignmentReviewResult = NULL,
               AssignmentReviewAction = NULL,

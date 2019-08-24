@@ -13,7 +13,7 @@
 #' @param search.query An optional character string to use as a search query
 #' @param must.be.requestable A boolean indicating whether the Qualification
 #' must be requestable by Workers or not.
-#' @param return.pages A boolean indicating whether to search only the
+#' @param must.be.owner A boolean indicating whether to search only the
 #' Qualifications you own / created, or to search all Qualifications.
 #' Defaults to FALSE.
 #' @param return.pages An integer indicating how many pages of results should
@@ -22,6 +22,9 @@
 #' search results to start at. Most users can ignore this.
 #' @param results An optional character string indicating how many results to
 #' fetch per page. Must be between 1 and 100. Most users can ignore this.
+#' @param verbose Optionally print the results of the API request to the
+#' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+#' TRUE)}.
 #' @return A data frame of Qualification Types
 #' @author Tyler Burleigh
 #' @references
@@ -42,7 +45,8 @@ SearchQualificationTypes <-
   ListQuals <-
   function (search.query = NULL, must.be.requestable = FALSE,
             must.be.owner = FALSE, results = as.integer(100),
-            return.pages = NULL, pagetoken = NULL, verbose = TRUE) {
+            return.pages = NULL, pagetoken = NULL,
+            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
 
@@ -81,7 +85,7 @@ SearchQualificationTypes <-
         stop("Request failed!")
       }
 
-      quals <- as.data.frame.QualificationTypes(response$QualificationTypes)
+      quals <- ToDataFrameQualificationTypes(response$QualificationTypes)
       token <- response$NextToken
       results <- response$NumResults
       return(list(Quals = quals, NextToken = token, NumResults = results))

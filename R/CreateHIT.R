@@ -3,8 +3,7 @@
 #' Create a single HIT. This is the most important function in the package. It
 #' creates a HIT based upon the specified parameters: (1) characteristics
 #' inherited from a HITType or specification of those parameters and (2) some
-#' kind of Question data structure. Use \code{\link{BulkCreate}} to create
-#' multiple HITs with shared properties.
+#' kind of Question data structure.
 #'
 #' This function creates a new HIT and makes it available to workers.
 #' Characteristics of the HIT can either be specified by including a valid
@@ -28,11 +27,11 @@
 #'
 #' Note that HIT and Assignment Review Policies are not currently supported.
 #'
-#' \code{createhit()}, \code{create()}, \code{create_hit()},
-#' \code{CreateHITWithHITType()}, \code{create_hit_with_hit_type()} are aliases.
+#' \code{createhit()}, \code{create()}, \code{CreateHITWithHITType()},
+#' and \code{createhitwithhittype()} are aliases.
 #'
-#' @aliases CreateHIT createhit create create_hit CreateHITWithHITType
-#' create_hit_with_hit_type
+#' @aliases CreateHIT createhit create CreateHITWithHITType
+#' createhitwithhittype
 #' @param hit.type An optional character string specifying the HITTypeId that
 #' this HIT should be generated from. If used, the HIT will inherit title,
 #' description, keywords, reward, and other properties of the HIT.
@@ -250,7 +249,7 @@ CreateHIT <-
     }
 
     # Unique request token
-    if (!is.null(unique.request.token) && nchar(curl_escape(unique.request.token)) > 64) {
+    if (!is.null(unique.request.token) && nchar(curl::curl_escape(unique.request.token)) > 64) {
       stop("UniqueRequestToken must be <= 64 characters")
     } else if (!is.null(unique.request.token)) {
       args <- c(args, list(UniqueRequestToken = as.character(unique.request.token)))

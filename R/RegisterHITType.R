@@ -10,10 +10,10 @@
 #' properties for a specific HIT, the HIT should be changed to a new HITType
 #' (see \code{\link{ChangeHITType}}).
 #'
-#' \code{hittype()}, \code{CreateHITType()}, \code{createhittype()},
-#' and \code{create_hit_type()} are aliases.
+#' \code{hittype()}, \code{CreateHITType()}, and \code{createhittype()}
+#' are aliases.
 #'
-#' @aliases RegisterHITType hittype CreateHITType create_hit_type
+#' @aliases RegisterHITType hittype CreateHITType createhittype
 #' @param title A character string containing the title for the HITType. All
 #' HITs of this HITType will be visibly grouped to workers according to this
 #' title. Maximum of 128 characters.
@@ -35,6 +35,9 @@
 #' @param qual.req An optional character string containing one or more
 #' QualificationRequirements data structures, for example as returned by
 #' \code{\link{GenerateQualificationRequirement}}.
+#' @param verbose Optionally print the results of the API request to the
+#' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+#' TRUE)}.
 #' @return A two-column data frame containing the HITTypeId of the newly
 #' registered HITType and an indicator for whether the registration request was
 #' valid.
@@ -63,9 +66,9 @@ RegisterHITType <-
   hittype <-
   CreateHITType <-
   createhittype <-
-  create_hit_type <-
   function (title, description, reward, duration, keywords = NULL,
-            auto.approval.delay = as.integer(2592000), qual.req = NULL, verbose = TRUE) {
+            auto.approval.delay = as.integer(2592000), qual.req = NULL,
+            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
 

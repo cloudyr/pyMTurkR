@@ -13,6 +13,9 @@
 #' search results to start at. Most users can ignore this.
 #' @param results An optional character string indicating how many results to
 #' fetch per page. Must be between 1 and 100. Most users can ignore this.
+#' @param verbose Optionally print the results of the API request to the
+#' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+#' TRUE)}.
 #' @return A list containing data frames of HITs and Qualification Requirements
 #' @author Tyler Burleigh, Thomas J. Leeper
 #' @references
@@ -30,8 +33,10 @@ SearchHITs <-
 searchhits <-
 ListHITs <-
 listhits <-
-function (return.pages = NULL, results = as.integer(100),
-          pagetoken = NULL, verbose = TRUE) {
+function (return.pages = NULL,
+          results = as.integer(100),
+          pagetoken = NULL,
+          verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
   client <- GetClient() # Boto3 client
 
@@ -49,8 +54,8 @@ function (return.pages = NULL, results = as.integer(100),
       stop("SearchHITs() request failed!")
     }
 
-    response$QualificationRequirements <- as.data.frame.QualificationRequirements(response$HITs)
-    response$HITs <- as.data.frame.HITs(response$HITs)
+    response$QualificationRequirements <- ToDataFrameQualificationRequirements(response$HITs)
+    response$HITs <- ToDataFrameHITs(response$HITs)
     return(response)
   }
 

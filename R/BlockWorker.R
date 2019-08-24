@@ -15,10 +15,14 @@
 #'
 #' @aliases BlockWorker BlockWorkers block CreateWorkerBlock UnblockWorker
 #' UnblockWorkers unblock DeleteWorkerBlock GetBlockedWorkers blockedworkers
+#' ListWorkerBlocks listworkerblocks
 #' @param workers A character string containing a WorkerId, or a vector of
 #' character strings containing multiple WorkerIds.
 #' @param reasons A character string containing a reason for blocking a worker.
 #' This must have length 1 or length equal to the number of workers.
+#' @param verbose Optionally print the results of the API request to the
+#' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+#' TRUE)}.
 #' @return \code{BlockWorker} returns a data frame containing the list of workers,
 #' reasons (for blocking them), and whether the request to block was valid.
 #'

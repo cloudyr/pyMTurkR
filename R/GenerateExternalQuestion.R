@@ -7,11 +7,7 @@
 #' that is displayed to workers within an HTML iframe of the specified height.
 #' The URL should point to a page --- likely an HTML form --- that can retrieve
 #' several URL GET parameters for \dQuote{AssignmentId} and \dQuote{WorkerId},
-#' which are attached by MTurk when opening the URL. The page should also be
-#' able to submit those parameters plus any assignment data to
-#' \url{https://www.mturk.com/mturk/externalSubmit} (for the live MTurk site)
-#' or \url{https://workersandbox.mturk.com/mturk/externalSubmit} (for the
-#' sandbox site), using either the HTTP GET or POST methods.
+#' which are attached by MTurk when opening the URL.
 #'
 #' Note: \code{url} must be HTTPS.
 #'
@@ -26,8 +22,6 @@
 #' \code{\link{CreateHIT}}.
 #' @author Tyler Burleigh, Thomas J. Leeper
 #' @seealso \code{\link{CreateHIT}}
-#'
-#' \code{\link{GenerateHITLayoutParameter}}
 #' @references
 #' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ExternalQuestionArticle.html}{API Reference}
 #' @keywords HITs

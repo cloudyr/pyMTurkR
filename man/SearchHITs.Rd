@@ -8,7 +8,7 @@
 \title{Search your HITs}
 \usage{
 SearchHITs(return.pages = NULL, results = as.integer(100),
-  pagetoken = NULL, verbose = TRUE)
+  pagetoken = NULL, verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{return.pages}{An integer indicating how many pages of results should
@@ -19,6 +19,10 @@ fetch per page. Must be between 1 and 100. Most users can ignore this.}
 
 \item{pagetoken}{An optional character string indicating which page of
 search results to start at. Most users can ignore this.}
+
+\item{verbose}{Optionally print the results of the API request to the
+standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+TRUE)}.}
 }
 \value{
 A list containing data frames of HITs and Qualification Requirements

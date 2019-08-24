@@ -53,6 +53,9 @@
 #' a batch ID, the batch must be written in a character string of the form
 #' \dQuote{BatchId:78382;}, where \dQuote{73832} is the batch ID shown in the
 #' RUI. Must specify \code{hit} xor \code{old.hit.type} xor \code{annotation}.
+#' @param verbose Optionally print the results of the API request to the
+#' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+#' TRUE)}.
 #' @return A data frame listing the HITId of each HIT who HITType was changed,
 #' its old HITTypeId and new HITTypeId, and whether the request for each HIT
 #' was valid.
@@ -112,7 +115,8 @@ ChangeHITType <-
   function (hit = NULL, old.hit.type = NULL, new.hit.type = NULL,
             title = NULL, description = NULL, reward = NULL, duration = NULL,
             keywords = NULL, auto.approval.delay = as.integer(2592000),
-            qual.req = NULL, old.annotation = NULL, verbose = TRUE) {
+            qual.req = NULL, old.annotation = NULL,
+            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
 

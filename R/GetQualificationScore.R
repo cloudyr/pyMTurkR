@@ -80,7 +80,7 @@ GetQualificationScore <-
 
       # Validity check response
       if(class(response) != "try-error") {
-        x <- as.data.frame.Qualifications(response$Qualification)
+        x <- ToDataFrameQualifications(response$Qualification)
         x$Valid <- TRUE
         Qualifications[i,] <- x
         if (verbose) {

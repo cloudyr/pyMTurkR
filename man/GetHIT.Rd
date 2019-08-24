@@ -8,10 +8,14 @@
 \alias{status}
 \title{Get HIT}
 \usage{
-GetHIT(hit, verbose = TRUE)
+GetHIT(hit, verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{hit}{A character string specifying the HITId of the HIT to be retrieved.}
+
+\item{verbose}{Optionally print the results of the API request to the
+standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+TRUE)}.}
 }
 \description{
 Retrieve various details of a HIT as a data frame.

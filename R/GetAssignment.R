@@ -102,7 +102,7 @@ GetAssignment <-
         response <- try(client$get_assignment(AssignmentId = assignment[i]))
         QualificationRequirements <- list()
         if (class(response) != "try-error") {
-          tmp <- as.data.frame.Assignment(response$Assignment)
+          tmp <- ToDataFrameAssignment(response$Assignment)
           a <- tmp$assignments
           ans <- tmp$answers
           if (i == 1) {
@@ -196,7 +196,7 @@ GetAssignment <-
         # For each assignment...
         if(length(assignments) > 0){
           for (i in 1:length(assignments)) {
-            tmp <- as.data.frame.Assignment(assignments[[i]])
+            tmp <- ToDataFrameAssignment(assignments[[i]])
             tmpAssignments <- rbind(tmpAssignments, tmp$assignments)
             tmpAnswers <- rbind(tmpAnswers, tmp$answers)
             message("\nAssignment ", assignments[[i]]$AssignmentId, " Retrieved")

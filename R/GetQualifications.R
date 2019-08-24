@@ -26,6 +26,9 @@
 #' search results to start at. Most users can ignore this.
 #' @param results An optional character string indicating how many results to
 #' fetch per page. Must be between 1 and 100. Most users can ignore this.
+#' @param verbose Optionally print the results of the API request to the
+#' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+#' TRUE)}.
 #' @return A data frame containing the QualificationTypeId, WorkerId, and
 #' Qualification scores of workers assigned the Qualification.
 #' @author Tyler Burleigh, Thomas J. Leeper
@@ -58,7 +61,7 @@ GetQualifications <-
   getquals <-
   function (qual, status = NULL, return.pages = NULL,
             results = as.integer(100), pagetoken = NULL,
-            verbose = TRUE) {
+            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
 
@@ -89,7 +92,7 @@ GetQualifications <-
         stop("GetQualifications() request failed!")
       }
 
-      response$Qualifications <- as.data.frame.Qualifications(response$Qualifications)
+      response$Qualifications <- ToDataFrameQualifications(response$Qualifications)
       return(response)
     }
 

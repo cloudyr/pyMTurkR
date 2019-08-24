@@ -4,9 +4,8 @@
 \alias{CreateHIT}
 \alias{createhit}
 \alias{create}
-\alias{create_hit}
 \alias{CreateHITWithHITType}
-\alias{create_hit_with_hit_type}
+\alias{createhitwithhittype}
 \title{Create HIT}
 \usage{
 CreateHIT(hit.type = NULL, question = NULL, expiration,
@@ -93,8 +92,7 @@ created HIT.
 Create a single HIT. This is the most important function in the package. It
 creates a HIT based upon the specified parameters: (1) characteristics
 inherited from a HITType or specification of those parameters and (2) some
-kind of Question data structure. Use \code{\link{BulkCreate}} to create
-multiple HITs with shared properties.
+kind of Question data structure.
 }
 \details{
 This function creates a new HIT and makes it available to workers.
@@ -119,8 +117,8 @@ appropriate ExternalQuestion data structure specified for the
 
 Note that HIT and Assignment Review Policies are not currently supported.
 
-\code{createhit()}, \code{create()}, \code{create_hit()},
-\code{CreateHITWithHITType()}, \code{create_hit_with_hit_type()} are aliases.
+\code{createhit()}, \code{create()}, \code{CreateHITWithHITType()},
+and \code{createhitwithhittype()} are aliases.
 }
 \examples{
 

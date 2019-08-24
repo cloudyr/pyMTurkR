@@ -82,9 +82,6 @@ DisposeHIT(hit.type = hittype1$HITTypeId)
 
 \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ExternalQuestionArticle.html}{API Reference: ExternalQuestion Data Structure}
 }
-\seealso{
-\code{\link{BulkCreateFromTemplate}}
-}
 \author{
 Thomas J. Leeper
 }

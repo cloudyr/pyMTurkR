@@ -63,8 +63,8 @@ GetHITsForQualificationType <-
       }
 
       if(length(response$HITs) > 0){
-        response$QualificationRequirements <- as.data.frame.QualificationRequirements(response$HITs)
-        response$HITs <- as.data.frame.HITs(response$HITs)
+        response$QualificationRequirements <- ToDataFrameQualificationRequirements(response$HITs)
+        response$HITs <- ToDataFrameHITs(response$HITs)
         return(response)
       } else {
         stop("No HITs found")

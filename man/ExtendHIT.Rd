@@ -7,7 +7,8 @@
 \usage{
 ExtendHIT(hit = NULL, hit.type = NULL, annotation = NULL,
   add.assignments = NULL, add.seconds = NULL,
-  unique.request.token = NULL, verbose = TRUE)
+  unique.request.token = NULL, verbose = getOption("pyMTurkR.verbose",
+  TRUE))
 }
 \arguments{
 \item{hit}{An optional character string containing a HITId or a vector of
@@ -35,6 +36,10 @@ time to extend the HIT, in seconds (for example, returned by
 
 \item{unique.request.token}{An optional character string, included only for
 advanced users.}
+
+\item{verbose}{Optionally print the results of the API request to the
+standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+TRUE)}.}
 }
 \value{
 A data frame containing the HITId, assignment increment, time

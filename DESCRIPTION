@@ -1,7 +1,7 @@
 Package: pyMTurkR
 Type: Package
 Title: An R package to interface with the MTurk requester API
-Version: 0.6.2
+Version: 0.6.3
 Authors@R: c(person("Tyler", "Burleigh",
                     role = c("aut", "cre"), 
                     email = "tylerburleigh@gmail.com",
@@ -24,5 +24,7 @@ Imports:
 	reticulate,
 	progress,
 	curl,
+	stats,
+	utils,
 	XML
 RoxygenNote: 6.1.1

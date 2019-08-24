@@ -6,9 +6,11 @@
 \alias{contact}
 \alias{NotifyWorkers}
 \alias{notify}
+\alias{NotifyWorker}
 \title{Contact Worker(s)}
 \usage{
-ContactWorker(subjects, msgs, workers, batch = FALSE, verbose = TRUE)
+ContactWorker(subjects, msgs, workers, batch = FALSE,
+  verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{subjects}{A character string containing subject line of an email, or a
@@ -28,6 +30,10 @@ character strings containing multiple WorkerIds.}
 should be contacted in batches of 100 (the maximum allowed by the API). This
 significantly reduces the time required to contact workers, but eliminates
 the ability to send customized messages to each worker.}
+
+\item{verbose}{Optionally print the results of the API request to the
+standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+TRUE)}.}
 }
 \value{
 A data frame containing the list of workers, subjects, and messages,

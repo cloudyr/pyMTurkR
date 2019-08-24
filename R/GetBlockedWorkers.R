@@ -2,8 +2,10 @@ GetBlockedWorkers <-
   blockedworkers <-
   ListWorkerBlocks <-
   listworkerblocks <-
-  function(return.pages = NULL, results = as.integer(100),
-           pagetoken = NULL, verbose = TRUE) {
+  function(return.pages = NULL,
+           results = as.integer(100),
+           pagetoken = NULL,
+           verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
 
@@ -23,7 +25,7 @@ GetBlockedWorkers <-
       }
 
       if(response$NumResults > 0){
-        response$WorkerBlocks <- as.data.frame.WorkerBlock(response$WorkerBlocks)
+        response$WorkerBlocks <- ToDataFrameWorkerBlock(response$WorkerBlocks)
         return(response)
       } else {
         stop("No HITs found")

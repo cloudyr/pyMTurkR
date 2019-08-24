@@ -53,6 +53,9 @@
 #' @param auto.value An optional parameter specifying the value that is
 #' automatically assigned to workers when they request it (if the Qualification
 #' is automatically granted).
+#' @param verbose Optionally print the results of the API request to the
+#' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
+#' TRUE)}.
 #' @return A data frame containing the list of workers, the
 #' QualificationTypeId, the value each worker was assigned, whether they were
 #' notified of their QualificationType assignment, and whether the request was
@@ -89,7 +92,8 @@ AssignQualification <-
             notify = FALSE, name = NULL, description = NULL,
             keywords = NULL, status = NULL, retry.delay = NULL,
             test = NULL, answerkey = NULL, test.duration = NULL,
-            auto = NULL, auto.value = NULL, verbose = TRUE) {
+            auto = NULL, auto.value = NULL,
+            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
 
@@ -154,12 +158,13 @@ AssignQualification <-
     }
 
     qual.value <- value
-    Qualifications <- emptydf(length(workers), 5, c("WorkerId", "QualificationTypeId", "Value", "Notified", "Valid"))
+    Qualifications <- emptydf(length(workers), 5,
+                              c("WorkerId", "QualificationTypeId", "Value", "Notified", "Valid"))
 
     for (i in 1:length(workers)) {
       x <- batch(workers[i], value)
       if (is.null(x$valid)) {
-        return(request)
+        x$valid <- FALSE
       }
       Qualifications[i, ] = c(workers[i], qual, value, notify, x$valid)
     }
