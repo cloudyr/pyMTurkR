@@ -62,15 +62,9 @@ function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
   else endpoint_url <- 'https://mturk-requester.us-east-1.amazonaws.com'
 
   # Check if AWS credentials can be found in an environment variable
-  # else check .aws/credentials
-  # else stop
   if(Sys.getenv("AWS_ACCESS_KEY_ID") != "" & Sys.getenv("AWS_SECRET_ACCESS_KEY") != ""){
     key <- Sys.getenv("AWS_ACCESS_KEY_ID")
     secret_key <- Sys.getenv("AWS_SECRET_ACCESS_KEY")
-  } else if (length(aws.signature::read_credentials()[[profile]]$AWS_ACCESS_KEY_ID) > 0 &
-              length(aws.signature::read_credentials()[[profile]]$AWS_SECRET_ACCESS_KEY) > 0) {
-    key <- aws.signature::read_credentials()[[profile]]$AWS_ACCESS_KEY_ID
-    secret_key <- aws.signature::read_credentials()[[profile]]$AWS_SECRET_ACCESS_KEY
   } else {
     stop("ERROR: Missing AWS Access Key or Secret Access Key.")
   }
@@ -100,9 +94,6 @@ function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
 
 CheckAWSKeys <- function(profile = getOption('pyMTurkR.profile', 'default')){
   if(Sys.getenv("AWS_ACCESS_KEY_ID") != "" & Sys.getenv("AWS_SECRET_ACCESS_KEY") != ""){
-    return(TRUE)
-  } else if (length(aws.signature::read_credentials()[[profile]]$AWS_ACCESS_KEY_ID) > 0 &
-             length(aws.signature::read_credentials()[[profile]]$AWS_SECRET_ACCESS_KEY) > 0) {
     return(TRUE)
   } else {
     return(FALSE)
