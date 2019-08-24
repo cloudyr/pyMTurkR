@@ -49,6 +49,7 @@
 #' DisableHIT(hit1$HITId)
 #' }
 #'
+#' @export
 
 SetHITAsReviewing <-
   reviewing <-

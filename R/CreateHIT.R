@@ -102,6 +102,7 @@
 #'          question = GenerateExternalQuestion("https://www.example.com/","400"))
 #' }
 #'
+#' @export
 
 CreateHIT <-
   CreateHITWithHITType <-

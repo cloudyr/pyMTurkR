@@ -49,6 +49,7 @@
 #'                   feedback = "Great work!")
 #' }
 #'
+#' @export
 
 ApproveAssignment <-
 ApproveAssignments <-

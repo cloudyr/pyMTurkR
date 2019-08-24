@@ -32,6 +32,7 @@
 #' GetHITsForQualificationType()
 #' }
 #'
+#' @export
 
 GetHITsForQualificationType <-
   ListHITsForQualificationType <-

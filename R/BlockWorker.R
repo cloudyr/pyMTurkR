@@ -38,6 +38,7 @@
 #' UnblockWorker("A1RO9UJNWXMU65")
 #' }
 #'
+#' @export
 
 BlockWorker <-
   block <-

@@ -61,6 +61,8 @@
 #' DisableHIT(annotation="BatchId:78382;")
 #' }
 #'
+#' @export
+
 DisableHIT <-
   DisposeHIT <-
   DeleteHIT <-

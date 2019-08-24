@@ -65,6 +65,7 @@
 #' DisposeHIT(hit.type = hittype1$HITTypeId)
 #' }
 #'
+#' @export
 
 GenerateHITsFromTemplate <-
 function (template, input, filenames = NULL, write.files = FALSE) {

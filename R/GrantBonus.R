@@ -62,6 +62,7 @@
 #' GrantBonus(workers=a, assignments=b, amounts=c, reasons=d)
 #' }
 #'
+#' @export
 
 GrantBonus <-
   bonus <-

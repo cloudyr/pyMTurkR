@@ -43,6 +43,7 @@
 #' DisposeHIT(hit1$HITId)
 #' }
 #'
+#' @export
 
 GenerateExternalQuestion <-
 function (url, frame.height = 400) {

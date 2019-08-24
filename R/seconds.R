@@ -16,6 +16,7 @@
 #' @param seconds An optional number of seconds.
 #' @return An integer equal to the requested amount of time in seconds.
 #' @author Thomas J. Leeper
+#' @export
 
 
 seconds <-

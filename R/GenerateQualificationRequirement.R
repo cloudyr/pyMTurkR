@@ -42,6 +42,7 @@
 #' }
 #'
 #'
+#' @export
 
 GenerateQualificationRequirement <-
   function (quals) {

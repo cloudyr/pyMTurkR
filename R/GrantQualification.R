@@ -50,6 +50,7 @@
 #'
 #' @keywords Qualifications
 #'
+#' @export
 
 GrantQualification <-
   GrantQualifications <-

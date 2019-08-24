@@ -30,6 +30,7 @@
 #' DisposeQualificationType(qual1$QualificationTypeId)
 #' }
 #'
+#' @export
 
 GetQualificationType <-
   qualtype <-

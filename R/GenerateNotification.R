@@ -30,6 +30,7 @@
 #'
 #' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMechanicalTurkRequester/Concepts_NotificationsArticle.html}{API Reference: Concept}
 #' @keywords Notifications
+#' @export
 
 GenerateNotification <-
 function (destination,

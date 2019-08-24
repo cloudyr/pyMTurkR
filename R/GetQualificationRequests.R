@@ -41,6 +41,7 @@
 #' GetQualificationRequests("2YCIA0RYNJ9262B1D82MPTUEXAMPLE")
 #' }
 #'
+#' @export
 
 GetQualificationRequests <-
   ListQualificationRequests <-

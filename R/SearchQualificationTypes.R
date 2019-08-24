@@ -36,6 +36,7 @@
 #' SearchQuals()
 #' }
 #'
+#' @export
 
 SearchQualificationTypes <-
   SearchQuals <-

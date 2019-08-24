@@ -75,6 +75,7 @@
 #'                    batch = TRUE)
 #' }
 #'
+#' @export
 
 ContactWorker <-
   contact <-

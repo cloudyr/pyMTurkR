@@ -58,6 +58,7 @@
 #' DisposeHIT(hit1$HITId)
 #' }
 #'
+#' @export
 
 GenerateHTMLQuestion <-
 function (character = NULL, file = NULL, frame.height = 450) {

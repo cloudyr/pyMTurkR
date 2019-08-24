@@ -55,6 +55,7 @@
 #' GetBonuses(annotation = "BatchId:78382;")
 #' }
 #'
+#' @export
 
 GetBonuses <-
   ListBonusPayments <-

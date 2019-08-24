@@ -40,6 +40,7 @@
 #'
 #' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_HITReviewPolicyDataStructureArticle.html}{API Reference (Data Structure)}
 #' @keywords HITs
+#' @export
 
 GetReviewResultsForHIT <-
   ListReviewPolicyResultsForHIT <-

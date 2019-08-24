@@ -47,6 +47,7 @@
 #'
 #' }
 #'
+#' @export
 
 
 RevokeQualification <-

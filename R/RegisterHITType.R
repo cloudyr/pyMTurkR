@@ -61,6 +61,7 @@
 #'                 keywords="survey, questionnaire, politics")
 #' }
 #'
+#' @export
 
 RegisterHITType <-
   hittype <-

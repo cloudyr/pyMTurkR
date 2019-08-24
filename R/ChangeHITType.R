@@ -108,6 +108,9 @@
 #' DisposeHIT(hit = hit$HITId)
 #' }
 #'
+#' @export
+
+
 ChangeHITType <-
   changehittype <-
   UpdateHITTypeOfHIT <-

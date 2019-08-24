@@ -73,6 +73,7 @@
 #' ExtendHIT(annotation="BatchId:78382;", add.assignments = "20")
 #' }
 #'
+#' @export
 
 ExtendHIT <-
   extend <-

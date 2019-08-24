@@ -83,6 +83,7 @@
 #'                     status = "Active",
 #'                     keywords = "Worked for me before")
 #'}
+#' @export
 
 AssignQualification <-
   assignqual <-

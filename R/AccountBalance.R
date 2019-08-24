@@ -23,6 +23,7 @@
 #' AccountBalance()
 #' }
 #'
+#' @export
 
 AccountBalance <-
 accountbalance <-
