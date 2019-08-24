@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.2] - 2019-08-23
+### Fixed
+- Fix for IntegerValues in GenerateQualificationRequirement, requires casting as.integer() (thanks Clara!)
+
 ## [0.6.1] - 2019-08-23
 ### Fixed
 - Really fixed bug in GenerateQualificationRequirement

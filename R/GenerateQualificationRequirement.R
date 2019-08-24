@@ -123,7 +123,7 @@ GenerateQualificationRequirement <-
       if(exists('actions.guarded', where = qual))
         this.qual$ActionsGuarded <- qual$ActionsGuarded
       if(exists('IntegerValues', where = qual))
-        this.qual$IntegerValues <- qual$IntegerValues
+        this.qual$IntegerValues <- list(as.integer(qual$IntegerValues))
       if(exists('LocaleValues', where = qual))
         this.qual$LocaleValues <- list(qual$LocaleValues)
 
