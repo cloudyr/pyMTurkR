@@ -343,44 +343,44 @@ ToDataFrameQualifications <- function(quals){
 }
 
 
-ToDataFrameQualificationTypes <- function(qual) {
 
-  this.qual <- emptydf(1, 13, c("QualificationTypeId", "CreationTime", "Name", "Description",
-                                "Keywords", "QualificationTypeStatus", "AutoGranted", "AutoGrantedValue",
-                                "IsRequestable", "RetryDelayInSeconds", "TestDurationInSeconds",
-                                "Test","AnswerKey"))
+ToDataFrameQualificationTypes <- function(quals) {
 
-  this.qual[1] <- qual$QualificationTypeId
-  if(!is.null(qual$CreationTime)){
-    Quals[2] <- reticulate::py_to_r(qual$CreationTime)
-  }
-  this.qual[3] <- qual$Name
-  this.qual[4] <- qual$Description
-  this.qual[5] <- qual$Keywords
-  this.qual[6] <- qual$QualificationTypeStatus
-  this.qual[7] <- qual$AutoGranted
-  if(!is.null(qual$AutoGrantedValue)){
-    this.qual[8] <- qual$AutoGrantedValue
-  }
-  if(!is.null(qual$IsRequestable)){
-    this.qual[9] <- qual$IsRequestable
-  }
-  if(!is.null(qual$RetryDelayInSeconds)){
-    this.qual[10] <- qual$RetryDelayInSeconds
-  }
-  if(!is.null(qual$TestDurationInSeconds)){
-    this.qual[11] <- qual$TestDurationInSeconds
-  }
-  if(!is.null(qual$Test)){
-    this.qual[12] <- qual$Test
-  }
-  if(!is.null(qual$AnswerKey)){
-    this.qual[13] <- qual$AnswerKey
+  return.quals <- emptydf(nrow = 0, ncol = 9, c('QualificationTypeId', 'CreationTime', 'Name',
+                                                'Description', 'Keywords', 'QualificationTypeStatus',
+                                                'RetryDelayInSeconds', 'IsRequestable', 'AutoGranted'))
+
+  for (i in 1:length(quals)) {
+
+    Quals <- emptydf(1, 9, c('QualificationTypeId', 'CreationTime', 'Name',
+                             'Description', 'Keywords', 'QualificationTypeStatus',
+                             'RetryDelayInSeconds', 'IsRequestable', 'AutoGranted'))
+
+    qual <- quals[[i]]
+
+    Quals[1] <- qual$QualificationTypeId
+    if(!is.null(qual$CreationTime)){
+      Quals[2] <- reticulate::py_to_r(qual$CreationTime)
+    }
+    Quals[3] <- qual$Name
+    Quals[4] <- qual$Description
+    if(!is.null(qual$Keywords)){
+      Quals[5] <- qual$Keywords
+    }
+    Quals[6] <- qual$QualificationTypeStatus
+    if(!is.null(qual$RetryDelayInSeconds)){
+      Quals[7] <- qual$RetryDelayInSeconds
+    }
+    Quals[8] <- qual$IsRequestable
+    Quals[9] <- qual$AutoGranted
+
+    return.quals <- rbind(Quals, return.quals)
+
   }
 
-  return(this.qual)
+  return(return.quals)
+
 }
-
 
 
 
