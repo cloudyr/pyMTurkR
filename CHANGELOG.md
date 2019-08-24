@@ -1,6 +1,10 @@
 # Changelog
 
-## [0.6.3] - 2019-08-23
+## [0.6.4] - 2019-08-24
+### Unit testing
+- Added unit tests for AccountBalance, ApproveAllAssignments, ApproveAssignment, GetClient, SearchQualificationTypes
+
+## [0.6.3] - 2019-08-24
 ### Cleanup
 - Code cleanup to pass build check without any warnings :)
 

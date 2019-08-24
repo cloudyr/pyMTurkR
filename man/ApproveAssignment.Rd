@@ -8,7 +8,7 @@
 \alias{approveall}
 \title{Approve Assignment(s)}
 \usage{
-ApproveAssignment(assignments, feedback = "", rejected = FALSE,
+ApproveAssignment(assignments, feedback = NULL, rejected = FALSE,
   verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
