@@ -4,7 +4,6 @@
 \alias{ChangeHITType}
 \alias{changehittype}
 \alias{UpdateHITTypeOfHIT}
-\alias{update_hit_type_of_hit}
 \title{Change HITType Properties of a HIT}
 \usage{
 ChangeHITType(hit = NULL, old.hit.type = NULL, new.hit.type = NULL,
@@ -85,8 +84,7 @@ HITs or all HITs of a specified HITType) to a new HITType.  \code{hit} xor
 specified or a new HITType can be created by atomically by specifying the
 characteristics of the new HITType.
 
-\code{changehittype()}, \code{UpdateHITTypeOfHIT()}, and
-\code{update_hit_type_of_hit()} are aliases.
+\code{changehittype()} and \code{UpdateHITTypeOfHIT()} are aliases.
 }
 \examples{
 

@@ -75,7 +75,12 @@
 #'                    batch = TRUE)
 #' }
 #'
-#' @export
+#' @export ContactWorker
+#' @export contact
+#' @export ContactWorkers
+#' @export NotifyWorkers
+#' @export NotifyWorker
+#' @export notify
 
 ContactWorker <-
   contact <-

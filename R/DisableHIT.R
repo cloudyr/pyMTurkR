@@ -61,7 +61,13 @@
 #' DisableHIT(annotation="BatchId:78382;")
 #' }
 #'
-#' @export
+#' @export DisableHIT
+#' @export DisposeHIT
+#' @export ExpireHIT
+#' @export DeleteHIT
+#' @export disablehit
+#' @export disposehit
+#' @export deletehit
 
 DisableHIT <-
   DisposeHIT <-

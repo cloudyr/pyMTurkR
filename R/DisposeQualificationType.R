@@ -32,7 +32,10 @@
 #' DisposeQualificationType(qual1$QualificationTypeId)
 #' }
 #'
-#' @export
+#' @export DisposeQualificationType
+#' @export DeleteQualificationType
+#' @export disposequal
+#' @export deletequal
 
 DisposeQualificationType <-
   DeleteQualificationType <-

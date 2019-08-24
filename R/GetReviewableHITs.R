@@ -34,7 +34,8 @@
 #' GetReviewableHITs()
 #' }
 #'
-#' @export
+#' @export GetReviewableHITs
+#' @export reviewable
 
 GetReviewableHITs <-
   reviewable <-

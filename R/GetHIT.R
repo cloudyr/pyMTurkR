@@ -20,7 +20,11 @@
 #' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_GetHITOperation.html}{API Reference}
 #' @keywords HITs
 #'
-#' @export
+#' @export GetHIT
+#' @export gethit
+#' @export hit
+#' @export HITStatus
+#' @export status
 
 GetHIT <-
   gethit <-

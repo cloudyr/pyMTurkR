@@ -83,7 +83,10 @@
 #'                     status = "Active",
 #'                     keywords = "Worked for me before")
 #'}
-#' @export
+#' @export AssignQualification
+#' @export assignqual
+#' @export AssignQualifications
+#' @export AssociateQualificationWithWorker
 
 AssignQualification <-
   assignqual <-

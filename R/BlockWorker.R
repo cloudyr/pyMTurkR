@@ -38,7 +38,18 @@
 #' UnblockWorker("A1RO9UJNWXMU65")
 #' }
 #'
-#' @export
+#' @export BlockWorker
+#' @export BlockWorkers
+#' @export block
+#' @export CreateWorkerBlock
+#' @export UnblockWorker
+#' @export UnblockWorkers
+#' @export unblock
+#' @export DeleteWorkerBlock
+#' @export GetBlockedWorkers
+#' @export blockedworkers
+#' @export ListWorkerBlocks
+#' @export listworkerblocks
 
 BlockWorker <-
   block <-

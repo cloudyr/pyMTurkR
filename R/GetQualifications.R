@@ -55,7 +55,9 @@
 #' DisposeQualificationType(qual1$QualificationTypeId)
 #' }
 #'
-#' @export
+#' @export GetQualifications
+#' @export ListWorkersWithQualificationType
+#' @export getquals
 
 GetQualifications <-
   ListWorkersWithQualificationType <-

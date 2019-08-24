@@ -3,7 +3,6 @@
 \name{CreateQualificationType}
 \alias{CreateQualificationType}
 \alias{createqual}
-\alias{create_qualification_type}
 \title{Create QualificationType}
 \usage{
 CreateQualificationType(name, description, status, keywords = NULL,
@@ -73,8 +72,7 @@ assign Qualifications to workers with \code{\link{AssignQualification}} and
 invoked as QualificationRequirements in \code{\link{RegisterHITType}} and/or
 \code{\link{CreateHIT}} operations.
 
-\code{createqual()} and\code{create_qualification_type()}
-are aliases for \code{CreateQualificationType}.
+\code{createqual()} is an alias.
 }
 \examples{
 

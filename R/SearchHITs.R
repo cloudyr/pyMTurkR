@@ -28,7 +28,10 @@
 #' SearchHITs()
 #' }
 #'
-#' @export
+#' @export SearchHITs
+#' @export searchhits
+#' @export ListHITs
+#' @export listhits
 
 SearchHITs <-
 searchhits <-

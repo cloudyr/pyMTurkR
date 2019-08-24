@@ -50,7 +50,14 @@
 #'
 #' @keywords Qualifications
 #'
-#' @export
+#' @export GrantQualification
+#' @export GrantQualifications
+#' @export grantqual
+#' @export AcceptQualificationRequest
+#' @export acceptrequest
+#' @export RejectQualification
+#' @export RejectQualifications
+#' @export rejectrequest
 
 GrantQualification <-
   GrantQualifications <-

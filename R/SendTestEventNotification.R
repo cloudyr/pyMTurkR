@@ -35,7 +35,8 @@
 #' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_SendTestEventNotificationOperation.html}{API Reference}
 #' @keywords Notifications
 #'
-#' @export
+#' @export SendTestEventNotification
+#' @export notificationtest
 
 SendTestEventNotification <-
   notificationtest <-

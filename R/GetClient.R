@@ -26,7 +26,10 @@
 #' myclient <- GetClient()
 #' myclient$get_account_balance()
 #' }
-#' @export
+#' @export GetClient
+#' @export StartClient
+#' @export Client
+#' @export client
 
 GetClient <-
 StartClient <-

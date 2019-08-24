@@ -4,7 +4,6 @@
 \alias{GetHITsForQualificationType}
 \alias{ListHITsForQualificationType}
 \alias{gethitsbyqual}
-\alias{listhitsbyqual}
 \title{Get HITs by Qualification}
 \usage{
 GetHITsForQualificationType(qual, return.pages = NULL,
@@ -38,8 +37,7 @@ complete those HITs.
 \details{
 A function to retrieve HITs that require the specified QualificationType.
 
-\code{gethitsbyqual()}, \code{ListHITsForQualificationType()},
-\code{listhitsbyqual()} are aliases.
+\code{gethitsbyqual()} and \code{ListHITsForQualificationType()} are aliases.
 }
 \examples{
 

@@ -69,7 +69,11 @@
 #' GetAssignment(annotation="BatchId:78382;")
 #' }
 #'
-#' @export
+#' @export GetAssignment
+#' @export GetAssignments
+#' @export assignment
+#' @export assignments
+#' @export ListAssignmentsForHIT
 
 GetAssignment <-
   assignment <-

@@ -57,7 +57,8 @@
 #' DisposeQualificationType(qual1$QualificationTypeId)
 #' }
 #'
-#' @export
+#' @export UpdateQualificationScore
+#' @export updatequalscore
 
 UpdateQualificationScore <-
   updatequalscore <-

@@ -13,10 +13,9 @@
 #' specified or a new HITType can be created by atomically by specifying the
 #' characteristics of the new HITType.
 #'
-#' \code{changehittype()}, \code{UpdateHITTypeOfHIT()}, and
-#' \code{update_hit_type_of_hit()} are aliases.
+#' \code{changehittype()} and \code{UpdateHITTypeOfHIT()} are aliases.
 #'
-#' @aliases ChangeHITType changehittype UpdateHITTypeOfHIT update_hit_type_of_hit
+#' @aliases ChangeHITType changehittype UpdateHITTypeOfHIT
 #' @param hit An optional character string containing the HITId whose HITTypeId
 #' is to be changed, or a vector of character strings containing each of
 #' multiple HITIds to be changed. Must specify \code{hit} xor
@@ -108,13 +107,14 @@
 #' DisposeHIT(hit = hit$HITId)
 #' }
 #'
-#' @export
+#' @export ChangeHITType
+#' @export changehittype
+#' @export UpdateHITTypeOfHIT
 
 
 ChangeHITType <-
   changehittype <-
   UpdateHITTypeOfHIT <-
-  update_hit_type_of_hit <-
   function (hit = NULL, old.hit.type = NULL, new.hit.type = NULL,
             title = NULL, description = NULL, reward = NULL, duration = NULL,
             keywords = NULL, auto.approval.delay = as.integer(2592000),

@@ -102,7 +102,11 @@
 #'          question = GenerateExternalQuestion("https://www.example.com/","400"))
 #' }
 #'
-#' @export
+#' @export CreateHIT
+#' @export createhit
+#' @export create
+#' @export CreateHITWithHITType
+#' @export createhitwithhittype
 
 CreateHIT <-
   CreateHITWithHITType <-

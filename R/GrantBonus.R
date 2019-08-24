@@ -62,7 +62,10 @@
 #' GrantBonus(workers=a, assignments=b, amounts=c, reasons=d)
 #' }
 #'
-#' @export
+#' @export GrantBonus
+#' @export bonus
+#' @export paybonus
+#' @export sendbonus
 
 GrantBonus <-
   bonus <-

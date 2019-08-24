@@ -32,7 +32,9 @@
 #' RejectAssignment(assignments = "26XXH0JPPSI23H54YVG7BKLEXAMPLE")
 #' }
 #'
-#' @export
+#' @export RejectAssignment
+#' @export RejectAssignments
+#' @export reject
 
 RejectAssignment <-
   RejectAssignments <-

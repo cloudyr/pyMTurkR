@@ -49,7 +49,12 @@
 #'                   feedback = "Great work!")
 #' }
 #'
-#' @export
+#' @export ApproveAssignment
+#' @export ApproveAssignments
+#' @export approve
+#' @export approve
+#' @export ApproveAllAssignments
+#' @export approveall
 
 ApproveAssignment <-
 ApproveAssignments <-

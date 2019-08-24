@@ -13,10 +13,9 @@
 #' invoked as QualificationRequirements in \code{\link{RegisterHITType}} and/or
 #' \code{\link{CreateHIT}} operations.
 #'
-#' \code{createqual()} and\code{create_qualification_type()}
-#' are aliases for \code{CreateQualificationType}.
+#' \code{createqual()} is an alias.
 #'
-#' @aliases CreateQualificationType createqual create_qualification_type
+#' @aliases CreateQualificationType createqual
 #' @param name A name for the QualificationType. This is visible to workers. It
 #' cannot be modified by \code{\link{UpdateQualificationType}}.
 #' @param description A longer description of the QualificationType. This is
@@ -66,11 +65,11 @@
 #' DisposeQualificationType(qual1$QualificationTypeId)
 #' }
 #'
-#' @export
+#' @export CreateQualificationType
+#' @export createqual
 
 CreateQualificationType <-
   createqual <-
-  create_qualification_type <-
   function (name,
             description,
             status,

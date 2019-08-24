@@ -8,8 +8,8 @@
 #' \code{SearchQuals()}, \code{searchquals()},\code{ListQualificationTypes()}
 #' \code{listquals()}, \code{ListQuals()} are aliases
 #'
-#' @aliases SearchQualifications SearchQuals searchquals ListQualificationTypes
-#' listquals ListQuals
+#' @aliases SearchQualificationTypes SearchQualifications SearchQuals searchquals
+#' ListQualificationTypes listquals ListQuals
 #' @param search.query An optional character string to use as a search query
 #' @param must.be.requestable A boolean indicating whether the Qualification
 #' must be requestable by Workers or not.
@@ -36,7 +36,13 @@
 #' SearchQuals()
 #' }
 #'
-#' @export
+#' @export SearchQualificationTypes
+#' @export SearchQualifications
+#' @export SearchQuals
+#' @export searchquals
+#' @export ListQualificationTypes
+#' @export listquals
+#' @export ListQuals
 
 SearchQualificationTypes <-
   SearchQuals <-

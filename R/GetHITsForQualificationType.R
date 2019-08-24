@@ -5,11 +5,9 @@
 #'
 #' A function to retrieve HITs that require the specified QualificationType.
 #'
-#' \code{gethitsbyqual()}, \code{ListHITsForQualificationType()},
-#' \code{listhitsbyqual()} are aliases.
+#' \code{gethitsbyqual()} and \code{ListHITsForQualificationType()} are aliases.
 #'
 #' @aliases GetHITsForQualificationType ListHITsForQualificationType gethitsbyqual
-#' listhitsbyqual
 #' @param qual A character string containing a QualificationTypeId.
 #' @param return.pages An integer indicating how many pages of results should
 #' be returned.
@@ -32,12 +30,13 @@
 #' GetHITsForQualificationType()
 #' }
 #'
-#' @export
+#' @export GetHITsForQualificationType
+#' @export ListHITsForQualificationType
+#' @export gethitsbyqual
 
 GetHITsForQualificationType <-
   ListHITsForQualificationType <-
   gethitsbyqual <-
-  listhitsbyqual <-
   function (qual,
             return.pages = NULL,
             results = as.integer(100),
