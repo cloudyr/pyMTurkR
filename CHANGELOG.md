@@ -1,11 +1,19 @@
 # Changelog
 
+## [0.6.6] - 2019-08-25
+### Fixed
+- Fixed a bug in ContactWorker when warning about invalid requests
+- Fixed a bug in ContactWorker with the deduplication of worker lists
+- Fixed a bug in ApproveAssignment reporting of total # approved
+### Unit tests
+- Added unit tests for AssignQualification, BlockWorker, ChangeHITType, ContactWorker
+
 ## [0.6.5] - 2019-08-25
 ### Fixed
-- auto.approval.delay parameter in CreateHIT
+- auto.approval.delay parameter in CreateHIT (thanks Clara!)
 
 ## [0.6.4] - 2019-08-24
-### Unit testing
+### Unit tests
 - Added unit tests for AccountBalance, ApproveAllAssignments, ApproveAssignment, GetClient, SearchQualificationTypes
 
 ## [0.6.3] - 2019-08-24

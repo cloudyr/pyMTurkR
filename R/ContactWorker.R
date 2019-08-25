@@ -104,9 +104,9 @@ ContactWorker <-
     }
     if (is.factor(workers)) {
       workers <- as.character(workers)
-      if (length(workers) > length(unique(workers))) {
-        warning("Duplicated WorkerIds removed from 'workers'")
-      }
+    }
+    if (length(workers) > length(unique(workers))) {
+      warning("Duplicated WorkerIds removed from 'workers'")
       workers <- unique(workers)
     }
 
@@ -149,21 +149,21 @@ ContactWorker <-
         if (class(response) != "try-error") {
           Notifications$Valid[Notifications$WorkerId %in% workerbatch[[i]]] <- TRUE
           if (verbose) {
-            message(i, ": Workers ", workerbatch[[i]][1], " to ",
-                    utils::tail(workerbatch[[i]],1), " Notified")
+            message(i, ": Workers ", workerbatch[[i]][1], " to ", utils::tail(workerbatch[[i]],1), " Notified")
           }
           if (length(response$NotifyWorkersFailureStatuses) > 0) {
             for (k in 1:length(response$NotifyWorkersFailureStatuses)) {
-              fail <- response$NotifyWorkersFailureStatuses[[i]]
-              message(paste("Invalid Request for worker ",fail$WorkerId, ": ", fail$NotifyWorkersFailureMessage, sep=""))
+              fail <- response$NotifyWorkersFailureStatuses[[k]]
               Notifications$Valid[Notifications$WorkerId == fail$WorkerId] <- 'HardFailure'
+              if (verbose) {
+                message(paste("Invalid Request for worker ", fail$WorkerId, ": ", fail$NotifyWorkersFailureMessage, sep=""))
+              }
             }
           }
         } else {
           Notifications$Valid[Notifications$WorkerId %in% workerbatch[[i]]] <- FALSE
           if (verbose) {
-            warning(i,": Invalid Request for workers ", workerbatch[[i]][1], " to ",
-                    utils::tail(workerbatch[[i]],1))
+            warning(i,": Invalid Request for workers ", workerbatch[[i]][1], " to ", utils::tail(workerbatch[[i]],1))
           }
         }
       }

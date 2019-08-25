@@ -37,9 +37,11 @@ test_that("ChangeHITType using RegisterHITType", {
   expect_type(ChangeHITType(hit = as.factor(hit$HITId), new.hit.type = hittype2$HITTypeId, title = 'x'), "list")
 
   # Delete HIT
-  DeleteHIT(hit$HITId,
-            delete.hit = TRUE,
+  ExpireHIT(hit$HITId,
             approve.pending.assignments = TRUE,
+            verbose = FALSE)
+  DeleteHIT(hit$HITId,
+            skip.delete.prompt = TRUE,
             verbose = FALSE)
 })
 
@@ -74,9 +76,11 @@ test_that("ChangeHITType using new HIT Type defined in function", {
                             auto.approval.delay = 1,
                             keywords = "survey, questionnaire, politics"), "list")
   # Delete HIT
-  DeleteHIT(hit$HITId,
-            delete.hit = TRUE,
+  ExpireHIT(hit$HITId,
             approve.pending.assignments = TRUE,
+            verbose = FALSE)
+  DeleteHIT(hit$HITId,
+            skip.delete.prompt = TRUE,
             verbose = FALSE)
 
 
