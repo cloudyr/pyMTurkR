@@ -106,14 +106,14 @@ DisableHIT <-
       if (is.factor(hit.type)) {
         hit.type <- as.character(hit.type)
       }
-      hitsearch <- SearchHITs()
+      hitsearch <- SearchHITs(verbose = verbose)
       hitlist <- hitsearch$HITs$HITId[hitsearch$HITs$HITTypeId %in% hit.type]
 
     } else if (!is.null(annotation)) {
       if (is.factor(annotation)) {
         annotation <- as.character(annotation)
       }
-      hitsearch <- SearchHITs(verbose = FALSE)
+      hitsearch <- SearchHITs(verbose = verbose)
       hitlist <- hitsearch$HITs$HITId[grepl(annotation, hitsearch$HITs$RequesterAnnotation)]
     }
     if (length(hitlist) == 0 || is.null(hitlist)) {
@@ -145,18 +145,15 @@ DisableHIT <-
         }
         if(approve.pending.assignments){
           # Approve pending assignments
-          ApproveAllAssignments(hit = hit, verbose = FALSE)
+          ApproveAllAssignments(hit = hit, verbose = verbose)
 
-          # If delete.hit.after
+          # If delete.hit
           if(delete.hit){
-
             # Check HIT status
             hitdetail <- GetHIT(hit = hit)
-            if(hitdetail$HITs$HITStatus == "Reviewing" |
-               hitdetail$HITs$HITStatus == "Reviewable"){
-              response <- try(client$delete_hit(
-                HITId = hit
-              ))
+            if(hitdetail$HITs$HITStatus %in% c("Reviewing", "Reviewable")){
+              response <- try(client$delete_hit(HITId = hit))
+
               if(class(response) == "try-error") {
                 warning(i, ": Unable to Delete HIT ", hit)
               } else {
@@ -166,10 +163,9 @@ DisableHIT <-
               warning(i, ": Unable to Delete HIT ", hit, " with status ", hitdetail$HITs$HITStatus)
             }
 
-
           }
         }
-        valid = TRUE
+        valid <- TRUE
       }
       HITs[i, ] <- c(hit, valid)
     }

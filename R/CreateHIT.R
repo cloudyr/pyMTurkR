@@ -207,6 +207,11 @@ CreateHIT <-
           args <- c(args, list(MaxAssignments = as.integer(assignments)))
         }
 
+        # Auto approval delay
+        if (!is.null(auto.approval.delay)) {
+          args <- c(args, list(AutoApprovalDelayInSeconds = as.integer(auto.approval.delay)))
+        }
+
       }
     }
 

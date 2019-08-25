@@ -139,6 +139,8 @@ function (assignments,
   }
 
   # Return results
-  message(as.integer(Assignments$Valid), " Assignments Approved")
+  if(verbose){
+    message(sum(as.integer(Assignments$Valid)), " Assignments Approved")
+  }
   return(Assignments)
 }

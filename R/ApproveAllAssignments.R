@@ -39,7 +39,7 @@ approveall <-
 
     }
 
-    if (length(assignments)==0) {
+    if (length(assignments) == 0) {
       return(emptydf(0, 3, c("AssignmentId", "Feedback", "Valid")))
     } else {
       request <- ApproveAssignments(assignments = assignments,

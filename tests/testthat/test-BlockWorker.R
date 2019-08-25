@@ -1,6 +1,7 @@
 test_that("BlockWorker and UnblockWorker", {
   skip_if_not(CheckAWSKeys())
 
+  # Test block
   expect_type(BlockWorker("A1RO9UJNWXMU65", reasons = "Did not follow instructions"), "list")
   expect_type(BlockWorker(as.factor("A1RO9UJNWXMU65"),
                           reasons = as.factor("Did not follow instructions")), "list")
@@ -10,8 +11,8 @@ test_that("BlockWorker and UnblockWorker", {
                           reasons = "Did not follow instructions"), "list")
 
   # Incorrect number of reasons
-  expect_type(class(try(BlockWorker("A1RO9UJNWXMU65",
-                          reasons = c("reason1", "reason2")))), "try-error")
+  expect_s3_class(try(BlockWorker("A1RO9UJNWXMU65",
+                          reasons = c("reason1", "reason2")), TRUE), "try-error")
 
   # Unblock
   expect_type(UnblockWorker("A1RO9UJNWXMU65"), "list")
@@ -20,6 +21,5 @@ test_that("BlockWorker and UnblockWorker", {
 
 test_that("BlockWorker and UnblockWorker misspecifications", {
   skip_if_not(CheckAWSKeys())
-
   expect_type(UnblockWorker("A1RO9UJNWXMU65"), "list")
 })

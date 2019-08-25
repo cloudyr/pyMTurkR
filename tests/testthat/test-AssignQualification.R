@@ -12,9 +12,9 @@ test_that("AssignQualification existing Qualification to worker", {
 test_that("AssignQualification parameter misspecification errors", {
   skip_if_not(CheckAWSKeys())
 
-  expect_type(class(try(AssignQualification(qual = 'x', workers = 'x', notify = 'x'))), "try-error")
-  expect_type(class(try(AssignQualification(qual = 'x', workers = 'x', value = 'x'))), "try-error")
-  expect_type(class(try(AssignQualification(qual = 'x', workers = c('x','x','x'), value = c(1, 2, '')))), "try-error")
+  expect_s3_class(try(AssignQualification(qual = 'x', workers = 'x', notify = 'x', verbose = FALSE), TRUE), "try-error")
+  expect_s3_class(try(AssignQualification(qual = 'x', workers = 'x', value = 'x'), TRUE), "try-error")
+  expect_type(AssignQualification(qual = 'x', workers = c('x','x','x'), value = c(1, 2, '')), "list")
 })
 
 test_that("AssignQualification Qualification defined in function call", {
@@ -33,14 +33,14 @@ test_that("AssignQualification Qualification defined in function call", {
 test_that("AssignQualification Qualification definition misspecification", {
   skip_if_not(CheckAWSKeys())
   # Missing description
-  expect_type(class(try(AssignQualification(workers = 'A3LXJ76P1ZZPMC',
+  expect_s3_class(try(AssignQualification(workers = 'A3LXJ76P1ZZPMC',
                                             name = 'This is a qualification',
                                             keywords = 'qualification',
-                                            status = 'Active'))), "try-error")
+                                            status = 'Active'), TRUE), "try-error")
   # Missing description
-  expect_type(class(try(AssignQualification(workers = 'A3LXJ76P1ZZPMC',
+  expect_s3_class(try(AssignQualification(workers = 'A3LXJ76P1ZZPMC',
                                             name = 'This is a qualification',
-                                            qual = 'x'))), "try-error")
+                                            qual = 'x'), TRUE), "try-error")
   # Missing description
   AssignQualification(workers = 'A3LXJ76P1ZZPMC',
                       name = 'This is a qualification',

@@ -104,6 +104,13 @@ RegisterHITType <-
       }
     }
 
+    # Rewards
+    # If it's a fraction of a dollar, then it must have a leading zero
+    if(grepl('^\\.', reward)){
+      reward <- paste0('0', reward)
+    }
+    args <- c(args, list(Reward = as.character(reward)))
+
     HITType <- emptydf(1, 2, c("HITTypeId", "Valid"))
 
     # Create HIT with or without qual.req

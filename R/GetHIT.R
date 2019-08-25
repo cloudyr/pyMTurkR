@@ -36,15 +36,12 @@ GetHIT <-
     response <- try(client$get_hit(HITId = hit))
 
     if (class(response) != "try-error") {
-      if (verbose) {
-        message("HIT (", hit, ") Retrieved")
-      }
       hitdetails <- list(response$HIT) # Hack for 1 result
       return.list <- list(HITs = ToDataFrameHITs(hitdetails),
                             QualificationRequirements = ToDataFrameQualificationRequirements(hitdetails))
     } else {
       if (verbose) {
-        message("No HITs Retrieved")
+        message("Error: No HITs Retrieved")
       }
       return.list <- list()
     }

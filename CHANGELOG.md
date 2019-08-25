@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.5] - 2019-08-25
+### Fixed
+- auto.approval.delay parameter in CreateHIT
+
 ## [0.6.4] - 2019-08-24
 ### Unit testing
 - Added unit tests for AccountBalance, ApproveAllAssignments, ApproveAssignment, GetClient, SearchQualificationTypes

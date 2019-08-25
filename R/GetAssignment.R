@@ -134,14 +134,17 @@ GetAssignment <-
         if (is.factor(hit.type)) {
           hit.type <- as.character(hit.type)
         }
-        message("Searching for HITs matching HITTypeId...")
-        hitsearch <- SearchHITs()
+        if(verbose){
+          message("Searching for HITs matching HITTypeId...")
+        }
+
+        hitsearch <- SearchHITs(verbose = verbose)
         hitlist <- hitsearch$HITs$HITId[hitsearch$HITs$HITTypeId %in% hit.type]
       } else if (!is.null(annotation)) { # Search by HIT Annotation
         if (is.factor(annotation)) {
           annotation <- as.character(annotation)
         }
-        hitsearch <- SearchHITs()
+        hitsearch <- SearchHITs(verbose = verbose)
         hitlist <- hitsearch$HITs$HITId[grepl(annotation, hitsearch$HITs$RequesterAnnotation)]
       }
       if (length(hitlist) == 0) {
@@ -204,7 +207,10 @@ GetAssignment <-
             tmp <- ToDataFrameAssignment(assignments[[i]])
             tmpAssignments <- rbind(tmpAssignments, tmp$assignments)
             tmpAnswers <- rbind(tmpAnswers, tmp$answers)
-            message("\nAssignment ", assignments[[i]]$AssignmentId, " Retrieved")
+
+            if(verbose){
+              message("\nAssignment ", assignments[[i]]$AssignmentId, " Retrieved")
+            }
           }
         } else {
           return(NULL)
@@ -243,8 +249,10 @@ GetAssignment <-
                                 "UploadedFileKey", "UploadedFileSizeInBytes"))
 
       # Progress bar because this can take a while
-      pb <- progress::progress_bar$new(total = length(hitlist))
-      message("\nSearching for Assignments...")
+      if(verbose){
+        pb <- progress::progress_bar$new(total = length(hitlist))
+        message("\nSearching for Assignments...")
+      }
 
       # Run batch over hitlist
       for (i in 1:length(hitlist)) {
@@ -275,7 +283,9 @@ GetAssignment <-
           Answers <- rbind(Answers, to.return$Answers)
 
         }
-        pb$tick()
+        if(verbose){
+          pb$tick()
+        }
 
       }
 
