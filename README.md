@@ -1,6 +1,4 @@
-<img src="assets/logo.png" alt="pyMTurkR logo" width="250" />
-
-# An R package to interface with MTurk's Requester API
+# pyMTurkR: An R package to interface with MTurk's Requester API <img src="assets/hex-pyMTurkR.png" align="right" width="200" />
 
 <!-- badges: start -->
 ![travis-ci](https://travis-ci.org/cloudyr/pyMTurkR.svg?branch=master)
