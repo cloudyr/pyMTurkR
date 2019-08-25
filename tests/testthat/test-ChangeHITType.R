@@ -11,7 +11,7 @@ test_that("ChangeHITType using RegisterHITType", {
 
   # Create a HIT using the HIT type just created
   a <- GenerateExternalQuestion("https://www.example.com", "400")
-  hit <- CreateHIT(hit.type = hittype1$HITTypeId,
+  hit <- CreateHIT(hit.type = as.factor(hittype1$HITTypeId),
                    assignments = 1,
                    expiration = seconds(days=1),
                    question = a$string)

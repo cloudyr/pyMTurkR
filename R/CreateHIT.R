@@ -190,15 +190,11 @@ CreateHIT <-
         }
 
         # Rewards
-        if (is.null(reward)) {
-          stop("Reward must be set")
-        } else {
-          # If it's a fraction of a dollar, then it must have a leading zero
-          if(grepl('^\\.', reward)){
-            reward <- paste0('0', reward)
-          }
-          args <- c(args, list(Reward = as.character(reward)))
+        # If it's a fraction of a dollar, then it must have a leading zero
+        if(grepl('^\\.', reward)){
+          reward <- paste0('0', reward)
         }
+        args <- c(args, list(Reward = as.character(reward)))
 
         # Keywords
         if (!is.null(keywords)) {
