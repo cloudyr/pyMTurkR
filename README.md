@@ -1,7 +1,7 @@
 # pyMTurkR: An R package to interface with MTurk's Requester API <img src="assets/hex-pyMTurkR.png" align="right" width="200" />
 
 <!-- badges: start -->
-![travis-ci](https://travis-ci.org/cloudyr/pyMTurkR.svg?branch=master)
+[![travis-ci](https://travis-ci.org/cloudyr/pyMTurkR.svg?branch=master)](https://travis-ci.org/cloudyr/pyMTurkR?branch=master)
 [![Codecov test coverage](https://codecov.io/gh/cloudyr/pyMTurkR/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudyr/pyMTurkR?branch=master)
 ![version](https://img.shields.io/badge/version-0.6.6-blue.svg)
 ![alpha](https://img.shields.io/badge/status-alpha-lightgrey.svg)
