@@ -38,6 +38,7 @@ test_that("ApproveAllAssignments with hit", {
 test_that("ApproveAllAssignments with feedback that's too long", {
   skip_if_not(CheckAWSKeys())
 
+  # Get HITs then Assignment
   GetReviewableHITs() -> hits
   hits$HITId[[1]] -> hit
   GetAssignment(hit = hit)[[1]][1] -> assignment

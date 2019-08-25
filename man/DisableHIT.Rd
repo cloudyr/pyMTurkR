@@ -8,10 +8,10 @@
 \alias{disablehit}
 \alias{disposehit}
 \alias{deletehit}
-\title{Disable HIT}
+\title{Disable/Expire or Delete HIT}
 \usage{
 DisableHIT(hit = NULL, hit.type = NULL, annotation = NULL,
-  approve.pending.assignments = FALSE, delete.hit = FALSE,
+  approve.pending.assignments = FALSE, skip.delete.prompt = FALSE,
   verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
@@ -34,11 +34,10 @@ batch ID shown in the RUI. Must specify \code{hit} xor \code{hit.type} xor
 \item{approve.pending.assignments}{A logical indicating whether the pending
 assignments should be approved when the HIT is disabled.}
 
-\item{delete.hit}{A logical indicating whether to try deleting the HIT
-when the HIT is disabled. This will also delete the assignment data. Note
-that the HIT can only be deleted if it has a "Reviewing" or "Reviewable"
-status. In other words, you can't delete a HIT if someone is currently working
-on an assignment for it.}
+\item{skip.delete.prompt}{A logical indicating whether to skip the prompt that
+asks you to confirm the delete operation. If TRUE, you will not be asked to
+confirm that you wish to Delete the HITs. This is a safeguard flag to protect
+the user from mistakenly deleting HITs.}
 
 \item{verbose}{Optionally print the results of the API request to the
 standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
@@ -52,10 +51,15 @@ disable each of them was valid.
 This function will allow you to expire a HIT early, which means it will no
 longer be available for new workers to accept. Optionally, when disabling the
 HIT you can approve all pending assignments and you can also try to delete
-the HIT. Be careful when deleting a HIT: this will also delete the assignment
-data!
+the HIT.
 }
 \details{
+Be careful when deleting a HIT: this will also delete the assignment
+data! Calling this function with \code{DeleteHIT()}, \code{deletehit()},
+\code{DisposeHIT()}, or \code{disposehit()} will result in deleting the HIT.
+The user will be prompted before continuing, unless \code{skip.delete.prompt}
+is TRUE.
+
 If you disable a HIT while workers are still working on an assignment, they
 will still be able to complete their task.
 
@@ -66,10 +70,17 @@ will still be able to complete their task.
 
 \dontrun{
 # Disable a single HIT
-b <- GenerateExternalQuestion("http://www.example.com/","400")
-hit1 <- CreateHIT(hit.type="2FFNCWYB49F9BBJWA4SJUNST5OFSOW",
-                  expiration = seconds(days = 1),
-                  question=b$string)
+hittype1 <- RegisterHITType(title = "10 Question Survey",
+                description = "Complete a 10-question survey about news coverage and your opinions",
+                reward = ".20",
+                duration = seconds(hours=1),
+                keywords = "survey, questionnaire, politics")
+a <- GenerateExternalQuestion("https://www.example.com/", "400")
+hit1 <- CreateHIT(hit.type = hittype1$HITTypeId,
+                 assignments = 1,
+                 expiration = seconds(days=1),
+                 question = a$string)
+
 DisableHIT(hit = hit1$HITId)
 
 # Disable all HITs of a given HITType
@@ -77,6 +88,9 @@ DisableHIT(hit.type = hit1$HITTypeId)
 
 # Disable all HITs of a given batch from the RUI
 DisableHIT(annotation="BatchId:78382;")
+
+# Delete the HIT previously disabled
+DeleteHIT(hit = hit1$HITId)
 }
 
 }

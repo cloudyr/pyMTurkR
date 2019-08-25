@@ -57,8 +57,7 @@ UnblockWorker("A1RO9UJNWXMU65")
 
 }
 \references{
-\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_CreateWorkerBlockOperation.html}{API
-Reference: Block}
+\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_CreateWorkerBlockOperation.html}{API Reference: Block}
 }
 \author{
 Tyler Burleigh, Thomas J. Leeper

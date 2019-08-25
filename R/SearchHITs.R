@@ -68,9 +68,6 @@ function (return.pages = NULL,
   response <- batch()
   results.found <- response$NumResults
   to.return <- response
-
-  # Keep a running total of all HITs returned
-  runningtotal <- response$NumResults
   pages <- 1
 
   if (!is.null(response$NextToken)) { # continue to fetch pages
@@ -91,10 +88,6 @@ function (return.pages = NULL,
           to.return$QualificationRequirements <- rbind(to.return$QualificationRequirements,
                                                        response$QualificationRequirements)
 
-          # Add to running total
-          runningtotal <- runningtotal + response$NumResults
-          results.found <- response$NumResults
-
           # Update page token
           if(!is.null(response$NextToken)){
             pagetoken <- response$NextToken
@@ -104,7 +97,7 @@ function (return.pages = NULL,
   }
 
   if (verbose) {
-    message(runningtotal, " HITs Retrieved")
+    message(nrow(to.return$HITs), " HITs Retrieved")
   }
   return(to.return[c("HITs", "QualificationRequirements")])
 }
