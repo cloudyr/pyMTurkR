@@ -113,11 +113,22 @@ CreateHIT <-
   create <-
   createhit <-
   createhitwithhittype <-
-  function (hit.type = NULL, question = NULL, expiration, assignments = NULL,
-            assignment.review.policy = NULL, hit.review.policy = NULL,
-            annotation = NULL, unique.request.token = NULL, title = NULL,
-            description = NULL, reward = NULL, duration = NULL, keywords = NULL,
-            auto.approval.delay = NULL, qual.req = NULL, hitlayoutid = NULL,
+  function (hit.type = NULL,
+            question = NULL,
+            expiration,
+            assignments = NULL,
+            assignment.review.policy = NULL,
+            hit.review.policy = NULL,
+            annotation = NULL,
+            unique.request.token = NULL,
+            title = NULL,
+            description = NULL,
+            reward = NULL,
+            duration = NULL,
+            keywords = NULL,
+            auto.approval.delay = NULL,
+            qual.req = NULL,
+            hitlayoutid = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
@@ -207,8 +218,13 @@ CreateHIT <-
           args <- c(args, list(MaxAssignments = as.integer(assignments)))
         }
 
-        # Auto approval delay
         if (!is.null(auto.approval.delay)) {
+          if (!as.integer(auto.approval.delay) > 0 | !as.integer(auto.approval.delay) <= 2592000) {
+            warning("AutoApprovalDelayInSeconds must be between 0 (0 seconds) and 2592000 (30 days); defaults to 30 days")
+            auto.approval.delay <- as.integer(2592000)
+          } else {
+            auto.approval.delay <- as.integer(auto.approval.delay)
+          }
           args <- c(args, list(AutoApprovalDelayInSeconds = as.integer(auto.approval.delay)))
         }
 

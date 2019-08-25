@@ -70,8 +70,13 @@ RegisterHITType <-
   hittype <-
   CreateHITType <-
   createhittype <-
-  function (title, description, reward, duration, keywords = NULL,
-            auto.approval.delay = as.integer(2592000), qual.req = NULL,
+  function (title,
+            description,
+            reward,
+            duration,
+            keywords = NULL,
+            auto.approval.delay = as.integer(2592000),
+            qual.req = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client

@@ -115,10 +115,17 @@
 ChangeHITType <-
   changehittype <-
   UpdateHITTypeOfHIT <-
-  function (hit = NULL, old.hit.type = NULL, new.hit.type = NULL,
-            title = NULL, description = NULL, reward = NULL, duration = NULL,
-            keywords = NULL, auto.approval.delay = as.integer(2592000),
-            qual.req = NULL, old.annotation = NULL,
+  function (hit = NULL,
+            old.hit.type = NULL,
+            new.hit.type = NULL,
+            title = NULL,
+            description = NULL,
+            reward = NULL,
+            duration = NULL,
+            keywords = NULL,
+            auto.approval.delay = as.integer(2592000),
+            qual.req = NULL,
+            old.annotation = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
@@ -152,9 +159,13 @@ ChangeHITType <-
         stop("Must specify new HITType xor new HITType parameters (title, description, reward, duration)")
       } else {
         # Create a new HIT Type for the user
-        register <- try(RegisterHITType(title, description, reward, duration,
-                                    keywords = keywords, auto.approval.delay = auto.approval.delay,
-                                    qual.req = qual.req))
+        register <- try(RegisterHITType(title = title,
+                                        description = description,
+                                        reward = reward,
+                                        duration = duration,
+                                        keywords = keywords,
+                                        auto.approval.delay = auto.approval.delay,
+                                        qual.req = qual.req))
 
         if (class(register) == "try-error") {
           stop("Could not RegisterHITType(), check parameters")
@@ -164,7 +175,7 @@ ChangeHITType <-
       }
     }
 
-    # We need hit, old.hit.tyle, or old.annotation
+    # We need hit, old.hit.type, or old.annotation
     if (!is.null(hit)) { # hit
       hitlist <- hit
     } else if(!is.null(old.hit.type)) { # old.hit.type
@@ -172,14 +183,14 @@ ChangeHITType <-
         old.hit.type <- as.character(old.hit.type)
       }
       message("Hang on while I search your HITs by HIT Type ID...")
-      hitsearch <- SearchHITs()
+      hitsearch <- SearchHITs(verbose = FALSE)
       hitlist <- hitsearch$HITs$HITId[hitsearch$HITs$HITTypeId %in% old.hit.type]
     } else if (!is.null(old.annotation)) { # old.annotation
       if (is.factor(old.annotation)) {
         old.annotation <- as.character(old.annotation)
       }
       message("Hang on while I search your HITs by annotation...")
-      hitsearch <- SearchHITs()
+      hitsearch <- SearchHITs(verbose = FALSE)
       hitlist <- hitsearch$HITs$HITId[grepl(old.annotation, hitsearch$HITs$RequesterAnnotation)]
     }
     if (length(hitlist) == 0) {

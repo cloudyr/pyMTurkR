@@ -29,8 +29,7 @@
 GetHIT <-
   gethit <-
   hit <-
-  function(hit,
-           verbose = getOption('pyMTurkR.verbose', TRUE)){
+  function(hit, verbose = getOption('pyMTurkR.verbose', TRUE)){
 
     client <- GetClient() # Boto3 client
     response <- try(client$get_hit(HITId = hit))
