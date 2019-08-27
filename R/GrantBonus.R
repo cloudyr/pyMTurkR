@@ -119,6 +119,9 @@ GrantBonus <-
     if (!length(assignments) == length(workers)) {
       stop("Number of assignments is not length(workers)")
     }
+    if(is.integer(amounts)){
+      amounts <- as.character(amounts)
+    }
 
     Bonuses <- emptydf(length(workers), 5, c("WorkerId", "Assignment", "Amount", "Reason", "Valid"))
 
