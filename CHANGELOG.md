@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.7] - 2019-08-27
+### Fixed
+- Now exports emptydf() helper function
+
 ## [0.6.6] - 2019-08-25
 ### Fixed
 - Fixed a bug in ContactWorker when warning about invalid requests
