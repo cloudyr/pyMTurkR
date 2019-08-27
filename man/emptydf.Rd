@@ -9,9 +9,9 @@ emptydf(nrow, ncol, names)
 \arguments{
 \item{nrow}{Number of rows}
 
-\item{nrow}{Number of columns}
+\item{ncol}{Number of columns}
 
-\item{nrow}{Number of names of the columns}
+\item{names}{Number of names of the columns}
 }
 \description{
 Helper function that creates an empty data.frame
