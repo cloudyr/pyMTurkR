@@ -204,7 +204,7 @@ ContactWorker <-
 
       for (i in 1:length(workers)) {
 
-        response <<- try(client$notify_workers(
+        response <- try(client$notify_workers(
           Subject = subjects[i],
           WorkerIds = as.list(workers[i]),
           MessageText = msgs[i]
