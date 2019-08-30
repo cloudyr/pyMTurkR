@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.6.8] - 2019-08-30
+- Fix in CreateQualificationType when specifying a Qualification Test
+- Remove erroneous global variable assignment in CreateHIT
+- Added templates from MTurkR
+- More unit tests
+
 ## [0.6.7] - 2019-08-27
 ### Fixed
 - Now exports emptydf() helper function

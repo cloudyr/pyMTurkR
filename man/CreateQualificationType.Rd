@@ -77,12 +77,24 @@ invoked as QualificationRequirements in \code{\link{RegisterHITType}} and/or
 \examples{
 
 \dontrun{
-# Create
+# Create a Qualification Type
 qual1 <- CreateQualificationType(name="Worked for me before",
            description="This qualification is for people who have worked for me before",
            status = "Active",
            keywords = "Worked for me before")
 DisposeQualificationType(qual1$QualificationTypeId)
+
+
+# Create a Qualification Type with a Qualification Test
+f <- system.file("templates/qualificationtest1.xml", package = "pyMTurkR")
+QuestionForm <- paste0(readLines(f, warn = FALSE), collapse = "")
+
+qual2 <- CreateQualificationType(name = "Qual0001",
+                        description = "This is a qualification",
+                        status = "Active",
+                        test = QuestionForm,
+                        test.duration = 30)
+DisposeQualificationType(qual2$QualificationTypeId)
 }
 
 }

@@ -57,12 +57,24 @@
 #' @examples
 #'
 #' \dontrun{
-#' # Create
+#' # Create a Qualification Type
 #' qual1 <- CreateQualificationType(name="Worked for me before",
 #'            description="This qualification is for people who have worked for me before",
 #'            status = "Active",
 #'            keywords = "Worked for me before")
 #' DisposeQualificationType(qual1$QualificationTypeId)
+#'
+#'
+#' # Create a Qualification Type with a Qualification Test
+#' f <- system.file("templates/qualificationtest1.xml", package = "pyMTurkR")
+#' QuestionForm <- paste0(readLines(f, warn = FALSE), collapse = "")
+#'
+#' qual2 <- CreateQualificationType(name = "Qual0001",
+#'                         description = "This is a qualification",
+#'                         status = "Active",
+#'                         test = QuestionForm,
+#'                         test.duration = 30)
+#' DisposeQualificationType(qual2$QualificationTypeId)
 #' }
 #'
 #' @export CreateQualificationType
@@ -108,11 +120,12 @@ CreateQualificationType <-
     } else if(is.null(test) & !is.null(test.duration)){
       stop("If test.duration is specified then test must be too")
     } else if(!is.null(test) & !is.null(test.duration)){
-      args <- c(args, list(Test = as.integer(test.duration)))
+      args <- c(args, list(TestDurationInSeconds = as.integer(test.duration),
+                           Test = test))
     }
     if(is.null(test) & !is.null(answerkey)){
       stop("If answerkey is specified then test must be too")
-    } else if(!is.null(test) & !is.null(test.duration) & !is.null(answerkey)){
+    } else if(!is.null(test) & !is.null(answerkey)){
       args <- c(args, list(AnswerKey = answerkey))
     }
     if(!is.null(auto)){
