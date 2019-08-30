@@ -75,6 +75,21 @@
 #'                         test = QuestionForm,
 #'                         test.duration = 30)
 #' DisposeQualificationType(qual2$QualificationTypeId)
+#'
+#'
+#' # Create a Qualification Type with a Qualification Test and Answer Key
+#' f <- system.file("templates/qualificationtest1.xml", package = "pyMTurkR")
+#' QuestionForm <- paste0(readLines(f, warn = FALSE), collapse = "")
+#' f <- system.file("templates/answerkey1.xml", package = "pyMTurkR")
+#' AnswerKey <- paste0(readLines(f, warn = FALSE), collapse = "")
+#'
+#' qual3 <- CreateQualificationType(name = "Qual0001",
+#'                         description = "This is a qualification",
+#'                         status = "Active",
+#'                         test = QuestionForm,
+#'                         test.duration = 30,
+#'                         answerkey = AnswerKey)
+#' DisposeQualificationType(qual3$QualificationTypeId)
 #' }
 #'
 #' @export CreateQualificationType

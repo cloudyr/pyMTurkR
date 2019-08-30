@@ -59,10 +59,10 @@
 #' ExtendHIT(hit = hit1$HITId, add.assignments = "20")
 #'
 #' # add time
-#' ExtendHIT(hit = hit1$HITId, add.seconds = seconds(days=1)))
+#' ExtendHIT(hit = hit1$HITId, add.seconds = seconds(days=1))
 #'
 #' # add assignments and time
-#' ExtendHIT(hit = hit1$HITId, add.assignments = "20", add.seconds = seconds(days=1)))
+#' ExtendHIT(hit = hit1$HITId, add.assignments = "20", add.seconds = seconds(days=1))
 #'
 #' # cleanup
 #' DisableHIT(hit = hit1$HITId)
@@ -150,9 +150,9 @@ ExtendHIT <-
         args <- c(args, list(HITId = hit,
                              NumberOfAdditionalAssignments = as.integer(add.assignments)))
 
-        # Add request token if applicable
+        # Add request token if applicable, appending i to differentiate the requests
         if(!is.null(unique.request.token)){
-          args <- c(args, list(UniqueRequestToken = unique.request.token))
+          args <- c(args, list(UniqueRequestToken = paste0(unique.request.token, i)))
         }
 
         # Execute the API call

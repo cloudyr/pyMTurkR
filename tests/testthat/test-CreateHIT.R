@@ -4,7 +4,7 @@ test_that("CreateHIT", {
 
   # Register a HIT type
   hittype1 <- RegisterHITType(title = "10 Question Survey",
-                              description = "Complete a 10-question survey about news coverage and your opinions",
+                              description = "Complete a 10-question survey",
                               reward = ".20",
                               duration = seconds(hours=1),
                               keywords = "survey, questionnaire, politics")
@@ -38,7 +38,7 @@ test_that("CreateHIT with policies", {
 
   # Register a HIT type
   hittype1 <- RegisterHITType(title = "10 Question Survey",
-                              description = "Complete a 10-question survey about news coverage and your opinions",
+                              description = "Complete a 10-question survey",
                               reward = ".20",
                               duration = seconds(hours=1),
                               keywords = "survey, questionnaire, politics")
@@ -86,7 +86,7 @@ test_that("CreateHIT with incorrect parameters", {
 
   # Register a HIT type
   hittype1 <- RegisterHITType(title = "10 Question Survey",
-                              description = "Complete a 10-question survey about news coverage and your opinions",
+                              description = "Complete a 10-question survey",
                               reward = ".20",
                               duration = seconds(hours=1),
                               keywords = "survey, questionnaire, politics")
