@@ -57,7 +57,7 @@ GetQualificationType <-
         warning("Invalid Request")
       }
     } else {
-      Qualifications <- ToDataFrameQualificationTypes(response$QualificationType)
+      Qualifications <- ToDataFrameQualificationTypes(list(response$QualificationType))
       if (verbose) {
         message("QualificationType Retrieved: ", qual)
       }

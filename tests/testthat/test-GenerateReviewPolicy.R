@@ -78,16 +78,14 @@ test_that("GenerateAssignmentReviewPolicy errors", {
   listb <- list(AnswerKey = list("QuestionId1" = "B", "QuestionId2" = "A"),
                 ApproveIfKnownAnswerScoreIsAtLeast = 102)
   policyb <- try(do.call(GenerateAssignmentReviewPolicy, listb))
-  expect_s3_class(policya, "try-error")
-
-
+  expect_s3_class(policyb, "try-error")
 
   # RejectIfKnownAnswerScoreIsLessThan must be between 0 and 101
   listb <- list(AnswerKey = list("QuestionId1" = "B", "QuestionId2" = "A"),
                 ApproveIfKnownAnswerScoreIsAtLeast = 99,
                 RejectIfKnownAnswerScoreIsLessThan = 102)
   policyb <- try(do.call(GenerateAssignmentReviewPolicy, listb))
-  expect_s3_class(policya, "try-error")
+  expect_s3_class(policyb, "try-error")
 
 
   # ExtendIfKnownAnswerScoreIsLessThan must be between 0 and 101
@@ -95,7 +93,7 @@ test_that("GenerateAssignmentReviewPolicy errors", {
                 ApproveIfKnownAnswerScoreIsAtLeast = 99,
                 ExtendIfKnownAnswerScoreIsLessThan = 102)
   policyb <- try(do.call(GenerateAssignmentReviewPolicy, listb))
-  expect_s3_class(policya, "try-error")
+  expect_s3_class(policyb, "try-error")
 
 
   # ExtendMaximumAssignments must be between 2 and 25
@@ -103,7 +101,7 @@ test_that("GenerateAssignmentReviewPolicy errors", {
                 ApproveIfKnownAnswerScoreIsAtLeast = 99,
                 ExtendMaximumAssignments = 102)
   policyb <- try(do.call(GenerateAssignmentReviewPolicy, listb))
-  expect_s3_class(policya, "try-error")
+  expect_s3_class(policyb, "try-error")
 
 
   # ExtendMinimumTimeInSeconds must be between 1 hour and 1 year
@@ -111,13 +109,13 @@ test_that("GenerateAssignmentReviewPolicy errors", {
                 ApproveIfKnownAnswerScoreIsAtLeast = 99,
                 ExtendMinimumTimeInSeconds = 1)
   policyb <- try(do.call(GenerateAssignmentReviewPolicy, listb))
-  expect_s3_class(policya, "try-error")
+  expect_s3_class(policyb, "try-error")
 
 
   # Missing Answer Key
   listb <- list(ApproveIfKnownAnswerScoreIsAtLeast = 99)
   policyb <- try(do.call(GenerateAssignmentReviewPolicy, listb))
-  expect_s3_class(policya, "try-error")
+  expect_s3_class(policyb, "try-error")
 
 
   # Inappropriate parameter
@@ -125,7 +123,7 @@ test_that("GenerateAssignmentReviewPolicy errors", {
                 ApproveIfKnownAnswerScoreIsAtLeast = 99,
                 X = 1)
   policyb <- try(do.call(GenerateAssignmentReviewPolicy, listb))
-  expect_s3_class(policya, "try-error")
+  expect_s3_class(policyb, "try-error")
 
 })
 
