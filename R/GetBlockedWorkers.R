@@ -28,7 +28,7 @@ GetBlockedWorkers <-
         response$WorkerBlocks <- ToDataFrameWorkerBlock(response$WorkerBlocks)
         return(response)
       } else {
-        stop("No HITs found")
+        stop("No Blocked Workers found")
       }
     }
 
@@ -39,7 +39,7 @@ GetBlockedWorkers <-
 
     # Keep a running total of all HITs returned
     runningtotal <- response$NumResults
-    pages <- 1
+    pages <- 0
 
     if (!is.null(response$NextToken)) { # continue to fetch pages
 

@@ -172,10 +172,6 @@ GetBonuses <-
 
       to.return <- data.frame()
 
-      # Progress bar because this can take some time
-      pb <- progress::progress_bar$new(total = length(hitlist))
-      message("\nSearching for Bonuses...")
-
       # Loop over hitlist
       for(i in 1:length(hitlist)){
         hit <- hitlist[i]
@@ -199,15 +195,10 @@ GetBonuses <-
 
       to.return <- data.frame()
 
-      # Progress bar because this can take some time
-      pb <- progress::progress_bar$new(total = length(hitlist))
-      message("\nSearching for Bonuses...")
-
       # Loop over hitlist
       for(i in 1:length(hitlist)){
         hit <- hitlist[i]
         to.return <- rbind(to.return, batch_helper(hit = hit))
-        pb$tick()
       }
 
     }
