@@ -21,6 +21,7 @@ test_that("ExtendHIT using HITId, HITTypeId, Annotation", {
   Sys.sleep(15)
 
   # Extend HIT using HITId
+  set.seed(as.integer(Sys.time()))
   ExtendHIT(hit = hit$HITId,
             add.assignments = "1",
             add.seconds = seconds(days=1),

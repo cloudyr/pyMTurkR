@@ -143,7 +143,7 @@ GetAssignment <-
           message("Searching for HITs matching HITTypeId...")
         }
 
-        hitsearch <- SearchHITs(verbose = verbose)
+        hitsearch <- SearchHITs(verbose = FALSE)
         hitlist <- hitsearch$HITs$HITId[hitsearch$HITs$HITTypeId %in% hit.type]
       } else if (!is.null(annotation)) { # Search by HIT Annotation
         if(is.na(annotation)){
@@ -152,7 +152,7 @@ GetAssignment <-
         if (is.factor(annotation)) {
           annotation <- as.character(annotation)
         }
-        hitsearch <- SearchHITs(verbose = verbose)
+        hitsearch <- SearchHITs(verbose = FALSE)
         hitlist <- hitsearch$HITs$HITId[grepl(annotation, hitsearch$HITs$RequesterAnnotation)]
       }
       if (length(hitlist) == 0) {
