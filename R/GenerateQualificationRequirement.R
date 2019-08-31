@@ -54,7 +54,7 @@ GenerateQualificationRequirement <-
       this.qual <- list()
       qual <- quals[[i]]
 
-      if (!exists('qual')) {
+      if (!exists('QualificationTypeId', where = qual)) {
         stop("No QualificationTypeId specified for item ", i, " in list")
       }
       if (!exists('Comparator', where = qual)) {
@@ -110,18 +110,23 @@ GenerateQualificationRequirement <-
           !qual$Comparator %in% c("Exists","DoesNotExist")) {
         stop("Masters qualifications can only accept 'Exists' comparator")
       }
-      if (qual$Comparator %in% c("Exists","DoesNotExist") & (exists('LocaleValues', where = qual) | exists('IntegerValues', where = qual)) ) {
-        if(exists('LocaleValues', where = qual))
+      if (qual$Comparator %in% c("Exists","DoesNotExist") &
+          (exists('LocaleValues', where = qual) | exists('IntegerValues', where = qual)) ) {
+        if(exists('LocaleValues', where = qual)){
           qual$LocaleValues <- NULL
-        if(exists('IntegerValues', where = qual))
+          warning("LocaleValues not used if Qualification is Exists/DoesNotExist")
+        }
+        if(exists('IntegerValues', where = qual)){
           qual$IntegerValues <- NULL
+          warning("IntegerValues not used if Qualification is Exists/DoesNotExist")
+        }
       }
 
       this.qual$QualificationTypeId <- qual$QualificationTypeId
       this.qual$Comparator <- qual$Comparator
       if(exists('RequiredToPreview', where = qual))
         this.qual$RequiredToPreview <- qual$RequiredToPreview
-      if(exists('actions.guarded', where = qual))
+      if(exists('ActionsGuarded', where = qual))
         this.qual$ActionsGuarded <- qual$ActionsGuarded
       if(exists('IntegerValues', where = qual))
         this.qual$IntegerValues <- list(as.integer(qual$IntegerValues))

@@ -45,12 +45,9 @@ function (destination,
     if (!event.type %in% validopts) {
       stop(paste0("Inappropriate EventType specified. Must be one of: ", paste(validopts, sep = ", ")))
     }
-    validdest <- c("Email", "SQS", "SNS")
-    if(!transport %in% validdest) {
-      stop(paste0("Inappropriate Transport specified. Must be one of: ", paste(validdest, sep = ", ")))
-    }
-    if (is.null(destination)) {
-        stop("No Destination specified; must be Email address, URL, or topic ARN -- depending on transport (see API)")
+    validtransport <- c("Email", "SQS", "SNS")
+    if(!transport %in% validtransport) {
+      stop(paste0("Inappropriate Transport specified. Must be one of: ", paste(validtransport, sep = ", ")))
     }
 
     notification <- reticulate::dict(
