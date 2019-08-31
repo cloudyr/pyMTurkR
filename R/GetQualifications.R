@@ -41,8 +41,7 @@
 #' @examples
 #'
 #' \dontrun{
-#' qual1 <-
-#' AssignQualification(workers = "A1RO9UJNWXMU65",
+#' qual1 <- AssignQualification(workers = "A1RO9UJNWXMU65",
 #'                     name = "Worked for me before",
 #'                     description = "This qualification is for people who have worked for me before",
 #'                     status = "Active",
@@ -70,29 +69,28 @@ GetQualifications <-
 
     batch <- function(pagetoken = NULL) {
 
-      # Use page token if given
-      if(!is.null(pagetoken)){
-        if(is.null(qual)){
-          response <- try(client$list_workers_with_qualification_type(NextToken = pagetoken,
-                                                                      MaxResults = as.integer(results)))
-        } else {
-          response <- try(client$list_workers_with_qualification_type(QualificationTypeId = qual,
-                                                                      NextToken = pagetoken,
-                                                                      MaxResults = as.integer(results)))
-        }
-      } else {
-        if(is.null(qual)){
-          response <- try(client$list_workers_with_qualification_type(MaxResults = as.integer(results)))
-        } else {
-          response <- try(client$list_workers_with_qualification_type(QualificationTypeId = qual,
-                                                                      MaxResults = as.integer(results)))
+      # List to store arguments
+      args <- list(QualificationTypeId = qual,
+                   MaxResults = as.integer(results))
 
-        }
+      # Set the function to use later (this one has a hit type)
+      fun <- client$list_workers_with_qualification_type
+
+      if(!is.null(pagetoken)){
+        args <- c(args, NextToken = pagetoken)
       }
+      if(!is.null(status)){
+        args <- c(args, Status = status)
+      }
+
+      # Execute the API call
+      response <- try(
+        do.call('fun', args)
+      )
 
       # Validity check response
       if(class(response) == "try-error") {
-        stop("GetQualifications() request failed!")
+        stop("Request failed")
       }
 
       response$Qualifications <- ToDataFrameQualifications(response$Qualifications)
@@ -107,7 +105,6 @@ GetQualifications <-
 
     # Keep a running total of all HITs returned
     runningtotal <- response$NumResults
-    pages <- 1
 
     if (!is.null(response$NextToken)) { # continue to fetch pages
 
@@ -115,8 +112,7 @@ GetQualifications <-
       pagetoken <- response$NextToken
 
       # Fetch while the number of results is equal to max results per page
-      while (results.found == results &
-             (is.null(return.pages) || pages < return.pages)) {
+      while (results.found == results) {
 
         # Fetch next batch
         response <- batch(pagetoken)
@@ -124,20 +120,17 @@ GetQualifications <-
         # Add to HIT DF
         to.return$Qualifications <- rbind(to.return$Qualifications, response$Qualifications)
 
-        # Add to running total
-        runningtotal <- runningtotal + response$NumResults
         results.found <- response$NumResults
 
         # Update page token
         if(!is.null(response$NextToken)){
           pagetoken <- response$NextToken
         }
-        pages <- pages + 1
       }
     }
 
     if (verbose) {
-      message(runningtotal, " Qualifications Retrieved")
+      message(nrow(to.return$Qualifications), " Qualifications Retrieved")
     }
     return(to.return$Qualifications)
 

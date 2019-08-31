@@ -38,5 +38,11 @@ test_that("GetAssignment", {
                 get.answers = TRUE) -> result
   expect_type(result, "list")
 
+  # GetAssignment using Annotation, return answers
+  GetAssignment(annotation = ';',
+                get.answers = TRUE,
+                results = 1) -> result
+  expect_type(result, "list")
+
 
 })

@@ -36,7 +36,7 @@ GetBlockedWorkers <-
     results.found <- response$NumResults
     to.return <- response
 
-    if (!is.null(response$NextToken)) { # continue to fetch pages
+    if (!is.null(response$NextToken) & results > results.found) { # continue to fetch pages
 
       # Starting with the next page, identified using NextToken
       pagetoken <- response$NextToken
@@ -52,9 +52,9 @@ GetBlockedWorkers <-
 
         # Update results found
         if(!is.null(response)){
-          results.found <- 0
-        } else {
           results.found <- response$NumResults
+        } else {
+          results.found <- 0
         }
 
         # Update page token

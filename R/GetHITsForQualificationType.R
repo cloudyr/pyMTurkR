@@ -64,7 +64,8 @@ GetHITsForQualificationType <-
         response$HITs <- ToDataFrameHITs(response$HITs)
         return(response)
       } else {
-        stop("No HITs found")
+        return(emptydf(nrow = 0, ncol = 6, c('HITId', 'QualificationTypeId',  'Comparator',
+                                             'Value', 'RequiredToPreview', 'ActionsGuarded')))
       }
     }
 
@@ -73,10 +74,7 @@ GetHITsForQualificationType <-
     results.found <- response$NumResults
     to.return <- response
 
-    # Keep a running total of all HITs returned
-    runningtotal <- response$NumResults
-
-    if (!is.null(response$NextToken)) { # continue to fetch pages
+    if (!is.null(response$NextToken) & results > results.found) { # continue to fetch pages
 
       # Starting with the next page, identified using NextToken
       pagetoken <- response$NextToken
@@ -93,9 +91,12 @@ GetHITsForQualificationType <-
         to.return$QualificationRequirements <- rbind(to.return$QualificationRequirements,
                                                      response$QualificationRequirements)
 
-        # Add to running total
-        runningtotal <- runningtotal + response$NumResults
-        results.found <- response$NumResults
+        # Update results found
+        if(!is.null(response)){
+          results.found <- response$NumResults
+        } else {
+          results.found <- 0
+        }
 
         # Update page token
         if(!is.null(response$NextToken)){
@@ -105,7 +106,7 @@ GetHITsForQualificationType <-
     }
 
     if (verbose) {
-      message(runningtotal, " HITs Retrieved")
+      message(nrow(to.return$HITs), " HITs Retrieved")
     }
     return(to.return[c("HITs", "QualificationRequirements")])
   }

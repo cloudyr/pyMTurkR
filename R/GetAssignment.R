@@ -120,7 +120,7 @@ GetAssignment <-
             Answers <- rbind(Answers, ans)
           }
           if (verbose) {
-            message(i, ": Assignment ", assignment[i], " Retrieved")
+            message("Assignment ", assignment[i], " Retrieved")
           }
         }
       }
@@ -163,6 +163,8 @@ GetAssignment <-
       } else {
         status <- c("Approved", "Rejected", "Submitted")
       }
+
+
 
       batch_helper_list_assignments <- function(batchhit, pagetoken = NULL, num_retries = 1) {
 
@@ -215,7 +217,7 @@ GetAssignment <-
             tmpAnswers <- rbind(tmpAnswers, tmp$answers)
 
             if(verbose){
-              message("\nAssignment ", assignments[[i]]$AssignmentId, " Retrieved")
+              message("Assignment ", assignments[[i]]$AssignmentId, " Retrieved")
             }
           }
         } else {
@@ -254,14 +256,32 @@ GetAssignment <-
                                 "FreeText", "SelectionIdentifier", "OtherSelectionField",
                                 "UploadedFileKey", "UploadedFileSizeInBytes"))
 
+      total.results.found <- 0
+
       # Run batch over hitlist
       for (i in 1:length(hitlist)) {
 
         hit <- hitlist[i]
         pagetoken <- NULL
-        results.found <- NULL
 
-        while ((is.null(results.found) || results.found == results)) {
+        # Fetch first page
+        response <- batch(hit, pagetoken)
+        if(!is.null(response)){
+          results.found <- response$NumResults
+        } else {
+          results.found <- 0
+        }
+        total.results.found <- total.results.found + results.found
+        to.return <- response
+
+        Assignments <- rbind(Assignments, to.return$Assignments)
+        Answers <- rbind(Answers, to.return$Answers)
+
+        if(total.results.found >= results) {
+          break
+        }
+
+        while (!is.null(response$NextToken) & results > total.results.found) {
 
           response <- batch(hit, pagetoken)
           results.found <- response$NumResults
@@ -273,6 +293,7 @@ GetAssignment <-
           } else {
             results.found <- 0
           }
+          total.results.found <- total.results.found + results.found
 
           Assignments <- rbind(Assignments, to.return$Assignments)
           Answers <- rbind(Answers, to.return$Answers)

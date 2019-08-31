@@ -36,7 +36,11 @@
 #'
 #' \dontrun{
 #' GetQualificationRequests()
-#' GetQualificationRequests("2YCIA0RYNJ9262B1D82MPTUEXAMPLE")
+#'
+#' # Search for qualifications you own, then get requests for one of the quals
+#' SearchQualificationTypes(must.be.owner = TRUE, verbose = FALSE) -> quals
+#' quals$QualificationTypeId[[1]] -> qual1
+#' GetQualificationRequests(qual1)
 #' }
 #'
 #' @export GetQualificationRequests
@@ -52,6 +56,13 @@ GetQualificationRequests <-
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
+
+    if(!is.null(qual)){
+      SearchQualificationTypes(must.be.owner = TRUE, verbose = FALSE) -> quals
+      if(!qual %in% quals$QualificationTypeId){
+        stop("Can only get Qualification Requests for Qualifications you own")
+      }
+    }
 
     batch <- function(pagetoken = NULL) {
 
@@ -77,7 +88,7 @@ GetQualificationRequests <-
 
       # Validity check response
       if(class(response) == "try-error") {
-        stop("GetQualificationRequests() request failed!")
+        stop("Request failed")
       }
 
       response$QualificationRequests <- ToDataFrameQualificationRequests(response$QualificationRequests)
@@ -88,9 +99,6 @@ GetQualificationRequests <-
     response <- batch()
     results.found <- response$NumResults
     to.return <- response
-
-    # Keep a running total of all HITs returned
-    runningtotal <- response$NumResults
 
     if (!is.null(response$NextToken)) { # continue to fetch pages
 
@@ -104,10 +112,9 @@ GetQualificationRequests <-
         response <- batch(pagetoken)
 
         # Add to HIT DF
-        to.return$QualificationRequests <- rbind(to.return$QualificationRequests, response$QualificationRequests)
+        to.return$QualificationRequests <- rbind(to.return$QualificationRequests,
+                                                 response$QualificationRequests)
 
-        # Add to running total
-        runningtotal <- runningtotal + response$NumResults
         results.found <- response$NumResults
 
         # Update page token
@@ -118,7 +125,7 @@ GetQualificationRequests <-
     }
 
     if (verbose) {
-      message(runningtotal, " Requests Retrieved")
+      message(nrow(to.return$QualificationRequests), " Requests Retrieved")
     }
     return(to.return$QualificationRequests)
   }
