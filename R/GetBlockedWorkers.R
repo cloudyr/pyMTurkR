@@ -33,15 +33,15 @@ GetBlockedWorkers <-
     }
 
     # Fetch first page
-    response <- batch()
+    response <- batch(pagetoken)
     results.found <- response$NumResults
     to.return <- response
 
     # Keep a running total of all HITs returned
-    runningtotal <- response$NumResults
-    pages <- 0
+    pages <- 1
 
-    if (!is.null(response$NextToken)) { # continue to fetch pages
+    if ((is.null(results.found) || results.found == results) &
+        (is.null(return.pages) || pages < return.pages)) { # continue to fetch pages
 
       # Starting with the next page, identified using NextToken
       pagetoken <- response$NextToken
@@ -69,7 +69,7 @@ GetBlockedWorkers <-
     }
 
     if (verbose) {
-      message(runningtotal, " Blocked Workers Found")
+      message(nrow(to.return$WorkerBlocks), " Blocked Workers Found")
     }
     return(to.return$WorkerBlocks)
   }
