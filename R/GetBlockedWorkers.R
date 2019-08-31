@@ -56,8 +56,7 @@ GetBlockedWorkers <-
         # Add to HIT DF
         to.return$WorkerBlocks <- rbind(to.return$WorkerBlocks, response$WorkerBlocks)
 
-        # Add to running total
-        runningtotal <- runningtotal + response$NumResults
+        # Update results found
         results.found <- response$NumResults
 
         # Update page token

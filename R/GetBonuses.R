@@ -150,7 +150,11 @@ GetBonuses <-
     }
 
     # Fetch using different input parameters
-    if(!is.null(hit)){
+    # Check that one of the params for lookup was provided
+    if (all(is.null(assignment) & is.null(hit) &
+            is.null(hit.type) & is.null(annotation))) {
+      stop("Must provide 'assignment' xor 'hit' xor 'hit.type' xor 'annotation'")
+    } else if(!is.null(hit)){
       to.return <- batch_helper(hit = hit)
     } else if(!is.null(assignment)) {
       response <- try(client$list_bonus_payments(AssignmentId = assignment))
@@ -176,7 +180,6 @@ GetBonuses <-
       for(i in 1:length(hitlist)){
         hit <- hitlist[i]
         to.return <- rbind(to.return, batch_helper(hit = hit))
-        pb$tick()
       }
 
     } else if (!is.null(annotation)) {
@@ -206,12 +209,15 @@ GetBonuses <-
     if (verbose) {
       if(is.null(to.return)){
         results <- 0
+        to.return <- emptydf(0, 5, c("AssignmentId", "WorkerId",
+                                          "BonusAmount", "Reason",
+                                          "GrantTime"))
       } else {
         results <- nrow(to.return)
       }
       message(results, " Worker Bonuses Found")
     }
 
-    to.return
+    return(to.return)
 
   }
