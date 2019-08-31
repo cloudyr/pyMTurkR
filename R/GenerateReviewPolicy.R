@@ -164,7 +164,8 @@
 #'			))
 #'
 #'}
-#' @export
+#' @export GenerateHITReviewPolicy
+#' @export GenerateAssignmentReviewPolicy
 
 GenerateHITReviewPolicy <-
   function(...) {

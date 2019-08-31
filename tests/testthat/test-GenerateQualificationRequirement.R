@@ -124,6 +124,28 @@ test_that("GenerateQualificationRequirement errors", {
   GenerateQualificationRequirement(quals.list) -> qual.req
   expect_type(qual.req, "list")
 
+
+  # IntegerValues missing but required
+  quals.list <- list(
+    list(QualificationTypeId = "00000000000000000001",
+         Comparator = ">",
+         RequiredToPreview = TRUE
+    )
+  )
+  GenerateQualificationRequirement(quals.list) -> qual.req
+  expect_type(qual.req, "list")
+
+
+  # Invalid comparator
+  quals.list <- list(
+    list(QualificationTypeId = "00000000000000000001",
+         Comparator = "!",
+         RequiredToPreview = TRUE
+    )
+  )
+  GenerateQualificationRequirement(quals.list) -> qual.req
+  expect_type(qual.req, "list")
+
 })
 
 

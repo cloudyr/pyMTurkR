@@ -75,10 +75,10 @@ hit1 <- CreateHIT(title = "Example",
 ExtendHIT(hit = hit1$HITId, add.assignments = "20")
 
 # add time
-ExtendHIT(hit = hit1$HITId, add.seconds = seconds(days=1)))
+ExtendHIT(hit = hit1$HITId, add.seconds = seconds(days=1))
 
 # add assignments and time
-ExtendHIT(hit = hit1$HITId, add.assignments = "20", add.seconds = seconds(days=1)))
+ExtendHIT(hit = hit1$HITId, add.assignments = "20", add.seconds = seconds(days=1))
 
 # cleanup
 DisableHIT(hit = hit1$HITId)

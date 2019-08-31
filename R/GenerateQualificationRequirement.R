@@ -60,11 +60,6 @@ GenerateQualificationRequirement <-
       if (!exists('Comparator', where = qual)) {
         stop("No Comparator specified for item ", i, " in list")
       }
-      if (!exists('LocaleValues', where = qual) & !exists('IntegerValues', where = qual)) {
-        stop("No IntegerValues / LocaleValues specified for item ", i, " in list")
-      } else if (exists('LocaleValues', where = qual) & exists('IntegerValues', where = qual)) {
-        stop("Error, IntegerValues and LocaleValues both specified for item ", i, " in list")
-      }
       if (!exists('RequiredToPreview', where = qual) & !exists('ActionsGuarded', where = qual)){
         stop("No RequiredToPreview or ActionsGuarded specified for item ", i, " in list")
       } else if (exists('RequiredToPreview', where = qual) & exists('ActionsGuarded', where = qual)) {
@@ -93,6 +88,16 @@ GenerateQualificationRequirement <-
                              "NotEqualTo", "Exists", "DoesNotExist", "In", "NotIn")) {
         stop("Inappropriate comparator specified for QualificationRequirement")
       }
+
+      # Must have IntegerValues or LocaleValues if we're not just checking existence
+      if (!qual$Comparator %in% c("Exists", "DoesNotExist") &
+          !exists('LocaleValues', where = qual) & !exists('IntegerValues', where = qual)) {
+        stop("No IntegerValues / LocaleValues specified for item ", i, " in list")
+      } else if (!qual$Comparator %in% c("Exists", "DoesNotExist") &
+                 exists('LocaleValues', where = qual) & exists('IntegerValues', where = qual)) {
+        stop("Error, IntegerValues and LocaleValues both specified for item ", i, " in list")
+      }
+
       if (qual$QualificationTypeId == "00000000000000000071" & !qual$Comparator %in% c("EqualTo", "NotEqualTo", "In", "NotIn")) {
         stop("Worker_Locale (00000000000000000071) Requirement can only be used with 'EqualTo', 'NotEqualTo', 'In', or 'NotIn' comparators")
       }
