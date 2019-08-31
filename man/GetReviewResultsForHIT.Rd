@@ -6,15 +6,12 @@
 \alias{ListReviewPolicyResultsForHIT}
 \title{Get ReviewPolicy Results for a HIT}
 \usage{
-GetReviewResultsForHIT(hit, assignment = NULL, policy.level = NULL,
-  return.pages = 1, results = as.integer(100), pagetoken = NULL,
+GetReviewResultsForHIT(hit, policy.level = NULL, return.pages = 1,
+  results = as.integer(100), pagetoken = NULL,
   verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{hit}{A character string containing a HITId.}
-
-\item{assignment}{An optional character string containing an AssignmentId.
-If specified, only results pertaining to that assignment will be returned.}
 
 \item{policy.level}{Either \code{HIT} or \code{Assignment}. If \code{NULL}
 (the default), all data for both policy levels is retrieved.}

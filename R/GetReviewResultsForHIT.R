@@ -11,8 +11,6 @@
 #'
 #' @aliases GetReviewResultsForHIT reviewresults ListReviewPolicyResultsForHIT
 #' @param hit A character string containing a HITId.
-#' @param assignment An optional character string containing an AssignmentId.
-#' If specified, only results pertaining to that assignment will be returned.
 #' @param policy.level Either \code{HIT} or \code{Assignment}. If \code{NULL}
 #' (the default), all data for both policy levels is retrieved.
 #' @param return.pages An integer indicating how many pages of results should
@@ -46,7 +44,6 @@ GetReviewResultsForHIT <-
   ListReviewPolicyResultsForHIT <-
   reviewresults <-
   function(hit,
-           assignment = NULL,
            policy.level = NULL,
            return.pages = 1,
            results = as.integer(100),
@@ -59,28 +56,13 @@ GetReviewResultsForHIT <-
     fun <- client$list_review_policy_results_for_hit
 
     # The arguments we'll call in the function
-    args <- list()
+    args <- list(RetrieveActions = TRUE,
+                 RetrieveResults = TRUE)
 
-    if (is.null(hit) && is.null(assignment)) {
-      stop("Must specify 'hit' or 'assignment'")
+    if(is.factor(hit)){
+      hit <- as.character(hit)
     }
-    if(!is.null(assignment)){
-      args <- c(args, Assignment = assignment)
-    } else if(!is.null(hit)){
-      args <- c(args, HITId = hit)
-    }
-    if(is.na(as.logical(retrieve.results))){
-      stop("'retrieve.results' must be TRUE or FALSE")
-    } else {
-      retrieve.results <- as.logical(retrieve.results)
-      args <- c(args, RetrieveResults = retrieve.results)
-    }
-    if(is.na(as.logical(retrieve.actions))){
-      stop("'retrieve.actions' must be TRUE or FALSE")
-    } else {
-      retrieve.actions <- as.logical(retrieve.actions)
-      args <- c(args, RetrieveActions = retrieve.actions)
-    }
+    args <- c(args, HITId = hit)
     if(!is.null(policy.level)) {
       if(!typeof(policy.level) %in% c("character", "list")){
         stop("'policy.level' must be character or list type")
@@ -152,6 +134,10 @@ GetReviewResultsForHIT <-
       message("ReviewResults Retrieved: ", appendLF = FALSE)
       if (is.null(response)) {
         message("0\n")
+        to.return <- list(AssignmentReviewResult = NULL,
+                          AssignmentReviewAction = NULL,
+                          HITReviewResult = NULL,
+                          HITReviewAction = NULL)
       } else {
         message("\n")
         message(length(to.return$AssignmentReviewResult), " Assignment ReviewResults Retrieved")

@@ -37,7 +37,7 @@
 
 GetReviewableHITs <-
   reviewable <-
-  function(hit.type = NULL,
+  function(hit.type,
             status = "Reviewable",
             results = as.integer(100),
             pagetoken = NULL,
@@ -91,9 +91,6 @@ GetReviewableHITs <-
     results.found <- response$NumResults
     to.return <- response
 
-    # Keep a running total of all HITs returned
-    runningtotal <- response$NumResults
-
     if (!is.null(response$NextToken)) { # continue to fetch pages
 
       # Starting with the next page, identified using NextToken
@@ -108,8 +105,6 @@ GetReviewableHITs <-
         # Add to HIT DF
         to.return <- rbind(to.return, response)
 
-        # Add to running total
-        runningtotal <- runningtotal + response$NumResults
         results.found <- response$NumResults
 
         # Update page token

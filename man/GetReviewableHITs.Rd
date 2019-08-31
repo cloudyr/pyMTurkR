@@ -5,7 +5,7 @@
 \alias{reviewable}
 \title{Get Reviewable HITs}
 \usage{
-GetReviewableHITs(hit.type = NULL, status = "Reviewable",
+GetReviewableHITs(hit.type, status = "Reviewable",
   results = as.integer(100), pagetoken = NULL,
   verbose = getOption("pyMTurkR.verbose", TRUE))
 }
