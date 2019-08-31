@@ -46,6 +46,9 @@
 #' fetch per page. Must be between 1 and 100. Most users can ignore this.
 #' @param get.answers An optional logical indicating whether to also get the
 #' answers. If TRUE, the returned object is a list with Assignments and Answers.
+#' @param persist.on.error A boolean specifying whether to persist on an error.
+#' Errors can sometimes happen when the server times-out, in cases where large
+#' numbers of Assignments are being retrieved.
 #' @param verbose Optionally print the results of the API request to the
 #' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
 #' TRUE)}.
@@ -89,6 +92,7 @@ GetAssignment <-
            results = as.integer(100),
            pagetoken = NULL,
            get.answers = FALSE,
+           persist.on.error = FALSE,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
@@ -98,7 +102,8 @@ GetAssignment <-
     }
 
     # Check that one of the params for lookup was provided
-    if (all(is.null(assignment) & is.null(hit) & is.null(hit.type) & is.null(annotation))) {
+    if (all(is.null(assignment) & is.null(hit) &
+            is.null(hit.type) & is.null(annotation))) {
       stop("Must provide 'assignment' xor 'hit' xor 'hit.type' xor 'annotation'")
     } else if (!is.null(assignment)) { # Lookup by assignments
 
@@ -141,6 +146,9 @@ GetAssignment <-
         hitsearch <- SearchHITs(verbose = verbose)
         hitlist <- hitsearch$HITs$HITId[hitsearch$HITs$HITTypeId %in% hit.type]
       } else if (!is.null(annotation)) { # Search by HIT Annotation
+        if(is.na(annotation)){
+          stop("Annotation is NA")
+        }
         if (is.factor(annotation)) {
           annotation <- as.character(annotation)
         }
@@ -173,7 +181,8 @@ GetAssignment <-
         }
 
         # Validity check response
-        if(class(response) == "try-error") {
+        if(class(response) == "try-error" & persist.on.error) {
+
           # If the response was an error, then we should try again
           # but stop after 5 attempts
           message("  Error. Trying again. Attempt #", num_retries, " for HIT: ", batchhit)
@@ -248,19 +257,13 @@ GetAssignment <-
                                 "FreeText", "SelectionIdentifier", "OtherSelectionField",
                                 "UploadedFileKey", "UploadedFileSizeInBytes"))
 
-      # Progress bar because this can take a while
-      if(verbose){
-        pb <- progress::progress_bar$new(total = length(hitlist))
-        message("\nSearching for Assignments...")
-      }
-
       # Run batch over hitlist
       for (i in 1:length(hitlist)) {
 
         hit <- hitlist[i]
         pagetoken <- NULL
         results.found <- NULL
-        pages <- 1
+        pages <- 0
 
         while ((is.null(results.found) || results.found == results) &
                (is.null(return.pages) || pages < return.pages)) {
@@ -271,8 +274,6 @@ GetAssignment <-
 
           # Update if response found results
           if(!is.null(response)) {
-            runningtotal <- runningtotal + response$NumResults
-            results.found <- response$NumResults
             pagetoken <- response$NextToken
           } else {
             results.found <- 0
@@ -282,9 +283,6 @@ GetAssignment <-
           Assignments <- rbind(Assignments, to.return$Assignments)
           Answers <- rbind(Answers, to.return$Answers)
 
-        }
-        if(verbose){
-          pb$tick()
         }
 
       }

@@ -11,7 +11,8 @@
 GetAssignment(assignment = NULL, hit = NULL, hit.type = NULL,
   annotation = NULL, status = NULL, return.pages = NULL,
   results = as.integer(100), pagetoken = NULL, get.answers = FALSE,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+  persist.on.error = FALSE, verbose = getOption("pyMTurkR.verbose",
+  TRUE))
 }
 \arguments{
 \item{assignment}{An optional character string specifying the AssignmentId
@@ -53,6 +54,10 @@ search results to start at. Most users can ignore this.}
 
 \item{get.answers}{An optional logical indicating whether to also get the
 answers. If TRUE, the returned object is a list with Assignments and Answers.}
+
+\item{persist.on.error}{A boolean specifying whether to persist on an error.
+Errors can sometimes happen when the server times-out, in cases where large
+numbers of Assignments are being retrieved.}
 
 \item{verbose}{Optionally print the results of the API request to the
 standard output. Default is taken from \code{getOption('pyMTurkR.verbose',

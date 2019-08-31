@@ -126,7 +126,7 @@ GetReviewableHITs <-
     }
 
     if (verbose) {
-      message(runningtotal, " HITs Retrieved")
+      message(nrow(to.return), " HITs Retrieved")
     }
     return(to.return)
   }
