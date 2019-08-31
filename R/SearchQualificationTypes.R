@@ -105,8 +105,6 @@ SearchQualificationTypes <-
     results.found <- response$NumResults
     to.return <- response$Quals
 
-    # Keep a running total of all HITs returned
-    runningtotal <- response$NumResults
     pages <- 1
 
     if (!is.null(response$NextToken)) { # continue to fetch pages
@@ -124,8 +122,6 @@ SearchQualificationTypes <-
         # Add to DF
         to.return <- rbind(to.return, response$Quals)
 
-        # Add to running total
-        runningtotal <- runningtotal + response$NumResults
         results.found <- response$NumResults
 
         # Update page token
@@ -137,7 +133,7 @@ SearchQualificationTypes <-
     }
 
     if (verbose) {
-      message(runningtotal, " Qualification Types Retrieved")
+      message(nrow(to.return), " Qualification Types Retrieved")
     }
     return(to.return)
   }

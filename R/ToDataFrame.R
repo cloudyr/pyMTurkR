@@ -344,12 +344,19 @@ ToDataFrameQualifications <- function(quals){
 
 
 
-ToDataFrameQualificationTypes <- function(qual) {
+ToDataFrameQualificationTypes <- function(quals) {
+
+  return.quals <- emptydf(nrow = 0, ncol = 9, c('QualificationTypeId', 'CreationTime', 'Name',
+                                                'Description', 'Keywords', 'QualificationTypeStatus',
+                                                'RetryDelayInSeconds', 'IsRequestable', 'AutoGranted'))
+
+  for (i in 1:length(quals)) {
 
     Quals <- emptydf(1, 9, c('QualificationTypeId', 'CreationTime', 'Name',
                              'Description', 'Keywords', 'QualificationTypeStatus',
                              'RetryDelayInSeconds', 'IsRequestable', 'AutoGranted'))
 
+    qual <- quals[[i]]
 
     Quals[1] <- qual$QualificationTypeId
     if(!is.null(qual$CreationTime)){
@@ -367,7 +374,11 @@ ToDataFrameQualificationTypes <- function(qual) {
     Quals[8] <- qual$IsRequestable
     Quals[9] <- qual$AutoGranted
 
-  return(Quals)
+    return.quals <- rbind(Quals, return.quals)
+
+  }
+
+  return(return.quals)
 
 }
 
