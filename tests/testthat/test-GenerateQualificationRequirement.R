@@ -143,8 +143,8 @@ test_that("GenerateQualificationRequirement errors", {
          RequiredToPreview = TRUE
     )
   )
-  GenerateQualificationRequirement(quals.list) -> qual.req
-  expect_type(qual.req, "list")
+  try(GenerateQualificationRequirement(quals.list)) -> qual.req
+  expect_s3_class(qual.req, "try-error")
 
 })
 

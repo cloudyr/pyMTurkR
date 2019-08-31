@@ -6,15 +6,11 @@
 \alias{gethitsbyqual}
 \title{Get HITs by Qualification}
 \usage{
-GetHITsForQualificationType(qual, return.pages = NULL,
-  results = as.integer(100), pagetoken = NULL,
-  verbose = getOption("MTurkR.verbose", TRUE))
+GetHITsForQualificationType(qual, results = as.integer(100),
+  pagetoken = NULL, verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{qual}{A character string containing a QualificationTypeId.}
-
-\item{return.pages}{An integer indicating how many pages of results should
-be returned.}
 
 \item{results}{An optional character string indicating how many results to
 fetch per page. Must be between 1 and 100. Most users can ignore this.}

@@ -9,8 +9,8 @@
 \title{Get Bonus Payments}
 \usage{
 GetBonuses(assignment = NULL, hit = NULL, hit.type = NULL,
-  annotation = NULL, return.pages = NULL, results = as.integer(100),
-  pagetoken = NULL, verbose = getOption("pyMTurkR.verbose", TRUE))
+  annotation = NULL, results = as.integer(100), pagetoken = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{assignment}{An optional character string containing an AssignmentId
@@ -32,9 +32,6 @@ Requester User Interface (RUI). To use a batch ID, the batch must be written
 in a character string of the form \dQuote{BatchId:78382;}, where
 \dQuote{73832} is the batch ID shown in the RUI. Must specify
 \code{assignment} xor \code{hit} xor \code{hit.type} xor \code{annotation}.}
-
-\item{return.pages}{An integer indicating how many pages of results should
-be returned.}
 
 \item{results}{An optional character string indicating how many results to
 fetch per page. Must be between 1 and 100. Most users can ignore this.}

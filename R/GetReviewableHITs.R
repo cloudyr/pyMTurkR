@@ -14,8 +14,6 @@
 #' consider when looking for reviewable HITs.
 #' @param status An optional character string of either \dQuote{Reviewable} or
 #' \dQuote{Reviewing} limiting the search to HITs of with either status.
-#' @param return.pages An integer indicating how many pages of results should
-#' be returned.
 #' @param pagetoken An optional character string indicating which page of
 #' search results to start at. Most users can ignore this.
 #' @param results An optional character string indicating how many results to
@@ -41,7 +39,6 @@ GetReviewableHITs <-
   reviewable <-
   function(hit.type = NULL,
             status = "Reviewable",
-            return.pages = NULL,
             results = as.integer(100),
             pagetoken = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
@@ -96,7 +93,6 @@ GetReviewableHITs <-
 
     # Keep a running total of all HITs returned
     runningtotal <- response$NumResults
-    pages <- 1
 
     if (!is.null(response$NextToken)) { # continue to fetch pages
 
@@ -104,8 +100,7 @@ GetReviewableHITs <-
       pagetoken <- response$NextToken
 
       # Fetch while the number of results is equal to max results per page
-      while (results.found == results &
-             (is.null(return.pages) || pages < return.pages)) {
+      while (results.found == results) {
 
         # Fetch next batch
         response <- batch(pagetoken)
@@ -121,7 +116,6 @@ GetReviewableHITs <-
         if(!is.null(response$NextToken)){
           pagetoken <- response$NextToken
         }
-        pages <- pages + 1
       }
     }
 

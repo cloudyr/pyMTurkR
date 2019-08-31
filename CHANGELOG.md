@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.9] - 2019-08-31
+- Fix for ActionsGuarded in GenerateQualificationRequirement
+- Now exports GenerateAssignmentReviewPolicy
+- Small change to parameter checking IntegerValues and LocaleValues
+- Add new parameter: persist.on.error in GetAssignment
+- Fix for page parameter in GetAssignment
+- Error on NA annotation in GetAssignment
+- Fix for report of HITs Retrieved in GetReviewableHITs
+- Fewer dependencies now, dropping progress and aws.signature
+- Default behavior for functions calling other functions is for cross-function calls to be verbose FALSE
+- Removing return.pages on several Get functions
+
 ## [0.6.8] - 2019-08-30
 - Fix in CreateQualificationType when specifying a Qualification Test
 - Remove erroneous global variable assignment in CreateHIT

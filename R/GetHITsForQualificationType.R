@@ -9,8 +9,6 @@
 #'
 #' @aliases GetHITsForQualificationType ListHITsForQualificationType gethitsbyqual
 #' @param qual A character string containing a QualificationTypeId.
-#' @param return.pages An integer indicating how many pages of results should
-#' be returned.
 #' @param pagetoken An optional character string indicating which page of
 #' search results to start at. Most users can ignore this.
 #' @param results An optional character string indicating how many results to
@@ -38,10 +36,9 @@ GetHITsForQualificationType <-
   ListHITsForQualificationType <-
   gethitsbyqual <-
   function (qual,
-            return.pages = NULL,
             results = as.integer(100),
             pagetoken = NULL,
-            verbose = getOption('MTurkR.verbose', TRUE)) {
+            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
 
@@ -78,7 +75,6 @@ GetHITsForQualificationType <-
 
     # Keep a running total of all HITs returned
     runningtotal <- response$NumResults
-    pages <- 1
 
     if (!is.null(response$NextToken)) { # continue to fetch pages
 
@@ -86,8 +82,7 @@ GetHITsForQualificationType <-
       pagetoken <- response$NextToken
 
       # Fetch while the number of results is equal to max results per page
-      while (results.found == results &
-             (is.null(return.pages) || pages < return.pages)) {
+      while (results.found == results) {
 
         # Fetch next batch
         response <- batch(pagetoken)
@@ -106,7 +101,6 @@ GetHITsForQualificationType <-
         if(!is.null(response$NextToken)){
           pagetoken <- response$NextToken
         }
-        pages <- pages + 1
       }
     }
 

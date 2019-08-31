@@ -6,17 +6,13 @@
 \alias{qualrequests}
 \title{Get Qualification Requests}
 \usage{
-GetQualificationRequests(qual = NULL, return.pages = NULL,
-  results = as.integer(100), pagetoken = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+GetQualificationRequests(qual = NULL, results = as.integer(100),
+  pagetoken = NULL, verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{qual}{An optional character string containing a QualificationTypeId to
 which the search should be restricted. If none is supplied, requests made
 for all QualificationTypes are returned.}
-
-\item{return.pages}{An integer indicating how many pages of results should
-be returned.}
 
 \item{results}{An optional character string indicating how many results to
 fetch per page. Must be between 1 and 100. Most users can ignore this.}

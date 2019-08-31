@@ -2,8 +2,7 @@ GetBlockedWorkers <-
   blockedworkers <-
   ListWorkerBlocks <-
   listworkerblocks <-
-  function(return.pages = NULL,
-           results = as.integer(100),
+  function(results = as.integer(100),
            pagetoken = NULL,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
@@ -28,7 +27,7 @@ GetBlockedWorkers <-
         response$WorkerBlocks <- ToDataFrameWorkerBlock(response$WorkerBlocks)
         return(response)
       } else {
-        stop("No Blocked Workers found")
+        return(emptydf(0, 2, c("WorkerId", "Reason")))
       }
     }
 
@@ -37,18 +36,13 @@ GetBlockedWorkers <-
     results.found <- response$NumResults
     to.return <- response
 
-    # Keep a running total of all HITs returned
-    pages <- 1
-
-    if ((is.null(results.found) || results.found == results) &
-        (is.null(return.pages) || pages < return.pages)) { # continue to fetch pages
+    if (!is.null(response$NextToken)) { # continue to fetch pages
 
       # Starting with the next page, identified using NextToken
       pagetoken <- response$NextToken
 
       # Fetch while the number of results is equal to max results per page
-      while (results.found == results &
-             (is.null(return.pages) || pages < return.pages)) {
+      while (results.found == results) {
 
         # Fetch next batch
         response <- batch(pagetoken)
@@ -57,13 +51,16 @@ GetBlockedWorkers <-
         to.return$WorkerBlocks <- rbind(to.return$WorkerBlocks, response$WorkerBlocks)
 
         # Update results found
-        results.found <- response$NumResults
+        if(!is.null(response)){
+          results.found <- 0
+        } else {
+          results.found <- response$NumResults
+        }
 
         # Update page token
         if(!is.null(response$NextToken)){
           pagetoken <- response$NextToken
         }
-        pages <- pages + 1
       }
     }
 

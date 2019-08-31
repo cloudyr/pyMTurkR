@@ -38,8 +38,6 @@
 #' only a subset of assignments should be returned. If \code{NULL}, all
 #' assignments are returned (the default). Only applies when \code{hit} or
 #' \code{hit.type} are specified; ignored otherwise.
-#' @param return.pages An integer indicating how many pages of results should
-#' be returned.
 #' @param pagetoken An optional character string indicating which page of
 #' search results to start at. Most users can ignore this.
 #' @param results An optional character string indicating how many results to
@@ -88,7 +86,6 @@ GetAssignment <-
            hit.type = NULL,
            annotation = NULL,
            status = NULL,
-           return.pages = NULL,
            results = as.integer(100),
            pagetoken = NULL,
            get.answers = FALSE,
@@ -263,10 +260,8 @@ GetAssignment <-
         hit <- hitlist[i]
         pagetoken <- NULL
         results.found <- NULL
-        pages <- 0
 
-        while ((is.null(results.found) || results.found == results) &
-               (is.null(return.pages) || pages < return.pages)) {
+        while ((is.null(results.found) || results.found == results)) {
 
           response <- batch(hit, pagetoken)
           results.found <- response$NumResults
@@ -279,7 +274,6 @@ GetAssignment <-
             results.found <- 0
           }
 
-          pages <- pages + 1
           Assignments <- rbind(Assignments, to.return$Assignments)
           Answers <- rbind(Answers, to.return$Answers)
 

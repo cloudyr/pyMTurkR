@@ -9,10 +9,9 @@
 \title{Get Assignment(s)}
 \usage{
 GetAssignment(assignment = NULL, hit = NULL, hit.type = NULL,
-  annotation = NULL, status = NULL, return.pages = NULL,
-  results = as.integer(100), pagetoken = NULL, get.answers = FALSE,
-  persist.on.error = FALSE, verbose = getOption("pyMTurkR.verbose",
-  TRUE))
+  annotation = NULL, status = NULL, results = as.integer(100),
+  pagetoken = NULL, get.answers = FALSE, persist.on.error = FALSE,
+  verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{assignment}{An optional character string specifying the AssignmentId
@@ -42,9 +41,6 @@ written in a character string of the form \dQuote{BatchId:78382;}, where
 only a subset of assignments should be returned. If \code{NULL}, all
 assignments are returned (the default). Only applies when \code{hit} or
 \code{hit.type} are specified; ignored otherwise.}
-
-\item{return.pages}{An integer indicating how many pages of results should
-be returned.}
 
 \item{results}{An optional character string indicating how many results to
 fetch per page. Must be between 1 and 100. Most users can ignore this.}

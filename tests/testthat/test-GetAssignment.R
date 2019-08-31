@@ -30,7 +30,6 @@ test_that("GetAssignment", {
 
   # GetAssignment using HITTypeId, specifying number of pages, results
   GetAssignment(hit.type = hits$HITs$HITTypeId[[1]],
-                return.pages = 1,
                 results = 1) -> result
   expect_type(result, "list")
 

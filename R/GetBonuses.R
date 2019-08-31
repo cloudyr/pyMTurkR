@@ -26,8 +26,6 @@
 #' in a character string of the form \dQuote{BatchId:78382;}, where
 #' \dQuote{73832} is the batch ID shown in the RUI. Must specify
 #' \code{assignment} xor \code{hit} xor \code{hit.type} xor \code{annotation}.
-#' @param return.pages An integer indicating how many pages of results should
-#' be returned.
 #' @param pagetoken An optional character string indicating which page of
 #' search results to start at. Most users can ignore this.
 #' @param results An optional character string indicating how many results to
@@ -70,7 +68,6 @@ GetBonuses <-
            hit = NULL,
            hit.type = NULL,
            annotation = NULL,
-           return.pages = NULL,
            results = as.integer(100),
            pagetoken = NULL,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
@@ -117,9 +114,6 @@ GetBonuses <-
       results.found <- response$NumResults
       to.return <- response$BonusPayments
 
-      # Keep a running total of all HITs returned
-      pages <- 1
-
       # Get remaining batches
       if (!is.null(response$NextToken)) { # continue to fetch pages
 
@@ -127,8 +121,7 @@ GetBonuses <-
         pagetoken <- response$NextToken
 
         # Fetch while the number of results is equal to max results per page
-        while (results.found == results &
-               (is.null(return.pages) || pages < return.pages)) {
+        while (results.found == results) {
 
           # Fetch next batch
           response <- batch(pagetoken = pagetoken, hit = hit)
@@ -141,7 +134,6 @@ GetBonuses <-
           if(!is.null(response$NextToken)){
             pagetoken <- response$NextToken
           }
-          pages <- pages + 1
         }
       }
 

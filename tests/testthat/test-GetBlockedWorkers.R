@@ -5,9 +5,9 @@ test_that("GetBlockedWorkers", {
   BlockWorker('A3LXJ76P1ZZPMC', 'testing')
   GetBlockedWorkers() -> result
   expect_type(result, "list")
-  GetBlockedWorkers(return.pages = 1, results = 1) -> result
+  GetBlockedWorkers(results = 1) -> result
   expect_type(result, "list")
-  GetBlockedWorkers(return.pages = 1, results = 2) -> result
+  GetBlockedWorkers(results = 2) -> result
   expect_type(result, "list")
   UnblockWorker('A3LXJ76P1ZZPMC')
 

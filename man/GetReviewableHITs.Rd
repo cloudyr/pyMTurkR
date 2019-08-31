@@ -6,7 +6,7 @@
 \title{Get Reviewable HITs}
 \usage{
 GetReviewableHITs(hit.type = NULL, status = "Reviewable",
-  return.pages = NULL, results = as.integer(100), pagetoken = NULL,
+  results = as.integer(100), pagetoken = NULL,
   verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
@@ -15,9 +15,6 @@ consider when looking for reviewable HITs.}
 
 \item{status}{An optional character string of either \dQuote{Reviewable} or
 \dQuote{Reviewing} limiting the search to HITs of with either status.}
-
-\item{return.pages}{An integer indicating how many pages of results should
-be returned.}
 
 \item{results}{An optional character string indicating how many results to
 fetch per page. Must be between 1 and 100. Most users can ignore this.}
