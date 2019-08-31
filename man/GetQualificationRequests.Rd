@@ -46,7 +46,11 @@ be granted (with \code{\link{GrantQualification}}) or rejected (with
 
 \dontrun{
 GetQualificationRequests()
-GetQualificationRequests("2YCIA0RYNJ9262B1D82MPTUEXAMPLE")
+
+# Search for qualifications you own, then get requests for one of the quals
+SearchQualificationTypes(must.be.owner = TRUE, verbose = FALSE) -> quals
+quals$QualificationTypeId[[1]] -> qual1
+GetQualificationRequests(qual1)
 }
 
 }

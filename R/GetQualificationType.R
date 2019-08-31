@@ -21,8 +21,7 @@
 #' @examples
 #'
 #' \dontrun{
-#' qual1 <-
-#' CreateQualificationType(name="Worked for me before",
+#' qual1 <- CreateQualificationType(name="Worked for me before",
 #'     description="This qualification is for people who have worked for me before",
 #'     status = "Active",
 #'     keywords="Worked for me before")
@@ -41,6 +40,9 @@ GetQualificationType <-
 
     if (is.null(qual)) {
       stop("Must specify QualificationTypeId")
+    }
+    if(is.factor(qual)){
+      qual <- as.character(qual)
     }
 
     response <- try(client$get_qualification_type(QualificationTypeId = qual))

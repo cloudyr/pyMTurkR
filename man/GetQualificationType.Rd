@@ -30,8 +30,7 @@ specified by \code{\link{CreateQualificationType}}).
 \examples{
 
 \dontrun{
-qual1 <-
-CreateQualificationType(name="Worked for me before",
+qual1 <- CreateQualificationType(name="Worked for me before",
     description="This qualification is for people who have worked for me before",
     status = "Active",
     keywords="Worked for me before")

@@ -20,8 +20,6 @@
 #' (i.e., not built-in) QualificationType.
 #' @param status An optional character string specifying whether only
 #' \dQuote{Granted} or \dQuote{Revoked} Qualifications should be returned.
-#' @param return.pages An integer indicating how many pages of results should
-#' be returned.
 #' @param pagetoken An optional character string indicating which page of
 #' search results to start at. Most users can ignore this.
 #' @param results An optional character string indicating how many results to
@@ -61,7 +59,7 @@
 GetQualifications <-
   ListWorkersWithQualificationType <-
   getquals <-
-  function (qual, status = NULL, return.pages = NULL,
+  function (qual, status = NULL,
             results = as.integer(100), pagetoken = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
 

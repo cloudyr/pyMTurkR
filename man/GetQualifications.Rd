@@ -6,9 +6,8 @@
 \alias{getquals}
 \title{Get Qualifications}
 \usage{
-GetQualifications(qual, status = NULL, return.pages = NULL,
-  results = as.integer(100), pagetoken = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+GetQualifications(qual, status = NULL, results = as.integer(100),
+  pagetoken = NULL, verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{qual}{A character string containing a QualificationTypeId for a custom
@@ -16,9 +15,6 @@ GetQualifications(qual, status = NULL, return.pages = NULL,
 
 \item{status}{An optional character string specifying whether only
 \dQuote{Granted} or \dQuote{Revoked} Qualifications should be returned.}
-
-\item{return.pages}{An integer indicating how many pages of results should
-be returned.}
 
 \item{results}{An optional character string indicating how many results to
 fetch per page. Must be between 1 and 100. Most users can ignore this.}
@@ -54,8 +50,7 @@ retrieve the WorkerIds for workers that are actively working on those HITs
 \examples{
 
 \dontrun{
-qual1 <-
-AssignQualification(workers = "A1RO9UJNWXMU65",
+qual1 <- AssignQualification(workers = "A1RO9UJNWXMU65",
                     name = "Worked for me before",
                     description = "This qualification is for people who have worked for me before",
                     status = "Active",

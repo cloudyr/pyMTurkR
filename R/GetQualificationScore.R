@@ -82,9 +82,8 @@ GetQualificationScore <-
 
       # Validity check response
       if(class(response) != "try-error") {
-        x <- ToDataFrameQualifications(response$Qualification)
-        x$Valid <- TRUE
-        Qualifications[i,] <- x
+        Qualifications[i,] <- ToDataFrameQualifications(response$Qualification)
+        Qualifications[i,]$Valid <- TRUE
         if (verbose) {
           message("Qualification (", qual[i], ") Score for ", workers[i], ": ", Qualifications$Value[i])
         }
