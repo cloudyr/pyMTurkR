@@ -37,7 +37,7 @@
 
 GetReviewableHITs <-
   reviewable <-
-  function(hit.type,
+  function(hit.type = NULL,
             status = "Reviewable",
             results = as.integer(100),
             pagetoken = NULL,
