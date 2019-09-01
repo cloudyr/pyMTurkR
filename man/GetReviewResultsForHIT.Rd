@@ -25,9 +25,6 @@ search results to start at. Most users can ignore this.}
 \item{verbose}{Optionally print the results of the API request to the
 standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
 TRUE)}.}
-
-\item{return.pages}{An integer indicating how many pages of results should
-be returned.}
 }
 \value{
 A four-element list containing up to four named data frames,
