@@ -6,6 +6,9 @@
 \usage{
 ToDataFrameQualificationRequirements(hits)
 }
+\arguments{
+\item{hits}{hits}
+}
 \description{
 ToDataFrameQualificationRequirements
 }

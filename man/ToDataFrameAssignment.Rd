@@ -6,6 +6,9 @@
 \usage{
 ToDataFrameAssignment(assignment)
 }
+\arguments{
+\item{assignment}{assignment}
+}
 \description{
 ToDataFrameAssignment
 }

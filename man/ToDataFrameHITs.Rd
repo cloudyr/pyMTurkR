@@ -6,6 +6,9 @@
 \usage{
 ToDataFrameHITs(hits)
 }
+\arguments{
+\item{hits}{hits}
+}
 \description{
 ToDataFrameHITs
 }

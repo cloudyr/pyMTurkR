@@ -6,6 +6,9 @@
 \usage{
 ToDataFrameQualificationTypes(quals)
 }
+\arguments{
+\item{quals}{qualifications}
+}
 \description{
 ToDataFrameQualificationTypes
 }

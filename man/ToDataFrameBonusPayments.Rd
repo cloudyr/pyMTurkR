@@ -6,6 +6,9 @@
 \usage{
 ToDataFrameBonusPayments(bonuses)
 }
+\arguments{
+\item{bonuses}{bonuses}
+}
 \description{
 ToDataFrameBonusPayments
 }

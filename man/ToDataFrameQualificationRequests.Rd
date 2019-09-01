@@ -6,6 +6,9 @@
 \usage{
 ToDataFrameQualificationRequests(requests)
 }
+\arguments{
+\item{requests}{requests}
+}
 \description{
 ToDataFrameQualificationRequests
 }

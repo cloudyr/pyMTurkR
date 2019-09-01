@@ -6,6 +6,9 @@
 \usage{
 ToDataFrameQualifications(quals)
 }
+\arguments{
+\item{quals}{qualifications}
+}
 \description{
 ToDataFrameQualifications
 }

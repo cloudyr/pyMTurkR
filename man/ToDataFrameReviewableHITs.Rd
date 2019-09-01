@@ -6,6 +6,9 @@
 \usage{
 ToDataFrameReviewableHITs(hits)
 }
+\arguments{
+\item{hits}{hits}
+}
 \description{
 ToDataFrameReviewableHITs
 }
