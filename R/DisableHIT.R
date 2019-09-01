@@ -36,7 +36,7 @@
 #' assignments should be approved when the HIT is disabled.
 #' @param skip.delete.prompt A logical indicating whether to skip the prompt that
 #' asks you to confirm the delete operation. If TRUE, you will not be asked to
-#' confirm that you wish to Delete the HITs. This is a safeguard flag to protect
+#' confirm that you wish to Delete the HITs. The prompt is a safeguard flag to protect
 #' the user from mistakenly deleting HITs.
 #' @param verbose Optionally print the results of the API request to the
 #' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',

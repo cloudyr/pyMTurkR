@@ -45,7 +45,6 @@ GetReviewResultsForHIT <-
   reviewresults <-
   function(hit,
            policy.level = NULL,
-           return.pages = 1,
            results = as.integer(100),
            pagetoken = NULL,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
@@ -66,9 +65,8 @@ GetReviewResultsForHIT <-
     if(!is.null(policy.level)) {
       if(!typeof(policy.level) %in% c("character", "list")){
         stop("'policy.level' must be character or list type")
-      }
-      if(typeof(policy.level) == "character"){
-        policy.level <- as.list(policy.level)
+      } else {
+        policy.level <- reticulate::tuple(policy.level)
       }
       args <- c(args, PolicyLevels = policy.level)
     }
@@ -104,17 +102,13 @@ GetReviewResultsForHIT <-
     response <- batch()
     to.return <- response
 
-    # Keep a running total of all HITs returned
-    pages <- 1
-
     if (!is.null(response$NextToken)) { # continue to fetch pages
 
       # Starting with the next page, identified using NextToken
       pagetoken <- response$NextToken
 
       # Fetch while the number of results is equal to max results per page
-      while (!is.null(response) &
-             (is.null(return.pages) || pages < return.pages)) {
+      while (!is.null(response)) {
 
         # Fetch next batch
         response <- batch(pagetoken)
@@ -126,7 +120,6 @@ GetReviewResultsForHIT <-
         if(!is.null(response$NextToken)){
           pagetoken <- response$NextToken
         }
-        pages <- pages + 1
       }
     }
 

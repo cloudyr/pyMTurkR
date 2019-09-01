@@ -7,7 +7,7 @@
 \alias{sendbonus}
 \title{Pay Bonus to Worker}
 \usage{
-GrantBonus(workers, assignments, amounts, reasons,
+GrantBonus(workers, assignments, amounts, reasons, skip.prompt = FALSE,
   unique.request.token = NULL, verbose = getOption("pyMTurkR.verbose",
   TRUE))
 }
@@ -28,6 +28,11 @@ of character strings containing the amount to be paid to each worker.}
 worker(s), or a vector (of length equal to the number of workers) of
 character strings containing the reason to bonus each worker. The reason is
 visible to each worker and is sent via email.}
+
+\item{skip.prompt}{A logical indicating whether to skip the prompt that
+asks you to continue when duplicate AssignmentIds are found. If TRUE, you will
+not be asked to confirm. The prompt is a safeguard flag to protect the user from
+mistakenly paying a bonus twice.}
 
 \item{unique.request.token}{An optional character string, included only for
 advanced users. It can be used to prevent resending a bonus. A bonus will

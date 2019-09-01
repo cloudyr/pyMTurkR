@@ -30,6 +30,10 @@
 #' advanced users. It can be used to prevent resending a bonus. A bonus will
 #' not be granted if a bonus was previously granted (within a short time
 #' window) using the same \code{unique.request.token}.
+#' @param skip.prompt A logical indicating whether to skip the prompt that
+#' asks you to continue when duplicate AssignmentIds are found. If TRUE, you will
+#' not be asked to confirm. The prompt is a safeguard flag to protect the user from
+#' mistakenly paying a bonus twice.
 #' @param verbose Optionally print the results of the API request to the
 #' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
 #' TRUE)}.
@@ -75,6 +79,7 @@ GrantBonus <-
             assignments,
             amounts,
             reasons,
+            skip.prompt = FALSE,
             unique.request.token = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)){
 
@@ -85,10 +90,13 @@ GrantBonus <-
     }
     if (is.factor(workers)) {
       workers <- as.character(workers)
-      if (length(workers) > length(unique(workers))) {
-        warning("Duplicated WorkerIds removed from 'workers'")
+    }
+    if (!skip.prompt & length(assignments) > length(unique(assignments))) {
+      utils::menu(c("Yes", "No"),
+                  title="Duplicate AssignmentIds.\nAre you sure you want to continue?") -> ans
+      if(ans == 2){
+        stop("User aborted operation.")
       }
-      workers <- unique(workers)
     }
 
     # Check validity of parameters
@@ -103,13 +111,13 @@ GrantBonus <-
     }
     for (i in 1:length(reasons)) {
       if (nchar(reasons[i]) > 4096) {
-        stop(paste("Message ", i, "Text Too Long (4096 char max)", sep = ""))
+        stop(paste("Message ", i, " Text Too Long (4096 char max)", sep = ""))
       }
     }
     if (length(reasons) == 1) {
       reasons <- rep(reasons[1], length(workers))
     } else if (!length(reasons) == length(workers)) {
-      stop("Number of messages is not 1 nor length(workers)")
+      stop("Number of reasons is not 1 nor length(workers)")
     }
     if (length(amounts) == 1) {
       amounts <- rep(amounts[1], length(workers))
@@ -119,7 +127,7 @@ GrantBonus <-
     if (!length(assignments) == length(workers)) {
       stop("Number of assignments is not length(workers)")
     }
-    if(is.integer(amounts)){
+    if(is.numeric(amounts)){
       amounts <- as.character(amounts)
     }
 
@@ -127,22 +135,21 @@ GrantBonus <-
 
     for (i in 1:length(workers)) {
 
-      if(is.null(unique.request.token)){
-        response <- try(client$send_bonus(
-          WorkerId = workers[i],
-          BonusAmount = amounts[i],
-          AssignmentId = assignments[i],
-          Reason = reasons[i]
-        ))
-      } else {
-        response <- try(client$send_bonus(
-          WorkerId = workers[i],
-          BonusAmount = amounts[i],
-          AssignmentId = assignments[i],
-          Reason = reasons[i],
-          UniqueRequestToken = unique.request.token
-        ))
+      args <- list(WorkerId = workers[i],
+                   BonusAmount = amounts[i],
+                   AssignmentId = assignments[i],
+                   Reason = reasons[i])
+
+      if(!is.null(unique.request.token)){
+        args <- c(args, UniqueRequestToken = unique.request.token)
       }
+
+      fun <- client$send_bonus
+
+      # Execute the API call
+      response <- try(
+        do.call('fun', args)
+      )
 
       # Check if failure
       if (response$ResponseMetadata$HTTPStatusCode == 200) {

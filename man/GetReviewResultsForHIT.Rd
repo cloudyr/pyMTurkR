@@ -6,7 +6,7 @@
 \alias{ListReviewPolicyResultsForHIT}
 \title{Get ReviewPolicy Results for a HIT}
 \usage{
-GetReviewResultsForHIT(hit, policy.level = NULL, return.pages = 1,
+GetReviewResultsForHIT(hit, policy.level = NULL,
   results = as.integer(100), pagetoken = NULL,
   verbose = getOption("pyMTurkR.verbose", TRUE))
 }
@@ -15,9 +15,6 @@ GetReviewResultsForHIT(hit, policy.level = NULL, return.pages = 1,
 
 \item{policy.level}{Either \code{HIT} or \code{Assignment}. If \code{NULL}
 (the default), all data for both policy levels is retrieved.}
-
-\item{return.pages}{An integer indicating how many pages of results should
-be returned.}
 
 \item{results}{An optional character string indicating how many results to
 fetch per page. Must be between 1 and 100. Most users can ignore this.}
@@ -28,6 +25,9 @@ search results to start at. Most users can ignore this.}
 \item{verbose}{Optionally print the results of the API request to the
 standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
 TRUE)}.}
+
+\item{return.pages}{An integer indicating how many pages of results should
+be returned.}
 }
 \value{
 A four-element list containing up to four named data frames,
