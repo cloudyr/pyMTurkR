@@ -13,8 +13,6 @@
 #' @param hit A character string containing a HITId.
 #' @param policy.level Either \code{HIT} or \code{Assignment}. If \code{NULL}
 #' (the default), all data for both policy levels is retrieved.
-#' @param return.pages An integer indicating how many pages of results should
-#' be returned.
 #' @param pagetoken An optional character string indicating which page of
 #' search results to start at. Most users can ignore this.
 #' @param results An optional character string indicating how many results to
