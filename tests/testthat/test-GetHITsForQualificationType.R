@@ -5,7 +5,7 @@ test_that("GetHITsForQualificationType", {
   SearchHITs() -> hits
 
   # GetHITsForQualificationType
-  qual <- hits$QualificationRequirements$QualificationTypeId[[1]]
+  qual <- hits$QualificationRequirements$QualificationTypeId[!is.na(hits$QualificationRequirements$QualificationTypeId)][[1]]
   GetHITsForQualificationType(qual = as.factor(qual)) -> result
   expect_type(result, "list")
 

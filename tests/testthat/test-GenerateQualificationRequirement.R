@@ -55,7 +55,7 @@ test_that("GenerateQualificationRequirement errors", {
          RequiredToPreview = TRUE
     )
   )
-  try(GenerateQualificationRequirement(quals.list)) -> qual.req
+  try(GenerateQualificationRequirement(quals.list), TRUE) -> qual.req
   expect_s3_class(qual.req, "try-error")
 
   # Wrong comparator for known qual type
@@ -66,7 +66,7 @@ test_that("GenerateQualificationRequirement errors", {
          RequiredToPreview = TRUE
     )
   )
-  try(GenerateQualificationRequirement(quals.list)) -> qual.req
+  try(GenerateQualificationRequirement(quals.list), TRUE) -> qual.req
   expect_s3_class(qual.req, "try-error")
 
 
@@ -79,7 +79,7 @@ test_that("GenerateQualificationRequirement errors", {
          ActionsGuarded = 'Accept'
     )
   )
-  try(GenerateQualificationRequirement(quals.list)) -> qual.req
+  try(GenerateQualificationRequirement(quals.list), TRUE) -> qual.req
   expect_s3_class(qual.req, "try-error")
 
 
@@ -88,7 +88,7 @@ test_that("GenerateQualificationRequirement errors", {
     list(QualificationTypeId = "00000000000000000071"
     )
   )
-  try(GenerateQualificationRequirement(quals.list)) -> qual.req
+  try(GenerateQualificationRequirement(quals.list), TRUE) -> qual.req
   expect_s3_class(qual.req, "try-error")
 
 
@@ -97,7 +97,7 @@ test_that("GenerateQualificationRequirement errors", {
     list(
       )
   )
-  try(GenerateQualificationRequirement(quals.list)) -> qual.req
+  try(GenerateQualificationRequirement(quals.list), TRUE) -> qual.req
   expect_s3_class(qual.req, "try-error")
 
 
@@ -132,7 +132,7 @@ test_that("GenerateQualificationRequirement errors", {
          RequiredToPreview = TRUE
     )
   )
-  try(GenerateQualificationRequirement(quals.list)) -> qual.req
+  try(GenerateQualificationRequirement(quals.list), TRUE) -> qual.req
   expect_s3_class(qual.req, "try-error")
 
 
@@ -143,7 +143,7 @@ test_that("GenerateQualificationRequirement errors", {
          RequiredToPreview = TRUE
     )
   )
-  try(GenerateQualificationRequirement(quals.list)) -> qual.req
+  try(GenerateQualificationRequirement(quals.list), TRUE) -> qual.req
   expect_s3_class(qual.req, "try-error")
 
 })

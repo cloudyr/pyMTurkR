@@ -1,5 +1,6 @@
-
-# HITs
+#' ToDataFrameHITs
+#' @aliases ToDataFrameHITs
+#' @param hits
 #' @export
 ToDataFrameHITs <- function(hits) {
 
@@ -44,6 +45,9 @@ ToDataFrameHITs <- function(hits) {
 }
 
 
+#' ToDataFrameReviewableHITs
+#' @aliases ToDataFrameReviewableHITs
+#' @param hits
 #' @export
 ToDataFrameReviewableHITs <- function(hits) {
 
@@ -63,6 +67,10 @@ ToDataFrameReviewableHITs <- function(hits) {
 
 
 # QUALIFICATION STRUCTURES
+
+#' ToDataFrameQualificationRequirements
+#' @aliases ToDataFrameQualificationRequirements
+#' @param hits
 #' @export
 ToDataFrameQualificationRequirements <- function(hits) {
 
@@ -120,6 +128,10 @@ ToDataFrameQualificationRequirements <- function(hits) {
 
 
 # ASSIGNMENTS
+
+#' ToDataFrameAssignment
+#' @aliases ToDataFrameAssignment
+#' @param assignment
 #' @export
 ToDataFrameAssignment <- function(assignment) {
 
@@ -166,6 +178,11 @@ ToDataFrameAssignment <- function(assignment) {
 
 
 # QUESTION FORM ANSWERS
+
+#' ToDataFrameQuestionFormAnswers
+#' @aliases ToDataFrameQuestionFormAnswers
+#' @param assignment
+#' @param answers
 #' @export
 ToDataFrameQuestionFormAnswers <- function(assignment, answers) {
 
@@ -214,6 +231,10 @@ ToDataFrameQuestionFormAnswers <- function(assignment, answers) {
 
 
 # BLOCKED WORKERS
+
+#' ToDataFrameWorkerBlock
+#' @aliases ToDataFrameWorkerBlock
+#' @param workers
 #' @export
 ToDataFrameWorkerBlock <- function(workers) {
 
@@ -233,6 +254,10 @@ ToDataFrameWorkerBlock <- function(workers) {
 
 
 # BONUS PAYMENTS
+
+#' ToDataFrameBonusPayments
+#' @aliases ToDataFrameBonusPayments
+#' @param bonuses
 #' @export
 ToDataFrameBonusPayments <- function(bonuses){
 
@@ -260,6 +285,10 @@ ToDataFrameBonusPayments <- function(bonuses){
 
 
 # QUALIFICATIONS
+
+#' ToDataFrameQualificationRequests
+#' @aliases ToDataFrameQualificationRequests
+#' @param requests
 #' @export
 ToDataFrameQualificationRequests <- function(requests){
 
@@ -296,6 +325,9 @@ ToDataFrameQualificationRequests <- function(requests){
 }
 
 
+#' ToDataFrameQualifications
+#' @aliases ToDataFrameQualifications
+#' @param quals
 #' @export
 ToDataFrameQualifications <- function(quals){
 
@@ -343,6 +375,9 @@ ToDataFrameQualifications <- function(quals){
 }
 
 
+#' ToDataFrameQualificationTypes
+#' @aliases ToDataFrameQualificationTypes
+#' @param quals
 #' @export
 ToDataFrameQualificationTypes <- function(quals) {
 
@@ -388,6 +423,10 @@ ToDataFrameQualificationTypes <- function(quals) {
 
 
 # REVIEW RESULTS
+
+#' ToDataFrameReviewResults
+#' @aliases ToDataFrameReviewResults
+#' @param results
 #' @export
 ToDataFrameReviewResults <- function(results) {
 

@@ -16,6 +16,6 @@ test_that("GetQualificationRequests", {
 test_that("GetQualificationRequests error don't own qual", {
   skip_if_not(CheckAWSKeys())
 
-  try(GetQualificationRequests("2YCIA0RYNJ9262B1D82MPTUEXAMPLE")) -> result
+  try(GetQualificationRequests("2YCIA0RYNJ9262B1D82MPTUEXAMPLE"), TRUE) -> result
   expect_s3_class(result, 'try-error')
 })

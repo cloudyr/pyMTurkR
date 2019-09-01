@@ -1,9 +1,12 @@
 
-test_that("DisableHIT using HITId", {
+test_that("DisableHIT", {
   skip_if_not(CheckAWSKeys())
 
+  #################
   # Register a HIT type
-  hittype1 <- RegisterHITType(title = "10 Question Survey",
+  set.seed(as.integer(Sys.time()))
+  hittype1 <- RegisterHITType(title =  paste0("10 Question Survey",
+                                              as.character(runif(1, 1, 99999999))),
                               description = "Complete a 10-question survey",
                               reward = ".20",
                               duration = seconds(hours=1),
@@ -18,11 +21,52 @@ test_that("DisableHIT using HITId", {
                    annotation = 'my_annotation',
                    auto.approval.delay = 30)
 
+
+  #################
+  # Register a HIT type
+  set.seed(as.integer(Sys.time()))
+  hittype1 <- RegisterHITType(title =  paste0("10 Question Survey",
+                                              as.character(runif(1, 1, 99999999))),
+                              description = "Complete a 10-question survey",
+                              reward = ".20",
+                              duration = seconds(hours=1),
+                              keywords = "survey, questionnaire, politics")
+
+  # Create a HIT using the HIT type just created
+  a <- GenerateExternalQuestion("https://www.example.com", "400")
+  hit2 <- CreateHIT(hit.type = hittype1$HITTypeId,
+                   assignments = 1,
+                   expiration = seconds(days=1),
+                   question = a$string,
+                   annotation = 'my_annotation',
+                   auto.approval.delay = 30)
+
+
+  #################
+  # Register a HIT type
+  set.seed(as.integer(Sys.time()))
+  hittype2 <- RegisterHITType(title =  paste0("10 Question Survey",
+                                              as.character(runif(1, 1, 99999999))),
+                              description = "Complete a 10-question survey",
+                              reward = ".20",
+                              duration = seconds(hours=1),
+                              keywords = "survey, questionnaire, politics")
+
+  # Create a HIT using the HIT type just created
+  annotation <- paste0('x', as.character(runif(1, 1, 99999999)))
+  a <- GenerateExternalQuestion("https://www.example.com", "400")
+  hit3 <- CreateHIT(hit.type = hittype2$HITTypeId,
+                   assignments = 1,
+                   expiration = seconds(days=1),
+                   question = a$string,
+                   annotation = annotation,
+                   auto.approval.delay = 30)
+
   Sys.sleep(15)
 
+  #################
   # Expire, Delete HIT by HITId
   ExpireHIT(hit$HITId,
-            approve.pending.assignments = TRUE,
             verbose = FALSE) -> expire
   DeleteHIT(hit$HITId,
             skip.delete.prompt = TRUE,
@@ -30,80 +74,28 @@ test_that("DisableHIT using HITId", {
 
   expect_type(expire, "list")
   expect_type(delete, "list")
-})
-
-
-
-
-test_that("DisableHIT using HITType", {
-  skip_if_not(CheckAWSKeys())
-
-  # Register a HIT type
-  hittype1 <- RegisterHITType(title = "10 Question Survey",
-                              description = "Complete a 10-question survey",
-                              reward = ".20",
-                              duration = seconds(hours=1),
-                              keywords = "survey, questionnaire, politics")
-
-  # Create a HIT using the HIT type just created
-  a <- GenerateExternalQuestion("https://www.example.com", "400")
-  hit <- CreateHIT(hit.type = hittype1$HITTypeId,
-                   assignments = 1,
-                   expiration = seconds(days=1),
-                   question = a$string,
-                   annotation = 'my_annotation',
-                   auto.approval.delay = 30)
-
-  Sys.sleep(15)
 
   # Expire, Delete HIT by HITType
-  ExpireHIT(hit.type = hit$HITTypeId,
-            approve.pending.assignments = TRUE,
-            verbose = FALSE) -> expire
-  DeleteHIT(hit.type = hit$HITTypeId,
+  ExpireHIT(hit.type = hit2$HITTypeId,
+            verbose = FALSE) -> expire2
+  DeleteHIT(hit.type = hit2$HITTypeId,
             skip.delete.prompt = TRUE,
-            verbose = FALSE) -> delete
+            verbose = FALSE) -> delete2
 
-  expect_type(expire, "list")
-  expect_type(delete, "list")
-})
+  expect_type(expire2, "list")
+  expect_type(delete2, "list")
 
-
-
-
-test_that("DisableHIT using Annotation", {
-  skip_if_not(CheckAWSKeys())
-
-  # Register a HIT type
-  hittype1 <- RegisterHITType(title = "10 Question Survey",
-                              description = "Complete a 10-question survey",
-                              reward = ".20",
-                              duration = seconds(hours=1),
-                              keywords = "survey, questionnaire, politics")
-
-  # Create a HIT using the HIT type just created
-  a <- GenerateExternalQuestion("https://www.example.com", "400")
-  hit <- CreateHIT(hit.type = hittype1$HITTypeId,
-                   assignments = 1,
-                   expiration = seconds(days=1),
-                   question = a$string,
-                   annotation = 'my_annotation',
-                   auto.approval.delay = 30)
-
-  Sys.sleep(15)
 
   # Expire, Delete HIT by Annotation
-  ExpireHIT(annotation = 'my_annotation',
-            approve.pending.assignments = TRUE,
-            verbose = FALSE) -> expire
-  DeleteHIT(annotation = 'my_annotation',
+  ExpireHIT(annotation = annotation,
+            verbose = FALSE) -> expire3
+  DeleteHIT(annotation = annotation,
             skip.delete.prompt = TRUE,
-            verbose = FALSE) -> delete
+            verbose = FALSE) -> delete3
 
-  expect_type(expire, "list")
-  expect_type(delete, "list")
+  expect_type(expire3, "list")
+  expect_type(delete3, "list")
 })
-
 
 
 test_that("DisableHIT but none found", {
@@ -111,8 +103,7 @@ test_that("DisableHIT but none found", {
 
   # Expire, Delete HIT by HITId
   try(ExpireHIT(annotation = 'NotAnAnnotation',
-            approve.pending.assignments = TRUE,
-            verbose = FALSE)) -> expire
+            verbose = FALSE), TRUE) -> expire
 
   expect_s3_class(expire, "try-error")
 })

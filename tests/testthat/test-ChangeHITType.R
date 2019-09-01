@@ -2,8 +2,11 @@
 test_that("ChangeHITType using RegisterHITType", {
   skip_if_not(CheckAWSKeys())
 
+  ####################
   # Register a HIT type
-  hittype1 <- RegisterHITType(title = "10 Question Survey",
+  set.seed(as.integer(Sys.time()))
+  hittype1 <- RegisterHITType(title =  paste0("10 Question Survey",
+                                              as.character(runif(1, 1, 99999999))),
                               description = "Complete a 10-question survey",
                               reward = ".20",
                               duration = seconds(hours=1),
@@ -16,17 +19,38 @@ test_that("ChangeHITType using RegisterHITType", {
                    expiration = seconds(days=1),
                    question = a$string)
 
-  # Create a second HIT type
-  hittype2 <- RegisterHITType(title = "10 Question Survey",
-                    description = "Complete a 10-question survey about news coverage and your opinions",
-                    reward = ".45",
-                    duration = seconds(hours=1),
-                    auto.approval.delay = 1,
-                    keywords = "survey, questionnaire, politics")
+  # Register a second HIT type
+  set.seed(as.integer(Sys.time()))
+  hittype2 <- RegisterHITType(title =  paste0("10 Question Survey",
+                                              as.character(runif(1, 1, 99999999))),
+                              description = "Complete a 10-question survey",
+                              reward = ".20",
+                              duration = seconds(hours=1),
+                              keywords = "survey, questionnaire, politics")
 
-  # Wait 15s to give the HIT time to "be made available in the marketplace"
+
+  ####################
+  # Register a HIT type
+  set.seed(as.integer(Sys.time()))
+  hittype3 <- RegisterHITType(title =  paste0("10 Question Survey",
+                                              as.character(runif(1, 1, 99999999))),
+                              description = "Complete a 10-question survey",
+                              reward = ".20",
+                              duration = seconds(hours=1),
+                              keywords = "survey, questionnaire, politics")
+
+  # Create a HIT using the HIT type just created
+  a <- GenerateExternalQuestion("https://www.example.com", "400")
+  hit2 <- CreateHIT(hit.type = hittype1$HITTypeId,
+                   assignments = 1,
+                   expiration = seconds(days=1),
+                   question = a$string)
+
+
+  #####################
   Sys.sleep(15)
 
+  # HIT 1
   # Now change the HIT type of the HIT created previously
   expect_type(ChangeHITType(hit = hit$HITId, new.hit.type = hittype2$HITTypeId), "list")
 
@@ -36,56 +60,32 @@ test_that("ChangeHITType using RegisterHITType", {
   # Title ignored
   expect_type(ChangeHITType(hit = as.factor(hit$HITId), new.hit.type = hittype2$HITTypeId, title = 'x'), "list")
 
-  Sys.sleep(15)
 
-  # Delete HIT
-  ExpireHIT(hit$HITId,
-            approve.pending.assignments = TRUE,
-            verbose = FALSE)
-  DeleteHIT(hit$HITId,
-            skip.delete.prompt = TRUE,
-            verbose = FALSE)
-})
-
-
-
-test_that("ChangeHITType using new HIT Type defined in function", {
-  skip_if_not(CheckAWSKeys())
-
-  # Register a HIT type
-  hittype1 <- RegisterHITType(title = "10 Question Survey",
-                              description = "Complete a 10-question survey",
-                              reward = ".20",
-                              duration = seconds(hours=1),
-                              keywords = "survey, questionnaire, politics")
-
-  # Create a HIT using the HIT type just created
-  a <- GenerateExternalQuestion("https://www.example.com", "400")
-  hit <- CreateHIT(hit.type = hittype1$HITTypeId,
-                   assignments = 1,
-                   expiration = seconds(days=1),
-                   question = a$string)
-
-  # Wait 15s to give the HIT time to "be made available in the marketplace"
-  Sys.sleep(15)
-
+  # HIT 2
   # Define new HIT type in function call to change it to
-  expect_type(ChangeHITType(hit = hit$HITId,
-                            title = "10 Question Survey",
+  expect_type(ChangeHITType(hit = hit2$HITId,
+                            title =  paste0("10 Question Survey",
+                                            as.character(runif(1, 1, 99999999))),
                             description = "Complete a 10-question survey",
                             reward = ".45",
                             duration = seconds(hours=1),
                             auto.approval.delay = 1,
                             keywords = "survey, questionnaire, politics"), "list")
+
+
   # Delete HIT
   ExpireHIT(hit$HITId,
-            approve.pending.assignments = TRUE,
             verbose = FALSE)
   DeleteHIT(hit$HITId,
             skip.delete.prompt = TRUE,
             verbose = FALSE)
 
-
+  # Delete HIT
+  ExpireHIT(hit2$HITId,
+            verbose = FALSE)
+  DeleteHIT(hit2$HITId,
+            skip.delete.prompt = TRUE,
+            verbose = FALSE)
 })
 
 
@@ -94,18 +94,18 @@ test_that("ChangeHITType using new HIT Type defined in function", {
   skip_if_not(CheckAWSKeys())
 
   # Register a HIT type
-  hittype1 <- RegisterHITType(title = "10 Question Survey",
+  set.seed(as.integer(Sys.time()))
+  hittype1 <- RegisterHITType(title =  paste0("10 Question Survey",
+                                              as.character(runif(1, 1, 99999999))),
                               description = "Complete a 10-question survey",
                               reward = ".20",
                               duration = seconds(hours=1),
                               keywords = "survey, questionnaire, politics")
 
   # Get Old HIT to change
-  GetAssignment(annotation = '249643',
-                results = 1)$HITId -> hit
-  GetHIT(hit) -> hit
-  hit$HITs$HITTypeId -> old.hit.type
-  hit$HITs$RequesterAnnotation -> old.annotation
+  SearchHITs() -> hits
+  tail(hits$HITs$HITTypeId, 1) -> old.hit.type
+  tail(hits$HITs$RequesterAnnotation[!is.na(hits$HITs$RequesterAnnotation)], 1) -> old.annotation
 
   # Change HITs matching Old HIT Type to New HIT Type
   expect_type(ChangeHITType(old.hit.type = old.hit.type,

@@ -11,11 +11,11 @@ test_that("GenerateNotification", {
 test_that("GenerateNotification parameter misspecification", {
 
   a <- try(GenerateNotification(destination = 'email@email.com',
-                            event.type = 'x'))
+                            event.type = 'x'), TRUE)
   expect_s3_class(a, 'try-error')
 
   a <- try(GenerateNotification(event.type = 'AssignmentAccepted',
-                                transport = 'FTP'))
+                                transport = 'FTP'), TRUE)
   expect_s3_class(a, 'try-error')
 
 })

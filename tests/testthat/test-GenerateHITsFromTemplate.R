@@ -66,7 +66,7 @@ test_that("GenerateHITsFromTemplate error", {
   try(GenerateHITsFromTemplate(template = temp,
                            input = a,
                            write.files = T,
-                           filenames = c('file1.html', 'file2.html'))) -> genhit
+                           filenames = c('file1.html', 'file2.html')), TRUE) -> genhit
 
   expect_s3_class(genhit, 'try-error')
 

@@ -14,7 +14,7 @@ test_that("ContactWorker two workers", {
 
   expect_s3_class(try(ContactWorker(subjects = 'Thanks!',
                             msgs = 'Thanks for participating in my study!',
-                            workers = c('A3LXJ76P1ZZPMC', 'NOTAWORKER'))), "try-error")
+                            workers = c('A3LXJ76P1ZZPMC', 'NOTAWORKER')), TRUE), "try-error")
 
 })
 
@@ -44,15 +44,15 @@ test_that("ContactWorker incorrect WorkerId specifications", {
   # invalid
   expect_s3_class(try(ContactWorker(subjects = 'Thanks!',
                                     msgs = 'Thanks for participating in my study!',
-                                    workers = 'NOTAWORKER')), "try-error")
+                                    workers = 'NOTAWORKER'), TRUE), "try-error")
   # too short
   expect_s3_class(try(ContactWorker(subjects = 'Thanks!',
                                     msgs = 'Thanks for participating in my study!',
-                                    workers = '')), "try-error")
+                                    workers = ''), TRUE), "try-error")
   # too long
   expect_s3_class(try(ContactWorker(subjects = 'Thanks!',
                                     msgs = 'Thanks for participating in my study!',
-                                    workers = paste(rep("A",65), collapse = ""))), "try-error")
+                                    workers = paste(rep("A",65), collapse = "")), TRUE), "try-error")
   # hasn't done any work for me
   expect_type(ContactWorker(subjects = 'Thanks!',
                                     msgs = 'Thanks for participating in my study!',
@@ -68,13 +68,13 @@ test_that("ContactWorker incorrect parameter lengths", {
   expect_s3_class(try(ContactWorker(subjects = c('Thanks!', 'x'),
                             msgs = 'Thanks for participating in my study!',
                             workers = rep('A3LXJ76P1ZZPMC', 3),
-                            verbose = FALSE)), "try-error")
+                            verbose = FALSE), TRUE), "try-error")
 
   # Incorrect msgs length
   expect_s3_class(try(ContactWorker(subjects = 'Thanks!',
                                     msgs = c('Thanks for participating in my study!', 'x'),
                                     workers = rep('A3LXJ76P1ZZPMC', 3),
-                                    verbose = FALSE)), "try-error")
+                                    verbose = FALSE), TRUE), "try-error")
 
 })
 
@@ -86,19 +86,19 @@ test_that("ContactWorker batch process errors", {
   expect_s3_class(try(ContactWorker(subjects = 'Thanks!',
                             msgs = c('x', 'y'),
                             workers = 'A3LXJ76P1ZZPMC',
-                            batch = TRUE)), "try-error")
+                            batch = TRUE), TRUE), "try-error")
 
   # Subject cannot be more than 200 chars long
   expect_s3_class(try(ContactWorker(subjects = paste(rep("A",201), collapse = ""),
                                     msgs = 'Thanks for participating in my study!',
                                     workers = 'A3LXJ76P1ZZPMC',
-                                    batch = TRUE)), "try-error")
+                                    batch = TRUE), TRUE), "try-error")
 
   # Msg cannot be more than 4096 characters
   expect_s3_class(try(ContactWorker(subjects = 'Thanks!',
                                     msgs = paste(rep("A",4097), collapse = ""),
                                     workers = 'A3LXJ76P1ZZPMC',
-                                    batch = TRUE)), "try-error")
+                                    batch = TRUE), TRUE), "try-error")
 
 })
 

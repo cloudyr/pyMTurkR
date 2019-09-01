@@ -63,28 +63,28 @@ test_that("CreateQualificationType with parameter misspecification", {
   try(CreateQualificationType(name = "Qual0001",
                           description = "This is a qualification",
                           status = "Active",
-                          test = QuestionForm)) -> qual
+                          test = QuestionForm), TRUE) -> qual
   expect_s3_class(qual, "try-error")
 
   # Specified test.duration, missing test
   try(CreateQualificationType(name = "Qual0001",
                               description = "This is a qualification",
                               status = "Active",
-                              test.duration = 30)) -> qual
+                              test.duration = 30), TRUE) -> qual
   expect_s3_class(qual, "try-error")
 
   # Specified answerkey, missing test
   try(CreateQualificationType(name = "Qual0001",
                               description = "This is a qualification",
                               status = "Active",
-                              answerkey = AnswerKey)) -> qual
+                              answerkey = AnswerKey), TRUE) -> qual
   expect_s3_class(qual, "try-error")
 
   # Auto is not logical
   try(CreateQualificationType(name = "Qual0001",
                               description = "This is a qualification",
                               status = "Active",
-                              auto = "x")) -> qual
+                              auto = "x"), TRUE) -> qual
   expect_s3_class(qual, "try-error")
 
   # Auto value is not integer
@@ -92,14 +92,14 @@ test_that("CreateQualificationType with parameter misspecification", {
                               description = "This is a qualification",
                               status = "Active",
                               auto = TRUE,
-                              auto.value = 'x')) -> qual
+                              auto.value = 'x'), TRUE) -> qual
   expect_s3_class(qual, "try-error")
 
   # Retry delay is not integer
   try(CreateQualificationType(name = "Qual0001",
                               description = "This is a qualification",
                               status = "Active",
-                              retry.delay = 'x')) -> qual
+                              retry.delay = 'x'), TRUE) -> qual
   expect_s3_class(qual, "try-error")
 
 })

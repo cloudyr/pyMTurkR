@@ -12,7 +12,7 @@ test_that("GetQualificationScore", {
   expect_type(result, "list")
 
   # Error -- Qual list must = 1 or length(workers)
-  try(GetQualificationScore(c(qual1,qual1), "A3LXJ76P1ZZPMC")) -> result
+  try(GetQualificationScore(c(qual1,qual1), "A3LXJ76P1ZZPMC"), TRUE) -> result
   expect_s3_class(result, 'try-error')
 
   RevokeQualification(qual1, "A3LXJ76P1ZZPMC")

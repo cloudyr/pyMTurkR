@@ -1,8 +1,11 @@
 
 test_that("ApproveAssignment with AssignmentId", {
   skip_if_not(CheckAWSKeys())
+  skip_if(nrow(try(GetAssignment(hit.type = '3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z',
+                                 results = 1,
+                                 status = 'Submitted'), TRUE)) == 0)
 
-  GetAssignment(annotation = ';',
+  GetAssignment(hit.type = '3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z',
                 results = 1,
                 status = 'Submitted')$AssignmentId -> assignment
 
@@ -12,15 +15,13 @@ test_that("ApproveAssignment with AssignmentId", {
 
 test_that("ApproveAssignment with AssignmentId and feedback", {
   skip_if_not(CheckAWSKeys())
+  skip_if(nrow(try(GetAssignment(hit.type = '3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z',
+                                 results = 1,
+                                 status = 'Submitted'), TRUE)) == 0)
 
-  GetAssignment(annotation = ';',
+  GetAssignment(hit.type = '3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z',
                 results = 1,
                 status = 'Submitted')$AssignmentId -> assignment
-
-  # Character feedback
-  expect_type(ApproveAssignment(assignments = assignment,
-                                verbose = FALSE,
-                                feedback = "good job"), "list")
 
   # Factor feedback
   expect_type(ApproveAssignment(assignments = assignment,
@@ -48,8 +49,11 @@ test_that("ApproveAssignment with AssignmentId and feedback", {
 
 test_that("ApproveAssignment with rejected parameter", {
   skip_if_not(CheckAWSKeys())
+  skip_if(nrow(try(GetAssignment(hit.type = '3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z',
+                                 results = 1,
+                                 status = 'Submitted'), TRUE)) == 0)
 
-  GetAssignment(annotation = ';',
+  GetAssignment(hit.type = '3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z',
                 results = 1,
                 status = 'Submitted')$AssignmentId -> assignment
 
