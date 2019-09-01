@@ -74,8 +74,8 @@ GrantQualification <-
     if (is.factor(qual.requests)) {
       qual.requests <- as.character(qual.requests)
     }
-    if (is.factor(values)) {
-      values <- as.character(values)
+    if (is.factor(values) | is.numeric(values)) {
+      values <- as.integer(values)
     }
     if (!length(qual.requests) == length(values)) {
       if (length(values) == 1) {

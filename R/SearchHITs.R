@@ -81,6 +81,7 @@ function (return.pages = NULL,
 
           # Fetch next batch
           response <- batch(pagetoken)
+          results.found <- response$NumResults
 
           # Add to HIT DF
           to.return$HITs <- rbind(to.return$HITs, response$HITs)
