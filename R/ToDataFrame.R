@@ -1,6 +1,6 @@
 
 # HITs
-
+#' @export
 ToDataFrameHITs <- function(hits) {
 
   HITs <- emptydf(length(hits), 19, c("HITId", "HITTypeId", "HITGroupId",
@@ -44,7 +44,7 @@ ToDataFrameHITs <- function(hits) {
 }
 
 
-
+#' @export
 ToDataFrameReviewableHITs <- function(hits) {
 
   HITs <- emptydf(length(hits), 2, c("HITId", "RequesterAnnotation"))
@@ -63,7 +63,7 @@ ToDataFrameReviewableHITs <- function(hits) {
 
 
 # QUALIFICATION STRUCTURES
-
+#' @export
 ToDataFrameQualificationRequirements <- function(hits) {
 
   return.quals <- emptydf(nrow = 0, ncol = 6, c('HITId', 'QualificationTypeId',  'Comparator',
@@ -120,7 +120,7 @@ ToDataFrameQualificationRequirements <- function(hits) {
 
 
 # ASSIGNMENTS
-
+#' @export
 ToDataFrameAssignment <- function(assignment) {
 
   Assignment <- emptydf(nrow = 1, ncol = 11, c('AssignmentId', 'WorkerId', 'HITId',
@@ -166,7 +166,7 @@ ToDataFrameAssignment <- function(assignment) {
 
 
 # QUESTION FORM ANSWERS
-
+#' @export
 ToDataFrameQuestionFormAnswers <- function(assignment, answers) {
 
   # Parse XML
@@ -214,7 +214,7 @@ ToDataFrameQuestionFormAnswers <- function(assignment, answers) {
 
 
 # BLOCKED WORKERS
-
+#' @export
 ToDataFrameWorkerBlock <- function(workers) {
 
   return.workers <- emptydf(0, 2, c("WorkerId", "Reason"))
@@ -233,7 +233,7 @@ ToDataFrameWorkerBlock <- function(workers) {
 
 
 # BONUS PAYMENTS
-
+#' @export
 ToDataFrameBonusPayments <- function(bonuses){
 
 
@@ -260,7 +260,7 @@ ToDataFrameBonusPayments <- function(bonuses){
 
 
 # QUALIFICATIONS
-
+#' @export
 ToDataFrameQualificationRequests <- function(requests){
 
   return.requests <- emptydf(0, 6, c("QualificationRequestId",
@@ -296,7 +296,7 @@ ToDataFrameQualificationRequests <- function(requests){
 }
 
 
-
+#' @export
 ToDataFrameQualifications <- function(quals){
 
   return.quals <- emptydf(0, 5, c("QualificationTypeId",
@@ -343,7 +343,7 @@ ToDataFrameQualifications <- function(quals){
 }
 
 
-
+#' @export
 ToDataFrameQualificationTypes <- function(quals) {
 
   return.quals <- emptydf(nrow = 0, ncol = 9, c('QualificationTypeId', 'CreationTime', 'Name',
@@ -388,6 +388,7 @@ ToDataFrameQualificationTypes <- function(quals) {
 
 
 # REVIEW RESULTS
+#' @export
 ToDataFrameReviewResults <- function(results) {
 
   out <- list(AssignmentReviewResult = NULL,
