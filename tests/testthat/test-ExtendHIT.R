@@ -10,12 +10,14 @@ test_that("ExtendHIT using HITId, HITTypeId, Annotation", {
                               keywords = "survey, questionnaire, politics")
 
   # Create a HIT using the HIT type just created
+  set.seed(as.integer(Sys.time()))
+  annotation <- paste0('x', as.character(runif(1, 1, 99999999)))
   a <- GenerateExternalQuestion("https://www.example.com", "400")
   hit <- CreateHIT(hit.type = hittype1$HITTypeId,
                    assignments = 1,
                    expiration = seconds(days=1),
                    question = a$string,
-                   annotation = 'my_annotation',
+                   annotation = annotation,
                    auto.approval.delay = 30)
 
   Sys.sleep(15)
@@ -38,7 +40,7 @@ test_that("ExtendHIT using HITId, HITTypeId, Annotation", {
 
   # Extend HIT using Annotation
   set.seed(as.integer(Sys.time()))
-  ExtendHIT(annotation = 'my_annotation',
+  ExtendHIT(annotation = annotation,
             add.assignments = "1",
             add.seconds = seconds(days=1),
             unique.request.token = as.character(runif(1, 1, 99999999))) -> extend

@@ -20,6 +20,34 @@
 #' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_GetHITOperation.html}{API Reference}
 #' @keywords HITs
 #'
+#' @examples
+#'
+#' \dontrun{
+#' # register HITType
+#' hittype <-
+#' RegisterHITType(title="10 Question Survey",
+#'                 description=
+#'                 "Complete a 10-question survey about news coverage and your opinions",
+#'                 reward=".20",
+#'                 duration=seconds(hours=1),
+#'                 keywords="survey, questionnaire, politics")
+#'
+#' a <- GenerateExternalQuestion("http://www.example.com/","400")
+#' hit1 <-
+#' CreateHIT(hit.type = hittype$HITTypeId, question = a$string)
+#'
+#' GetHIT(hit1$HITId)
+#' HITStatus(hit1$HITId)
+#'
+#' # cleanup
+#' DisableHIT(hit1$HITId)
+#' }
+#' \dontrun{
+#' # Get the status of all HITs from a given batch from the RUI
+#' HITStatus(annotation="BatchId:78382;")
+#' }
+#'
+#'
 #' @export GetHIT
 #' @export gethit
 #' @export hit

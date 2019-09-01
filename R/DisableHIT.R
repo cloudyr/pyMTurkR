@@ -174,7 +174,7 @@ DisableHIT <-
         if(approve.pending.assignments){
           # Approve pending assignments
           ApproveAllAssignments(hit = hit, verbose = FALSE)
-          operation <- paste0(operation, "; Approve Pending")
+          operation <- paste0(operation, "; Approve All Pending")
         }
 
       } else {

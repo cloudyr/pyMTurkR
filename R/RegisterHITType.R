@@ -118,27 +118,24 @@ RegisterHITType <-
 
     HITType <- emptydf(1, 2, c("HITTypeId", "Valid"))
 
-    # Create HIT with or without qual.req
-    if(!is.null(qual.req)) {
-      response <- try(client$create_hit_type(
-        AutoApprovalDelayInSeconds = auto.approval.delay,
-        AssignmentDurationInSeconds = duration,
-        Reward = reward,
-        Title = title,
-        Keywords = keywords,
-        Description = description,
-        QualificationRequirements = qual.req
-      ))
-    } else {
-      response <- try(client$create_hit_type(
-        AutoApprovalDelayInSeconds = auto.approval.delay,
-        AssignmentDurationInSeconds = duration,
-        Reward = reward,
-        Title = title,
-        Keywords = keywords,
-        Description = description
-      ))
+    args <- list(AutoApprovalDelayInSeconds = auto.approval.delay,
+                  AssignmentDurationInSeconds = duration,
+                  Reward = reward,
+                  Title = title,
+                  Keywords = keywords,
+                  Description = description)
+
+    if(!is.null(qual.req)){
+      args <- c(args, QualificationRequirements = qual.req)
     }
+
+    fun <- client$create_hit_type
+
+    # Execute the API call
+    response <- try(
+      do.call('fun', args)
+    )
+
     if (class(response) != "try-error") { # Valid
       HITType[1, ] <- c(response$HITTypeId, TRUE)
       if (verbose) {

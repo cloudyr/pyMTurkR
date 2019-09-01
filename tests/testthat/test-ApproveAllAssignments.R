@@ -15,8 +15,9 @@ test_that("ApproveAllAssignments with hit.type", {
   skip_if_not(CheckAWSKeys())
 
   # Get HITs then HIT Type
-  GetReviewableHITs() -> hits
-  hits$HITId[[1]] -> hit
+  GetAssignment(annotation = ';',
+                results = 1,
+                status = 'Submitted')$HITId -> hit
   GetHIT(hit) -> hit
   hit$HITs$HITTypeId[[1]] -> hit.type
 
@@ -28,8 +29,9 @@ test_that("ApproveAllAssignments with hit", {
   skip_if_not(CheckAWSKeys())
 
   # Get HITs then HIT Type
-  GetReviewableHITs() -> hits
-  hits$HITId[[1]] -> hit
+  GetAssignment(annotation = ';',
+                results = 1,
+                status = 'Submitted')$HITId -> hit
 
   expect_type(ApproveAllAssignments(hit = hit), "list")
 })
@@ -39,9 +41,9 @@ test_that("ApproveAllAssignments with feedback that's too long", {
   skip_if_not(CheckAWSKeys())
 
   # Get HITs then Assignment
-  GetReviewableHITs() -> hits
-  hits$HITId[[1]] -> hit
-  GetAssignment(hit = hit)[[1]][1] -> assignment
+  GetAssignment(annotation = ';',
+                results = 1,
+                status = 'Submitted')$AssignmentId -> assignment
 
   # Feedback that's too long (more than 1024 characters)
   expect_type(ApproveAssignment(assignments = assignment,

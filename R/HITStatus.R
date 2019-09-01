@@ -5,7 +5,7 @@ function (hit = NULL,
           annotation = NULL,
           verbose = getOption('pyMTurkR.verbose', TRUE)){
 
-    hitsearch <- SearchHITs(verbose = TRUE)
+    hitsearch <- SearchHITs(verbose = FALSE)
     HITs <- hitsearch$HITs
     if (is.null(HITs)) {
         return(HITs) # return if NULL
@@ -66,6 +66,6 @@ function (hit = NULL,
     if (all(toprint$Annotation == "")) {
         toprint <- toprint[, -length(toprint)]
     }
-    print(toprint, row.names = FALSE)
-    return(invisible(HITs))
+
+    return(HITs)
 }

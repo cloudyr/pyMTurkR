@@ -26,6 +26,9 @@ test_that("CreateHIT", {
   ExpireHIT(hit$HITId,
             approve.pending.assignments = TRUE,
             verbose = FALSE)
+
+  Sys.sleep(15)
+
   DeleteHIT(hit$HITId,
             skip.delete.prompt = TRUE,
             verbose = FALSE)
@@ -74,6 +77,9 @@ test_that("CreateHIT with policies", {
   ExpireHIT(hit$HITId,
             approve.pending.assignments = TRUE,
             verbose = FALSE)
+
+  Sys.sleep(15)
+
   DeleteHIT(hit$HITId,
             skip.delete.prompt = TRUE,
             verbose = FALSE)

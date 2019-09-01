@@ -4,7 +4,7 @@ test_that("ChangeHITType using RegisterHITType", {
 
   # Register a HIT type
   hittype1 <- RegisterHITType(title = "10 Question Survey",
-                              description = "Complete a 10-question survey about news coverage and your opinions",
+                              description = "Complete a 10-question survey",
                               reward = ".20",
                               duration = seconds(hours=1),
                               keywords = "survey, questionnaire, politics")
@@ -36,6 +36,8 @@ test_that("ChangeHITType using RegisterHITType", {
   # Title ignored
   expect_type(ChangeHITType(hit = as.factor(hit$HITId), new.hit.type = hittype2$HITTypeId, title = 'x'), "list")
 
+  Sys.sleep(15)
+
   # Delete HIT
   ExpireHIT(hit$HITId,
             approve.pending.assignments = TRUE,
@@ -52,7 +54,7 @@ test_that("ChangeHITType using new HIT Type defined in function", {
 
   # Register a HIT type
   hittype1 <- RegisterHITType(title = "10 Question Survey",
-                              description = "Complete a 10-question survey about news coverage and your opinions",
+                              description = "Complete a 10-question survey",
                               reward = ".20",
                               duration = seconds(hours=1),
                               keywords = "survey, questionnaire, politics")
@@ -70,7 +72,7 @@ test_that("ChangeHITType using new HIT Type defined in function", {
   # Define new HIT type in function call to change it to
   expect_type(ChangeHITType(hit = hit$HITId,
                             title = "10 Question Survey",
-                            description = "Complete a 10-question survey about news coverage and your opinions",
+                            description = "Complete a 10-question survey",
                             reward = ".45",
                             duration = seconds(hours=1),
                             auto.approval.delay = 1,
@@ -93,15 +95,17 @@ test_that("ChangeHITType using new HIT Type defined in function", {
 
   # Register a HIT type
   hittype1 <- RegisterHITType(title = "10 Question Survey",
-                              description = "Complete a 10-question survey about news coverage and your opinions",
+                              description = "Complete a 10-question survey",
                               reward = ".20",
                               duration = seconds(hours=1),
                               keywords = "survey, questionnaire, politics")
 
   # Get Old HIT to change
-  SearchHITs() -> hits
-  hits$HITs$HITTypeId[[1]] -> old.hit.type
-  subset(hits$HITs$RequesterAnnotation, !is.na(hits$HITs$RequesterAnnotation))[[1]] -> old.annotation
+  GetAssignment(annotation = '249643',
+                results = 1)$HITId -> hit
+  GetHIT(hit) -> hit
+  hit$HITs$HITTypeId -> old.hit.type
+  hit$HITs$RequesterAnnotation -> old.annotation
 
   # Change HITs matching Old HIT Type to New HIT Type
   expect_type(ChangeHITType(old.hit.type = old.hit.type,
