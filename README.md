@@ -1,5 +1,3 @@
-<title>pyMTurkR: An R package to interface with MTurk's Requester API</title>
-
 # pyMTurkR: An R package to interface with MTurk's Requester API <img src="assets/hex-pyMTurkR.png" align="right" width="200" />
 
 <!-- badges: start -->
