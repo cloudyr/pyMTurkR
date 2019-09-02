@@ -5,7 +5,7 @@
 [![Codecov test coverage](https://codecov.io/gh/cloudyr/pyMTurkR/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudyr/pyMTurkR?branch=master)
 ![version](https://img.shields.io/badge/version-0.7.0-blue.svg)
 ![alpha](https://img.shields.io/badge/status-alpha-lightgrey.svg)
-![downloads](https://img.shields.io/badge/downloads-82-brightgreen)
+![downloads](https://img.shields.io/badge/downloads-142-brightgreen)
 <!-- badges: end -->
 
 **pyMTurkR** is an R package that allows you to interface with MTurk's Requester API. 
