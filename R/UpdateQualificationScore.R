@@ -46,8 +46,7 @@
 #' @examples
 #'
 #' \dontrun{
-#' qual1 <-
-#' CreateQualificationType(name="Worked for me before",
+#' qual1 <- CreateQualificationType(name="Worked for me before",
 #'     description="This qualification is for people who have worked for me before",
 #'     status = "Active",
 #'     keywords="Worked for me before")
@@ -108,7 +107,8 @@ UpdateQualificationScore <-
       stop("Value(s) is/are missing")
     }
 
-    Qualifications <- emptydf(length(workers), 4, c("QualificationTypeId", "WorkerId", "Value", "Valid"))
+    Qualifications <- emptydf(length(workers), 4,
+                              c("QualificationTypeId", "WorkerId", "Value", "Valid"))
 
     for (i in 1:length(workers)) {
 
@@ -119,7 +119,8 @@ UpdateQualificationScore <-
       } else {
         request <- AssignQualification(qual = qual,
                                        workers = workers[i],
-                                       value = values[i])
+                                       value = values[i],
+                                       verbose = FALSE)
 
         valid <- as.logical(request$Valid)
         Qualifications[i, ] <- c(qual, workers[i], values[i], valid)

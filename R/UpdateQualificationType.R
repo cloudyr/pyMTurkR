@@ -50,13 +50,11 @@
 #' @examples
 #'
 #' \dontrun{
-#' qual1 <-
-#' CreateQualificationType(name="Worked for me before",
+#' qual1 <- CreateQualificationType(name="Worked for me before",
 #'     description="This qualification is for people who have worked for me before",
 #'     status = "Active",
 #'     keywords="Worked for me before")
-#' qual2 <-
-#' UpdateQualificationType(qual1$QualificationTypeId,
+#' qual2 <- UpdateQualificationType(qual1$QualificationTypeId,
 #'     description="This qualification is for everybody!",
 #'     auto=TRUE, auto.value="5")
 #' DisposeQualificationType(qual1$QualificationTypeId)
@@ -100,7 +98,8 @@ function (qual,
   } else if(is.null(test) & !is.null(test.duration)){
     stop("If test.duration is specified then test must be too")
   } else if(!is.null(test) & !is.null(test.duration)){
-    args <- c(args, list(Test = as.integer(test.duration)))
+    args <- c(args, list(TestDurationInSeconds = as.integer(test.duration),
+                         Test = test))
   }
   if(is.null(test) & !is.null(answerkey)){
     stop("If answerkey is specified then test must be too")
@@ -128,7 +127,7 @@ function (qual,
 
   # Execute the API call
   response <- try(
-    do.call('fun', args)
+    do.call('fun', args), silent = !verbose
   )
 
   # Update Qualification with any other parameters,
@@ -142,7 +141,8 @@ function (qual,
                              "RetryDelayInSeconds", "TestDurationInSeconds", "Test", "AnswerKey"))
 
     info[1,]$QualificationTypeId <- qual
-    info[1,]$CreationTime <- reticulate::py_to_r(response$QualificationType$CreationTime)
+    time <- reticulate::py_to_r(response$QualificationType$CreationTime)
+    info[1,]$CreationTime <- as.character(as.POSIXct(as.numeric(time), origin="1970-01-01"))
     info[1,]$Name <- response$QualificationType$Name
     info[1,]$Description <- response$QualificationType$Description
     if(!is.null(status)){

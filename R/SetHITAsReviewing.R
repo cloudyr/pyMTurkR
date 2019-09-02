@@ -40,13 +40,16 @@
 #' @examples
 #'
 #' \dontrun{
-#' a <- GenerateExternalQuestion("http://www.example.com/","400")
-#' hit1 <-
-#' CreateHIT(hit.type="2FFNCWYB49F9BBJWA4SJUNST5OFSOW", question=a$string)
+#'
+#' a <- GenerateExternalQuestion("https://www.example.com/", "400")
+#' hit1 <- CreateHIT(hit.type = "2FFNCWYB49F9BBJWA4SJUNST5OFSOW",
+#'                   question = a$string,
+#'                   expiration = seconds(hours = 1))
 #' SetHITAsReviewing(hit1$HITId)
 #'
 #' # cleanup
 #' DisableHIT(hit1$HITId)
+#'
 #' }
 #'
 #' @export

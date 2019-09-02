@@ -14,7 +14,7 @@
 #' @param assignments A character string containing an AssignmentId, or a
 #' vector of multiple character strings containing multiple AssignmentIds, to
 #' reject.
-#' @param feedback An optional character string containing any feedback for a
+#' @param feedback A character string containing any feedback for a
 #' worker. This must have length 1 or length equal to the number of workers.
 #' @param verbose Optionally print the results of the API request to the
 #' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
@@ -40,7 +40,7 @@ RejectAssignment <-
   RejectAssignments <-
   reject <-
   function (assignments,
-            feedback = "",
+            feedback,
             verbose = getOption('pyMTurkR.verbose', TRUE)){
 
     client <- GetClient() # Boto3 client
@@ -48,23 +48,21 @@ RejectAssignment <-
     if (is.factor(assignments)) {
       assignments <- as.character(assignments)
     }
-    if (!is.null(feedback)) {
-      if (is.factor(feedback)) {
-        feedback <- as.character(feedback)
-      }
-      for (i in 1:length(feedback)) {
-        if (!is.null(feedback[i]) && nchar(feedback[i]) > 1024)
-          warning("Feedback ", i, " is too long (1024 char max)")
-      }
-      if (length(feedback) == 1) {
-        feedback <- rep(feedback[1], length(assignments))
-      } else if (!length(feedback) == length(assignments)) {
-        stop("Number of feedback is not 1 nor length(assignments)")
-      }
+    if (is.factor(feedback)) {
+      feedback <- as.character(feedback)
+    }
+    for (i in 1:length(feedback)) {
+      if (!is.null(feedback[i]) && nchar(feedback[i]) > 1024)
+        stop("Feedback ", i, " is too long (1024 char max)")
+    }
+    if (length(feedback) == 1) {
+      feedback <- rep(feedback[1], length(assignments))
+    } else if (!length(feedback) == length(assignments)) {
+      stop("Number of feedback is not 1 nor length(assignments)")
     }
 
     # Data frame to hold results
-    Assignments <- emptydf(length(assignments), 3, c("AssignmentId", "Feedback", "Valid"))
+    Assignments <- emptydf(0, 3, c("AssignmentId", "Feedback", "Valid"))
 
     # Loop through assignments and approve
     for (i in 1:length(assignments)){
@@ -72,23 +70,25 @@ RejectAssignment <-
       response <- try(client$reject_assignment(
         AssignmentId = assignments[i],
         RequesterFeedback = feedback[i]
-      ))
+      ), silent = !verbose)
 
       # Check if failure
-      if (response$ResponseMetadata$HTTPStatusCode == 200) {
-        valid <- TRUE
-        if (verbose) {
-          message(i, ": Assignment (", assignments[i], ") Rejected")
-        }
-      } else {
+      if (class(response) == "try-error") {
         valid <- FALSE
         if (verbose) {
           warning(i, ": Invalid request for assignment ",assignments[i])
         }
+      } else {
+        valid <- TRUE
+        if (verbose) {
+          message(i, ": Assignment (", assignments[i], ") Rejected")
+        }
       }
 
       # Add to data frame
-      Assignments <- rbind(Assignments, data.frame(AssignmentId = assignments[i], Feedback = feedback[i], Valid = valid))
+      Assignments <- rbind(Assignments, data.frame(AssignmentId = assignments[i],
+                                                   Feedback = feedback[i],
+                                                   Valid = valid))
     }
 
     # Return results

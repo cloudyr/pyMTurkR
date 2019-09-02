@@ -21,19 +21,6 @@ test_that("CreateQualificationType with Qualification Test", {
 
   f <- system.file("templates/qualificationtest1.xml", package = "pyMTurkR")
   QuestionForm <- paste0(readLines(f, warn = FALSE), collapse = "")
-
-  CreateQualificationType(name = "Qual0001",
-                          description = "This is a qualification",
-                          status = "Active",
-                          test = QuestionForm,
-                          test.duration = 30) -> qual
-  expect_type(qual, "list")
-
-  # Delete qual
-  DeleteQualificationType(qual$QualificationTypeId)
-
-
-  # With AnswerKey
   f <- system.file("templates/answerkey1.xml", package = "pyMTurkR")
   AnswerKey <- paste0(readLines(f, warn = FALSE), collapse = "")
 

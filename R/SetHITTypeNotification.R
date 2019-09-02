@@ -17,7 +17,7 @@
 #' @aliases SetHITTypeNotification setnotification
 #' @param hit.type A character string specifying the HITTypeId of the HITType
 #' for which notifications are being configured.
-#' @param notification A dictionary object Notification structure (e.g., returned by
+#' @param notification An optional dictionary object Notification structure (e.g., returned by
 #' \code{\link{GenerateNotification}}).
 #' @param active A logical indicating whether the Notification is active or
 #' inactive.
@@ -50,15 +50,16 @@
 #' \dontrun{
 #' # setup email notification
 #' hittype <- RegisterHITType(title = "10 Question Survey",
-#'                 description = "Complete a 10-question survey about news coverage and your opinions",
+#'                 description = "Complete a 10-question survey",
 #'                 reward = ".20",
-#'                 duration = seconds(hours=1),
+#'                 duration = seconds(hours = 1),
 #'                 keywords = "survey, questionnaire, politics")
 #'
 #' a <- GenerateNotification("user@gmail.com", "Email", "AssignmentAccepted")
 #' SetHITTypeNotification(hit.type = hittype$HITTypeId,
 #'                        notification = a,
 #'                        active = TRUE)
+#'
 #' # send test notification
 #' SendTestEventNotification(a, test.event.type = "AssignmentAccepted")
 #' }
@@ -102,17 +103,15 @@ SetHITTypeNotification <-
     Notification <- emptydf(1, 4, c("HITTypeId", "Notification", "Active", "Valid"))
 
     # Call the function with the arguments
-    response <- try(do.call('fun', args))
+    response <- try(do.call('fun', args), silent = !verbose)
 
     if(class(response) == "try-error") {
-      valid = FALSE
+      valid = FALSE else
+      if (verbose) {
+        warning("Invalid Request")
+      }
     } else {
       valid = TRUE
-    }
-
-    Notification[1, ] <- c(hit.type, as.character(notification), active, valid)
-
-    if (valid) {
       if (verbose) {
         if (!is.null(notification) & is.null(active)) {
           message("HITTypeNotification for ", hit.type, " Created")
@@ -126,9 +125,14 @@ SetHITTypeNotification <-
           message("HITTypeNotification for ", hit.type, " Inactive")
         }
       }
-    } else if (!valid & verbose) {
-      warning("Invalid Request")
     }
+
+
+    if(is.null(notification)){
+      notification <- NA_character_
+    }
+
+    Notification[1, ] <- c(hit.type, as.character(notification), active, valid)
     Notification$Valid <- factor(Notification$Valid, levels=c('TRUE','FALSE'))
     return(Notification)
   }

@@ -34,6 +34,21 @@
 #' @references
 #' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_SendTestEventNotificationOperation.html}{API Reference}
 #' @keywords Notifications
+#' @examples
+#'
+#' \dontrun {
+#' hittype <- RegisterHITType(title="10 Question Survey",
+#'                            description = "Complete a 10-question survey",
+#'                            reward = ".20",
+#'                            duration = seconds(hours = 1),
+#'                            keywords = "survey, questionnaire, politics")
+#'
+#' a <- GenerateNotification("requester@example.com", event.type = "HITExpired")
+#'
+#' SetHITTypeNotification(hit.type = hittype$HITTypeId,
+#'                        notification = a,
+#'                        active = TRUE)
+#' }
 #'
 #' @export SendTestEventNotification
 #' @export notificationtest
@@ -51,7 +66,8 @@ SendTestEventNotification <-
                    "HITCreated", "HITExtended", "HITDisposed", "HITReviewable", "HITExpired",
                    "Ping")
     if (!test.event.type %in% validopts) {
-      stop(paste0("Inappropriate TestEventType specified. Must be one of: ", paste(validopts, sep = ", ")))
+      stop(paste0("Inappropriate TestEventType specified. Must be one of: ",
+                  paste(validopts, collapse = ", ")))
     }
 
     # List to store arguments
@@ -65,7 +81,7 @@ SendTestEventNotification <-
 
     # Execute the API call
     response <- try(
-      do.call('fun', args)
+      do.call('fun', args), silent = !verbose
     )
 
     # Check if failure

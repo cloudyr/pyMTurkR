@@ -140,7 +140,7 @@ function (assignments,
 
   # Return results
   if(verbose){
-    message(sum(as.integer(Assignments$Valid)), " Assignments Approved")
+    message(sum(Assignments$Valid), " Assignments Approved")
   }
   return(Assignments)
 }

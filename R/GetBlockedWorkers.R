@@ -47,7 +47,6 @@ GetBlockedWorkers <-
         # Fetch next batch
         response <- batch(pagetoken)
 
-        print(1)
         # Add to HIT DF
         to.return$WorkerBlocks <- rbind(to.return$WorkerBlocks, response$WorkerBlocks)
 

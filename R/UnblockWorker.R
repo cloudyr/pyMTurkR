@@ -11,16 +11,14 @@ UnblockWorker <-
     if (is.factor(workers)) {
       workers <- as.character(workers)
     }
-    if (length(workers) > 1) {
-      if (!is.null(reasons)) {
-        if (is.factor(reasons)) {
-          reasons <- as.character(reasons)
-        }
-        if (length(reasons) == 1) {
-          reasons <- rep(reasons, length(workers))
-        } else if (!length(workers) == length(reasons)) {
-          stop("length(reason) must equal length(workers) or 1")
-        }
+    if (!is.null(reasons)) {
+      if (is.factor(reasons)) {
+        reasons <- as.character(reasons)
+      }
+      if (length(reasons) == 1) {
+        reasons <- rep(reasons, length(workers))
+      } else if (!length(workers) == length(reasons)) {
+        stop("length(reason) must equal length(workers) or 1")
       }
     }
 
@@ -48,18 +46,18 @@ UnblockWorker <-
       # Validity check
       if(class(response) == "try-error") {
         valid = FALSE
+        if(verbose){
+          message(i, ": Worker ", workers[i], " Unblocked")
+        }
       }
       else {
         valid = TRUE
+        if(verbose){
+          warning(i,": Invalid Request for worker ", workers[i])
+        }
       }
 
       Workers[i, ] <- c(workers[i], this.reason, valid)
-
-      if (valid == TRUE & verbose) {
-        message(i, ": Worker ", workers[i], " Unblocked")
-      } else if (valid == FALSE & verbose) {
-        warning(i,": Invalid Request for worker ", workers[i])
-      }
 
     }
 

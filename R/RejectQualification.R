@@ -22,36 +22,31 @@ RejectQualification <-
         }
       }
     }
-    QualificationRequests <- emptydf(length(qual.requests), 3, c("QualificationRequestId", "Reason", "Valid"))
+    QualificationRequests <- emptydf(0, 3, c("QualificationRequestId", "Reason", "Valid"))
 
     for (i in 1:length(qual.requests)) {
 
       response <- try(client$reject_qualification_request(QualificationRequestId = qual.requests[i],
-                                                          Reason = reason[i]))
+                                                          Reason = reason[i]), silent = !verbose)
 
       if (is.null(reason[i])) {
         reason[i] <- NA_character_
       }
 
       # Check if failure
-      if (response$ResponseMetadata$HTTPStatusCode == 200) {
-        valid <- TRUE
-      } else {
+      if (class(response) == "try-error") {
         valid <- FALSE
-      }
-
-      QualificationRequests[i, ] <- c(qual.requests[i], reason[i], valid)
-
-      # Message with results
-      if (class(response) != "try-error" & valid == TRUE) {
-        if (verbose) {
-          message(i, ": Qualification (", qual.requests[i],") Rejected")
-        }
-      } else {
         if (verbose) {
           warning(i, ": Invalid Request for QualificationRequestId ", qual.requests[i])
         }
+      } else {
+        valid <- TRUE
+        if (verbose) {
+          message(i, ": Qualification (", qual.requests[i],") Rejected")
+        }
       }
+
+      QualificationRequests[i, ] <- c(qual.requests[i], reason[i], valid)
 
     }
     QualificationRequests$Valid <- factor(QualificationRequests$Valid, levels=c('TRUE','FALSE'))
