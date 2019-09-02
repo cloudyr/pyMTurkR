@@ -145,7 +145,7 @@ ContactWorker <-
           Subject = subjects,
           WorkerIds = as.list(workerbatch[[i]]),
           MessageText = msgs
-        ))
+        ), silent = !verbose)
         if (class(response) != "try-error") {
           Notifications$Valid[Notifications$WorkerId %in% workerbatch[[i]]] <- TRUE
           if (verbose) {
@@ -208,7 +208,7 @@ ContactWorker <-
           Subject = subjects[i],
           WorkerIds = as.list(workers[i]),
           MessageText = msgs[i]
-        ))
+        ), silent = !verbose)
 
         # Check if failure
         if (length(response$NotifyWorkersFailureStatuses) > 0) {

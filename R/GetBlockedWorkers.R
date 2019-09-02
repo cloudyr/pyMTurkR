@@ -13,9 +13,9 @@ GetBlockedWorkers <-
       # Use page token if given
       if(!is.null(pagetoken)){
         response <- try(client$list_worker_blocks(NextToken = pagetoken,
-                                                  MaxResults = as.integer(results)))
+                                                  MaxResults = as.integer(results)), silent = !verbose)
       } else {
-        response <- try(client$list_worker_blocks(MaxResults = as.integer(results)))
+        response <- try(client$list_worker_blocks(MaxResults = as.integer(results)), silent = !verbose)
       }
 
       # Validity check response

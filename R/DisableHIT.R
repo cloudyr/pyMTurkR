@@ -159,7 +159,7 @@ DisableHIT <-
         response <- try(client$update_expiration_for_hit(
           HITId = hit,
           ExpireAt = "10000"
-        ))
+        ), silent = !verbose)
         operation <- "Disable/Expire"
 
         if(class(response) == "try-error") {
@@ -182,7 +182,7 @@ DisableHIT <-
         # Check HIT status
         hitdetail <- GetHIT(hit = hit, verbose = FALSE)
         if(hitdetail$HITs$HITStatus %in% c("Reviewing", "Reviewable")){
-          response <- try(client$delete_hit(HITId = hit))
+          response <- try(client$delete_hit(HITId = hit), silent = !verbose)
 
           if(class(response) == "try-error") {
             warning(i, ": Unable to Delete HIT ", hit)

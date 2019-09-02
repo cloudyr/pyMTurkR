@@ -85,7 +85,7 @@ BlockWorker <-
       response <- try(client$create_worker_block(
         WorkerId = workers[i],
         Reason = reasons[i]
-      ))
+      ), silent = !verbose)
 
       # Validity check
       if(class(response) == "try-error") {

@@ -48,10 +48,10 @@ GetHITsForQualificationType <-
       if(!is.null(pagetoken)){
         response <- try(client$list_hits_for_qualification_type(QualificationTypeId = qual,
                                                                 NextToken = pagetoken,
-                                                                MaxResults = as.integer(results)))
+                                                                MaxResults = as.integer(results)), silent = !verbose)
       } else {
         response <- try(client$list_hits_for_qualification_type(QualificationTypeId = qual,
-                                                                MaxResults = as.integer(results)))
+                                                                MaxResults = as.integer(results)), silent = !verbose)
       }
 
       # Validity check response

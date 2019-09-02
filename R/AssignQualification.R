@@ -134,7 +134,7 @@ AssignQualification <-
         WorkerId = worker,
         IntegerValue = as.integer(value),
         SendNotification = as.logical(notify)
-      ))
+      ), silent = !verbose)
 
       # Validity check
       if(class(response) == "try-error") {
@@ -142,7 +142,7 @@ AssignQualification <-
       }
       else response$valid = TRUE
 
-      if(verbose)
+      if(verbose & response$valid)
         message("Qualification (", qual, ") Assigned to worker ", worker)
       return(invisible(response))
     }

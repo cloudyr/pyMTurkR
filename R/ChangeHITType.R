@@ -160,7 +160,7 @@ ChangeHITType <-
                                         duration = duration,
                                         keywords = keywords,
                                         auto.approval.delay = auto.approval.delay,
-                                        qual.req = qual.req))
+                                        qual.req = qual.req), silent = !verbose)
 
         if (class(register) == "try-error") {
           stop("Could not RegisterHITType(), check parameters")
@@ -202,7 +202,7 @@ ChangeHITType <-
       response <- try(client$update_hit_type_of_hit(
         HITId = hit,
         HITTypeId = new.hit.type
-      ))
+      ), silent = !verbose)
 
       if (class(response) != "try-error") { # Valid
         valid <- TRUE

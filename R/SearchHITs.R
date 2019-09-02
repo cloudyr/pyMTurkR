@@ -48,9 +48,9 @@ function (return.pages = NULL,
 
     # Use page token if given
     if(!is.null(pagetoken)){
-      response <- try(client$list_hits(NextToken = pagetoken, MaxResults = as.integer(results)))
+      response <- try(client$list_hits(NextToken = pagetoken, MaxResults = as.integer(results)), silent = !verbose)
     } else {
-      response <- try(client$list_hits(MaxResults = as.integer(results)))
+      response <- try(client$list_hits(MaxResults = as.integer(results)), silent = !verbose)
     }
 
     # Validity check response

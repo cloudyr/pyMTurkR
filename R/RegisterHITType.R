@@ -133,7 +133,7 @@ RegisterHITType <-
 
     # Execute the API call
     response <- try(
-      do.call('fun', args)
+      do.call('fun', args), silent = !verbose
     )
 
     if (class(response) != "try-error") { # Valid

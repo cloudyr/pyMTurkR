@@ -2,7 +2,7 @@
 test_that("CreateQualificationType with minimal info", {
   skip_if_not(CheckAWSKeys())
 
-  CreateQualificationType(name = "Qual0001",
+  CreateQualificationType(name = "Qual0001x",
                           description = "This is a qualification",
                           status = "Active",
                           auto = TRUE,
@@ -24,7 +24,7 @@ test_that("CreateQualificationType with Qualification Test", {
   f <- system.file("templates/answerkey1.xml", package = "pyMTurkR")
   AnswerKey <- paste0(readLines(f, warn = FALSE), collapse = "")
 
-  CreateQualificationType(name = "Qual0001",
+  CreateQualificationType(name = "Qual0001x",
                           description = "This is a qualification",
                           status = "Active",
                           test = QuestionForm,

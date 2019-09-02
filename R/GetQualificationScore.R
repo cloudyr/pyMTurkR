@@ -78,7 +78,7 @@ GetQualificationScore <-
     for (i in 1:length(workers)) {
 
       response <- try(client$get_qualification_score(QualificationTypeId = qual[i],
-                                                     WorkerId = workers[i]))
+                                                     WorkerId = workers[i]), silent = !verbose)
 
       # Validity check response
       if(class(response) != "try-error") {

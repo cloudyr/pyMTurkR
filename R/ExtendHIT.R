@@ -175,7 +175,7 @@ ExtendHIT <-
         response <- try(client$update_expiration_for_hit(
           HITId = hit,
           ExpireAt = as.character(as.integer(expirations[i]) + as.integer(add.seconds))
-        ))
+        ), silent = !verbose)
         if(class(response) == "try-error") {
           warning("Invalid Request")
           valid <- FALSE

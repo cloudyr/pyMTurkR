@@ -293,7 +293,7 @@ CreateHIT <-
 
     # Execute the API call
     response <- try(
-      do.call('fun', args)
+      do.call('fun', args), silent = !verbose
     )
 
     # Validity check

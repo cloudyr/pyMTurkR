@@ -106,7 +106,7 @@ GetAssignment <-
 
       # For each assignment...
       for (i in 1:length(assignment)) {
-        response <- try(client$get_assignment(AssignmentId = assignment[i]))
+        response <- try(client$get_assignment(AssignmentId = assignment[i]), silent = !verbose)
         QualificationRequirements <- list()
         if (class(response) != "try-error") {
           tmp <- ToDataFrameAssignment(response$Assignment)
@@ -175,11 +175,11 @@ GetAssignment <-
           response <- try(client$list_assignments_for_hit(HITId = batchhit,
                                                            NextToken = pagetoken,
                                                            MaxResults = as.integer(results),
-                                                           AssignmentStatuses = as.list(status)))
+                                                           AssignmentStatuses = as.list(status)), silent = !verbose)
         } else {
           response <- try(client$list_assignments_for_hit(HITId = batchhit,
                                                            MaxResults = as.integer(results),
-                                                           AssignmentStatuses = as.list(status)))
+                                                           AssignmentStatuses = as.list(status)), silent = !verbose)
         }
 
         # Validity check response

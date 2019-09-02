@@ -30,12 +30,12 @@ approveall <-
     } else if (!is.null(hit.type)) {
       assignments <- GetAssignments(hit.type = hit.type,
                                     status = status,
-                                    verbose = verbose)$AssignmentId
+                                    verbose = FALSE)$AssignmentId
 
     } else if (!is.null(annotation)) {
       assignments <- GetAssignments(annotation = annotation,
                                     status = status,
-                                    verbose = verbose)$AssignmentId
+                                    verbose = FALSE)$AssignmentId
 
     }
 

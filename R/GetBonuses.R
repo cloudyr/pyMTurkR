@@ -88,10 +88,10 @@ GetBonuses <-
       if(!is.null(pagetoken)){
         response <- try(client$list_bonus_payments(HITId = hit,
                                                    NextToken = pagetoken,
-                                                   MaxResults = as.integer(results)))
+                                                   MaxResults = as.integer(results)), silent = !verbose)
       } else {
         response <- try(client$list_bonus_payments(HITId = hit,
-                                                   MaxResults = as.integer(results)))
+                                                   MaxResults = as.integer(results)), silent = !verbose)
       }
 
       # Validity check response

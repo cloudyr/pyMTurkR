@@ -70,18 +70,18 @@ GetQualificationRequests <-
       if(!is.null(pagetoken)){
         if(is.null(qual)){
           response <- try(client$list_qualification_requests(NextToken = pagetoken,
-                                                             MaxResults = as.integer(results)))
+                                                             MaxResults = as.integer(results)), silent = !verbose)
         } else {
           response <- try(client$list_qualification_requests(QualificationTypeId = qual,
                                                              NextToken = pagetoken,
-                                                             MaxResults = as.integer(results)))
+                                                             MaxResults = as.integer(results)), silent = !verbose)
         }
       } else {
         if(is.null(qual)){
-          response <- try(client$list_qualification_requests(MaxResults = as.integer(results)))
+          response <- try(client$list_qualification_requests(MaxResults = as.integer(results)), silent = !verbose)
         } else {
           response <- try(client$list_qualification_requests(QualificationTypeId = qual,
-                                                             MaxResults = as.integer(results)))
+                                                             MaxResults = as.integer(results)), silent = !verbose)
 
         }
       }

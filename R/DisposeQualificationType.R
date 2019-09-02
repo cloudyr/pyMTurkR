@@ -58,7 +58,7 @@ DisposeQualificationType <-
 
     response <- try(client$delete_qualification_type(
       QualificationTypeId = qual
-    ))
+    ), silent = !verbose)
 
     if(class(response) == "try-error") {
       warning("Invalid request\n  Does this qualification exist?")
