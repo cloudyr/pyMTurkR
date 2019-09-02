@@ -27,6 +27,7 @@ pyMTurkR is not a native R language package. It uses [`reticulate`](https://rstu
 ## 1. Install `python` and `pip`
 
 1.1. Install `python 2` (>= 2.7) or `python 3` (>= 3.3) ([download page](https://www.python.org/downloads))
+
 1.2. Install `pip` for `python` 
 
  - Windows users: [see "Installing with get-pip.py" here](https://pip.pypa.io/en/stable/installing)
