@@ -64,7 +64,8 @@
 #' SendTestEventNotification(a, test.event.type = "AssignmentAccepted")
 #' }
 #'
-#' @export
+#' @export SetHITTypeNotification
+#' @export setnotification
 
 SetHITTypeNotification <-
   setnotification <-

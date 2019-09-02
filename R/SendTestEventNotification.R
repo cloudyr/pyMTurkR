@@ -13,8 +13,7 @@
 #' \code{notificationtest} is an alias.
 #'
 #' @aliases SendTestEventNotification notificationtest
-#' @param notification A dictionary object Notification structure (e.g., returned by
-#' \code{\link{GenerateNotification}}).
+#' @param notification A dictionary object Notification structure (e.g., returned by \code{\link{GenerateNotification}}).
 #' @param test.event.type A character string containing one of:
 #' \code{AssignmentAccepted}, \code{AssignmentAbandoned}, \code{AssignmentReturned},
 #' \code{AssignmentSubmitted}, \code{AssignmentRejected}, \code{AssignmentApproved},
@@ -35,7 +34,7 @@
 #' @keywords Notifications
 #' @examples
 #'
-#' \dontrun {
+#' \dontrun{
 #' hittype <- RegisterHITType(title="10 Question Survey",
 #'                            description = "Complete a 10-question survey",
 #'                            reward = ".20",

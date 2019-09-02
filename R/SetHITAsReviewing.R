@@ -52,7 +52,9 @@
 #'
 #' }
 #'
-#' @export
+#' @export SetHITAsReviewing
+#' @export reviewing
+#' @export UpdateHITReviewStatus
 
 SetHITAsReviewing <-
   reviewing <-

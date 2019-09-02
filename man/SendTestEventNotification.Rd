@@ -9,8 +9,7 @@ SendTestEventNotification(notification, test.event.type,
   verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
-\item{notification}{A dictionary object Notification structure (e.g., returned by
-\code{\link{GenerateNotification}}).}
+\item{notification}{A dictionary object Notification structure (e.g., returned by \code{\link{GenerateNotification}}).}
 
 \item{test.event.type}{A character string containing one of:
 \code{AssignmentAccepted}, \code{AssignmentAbandoned}, \code{AssignmentReturned},
@@ -45,7 +44,7 @@ event should do nothing.
 }
 \examples{
 
-\dontrun {
+\dontrun{
 hittype <- RegisterHITType(title="10 Question Survey",
                            description = "Complete a 10-question survey",
                            reward = ".20",
