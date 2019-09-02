@@ -15,4 +15,8 @@ test_that("GetReviewResultsForHIT", {
                          policy.level = 'HIT') -> result
   expect_type(result, "list")
 
+  # GetReviewResultsForHIT for a HIT that actually has policies
+  GetReviewResultsForHIT('3NZ1E5QA6Z108TQ3QK6XTM947PJB5B') -> result
+  expect_type(result, "list")
+
 })

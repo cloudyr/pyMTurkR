@@ -79,6 +79,8 @@
 #' User Interface at \samp{https://requester.mturk.com/create/projects}. If the
 #' HIT template includes variable placeholders, must also specify
 #' \code{hitlayoutparameters}.
+#' @param hitlayoutparameters Required if using a hitlayoutid with placeholder values.
+#' This must be a list of lists containing Name and String values.
 #' @param verbose Optionally print the results of the API request to the
 #' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
 #' TRUE)}.
@@ -129,6 +131,7 @@ CreateHIT <-
             auto.approval.delay = NULL,
             qual.req = NULL,
             hitlayoutid = NULL,
+            hitlayoutparameters = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
     client <- GetClient() # Boto3 client
@@ -234,6 +237,12 @@ CreateHIT <-
     if (is.null(question)) {
       if (!is.null(hitlayoutid)) {
         args <- c(args, list(HITLayoutId = as.character(hitlayoutid)))
+        if(!is.null(hitlayoutparameters)){
+          for(i in 1:length(hitlayoutparameters)){
+            hitlayoutparameters[[1]] <- reticulate::dict(hitlayoutparameters[[1]] )
+          }
+          args <- c(args, list(HITLayoutParameters = hitlayoutparameters))
+        }
       } else {
         stop("Must specify QuestionForm, HTMLQuestion, or ExternalQuestion for 'question' parameter; or a 'hitlayoutid'")
       }

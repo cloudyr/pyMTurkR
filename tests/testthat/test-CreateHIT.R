@@ -55,8 +55,23 @@ test_that("CreateHIT", {
                     hit.review.policy = policya,
                     assignment.review.policy = policyb,
                     auto.approval.delay = 30)
-
   expect_type(hit2, "list")
+
+  ########################
+  # Using hitlayoutid and hitlayoutparameters
+  hit3 <- CreateHIT(hit.type = '3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z',
+                    hitlayoutid = '3NT7VIEMIJ1I0VN7L8GIWYJN5TUZPK',
+                    hitlayoutparameters = list(
+                      list(
+                        Name = 'filler',
+                        Value = '1'
+                      )
+                    ),
+                    assignments = 1,
+                    expiration = seconds(days=1),
+                    hit.review.policy = policya,
+                    assignment.review.policy = policyb,
+                    auto.approval.delay = 30)
 
 
   Sys.sleep(15)

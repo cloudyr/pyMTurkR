@@ -14,7 +14,8 @@ CreateHIT(hit.type = NULL, question = NULL, expiration,
   unique.request.token = NULL, title = NULL, description = NULL,
   reward = NULL, duration = NULL, keywords = NULL,
   auto.approval.delay = NULL, qual.req = NULL, hitlayoutid = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+  hitlayoutparameters = NULL, verbose = getOption("pyMTurkR.verbose",
+  TRUE))
 }
 \arguments{
 \item{hit.type}{An optional character string specifying the HITTypeId that
@@ -79,6 +80,9 @@ retrieved from a HIT \dQuote{project} template generated in the Requester
 User Interface at \samp{https://requester.mturk.com/create/projects}. If the
 HIT template includes variable placeholders, must also specify
 \code{hitlayoutparameters}.}
+
+\item{hitlayoutparameters}{Required if using a hitlayoutid with placeholder values.
+This must be a list of lists containing Name and String values.}
 
 \item{verbose}{Optionally print the results of the API request to the
 standard output. Default is taken from \code{getOption('pyMTurkR.verbose',

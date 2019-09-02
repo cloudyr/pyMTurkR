@@ -10,7 +10,7 @@ test_that("GetBonuses", {
   expect_type(result, "list")
 
   # GetBonuses using HITTypeId
-  GetBonuses(hit.type = as.factor(hits$HITs$HITTypeId[[1]])) -> result
+  GetBonuses(hit.type = as.factor('3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z')) -> result
   expect_type(result, "list")
 
   # GetBonuses using Annotation
