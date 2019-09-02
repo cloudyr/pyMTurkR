@@ -24,52 +24,96 @@ pyMTurkR is not a native R language package. It uses [`reticulate`](https://rstu
 
 # Installation
 
-## Python and boto3 installation
+## 1. Install `python` and `pip`
 
-1. Install Python 2 (>= 2.7) or Python 3 (>= 3.3) ([download page](https://www.python.org/downloads))
-2. Install pip for Python ([see "Installing with get-pip.py" here](https://pip.pypa.io/en/stable/installing))
-3. Use a `system` command in R to install boto3 via pip
+1.1. Install `python 2` (>= 2.7) or `python 3` (>= 3.3) ([download page](https://www.python.org/downloads))
+1.2. Install `pip` for `python` 
+
+ - Windows users: [see "Installing with get-pip.py" here](https://pip.pypa.io/en/stable/installing)
+ - Mac users: run `sudo easy_install pip` to install pip
+
+1.3. Install `reticulate` for R
+
+```
+install.packages("reticulate")
+```
+
+1.4. Check that `reticulate` can now find `python`. You may have to restart RStudio.
+
+```
+reticulate::py_config()
+```
+
+1.5. Check that `pip` can be found
+
+```
+system("pip --version")
+```
+
+## 2. Install `boto3`
+
+2.1. Find the default `python` path that `reticulate` is using
+
+```
+reticulate::py_config()
+```
+
+Take note of the path in the first line (e.g., "/usr/bin/python").
+
+2.2. Find the path that the system `pip` command is using
+
+```
+system("pip --version")
+```
+
+For example, in "pip 18.0 from /usr/local/lib/python2.7/site-packages/pip" the `python` path is "/usr/local/lib/python2.7"). If the path here does not match the py_config() path, then you may need to manually set the path using `use_python()`.
+
+```
+reticulate::use_python("/usr/local/lib/python2.7", required = TRUE)
+```
+
+2.3. Install `boto3` using `pip`
 
 ```
 system("pip install boto3")
 ```
 
-## Package installation
+Or alternatively, run this command in the system terminal (`sudo pip install boto3` for Mac users).
+
+2.4. Check if you can now import boto3. You may have to restart RStudio.
+
+```
+reticulate::import("boto3")
+```
+
+For additional install options, [see "Installing Python Packages" in the `reticulate` docs](https://rstudio.github.io/reticulate/articles/python_packages.html).
+
+
+## 3. Install `pyMTurkR`
+
+3.1. Finally, you can install `pyMTurkR`.
 
 ```
 devtools::install_github("cloudyr/pyMTurkR")
 ```
 
-## Troubleshooting
-
-If you get a `ModuleNotFoundError: No module named 'boto3'` error, then you should check that you don't have more than one version of python installed on your system.
-
-```
-# Check for multiple python installs
-reticulate::py_config()
-```
-
-If this command returns multiple items under "python versions found" then you might have to specify which one to use.
-
-```
-# Specify a python to use
-reticulate::use_python("C:\\Python36\\python.exe")
-```
 
 # Usage
 
+Before using the package, you will need to retrieve your "Access" and "Secret Access" keys from Amazon Web Services (AWS). [See "Understanding and Getting Your Security Credentials"](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html).
+
 ## Set AWS keys
 
-AWS keys can be set as environment variables.
+The Access and Secret Access keys should be set as environment variables in R prior to running any API operations.
 
 ```R
-Sys.setenv(AWS_ACCESS_KEY_ID = "my access key")
-Sys.setenv(AWS_SECRET_ACCESS_KEY = "my secret key")
+Sys.setenv(AWS_ACCESS_KEY_ID = "MY_ACCESS_KEY")
+Sys.setenv(AWS_SECRET_ACCESS_KEY = "MY_SECRET_ACCESS_KEY")
 ```
 
 ## Set environment (Sandbox or Live)
 
-pyMTurkR will run in "sandbox" mode by default. To change this, set `pyMTurkR.sandbox` to `FALSE`.
+pyMTurkR will run in "sandbox" mode by default. It is good practice to test any new methods, procedures, or code in the sandbox first before going live. To change this setting and use the live environment, set `pyMTurkR.sandbox` to `FALSE`.
 
 ```R
 options(pyMTurkR.sandbox = FALSE)
