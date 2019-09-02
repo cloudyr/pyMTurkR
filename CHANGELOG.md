@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.0] - 2019-09-02
+Now that the unit testing is done and all tests are passing and hopefully all bugs sussed out, I'm bumping the version to 1.0!
+
 ## [0.7.1] - 2019-09-02
 - CreateHIT now accepts hitlayoutparameters parameter
 - Some small fixes
