@@ -1,6 +1,6 @@
 Package: pyMTurkR
 Type: Package
-Title: An R package to interface with the MTurk requester API
+Title: An R Package to Interface with the MTurk Requester API
 Version: 1.0
 Authors@R: c(person("Tyler", "Burleigh",
                     role = c("aut", "cre"), 
