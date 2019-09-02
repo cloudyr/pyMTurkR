@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.7.1] - 2019-09-01
+- CreateHIT now accepts hitlayoutparameters parameter
+- Some small fixes
+
 ## [0.7.0] - 2019-09-01
 - Deduplicating workers in GrantBonus doesn't make sense. Should be de-duplicating assignments -- but with a prompt to the user in case it's desired behavior. To achieve this, I've added a skip.prompt parameter.
 - Bug fix in SearchHITs -- Don't forget to refresh the results found!
