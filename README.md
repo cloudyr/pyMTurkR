@@ -73,6 +73,8 @@ For example, in "pip 18.0 from /usr/local/lib/python2.7/site-packages/pip" the `
 reticulate::use_python("/usr/local/lib/python2.7", required = TRUE)
 ```
 
+You may have to restart RStudio before setting the path if you have run other `reticulate` operations.
+
 2.3. Install `boto3` using `pip`
 
 ```
