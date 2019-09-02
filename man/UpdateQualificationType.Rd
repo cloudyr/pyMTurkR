@@ -63,13 +63,11 @@ keywords cannot be modified after a QualificationType is created.
 \examples{
 
 \dontrun{
-qual1 <-
-CreateQualificationType(name="Worked for me before",
+qual1 <- CreateQualificationType(name="Worked for me before",
     description="This qualification is for people who have worked for me before",
     status = "Active",
     keywords="Worked for me before")
-qual2 <-
-UpdateQualificationType(qual1$QualificationTypeId,
+qual2 <- UpdateQualificationType(qual1$QualificationTypeId,
     description="This qualification is for everybody!",
     auto=TRUE, auto.value="5")
 DisposeQualificationType(qual1$QualificationTypeId)

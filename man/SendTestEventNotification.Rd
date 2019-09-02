@@ -43,12 +43,30 @@ event should do nothing.
 
 \code{notificationtest} is an alias.
 }
+\examples{
+
+\dontrun {
+hittype <- RegisterHITType(title="10 Question Survey",
+                           description = "Complete a 10-question survey",
+                           reward = ".20",
+                           duration = seconds(hours = 1),
+                           keywords = "survey, questionnaire, politics")
+
+a <- GenerateNotification("requester@example.com", event.type = "HITExpired")
+
+SetHITTypeNotification(hit.type = hittype$HITTypeId,
+                       notification = a,
+                       active = TRUE)
+}
+
+}
 \references{
 \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_SendTestEventNotificationOperation.html}{API Reference}
 }
+\seealso{
+\code{\link{SetHITTypeNotification}}
+}
 \author{
 Tyler Burleigh, Thomas J. Leeper
-
-\code{\link{SetHITTypeNotification}}
 }
 \keyword{Notifications}

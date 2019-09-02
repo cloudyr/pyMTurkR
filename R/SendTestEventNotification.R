@@ -29,8 +29,7 @@
 #' will be sent to the configured destination (either an email or an SQS
 #' queue).
 #' @author Tyler Burleigh, Thomas J. Leeper
-#'
-#' \code{\link{SetHITTypeNotification}}
+#' @seealso \code{\link{SetHITTypeNotification}}
 #' @references
 #' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_SendTestEventNotificationOperation.html}{API Reference}
 #' @keywords Notifications

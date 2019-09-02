@@ -6,7 +6,7 @@
 \alias{reject}
 \title{Reject Assignment}
 \usage{
-RejectAssignment(assignments, feedback = "",
+RejectAssignment(assignments, feedback,
   verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
@@ -14,7 +14,7 @@ RejectAssignment(assignments, feedback = "",
 vector of multiple character strings containing multiple AssignmentIds, to
 reject.}
 
-\item{feedback}{An optional character string containing any feedback for a
+\item{feedback}{A character string containing any feedback for a
 worker. This must have length 1 or length equal to the number of workers.}
 
 \item{verbose}{Optionally print the results of the API request to the

@@ -12,7 +12,7 @@ SetHITTypeNotification(hit.type, notification = NULL, active = NULL,
 \item{hit.type}{A character string specifying the HITTypeId of the HITType
 for which notifications are being configured.}
 
-\item{notification}{A dictionary object Notification structure (e.g., returned by
+\item{notification}{An optional dictionary object Notification structure (e.g., returned by
 \code{\link{GenerateNotification}}).}
 
 \item{active}{A logical indicating whether the Notification is active or
@@ -57,15 +57,16 @@ for large projects and allows automated processing of notifications.
 \dontrun{
 # setup email notification
 hittype <- RegisterHITType(title = "10 Question Survey",
-                description = "Complete a 10-question survey about news coverage and your opinions",
+                description = "Complete a 10-question survey",
                 reward = ".20",
-                duration = seconds(hours=1),
+                duration = seconds(hours = 1),
                 keywords = "survey, questionnaire, politics")
 
 a <- GenerateNotification("user@gmail.com", "Email", "AssignmentAccepted")
 SetHITTypeNotification(hit.type = hittype$HITTypeId,
                        notification = a,
                        active = TRUE)
+
 # send test notification
 SendTestEventNotification(a, test.event.type = "AssignmentAccepted")
 }
