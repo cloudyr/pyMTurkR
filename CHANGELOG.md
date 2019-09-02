@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.7.1] - 2019-09-01
+## [0.7.1] - 2019-09-02
 - CreateHIT now accepts hitlayoutparameters parameter
 - Some small fixes
 
