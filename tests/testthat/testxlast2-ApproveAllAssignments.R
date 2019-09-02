@@ -15,13 +15,11 @@ test_that("ApproveAllAssignments with missing parameters", {
 test_that("ApproveAllAssignments with hit.type", {
   skip_if_not(CheckAWSKeys())
   skip_if(nrow(try(GetAssignment(hit.type = '3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z',
-                                 results = 1,
-                                 status = 'Submitted'), TRUE)) == 0)
+                                 results = 1), TRUE)) == 0)
 
   # Get HITs then HIT Type
   GetAssignment(hit.type = '3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z',
-                results = 1,
-                status = 'Submitted')$HITId -> hit
+                results = 1)$HITId -> hit
 
   GetHIT(hit) -> hit
   hit$HITs$HITTypeId[[1]] -> hit.type
@@ -33,13 +31,11 @@ test_that("ApproveAllAssignments with hit.type", {
 test_that("ApproveAllAssignments with hit", {
   skip_if_not(CheckAWSKeys())
   skip_if(nrow(try(GetAssignment(hit.type = '3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z',
-                                      results = 1,
-                                      status = 'Submitted'), TRUE)) == 0)
+                                      results = 1), TRUE)) == 0)
 
   # Get HITs then HIT Type
   GetAssignment(hit.type = '3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z',
-                results = 1,
-                status = 'Submitted')$HITId -> hit
+                results = 1)$HITId -> hit
 
   expect_type(ApproveAllAssignments(hit = hit), "list")
 
@@ -49,13 +45,11 @@ test_that("ApproveAllAssignments with hit", {
 test_that("ApproveAllAssignments with feedback that's too long", {
   skip_if_not(CheckAWSKeys())
   skip_if(nrow(try(GetAssignment(hit.type = '3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z',
-                                 results = 1,
-                                 status = 'Submitted'), TRUE)) == 0)
+                                 results = 1), TRUE)) == 0)
 
   # Get HITs then Assignment
   GetAssignment(hit.type = '3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z',
-                results = 1,
-                status = 'Submitted')$AssignmentId -> assignment
+                results = 1)$AssignmentId -> assignment
 
   # Feedback that's too long (more than 1024 characters)
   expect_s3_class(try(ApproveAssignment(assignments = assignment,
@@ -67,8 +61,7 @@ test_that("ApproveAllAssignments with feedback that's too long", {
 test_that("ApproveAllAssignments with annotation", {
   skip_if_not(CheckAWSKeys())
   skip_if(nrow(try(GetAssignment(hit.type = '3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z',
-                                 results = 1,
-                                 status = 'Submitted'), TRUE)) == 0)
+                                 results = 1), TRUE)) == 0)
 
   # Get HITs then Assignment
   GetAssignment(hit.type = '3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z',

@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.7.0] - 2019-09-01
+- Deduplicating workers in GrantBonus doesn't make sense. Should be de-duplicating assignments -- but with a prompt to the user in case it's desired behavior. To achieve this, I've added a skip.prompt parameter.
+- Bug fix in SearchHITs -- Don't forget to refresh the results found!
+- Allow no hit.type specified in GetReviewableHITs
+- Small fix in HITStatus where it would print the results in addition to returning them
+- More namespace exports for ToDataFrame* functions
+- Error messages for if no HITs are found in GetAssignment searches
+- Lots of unit test enhancements / optimizations
+
 ## [0.6.9] - 2019-08-31
 - Fix for ActionsGuarded in GenerateQualificationRequirement
 - Now exports GenerateAssignmentReviewPolicy
