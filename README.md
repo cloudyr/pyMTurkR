@@ -1,4 +1,4 @@
-# pyMTurkR: An R package to interface with MTurk's Requester API <img src="https://raw.githubusercontent.com/cloudyr/pyMTurkR/master/assets/hex-pyMTurkR.png" align="right" width="200" />
+# pyMTurkR: An R Package to Interface with the MTurk Requester API <img src="https://raw.githubusercontent.com/cloudyr/pyMTurkR/master/assets/hex-pyMTurkR.png" align="right" width="200" />
 
 <!-- badges: start -->
 [![travis-ci](https://travis-ci.org/cloudyr/pyMTurkR.svg?branch=master)](https://travis-ci.org/cloudyr/pyMTurkR?branch=master)
