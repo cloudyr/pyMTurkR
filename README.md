@@ -12,7 +12,7 @@
 
 pyMTurkR provides access to the latest Amazon Mechanical Turk (<a href='https://www.mturk.com'>MTurk</a>) Requester API (<a href="https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_CreateHITOperation.html">version '2017-01-17'</a>), using `reticulate` to wrap the `boto3` SDK for Python. pyMTurkR is a replacement for the now obsolete [MTurkR](https://github.com/cloudyr/MTurkR).
 
-Using this package, you can perform operations like: creating HITs, updating HITs, creating custom Qualifications, reviewing submitted Assignments, approving/rejecting Assignments, sending bonus payments to Workers, sending messages to Workers, blocking/unblocking Workers, and many more. See the [pyMTurkR documentation](assets/pyMTurkR.pdf) for a full list of operations available.
+Using this package, you can perform operations like: creating HITs, updating HITs, creating custom Qualifications, reviewing submitted Assignments, approving/rejecting Assignments, sending bonus payments to Workers, sending messages to Workers, blocking/unblocking Workers, and many more. See the [pyMTurkR documentation](https://github.com/cloudyr/pyMTurkR/raw/master/assets/pyMTurkR.pdf) for a full list of operations available.
 
 
 ## Why make this?

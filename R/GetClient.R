@@ -4,8 +4,7 @@
 #' function. \code{CheckAWSKeys()} is a helper function that checks if your
 #' AWS keys can be found.
 #'
-#' \code{StartClient()}, \code{Client()} and \code{client()} are aliases for
-#' \code{GetClient}.
+#' \code{StartClient()} is an alias
 #'
 #' @aliases GetClient StartClient Client client CheckAWSKeys
 #' @param sandbox A logical indicating whether the client should be in the
@@ -20,8 +19,6 @@
 #' \href{https://aws.amazon.com/sdk-for-python/}{AWS SDK for Python (Boto3)}
 #' \href{https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/mturk.html}{Boto3 Docs}
 #'
-#' @keywords client, start
-#'
 #' @examples
 #' \dontrun{
 #' myclient <- GetClient()
@@ -29,14 +26,10 @@
 #' }
 #' @export GetClient
 #' @export StartClient
-#' @export Client
-#' @export client
 #' @export CheckAWSKeys
 
 GetClient <-
 StartClient <-
-Client <-
-client <-
 function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
          profile = getOption('pyMTurkR.profile', 'default')){
 

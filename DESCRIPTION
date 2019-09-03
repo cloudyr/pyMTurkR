@@ -1,6 +1,6 @@
 Package: pyMTurkR
 Type: Package
-Title: An R Package to Interface with the MTurk Requester API
+Title: An 'R' Package to Interface with the 'MTurk' Requester API
 Version: 1.0
 Authors@R: c(person("Tyler", "Burleigh",
                     role = c("aut", "cre"), 
@@ -15,7 +15,7 @@ Authors@R: c(person("Tyler", "Burleigh",
              person("Jonathan", "Chang", role = "ctb"),
              person("Andrew", "Brown", role = "ctb"))
 Maintainer: Tyler Burleigh <tylerburleigh@gmail.com>
-Description: Provides access to the latest Amazon Mechanical Turk (MTurk) <https://www.mturk.com> Requester API (version '2017–01–17'), replacing the now deprecated MTurkR.
+Description: Provides access to the latest 'Amazon Mechanical Turk' ('MTurk') <https://www.mturk.com> Requester API (version '2017–01–17'), replacing the now deprecated 'MTurkR' package.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true

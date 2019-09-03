@@ -29,8 +29,7 @@ function. \code{CheckAWSKeys()} is a helper function that checks if your
 AWS keys can be found.
 }
 \details{
-\code{StartClient()}, \code{Client()} and \code{client()} are aliases for
-\code{GetClient}.
+\code{StartClient()} is an alias
 }
 \examples{
 \dontrun{
@@ -45,5 +44,3 @@ myclient$get_account_balance()
 \author{
 Tyler Burleigh
 }
-\keyword{client,}
-\keyword{start}
