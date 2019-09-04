@@ -18,6 +18,8 @@ sandbox environment or the live environment.}
 
 \item{profile}{A character string that specifies the profile to use
 from the .aws/credentials file, optional.}
+
+\item{restart.client}{A boolean that specifies whether to force the creation of a new client. This is useful if you want to change between sandbox and live environments within the same R session.}
 }
 \value{
 An object with the classes \dQuote{botocore.client.MTurk},

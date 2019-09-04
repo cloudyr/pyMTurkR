@@ -11,6 +11,7 @@
 #' sandbox environment or the live environment.
 #' @param profile A character string that specifies the profile to use
 #' from the .aws/credentials file, optional.
+#' @param restart.client A boolean that specifies whether to force the creation of a new client. This is useful if you want to change between sandbox and live environments within the same R session.
 #' @return An object with the classes \dQuote{botocore.client.MTurk},
 #' \dQuote{botocore.client.BaseClient}, \dQuote{python.builtin.object}, that
 #' is used as an MTurk client.

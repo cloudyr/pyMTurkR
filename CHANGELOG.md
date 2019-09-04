@@ -1,8 +1,8 @@
 # Changelog
 
-## [1.1] - 2019-09-02
+## [1.1] - 2019-09-04
 Major change to improve API requests by creating a stable client rather than creating a client each time a request is made
-Fix for bug in GrantBonus due to legacy code
+Fix for bug in GrantBonus due to legacy code (thanks Chris Hydock!)
 
 ## [1.0] - 2019-09-02
 Now that the unit testing is done and all tests are passing and hopefully all bugs sussed out, I'm bumping the version to 1.0!
