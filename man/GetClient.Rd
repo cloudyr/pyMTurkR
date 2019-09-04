@@ -3,8 +3,6 @@
 \name{GetClient}
 \alias{GetClient}
 \alias{StartClient}
-\alias{Client}
-\alias{client}
 \alias{CheckAWSKeys}
 \title{Creates an MTurk Client using the AWS SDK for Python (Boto3)}
 \usage{
@@ -20,11 +18,6 @@ sandbox environment or the live environment.}
 from the .aws/credentials file, optional.}
 
 \item{restart.client}{A boolean that specifies whether to force the creation of a new client. This is useful if you want to change between sandbox and live environments within the same R session.}
-}
-\value{
-An object with the classes \dQuote{botocore.client.MTurk},
-\dQuote{botocore.client.BaseClient}, \dQuote{python.builtin.object}, that
-is used as an MTurk client.
 }
 \description{
 Create an API client. Only advanced users will likely need to use this
