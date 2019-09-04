@@ -47,10 +47,10 @@ GetReviewResultsForHIT <-
            pagetoken = NULL,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     # The function we'll call
-    fun <- client$list_review_policy_results_for_hit
+    fun <- pyMTurkRClient$list_review_policy_results_for_hit
 
     # The arguments we'll call in the function
     args <- list(RetrieveActions = TRUE,

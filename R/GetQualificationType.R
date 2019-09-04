@@ -36,7 +36,7 @@ GetQualificationType <-
   qualtype <-
   function(qual, verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if (is.null(qual)) {
       stop("Must specify QualificationTypeId")
@@ -45,7 +45,7 @@ GetQualificationType <-
       qual <- as.character(qual)
     }
 
-    response <- try(client$get_qualification_type(QualificationTypeId = qual), silent = !verbose)
+    response <- try(pyMTurkRClient$get_qualification_type(QualificationTypeId = qual), silent = !verbose)
 
     # Validity check response
     if(class(response) == "try-error") {

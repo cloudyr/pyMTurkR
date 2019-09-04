@@ -76,15 +76,13 @@ function (qual,
           auto.value = NULL,
           verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-
-
-  client <- GetClient() # Boto3 client
+  GetClient() # Boto3 client
 
   # List to store arguments
   args <- list(QualificationTypeId = qual)
 
   # Set the function to use later
-  fun <- client$update_qualification_type
+  fun <- pyMTurkRClient$update_qualification_type
 
   # Add optional fields
   if(!is.null(description)){

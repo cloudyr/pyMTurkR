@@ -43,7 +43,7 @@ GetReviewableHITs <-
             pagetoken = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if (is.factor(hit.type)) {
       hit.type <- as.character(hit.type)
@@ -55,7 +55,7 @@ GetReviewableHITs <-
       args <- list()
 
       # Set the function to use later
-      fun <- client$list_reviewable_hits
+      fun <- pyMTurkRClient$list_reviewable_hits
 
       # Add required arguments
       args <- c(args, list(Status = status,

@@ -69,7 +69,7 @@ GrantQualification <-
            reason = NULL,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if (is.factor(qual.requests)) {
       qual.requests <- as.character(qual.requests)
@@ -96,12 +96,12 @@ GrantQualification <-
 
     for (i in 1:length(qual.requests)) {
 
-      response <- try(client$accept_qualification_request(QualificationRequestId = qual.requests[i],
+      response <- try(pyMTurkRClient$accept_qualification_request(QualificationRequestId = qual.requests[i],
                                                           IntegerValue = values[i]), silent = !verbose)
 
 
       # Check if failure
-      if (response$ResponseMetadata$HTTPStatusCode == 200) {
+      if (class(response) != "try-error") {
         valid <- TRUE
       } else {
         valid <- FALSE

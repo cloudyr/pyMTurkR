@@ -86,7 +86,7 @@ ExtendHIT <-
            unique.request.token = NULL,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if (is.null(add.assignments) & is.null(add.seconds)) {
       stop("Must specify more assignments or time (in seconds)")
@@ -144,7 +144,7 @@ ExtendHIT <-
         args <- list()
 
         # Set the function to use later
-        fun <- client$create_additional_assignments_for_hit
+        fun <- pyMTurkRClient$create_additional_assignments_for_hit
 
         # Add required arguments
         args <- c(args, list(HITId = hit,
@@ -172,7 +172,7 @@ ExtendHIT <-
 
       if(!is.null(add.seconds)){
 
-        response <- try(client$update_expiration_for_hit(
+        response <- try(pyMTurkRClient$update_expiration_for_hit(
           HITId = hit,
           ExpireAt = as.character(as.integer(expirations[i]) + as.integer(add.seconds))
         ), silent = !verbose)

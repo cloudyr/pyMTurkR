@@ -65,7 +65,7 @@ SetHITAsReviewing <-
            revert = FALSE,
            verbose = getOption('pyMTurkR.verbose', TRUE)){
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if(is.na(as.logical(revert))){
       stop("Revert parameter must be TRUE or FALSE")
@@ -103,7 +103,7 @@ SetHITAsReviewing <-
 
       hit <- hitlist[i]
 
-      response <- try(client$update_hit_review_status(
+      response <- try(pyMTurkRClient$update_hit_review_status(
         HITId = hit,
         Revert = revert
       ), silent = !verbose)

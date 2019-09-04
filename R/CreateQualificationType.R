@@ -109,7 +109,7 @@ CreateQualificationType <-
             auto.value = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     # Check status is valid
     if(!status %in% c("Active", "Inactive"))
@@ -119,7 +119,7 @@ CreateQualificationType <-
     args <- list()
 
     # Set the function to use later
-    fun <- client$create_qualification_type
+    fun <- pyMTurkRClient$create_qualification_type
 
     # Add required arguments
     args <- c(args, list(Name = name,

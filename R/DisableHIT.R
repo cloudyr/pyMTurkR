@@ -98,7 +98,7 @@ DisableHIT <-
            skip.delete.prompt = FALSE,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     # Check if user is calling with delete aliases
     if((match.call()[[1]] == "DeleteHIT" | match.call()[[1]] == "deletehit" |
@@ -156,7 +156,7 @@ DisableHIT <-
         #   is in "epoch" time and it doesn't accept a 0 value
         #   or really any value less than 10000 it seems
         #   but 10000 is still "in the past" so it works
-        response <- try(client$update_expiration_for_hit(
+        response <- try(pyMTurkRClient$update_expiration_for_hit(
           HITId = hit,
           ExpireAt = "10000"
         ), silent = !verbose)
@@ -182,7 +182,7 @@ DisableHIT <-
         # Check HIT status
         hitdetail <- GetHIT(hit = hit, verbose = FALSE)
         if(hitdetail$HITs$HITStatus %in% c("Reviewing", "Reviewable")){
-          response <- try(client$delete_hit(HITId = hit), silent = !verbose)
+          response <- try(pyMTurkRClient$delete_hit(HITId = hit), silent = !verbose)
 
           if(class(response) == "try-error") {
             warning(i, ": Unable to Delete HIT ", hit)

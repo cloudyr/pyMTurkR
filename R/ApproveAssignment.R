@@ -64,7 +64,7 @@ function (assignments,
           rejected = FALSE,
           verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-  client <- GetClient() # Boto3 client
+  GetClient() # Boto3 client
 
   if (is.factor(assignments)) {
       assignments <- as.character(assignments)
@@ -75,7 +75,7 @@ function (assignments,
     }
     for (i in 1:length(feedback)) {
         if (!is.null(feedback[i]) && nchar(feedback[i]) > 1024)
-            warning("Feedback ", i, " is too long (1024 char max)")
+            stop("Feedback ", i, " is too long (1024 char max)")
     }
     if (length(feedback) == 1) {
         feedback <- rep(feedback[1], length(assignments))
@@ -100,7 +100,7 @@ function (assignments,
   # Loop through assignments and approve
   for (i in 1:length(assignments)){
 
-    fun <- client$approve_assignment
+    fun <- pyMTurkRClient$approve_assignment
 
     args <- list(AssignmentId = assignments[i],
                  OverrideRejection = rejected[i])

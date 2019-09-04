@@ -57,7 +57,7 @@ SendTestEventNotification <-
             test.event.type,
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     validopts <- c("AssignmentAccepted", "AssignmentAbandoned", "AssignmentReturned",
                    "AssignmentSubmitted", "AssignmentRejected", "AssignmentApproved",
@@ -72,7 +72,7 @@ SendTestEventNotification <-
     args <- list()
 
     # Set the function to use later (this one has a hit type)
-    fun <- client$send_test_event_notification
+    fun <- pyMTurkRClient$send_test_event_notification
 
     args <- list(Notification = notification,
                  TestEventType = test.event.type)
@@ -83,7 +83,7 @@ SendTestEventNotification <-
     )
 
     # Check if failure
-    if (response$ResponseMetadata$HTTPStatusCode == 200) {
+    if (class(response) != "try-error") {
       valid <- TRUE
       if (verbose) {
         message("TestEventNotification ", test.event.type," Sent")

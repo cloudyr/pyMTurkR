@@ -123,7 +123,7 @@ ChangeHITType <-
             old.annotation = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     # Make sure the function call is specifying only one of hit, old.hit.type,
     # old.annotation
@@ -199,7 +199,7 @@ ChangeHITType <-
     for (i in 1:length(hitlist)) {
 
       hit <- hitlist[i]
-      response <- try(client$update_hit_type_of_hit(
+      response <- try(pyMTurkRClient$update_hit_type_of_hit(
         HITId = hit,
         HITTypeId = new.hit.type
       ), silent = !verbose)

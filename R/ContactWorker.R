@@ -94,7 +94,7 @@ ContactWorker <-
             batch = FALSE,
             verbose = getOption('pyMTurkR.verbose', TRUE)){
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if (is.factor(subjects)) {
       subjects <- as.character(subjects)
@@ -141,7 +141,7 @@ ContactWorker <-
       # Put into batches, then process
       workerbatch <- split(workers, rep(1:((length(workers) %/% 100) + 1), each = 100)[1:length(workers)])
       for (i in 1:length(workerbatch)) {
-        response <- try(client$notify_workers(
+        response <- try(pyMTurkRClient$notify_workers(
           Subject = subjects,
           WorkerIds = as.list(workerbatch[[i]]),
           MessageText = msgs
@@ -204,7 +204,7 @@ ContactWorker <-
 
       for (i in 1:length(workers)) {
 
-        response <- try(client$notify_workers(
+        response <- try(pyMTurkRClient$notify_workers(
           Subject = subjects[i],
           WorkerIds = as.list(workers[i]),
           MessageText = msgs[i]

@@ -58,7 +58,7 @@ BlockWorker <-
             reasons = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)){
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if (is.factor(workers)) {
       workers <- as.character(workers)
@@ -82,7 +82,7 @@ BlockWorker <-
 
     for (i in 1:length(workers)) {
 
-      response <- try(client$create_worker_block(
+      response <- try(pyMTurkRClient$create_worker_block(
         WorkerId = workers[i],
         Reason = reasons[i]
       ), silent = !verbose)

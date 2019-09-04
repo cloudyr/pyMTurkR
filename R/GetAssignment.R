@@ -92,7 +92,7 @@ GetAssignment <-
            persist.on.error = FALSE,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if (as.numeric(results) < 1 || as.numeric(results) > 100) {
       stop("'pagesize' must be in range (1 to 100)")
@@ -106,7 +106,7 @@ GetAssignment <-
 
       # For each assignment...
       for (i in 1:length(assignment)) {
-        response <- try(client$get_assignment(AssignmentId = assignment[i]), silent = !verbose)
+        response <- try(pyMTurkRClient$get_assignment(AssignmentId = assignment[i]), silent = !verbose)
         QualificationRequirements <- list()
         if (class(response) != "try-error") {
           tmp <- ToDataFrameAssignment(response$Assignment)
@@ -172,12 +172,12 @@ GetAssignment <-
       batch_helper_list_assignments <- function(batchhit, pagetoken = NULL, num_retries = 1) {
 
         if(!is.null(pagetoken)){ # Use page token if given
-          response <- try(client$list_assignments_for_hit(HITId = batchhit,
+          response <- try(pyMTurkRClient$list_assignments_for_hit(HITId = batchhit,
                                                            NextToken = pagetoken,
                                                            MaxResults = as.integer(results),
                                                            AssignmentStatuses = as.list(status)), silent = !verbose)
         } else {
-          response <- try(client$list_assignments_for_hit(HITId = batchhit,
+          response <- try(pyMTurkRClient$list_assignments_for_hit(HITId = batchhit,
                                                            MaxResults = as.integer(results),
                                                            AssignmentStatuses = as.list(status)), silent = !verbose)
         }

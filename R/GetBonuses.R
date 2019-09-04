@@ -72,7 +72,7 @@ GetBonuses <-
            pagetoken = NULL,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if(sum(!is.null(hit),
            !is.null(hit.type),
@@ -86,11 +86,11 @@ GetBonuses <-
 
       # Use page token if given
       if(!is.null(pagetoken)){
-        response <- try(client$list_bonus_payments(HITId = hit,
+        response <- try(pyMTurkRClient$list_bonus_payments(HITId = hit,
                                                    NextToken = pagetoken,
                                                    MaxResults = as.integer(results)), silent = !verbose)
       } else {
-        response <- try(client$list_bonus_payments(HITId = hit,
+        response <- try(pyMTurkRClient$list_bonus_payments(HITId = hit,
                                                    MaxResults = as.integer(results)), silent = !verbose)
       }
 
@@ -149,7 +149,7 @@ GetBonuses <-
     } else if(!is.null(hit)){
       to.return <- batch_helper(hit = hit)
     } else if(!is.null(assignment)) {
-      response <- try(client$list_bonus_payments(AssignmentId = assignment))
+      response <- try(pyMTurkRClient$list_bonus_payments(AssignmentId = assignment))
       to.return <- ToDataFrameBonusPayments(response$BonusPayments)
     } else if (!is.null(hit.type)) {
 

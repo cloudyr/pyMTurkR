@@ -21,8 +21,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' myclient <- GetClient()
-#' myclient$get_account_balance()
+#' myGetClient()
+#' mypyMTurkRClient$get_account_balance()
 #' }
 #' @export GetClient
 #' @export StartClient
@@ -31,21 +31,28 @@
 GetClient <-
 StartClient <-
 function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
-         profile = getOption('pyMTurkR.profile', 'default')){
+         profile = getOption('pyMTurkR.profile', 'default'),
+         restart.client = FALSE){
 
-  tryCatch({ # Try loading boto3 module
+  if(!exists('pyMTurkRClient') ||
+     !class(pyMTurkRClient)[[1]] == 'botocore.client.MTurk' ||
+     restart.client){
 
-    boto3 <- reticulate::import("boto3")
+    tryCatch({
 
-    tryCatch({ # Try starting client
-      .helper_mturk_client(sandbox, profile, boto3) # If the module loaded, start the client
+      # Try loading boto3 module
+      boto3 <- reticulate::import("boto3")
+
+      tryCatch({ # Try starting client
+        .helper_mturk_client(sandbox, profile, boto3) # If the module loaded, start the client
+      }, error = function(e) {
+        message(paste(e, "    Unable to authenticate with credentials."))
+      })
+
     }, error = function(e) {
-      message(paste(e, "    Unable to authenticate with credentials."))
+      message(paste(e, "    Unable to start boto3 client."))
     })
-
-  }, error = function(e) {
-    message(paste(e, "    Unable to start boto3 client."))
-  })
+  }
 
 }
 
@@ -63,7 +70,7 @@ function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
   }
 
   # Start client
-  client <- boto3$client('mturk', region_name='us-east-1',
+  pyMTurkRClient <<- boto3$client('mturk', region_name='us-east-1',
                                 aws_access_key_id = key,
                                 aws_secret_access_key = secret_key,
                                 endpoint_url = endpoint_url)
@@ -74,12 +81,10 @@ function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
 }
 
 .helper_mturk_credentials_test <- function(sandbox, client){
-  if(sandbox) mode <- "\n[SANDBOX MODE]"
-  else mode <- ""
 
   tryCatch({
-    invisible(client$get_account_balance()) # Test the credentials using a call to get_account_balance()
-    invisible(client)
+    invisible(pyMTurkRClient$get_account_balance()) # Test the credentials using a call to get_account_balance()
+    invisible(pyMTurkRClient)
   }, error = function(e) {
     message(paste(e, "    Check your AWS credentials."))
   })

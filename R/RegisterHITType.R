@@ -79,7 +79,7 @@ RegisterHITType <-
             qual.req = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     # Validate fields
     if (nchar(title) > 128) {
@@ -129,7 +129,7 @@ RegisterHITType <-
       args <- c(args, QualificationRequirements = qual.req)
     }
 
-    fun <- client$create_hit_type
+    fun <- pyMTurkRClient$create_hit_type
 
     # Execute the API call
     response <- try(

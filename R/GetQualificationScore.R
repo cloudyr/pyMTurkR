@@ -56,7 +56,7 @@ GetQualificationScore <-
             workers,
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if (is.factor(qual)) {
       qual <- as.character(qual)
@@ -77,7 +77,7 @@ GetQualificationScore <-
 
     for (i in 1:length(workers)) {
 
-      response <- try(client$get_qualification_score(QualificationTypeId = qual[i],
+      response <- try(pyMTurkRClient$get_qualification_score(QualificationTypeId = qual[i],
                                                      WorkerId = workers[i]), silent = !verbose)
 
       # Validity check response

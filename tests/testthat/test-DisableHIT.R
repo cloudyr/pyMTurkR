@@ -25,7 +25,7 @@ test_that("DisableHIT", {
   #################
   # Register a HIT type
   set.seed(as.integer(Sys.time()))
-  hittype1 <- RegisterHITType(title =  paste0("10 Question Survey",
+  hittype2 <- RegisterHITType(title =  paste0("10 Question Survey",
                                               as.character(runif(1, 1, 99999999))),
                               description = "Complete a 10-question survey",
                               reward = ".20",
@@ -34,7 +34,7 @@ test_that("DisableHIT", {
 
   # Create a HIT using the HIT type just created
   a <- GenerateExternalQuestion("https://www.example.com", "400")
-  hit2 <- CreateHIT(hit.type = hittype1$HITTypeId,
+  hit2 <- CreateHIT(hit.type = hittype2$HITTypeId,
                    assignments = 1,
                    expiration = seconds(days=1),
                    question = a$string,
@@ -45,7 +45,7 @@ test_that("DisableHIT", {
   #################
   # Register a HIT type
   set.seed(as.integer(Sys.time()))
-  hittype2 <- RegisterHITType(title =  paste0("10 Question Survey",
+  hittype3 <- RegisterHITType(title =  paste0("10 Question Survey",
                                               as.character(runif(1, 1, 99999999))),
                               description = "Complete a 10-question survey",
                               reward = ".20",
@@ -55,7 +55,7 @@ test_that("DisableHIT", {
   # Create a HIT using the HIT type just created
   annotation <- paste0('x', as.character(runif(1, 1, 99999999)))
   a <- GenerateExternalQuestion("https://www.example.com", "400")
-  hit3 <- CreateHIT(hit.type = hittype2$HITTypeId,
+  hit3 <- CreateHIT(hit.type = hittype3$HITTypeId,
                    assignments = 1,
                    expiration = seconds(days=1),
                    question = a$string,

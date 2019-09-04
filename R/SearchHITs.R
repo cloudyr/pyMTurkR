@@ -42,20 +42,24 @@ function (return.pages = NULL,
           pagetoken = NULL,
           verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-  client <- GetClient() # Boto3 client
+  GetClient() # Boto3 client
 
   batch <- function(pagetoken = NULL) {
 
     # Use page token if given
     if(!is.null(pagetoken)){
-      response <- try(client$list_hits(NextToken = pagetoken, MaxResults = as.integer(results)), silent = !verbose)
+      response <- try(pyMTurkRClient$list_hits(NextToken = pagetoken, MaxResults = as.integer(results)), silent = !verbose)
     } else {
-      response <- try(client$list_hits(MaxResults = as.integer(results)), silent = !verbose)
+      response <- try(pyMTurkRClient$list_hits(MaxResults = as.integer(results)), silent = !verbose)
     }
 
     # Validity check response
     if(class(response) == "try-error") {
-      stop("SearchHITs() request failed!")
+      stop("SearchHITs request failed!")
+    }
+
+    if(response$NumResults == 0){
+      stop("No HITs found.")
     }
 
     response$QualificationRequirements <- ToDataFrameQualificationRequirements(response$HITs)

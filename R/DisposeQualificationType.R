@@ -43,7 +43,7 @@ DisposeQualificationType <-
   deletequal <-
   function (qual, verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     operation <- "DisposeQualificationType"
     if (is.null(qual)) {
@@ -56,7 +56,7 @@ DisposeQualificationType <-
 
     QualificationTypes <- emptydf(0, 2, c("QualificationTypeId", "Valid"))
 
-    response <- try(client$delete_qualification_type(
+    response <- try(pyMTurkRClient$delete_qualification_type(
       QualificationTypeId = qual
     ), silent = !verbose)
 

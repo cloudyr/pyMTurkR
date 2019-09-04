@@ -60,7 +60,7 @@ RevokeQualification <-
             verbose = getOption('pyMTurkR.verbose', TRUE)){
 
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if (!is.null(qual) & is.factor(qual)) {
       qual <- as.character(qual)
@@ -77,7 +77,7 @@ RevokeQualification <-
     }
 
     # Function for API call
-    fun <- client$disassociate_qualification_from_worker
+    fun <- pyMTurkRClient$disassociate_qualification_from_worker
 
     Qualifications <- emptydf(0, 4, c("WorkerId", "QualificationTypeId", "Reason", "Valid"))
 
@@ -98,7 +98,7 @@ RevokeQualification <-
       )
 
       # Check if failure
-      if (response$ResponseMetadata$HTTPStatusCode == 200) {
+      if (class(response) != "try-error") {
         message(i, ": Qualification (", qual, ") for worker ", workers[i], " Revoked")
         valid <- TRUE
       } else {

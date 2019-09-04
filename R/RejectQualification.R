@@ -5,7 +5,7 @@ RejectQualification <-
             reason = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if (is.factor(qual.requests)) {
       qual.requests <- as.character(qual.requests)
@@ -26,7 +26,7 @@ RejectQualification <-
 
     for (i in 1:length(qual.requests)) {
 
-      response <- try(client$reject_qualification_request(QualificationRequestId = qual.requests[i],
+      response <- try(pyMTurkRClient$reject_qualification_request(QualificationRequestId = qual.requests[i],
                                                           Reason = reason[i]), silent = !verbose)
 
       if (is.null(reason[i])) {

@@ -6,7 +6,7 @@ UnblockWorker <-
             reasons = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)){
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if (is.factor(workers)) {
       workers <- as.character(workers)
@@ -27,7 +27,7 @@ UnblockWorker <-
 
     for (i in 1:length(workers)) {
 
-      fun <- client$delete_worker_block
+      fun <- pyMTurkRClient$delete_worker_block
 
       args <- list(WorkerId = workers[i])
 

@@ -6,16 +6,16 @@ GetBlockedWorkers <-
            pagetoken = NULL,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     batch <- function(pagetoken = NULL) {
 
       # Use page token if given
       if(!is.null(pagetoken)){
-        response <- try(client$list_worker_blocks(NextToken = pagetoken,
+        response <- try(pyMTurkRClient$list_worker_blocks(NextToken = pagetoken,
                                                   MaxResults = as.integer(results)), silent = !verbose)
       } else {
-        response <- try(client$list_worker_blocks(MaxResults = as.integer(results)), silent = !verbose)
+        response <- try(pyMTurkRClient$list_worker_blocks(MaxResults = as.integer(results)), silent = !verbose)
       }
 
       # Validity check response

@@ -83,7 +83,7 @@ GrantBonus <-
             unique.request.token = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)){
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if (is.factor(reasons)) {
       reasons <- as.character(reasons)
@@ -144,7 +144,7 @@ GrantBonus <-
         args <- c(args, UniqueRequestToken = unique.request.token)
       }
 
-      fun <- client$send_bonus
+      fun <- pyMTurkRClient$send_bonus
 
       # Execute the API call
       response <- try(
@@ -152,7 +152,7 @@ GrantBonus <-
       )
 
       # Check if failure
-      if (response$ResponseMetadata$HTTPStatusCode == 200) {
+      if (class(response) != "try-error") {
         valid <- TRUE
       } else {
         valid <- FALSE

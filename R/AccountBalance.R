@@ -31,8 +31,8 @@ AccountBalance <-
 accountbalance <-
 getbalance <-
 function() {
-  client <- GetClient() # Boto3 client
-  result <- client$get_account_balance()
+  GetClient() # Boto3 client
+  result <- pyMTurkRClient$get_account_balance()
   message(paste("Balance: $", result$AvailableBalance, "\n", sep = ""))
   return(result$AvailableBalance)
 }

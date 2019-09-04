@@ -43,7 +43,7 @@ RejectAssignment <-
             feedback,
             verbose = getOption('pyMTurkR.verbose', TRUE)){
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if (is.factor(assignments)) {
       assignments <- as.character(assignments)
@@ -67,7 +67,7 @@ RejectAssignment <-
     # Loop through assignments and approve
     for (i in 1:length(assignments)){
 
-      response <- try(client$reject_assignment(
+      response <- try(pyMTurkRClient$reject_assignment(
         AssignmentId = assignments[i],
         RequesterFeedback = feedback[i]
       ), silent = !verbose)

@@ -56,7 +56,7 @@ SearchQualificationTypes <-
             return.pages = NULL, pagetoken = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if(must.be.owner == FALSE){
       message("Searching all Qualifications that exist. Limiting results to 1 page.")
@@ -69,7 +69,7 @@ SearchQualificationTypes <-
       args <- list()
 
       # Set the function to use later
-      fun <- client$list_qualification_types
+      fun <- pyMTurkRClient$list_qualification_types
 
       # Add required arguments
       args <- c(args, list(MustBeRequestable = as.logical(must.be.requestable),

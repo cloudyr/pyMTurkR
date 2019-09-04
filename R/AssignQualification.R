@@ -102,7 +102,7 @@ AssignQualification <-
             auto = NULL, auto.value = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if (!is.null(qual) & is.factor(qual)) {
       qual <- as.character(qual)
@@ -129,7 +129,7 @@ AssignQualification <-
 
     # Function to batch process
     batch <- function(worker, value) {
-      response <- try(client$associate_qualification_with_worker(
+      response <- try(pyMTurkRClient$associate_qualification_with_worker(
         QualificationTypeId = qual,
         WorkerId = worker,
         IntegerValue = as.integer(value),

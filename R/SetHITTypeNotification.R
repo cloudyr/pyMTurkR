@@ -74,10 +74,10 @@ SetHITTypeNotification <-
             active = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)){
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     # The function we'll call
-    fun <- client$update_notification_settings
+    fun <- pyMTurkRClient$update_notification_settings
 
     # The arguments we'll call in the function
     args <- list()

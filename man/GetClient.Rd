@@ -9,7 +9,8 @@
 \title{Creates an MTurk Client using the AWS SDK for Python (Boto3)}
 \usage{
 GetClient(sandbox = getOption("pyMTurkR.sandbox", TRUE),
-  profile = getOption("pyMTurkR.profile", "default"))
+  profile = getOption("pyMTurkR.profile", "default"),
+  restart.client = FALSE)
 }
 \arguments{
 \item{sandbox}{A logical indicating whether the client should be in the
@@ -33,8 +34,8 @@ AWS keys can be found.
 }
 \examples{
 \dontrun{
-myclient <- GetClient()
-myclient$get_account_balance()
+myGetClient()
+mypyMTurkRClient$get_account_balance()
 }
 }
 \references{

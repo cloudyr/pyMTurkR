@@ -1,7 +1,8 @@
 test_that("UpdateQualificationType", {
   skip_if_not(CheckAWSKeys())
 
-  qual1 <- CreateQualificationType(name = "Qual002",
+  qual1 <- CreateQualificationType(name = paste0("X",
+                                                 as.character(round(runif(1, 1, 99999999)))),
                                    description = "Qual002",
                                    status = "Active",
                                    keywords = "Worked for me before")
@@ -26,7 +27,8 @@ test_that("UpdateQualificationType with Qualification Test", {
   f <- system.file("templates/answerkey1.xml", package = "pyMTurkR")
   AnswerKey <- paste0(readLines(f, warn = FALSE), collapse = "")
 
-  CreateQualificationType(name = "Qual002",
+  CreateQualificationType(name = paste0("X",
+                                        as.character(round(runif(1, 1, 99999999)))),
                           description = "Qual002",
                           status = "Active",
                           test = QuestionForm,

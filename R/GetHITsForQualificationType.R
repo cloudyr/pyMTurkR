@@ -40,17 +40,17 @@ GetHITsForQualificationType <-
             pagetoken = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     batch <- function(pagetoken = NULL) {
 
       # Use page token if given
       if(!is.null(pagetoken)){
-        response <- try(client$list_hits_for_qualification_type(QualificationTypeId = qual,
+        response <- try(pyMTurkRClient$list_hits_for_qualification_type(QualificationTypeId = qual,
                                                                 NextToken = pagetoken,
                                                                 MaxResults = as.integer(results)), silent = !verbose)
       } else {
-        response <- try(client$list_hits_for_qualification_type(QualificationTypeId = qual,
+        response <- try(pyMTurkRClient$list_hits_for_qualification_type(QualificationTypeId = qual,
                                                                 MaxResults = as.integer(results)), silent = !verbose)
       }
 

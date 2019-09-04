@@ -1,9 +1,9 @@
-# pyMTurkR: An R Package to Interface with the MTurk Requester API <img src="https://raw.githubusercontent.com/cloudyr/pyMTurkR/master/assets/hex-pyMTurkR.png" align="right" width="200" />
+# pyMTurkR: A Client for the MTurk Requester API <img src="https://raw.githubusercontent.com/cloudyr/pyMTurkR/master/assets/hex-pyMTurkR.png" align="right" width="200" />
 
 <!-- badges: start -->
 [![travis-ci](https://travis-ci.org/cloudyr/pyMTurkR.svg?branch=master)](https://travis-ci.org/cloudyr/pyMTurkR?branch=master)
 [![Codecov test coverage](https://codecov.io/gh/cloudyr/pyMTurkR/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudyr/pyMTurkR?branch=master)
-![version](https://img.shields.io/badge/version-1.0-blue.svg)
+![version](https://img.shields.io/badge/version-1.1-blue.svg)
 ![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)
 ![downloads](https://img.shields.io/badge/downloads-142-brightgreen)
 <!-- badges: end -->
@@ -45,11 +45,15 @@ install.packages("reticulate")
 reticulate::py_config()
 ```
 
+You will see information about your python configuration, including one or more system paths where python is installed.
+
 1.5. Check that `pip` can be found
 
 ```
 system("pip --version")
 ```
+
+You will see something like `pip 18.0 from /usr/local/lib/python2.7/site-packages/pip`
 
 ## 2. Install `boto3`
 
@@ -67,7 +71,7 @@ Take note of the path in the first line (e.g., "/usr/bin/python").
 system("pip --version")
 ```
 
-For example, in "pip 18.0 from /usr/local/lib/python2.7/site-packages/pip" the `python` path is "/usr/local/lib/python2.7"). If the path here does not match the py_config() path, then you may need to manually set the path using `use_python()`.
+For example, in "pip 18.0 from /usr/local/lib/python2.7/site-packages/pip" the `python` path is "/usr/local/lib/python2.7". If the path here does not match the py_config() path, then you may need to manually set the path using `use_python()`.
 
 ```
 reticulate::use_python("/usr/local/lib/python2.7", required = TRUE)

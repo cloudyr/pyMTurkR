@@ -55,7 +55,7 @@ GetQualificationRequests <-
             pagetoken = NULL,
             verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     if(!is.null(qual)){
       SearchQualificationTypes(must.be.owner = TRUE, verbose = FALSE) -> quals
@@ -69,18 +69,18 @@ GetQualificationRequests <-
       # Use page token if given
       if(!is.null(pagetoken)){
         if(is.null(qual)){
-          response <- try(client$list_qualification_requests(NextToken = pagetoken,
+          response <- try(pyMTurkRClient$list_qualification_requests(NextToken = pagetoken,
                                                              MaxResults = as.integer(results)), silent = !verbose)
         } else {
-          response <- try(client$list_qualification_requests(QualificationTypeId = qual,
+          response <- try(pyMTurkRClient$list_qualification_requests(QualificationTypeId = qual,
                                                              NextToken = pagetoken,
                                                              MaxResults = as.integer(results)), silent = !verbose)
         }
       } else {
         if(is.null(qual)){
-          response <- try(client$list_qualification_requests(MaxResults = as.integer(results)), silent = !verbose)
+          response <- try(pyMTurkRClient$list_qualification_requests(MaxResults = as.integer(results)), silent = !verbose)
         } else {
-          response <- try(client$list_qualification_requests(QualificationTypeId = qual,
+          response <- try(pyMTurkRClient$list_qualification_requests(QualificationTypeId = qual,
                                                              MaxResults = as.integer(results)), silent = !verbose)
 
         }

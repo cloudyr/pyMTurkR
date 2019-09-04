@@ -8,7 +8,7 @@ approveall <-
            status = NULL,
            verbose = getOption('pyMTurkR.verbose', TRUE)) {
 
-    client <- GetClient() # Boto3 client
+    GetClient() # Boto3 client
 
     # Validate feedback parameter
     if(!is.null(feedback)){

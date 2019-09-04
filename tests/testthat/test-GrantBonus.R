@@ -2,19 +2,15 @@
 test_that("GrantBonus one worker, one bonus", {
   skip_if_not(CheckAWSKeys())
 
-  GetAssignment(hit.type = '3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z',
-                results = 1,
-                status = 'Approved') -> assignments
-
   GrantBonus(workers = as.factor('A3LXJ76P1ZZPMC'),
-              assignments = as.factor(assignments$AssignmentId[[1]]),
+              assignments = as.factor('3WJEQKOXA82YOLHL9L9QK57XJ1YA1N'),
               amounts = .1,
               reasons = as.factor('Thanks!')) -> result
   expect_type(result, "list")
 
   # Duplicates, skip prompt
   GrantBonus(workers = c('A3LXJ76P1ZZPMC', 'A3LXJ76P1ZZPMC'),
-             assignments = c(assignments$AssignmentId[[1]], assignments$AssignmentId[[1]]),
+             assignments = c('3WJEQKOXA82YOLHL9L9QK57XJ1YA1N', '3WJEQKOXA82YOLHL9L9QK57XJ1YA1N'),
              amounts = .1,
              reasons = as.factor('Thanks!'),
              skip.prompt = TRUE) -> result
@@ -30,17 +26,17 @@ test_that("GrantBonus incorrect WorkerId specifications", {
 
   # invalid
   expect_s3_class(try(GrantBonus(workers = 'NOTAWORKER',
-                                  assignments = assignments$AssignmentId[[1]],
+                                  assignments = '3WJEQKOXA82YOLHL9L9QK57XJ1YA1N',
                                   amounts = .1,
                                   reasons = 'Thanks!'), TRUE), "try-error")
   # too short
   expect_s3_class(try(GrantBonus(workers = '',
-                                 assignments = assignments$AssignmentId[[1]],
+                                 assignments = '3WJEQKOXA82YOLHL9L9QK57XJ1YA1N',
                                  amounts = .1,
                                  reasons = 'Thanks!'), TRUE), "try-error")
   # too long
   expect_s3_class(try(GrantBonus(workers = paste(rep("A",65)),
-                                 assignments = assignments$AssignmentId[[1]],
+                                 assignments = '3WJEQKOXA82YOLHL9L9QK57XJ1YA1N',
                                  amounts = .1,
                                  reasons = 'Thanks!'), TRUE), "try-error")
 
@@ -52,20 +48,20 @@ test_that("ContactWorker incorrect parameter lengths", {
 
   # Incorrect reasons length
   try(GrantBonus(workers = 'A3LXJ76P1ZZPMC',
-             assignments = assignments$AssignmentId[[1]],
+             assignments = '3WJEQKOXA82YOLHL9L9QK57XJ1YA1N',
              amounts = .1,
              reasons = c('Thanks!', 'x')), TRUE) -> result
   expect_s3_class(result, "try-error")
 
   try(GrantBonus(workers = 'A3LXJ76P1ZZPMC',
-                 assignments = assignments$AssignmentId[[1]],
+                 assignments = '3WJEQKOXA82YOLHL9L9QK57XJ1YA1N',
                  amounts = .1,
                  reasons = paste(rep("A",4097), collapse="")), TRUE) -> result
   expect_s3_class(result, "try-error")
 
   # Incorrect rewards length
   try(GrantBonus(workers = 'A3LXJ76P1ZZPMC',
-                 assignments = assignments$AssignmentId[[1]],
+                 assignments = '3WJEQKOXA82YOLHL9L9QK57XJ1YA1N',
                  amounts = c(.1, .5),
                  reasons = 'Thanks!'), TRUE) -> result
   expect_s3_class(result, "try-error")

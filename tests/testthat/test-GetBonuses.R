@@ -19,7 +19,7 @@ test_that("GetBonuses", {
   expect_type(result, "list")
 
   # GetBonuses using HITTypeId, specifying number of pages, results
-  GetBonuses(hit.type = hits$HITs$HITTypeId[[1]],
+  GetBonuses(hit.type = '3ZY5FK1Q9GOM4W6XMFN2W6BL58VO8Z',
                 results = 1) -> result
   expect_type(result, "list")
 

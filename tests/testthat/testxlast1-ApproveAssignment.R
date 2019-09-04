@@ -15,9 +15,9 @@ test_that("ApproveAssignment with AssignmentId", {
                                 feedback = as.factor("good job")), "list")
 
   # Feedback that's too long (more than 1024 characters)
-  expect_type(ApproveAssignment(assignments = assignment,
+  expect_s3_class(try(ApproveAssignment(assignments = assignment,
                                 verbose = FALSE,
-                                feedback = paste(sample(LETTERS, 1025, replace=TRUE), collapse="")), "list")
+                                feedback = paste(sample(LETTERS, 1025, replace=TRUE), collapse="")), TRUE), "try-error")
 
   # Fewer feedbacks than assignments
   expect_type(ApproveAssignment(assignments = c(assignment, assignment),
