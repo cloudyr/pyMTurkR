@@ -55,7 +55,7 @@ GetReviewableHITs <-
       args <- list()
 
       # Set the function to use later
-      fun <- pyMTurkRClient$list_reviewable_hits
+      fun <- .pyMTurkRClient$list_reviewable_hits
 
       # Add required arguments
       args <- c(args, list(Status = status,

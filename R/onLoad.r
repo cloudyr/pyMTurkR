@@ -5,10 +5,4 @@
     if (is.null(getOption("pyMTurkR.verbose"))) {
         options(pyMTurkR.verbose = TRUE)      # print logical
     }
-    if (is.null(getOption("pyMTurkR.logdir"))) {
-        options(pyMTurkR.logdir = getwd())    # pyMTurkRlog.tsv directory
-    }
-    if (is.null(getOption("pyMTurkR.test"))) {
-        options(pyMTurkR.test = FALSE)        # validation.test logical
-    }
 }

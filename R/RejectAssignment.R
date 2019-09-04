@@ -67,7 +67,7 @@ RejectAssignment <-
     # Loop through assignments and approve
     for (i in 1:length(assignments)){
 
-      response <- try(pyMTurkRClient$reject_assignment(
+      response <- try(.pyMTurkRClient$reject_assignment(
         AssignmentId = assignments[i],
         RequesterFeedback = feedback[i]
       ), silent = !verbose)

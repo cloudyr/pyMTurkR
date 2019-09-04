@@ -69,18 +69,18 @@ GetQualificationRequests <-
       # Use page token if given
       if(!is.null(pagetoken)){
         if(is.null(qual)){
-          response <- try(pyMTurkRClient$list_qualification_requests(NextToken = pagetoken,
+          response <- try(.pyMTurkRClient$list_qualification_requests(NextToken = pagetoken,
                                                              MaxResults = as.integer(results)), silent = !verbose)
         } else {
-          response <- try(pyMTurkRClient$list_qualification_requests(QualificationTypeId = qual,
+          response <- try(.pyMTurkRClient$list_qualification_requests(QualificationTypeId = qual,
                                                              NextToken = pagetoken,
                                                              MaxResults = as.integer(results)), silent = !verbose)
         }
       } else {
         if(is.null(qual)){
-          response <- try(pyMTurkRClient$list_qualification_requests(MaxResults = as.integer(results)), silent = !verbose)
+          response <- try(.pyMTurkRClient$list_qualification_requests(MaxResults = as.integer(results)), silent = !verbose)
         } else {
-          response <- try(pyMTurkRClient$list_qualification_requests(QualificationTypeId = qual,
+          response <- try(.pyMTurkRClient$list_qualification_requests(QualificationTypeId = qual,
                                                              MaxResults = as.integer(results)), silent = !verbose)
 
         }

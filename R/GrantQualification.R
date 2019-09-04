@@ -96,7 +96,7 @@ GrantQualification <-
 
     for (i in 1:length(qual.requests)) {
 
-      response <- try(pyMTurkRClient$accept_qualification_request(QualificationRequestId = qual.requests[i],
+      response <- try(.pyMTurkRClient$accept_qualification_request(QualificationRequestId = qual.requests[i],
                                                           IntegerValue = values[i]), silent = !verbose)
 
 

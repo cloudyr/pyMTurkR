@@ -82,7 +82,7 @@ BlockWorker <-
 
     for (i in 1:length(workers)) {
 
-      response <- try(pyMTurkRClient$create_worker_block(
+      response <- try(.pyMTurkRClient$create_worker_block(
         WorkerId = workers[i],
         Reason = reasons[i]
       ), silent = !verbose)

@@ -82,7 +82,7 @@ function (qual,
   args <- list(QualificationTypeId = qual)
 
   # Set the function to use later
-  fun <- pyMTurkRClient$update_qualification_type
+  fun <- .pyMTurkRClient$update_qualification_type
 
   # Add optional fields
   if(!is.null(description)){

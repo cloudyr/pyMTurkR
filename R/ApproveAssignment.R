@@ -100,7 +100,7 @@ function (assignments,
   # Loop through assignments and approve
   for (i in 1:length(assignments)){
 
-    fun <- pyMTurkRClient$approve_assignment
+    fun <- .pyMTurkRClient$approve_assignment
 
     args <- list(AssignmentId = assignments[i],
                  OverrideRejection = rejected[i])

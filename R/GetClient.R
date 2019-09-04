@@ -22,8 +22,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' myGetClient()
-#' mypyMTurkRClient$get_account_balance()
+#' GetClient()
 #' }
 #' @export GetClient
 #' @export StartClient
@@ -35,8 +34,43 @@ function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
          profile = getOption('pyMTurkR.profile', 'default'),
          restart.client = FALSE){
 
-  if(!exists('pyMTurkRClient') ||
-     !class(pyMTurkRClient)[[1]] == 'botocore.client.MTurk' ||
+
+  helper_mturk_client <- function(sandbox, profile, boto3){
+
+    if(sandbox) endpoint_url <- 'https://mturk-requester-sandbox.us-east-1.amazonaws.com'
+    else endpoint_url <- 'https://mturk-requester.us-east-1.amazonaws.com'
+
+    # Check if AWS credentials can be found in an environment variable
+    if(Sys.getenv("AWS_ACCESS_KEY_ID") != "" & Sys.getenv("AWS_SECRET_ACCESS_KEY") != ""){
+      key <- Sys.getenv("AWS_ACCESS_KEY_ID")
+      secret_key <- Sys.getenv("AWS_SECRET_ACCESS_KEY")
+    } else {
+      stop("ERROR: Missing AWS Access Key or Secret Access Key.")
+    }
+
+    # Start client
+    .pyMTurkRClient <- boto3$client('mturk', region_name='us-east-1',
+                                    aws_access_key_id = key,
+                                    aws_secret_access_key = secret_key,
+                                    endpoint_url = endpoint_url)
+
+    # Test credentials with a simple API call
+    helper_mturk_credentials_test()
+
+  }
+
+  helper_mturk_credentials_test <- function(){
+
+    tryCatch({
+      invisible(.pyMTurkRClient$get_account_balance()) # Test the credentials using a call to get_account_balance()
+      invisible(.pyMTurkRClient)
+    }, error = function(e) {
+      message(paste(e, "    Check your AWS credentials."))
+    })
+  }
+
+  if(!exists('.pyMTurkRClient') ||
+     !class(.pyMTurkRClient)[[1]] == 'botocore.client.MTurk' ||
      restart.client){
 
     tryCatch({
@@ -45,7 +79,7 @@ function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
       boto3 <- reticulate::import("boto3")
 
       tryCatch({ # Try starting client
-        .helper_mturk_client(sandbox, profile, boto3) # If the module loaded, start the client
+        helper_mturk_client(sandbox, profile, boto3) # If the module loaded, start the client
       }, error = function(e) {
         message(paste(e, "    Unable to authenticate with credentials."))
       })
@@ -57,39 +91,6 @@ function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
 
 }
 
-.helper_mturk_client <- function(sandbox, profile, boto3){
-
-  if(sandbox) endpoint_url <- 'https://mturk-requester-sandbox.us-east-1.amazonaws.com'
-  else endpoint_url <- 'https://mturk-requester.us-east-1.amazonaws.com'
-
-  # Check if AWS credentials can be found in an environment variable
-  if(Sys.getenv("AWS_ACCESS_KEY_ID") != "" & Sys.getenv("AWS_SECRET_ACCESS_KEY") != ""){
-    key <- Sys.getenv("AWS_ACCESS_KEY_ID")
-    secret_key <- Sys.getenv("AWS_SECRET_ACCESS_KEY")
-  } else {
-    stop("ERROR: Missing AWS Access Key or Secret Access Key.")
-  }
-
-  # Start client
-  pyMTurkRClient <<- boto3$client('mturk', region_name='us-east-1',
-                                aws_access_key_id = key,
-                                aws_secret_access_key = secret_key,
-                                endpoint_url = endpoint_url)
-
-  # Test credentials with a simple API call
-  .helper_mturk_credentials_test(sandbox, client)
-
-}
-
-.helper_mturk_credentials_test <- function(sandbox, client){
-
-  tryCatch({
-    invisible(pyMTurkRClient$get_account_balance()) # Test the credentials using a call to get_account_balance()
-    invisible(pyMTurkRClient)
-  }, error = function(e) {
-    message(paste(e, "    Check your AWS credentials."))
-  })
-}
 
 CheckAWSKeys <- function(profile = getOption('pyMTurkR.profile', 'default')){
   if(Sys.getenv("AWS_ACCESS_KEY_ID") != "" & Sys.getenv("AWS_SECRET_ACCESS_KEY") != ""){
@@ -98,3 +99,5 @@ CheckAWSKeys <- function(profile = getOption('pyMTurkR.profile', 'default')){
     return(FALSE)
   }
 }
+
+if(getRversion() >= "2.15.1") utils::globalVariables(c(".pyMTurkRClient"))

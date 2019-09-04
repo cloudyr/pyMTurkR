@@ -36,8 +36,7 @@ AWS keys can be found.
 }
 \examples{
 \dontrun{
-myGetClient()
-mypyMTurkRClient$get_account_balance()
+GetClient()
 }
 }
 \references{

@@ -149,7 +149,7 @@ CreateHIT <-
       }
 
       # Set the function to use later (this one has a hit type)
-      fun <- pyMTurkRClient$create_hit_with_hit_type
+      fun <- .pyMTurkRClient$create_hit_with_hit_type
 
       # Add to args list
       args <- c(args, list(HITTypeId = hit.type))
@@ -169,7 +169,7 @@ CreateHIT <-
       } else { # Use other params
 
         # Set the function to use later (this one doesn't have a hit type)
-        fun <- pyMTurkRClient$create_hit
+        fun <- .pyMTurkRClient$create_hit
 
         # Title
         if (nchar(title) > 128) {

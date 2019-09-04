@@ -48,9 +48,9 @@ function (return.pages = NULL,
 
     # Use page token if given
     if(!is.null(pagetoken)){
-      response <- try(pyMTurkRClient$list_hits(NextToken = pagetoken, MaxResults = as.integer(results)), silent = !verbose)
+      response <- try(.pyMTurkRClient$list_hits(NextToken = pagetoken, MaxResults = as.integer(results)), silent = !verbose)
     } else {
-      response <- try(pyMTurkRClient$list_hits(MaxResults = as.integer(results)), silent = !verbose)
+      response <- try(.pyMTurkRClient$list_hits(MaxResults = as.integer(results)), silent = !verbose)
     }
 
     # Validity check response
