@@ -72,7 +72,7 @@ SendTestEventNotification <-
     args <- list()
 
     # Set the function to use later (this one has a hit type)
-    fun <- .pyMTurkRClient$send_test_event_notification
+    fun <- pyMTurkRClient$send_test_event_notification
 
     args <- list(Notification = notification,
                  TestEventType = test.event.type)

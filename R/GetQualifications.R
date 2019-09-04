@@ -72,7 +72,7 @@ GetQualifications <-
                    MaxResults = as.integer(results))
 
       # Set the function to use later (this one has a hit type)
-      fun <- .pyMTurkRClient$list_workers_with_qualification_type
+      fun <- pyMTurkRClient$list_workers_with_qualification_type
 
       if(!is.null(pagetoken)){
         args <- c(args, NextToken = pagetoken)

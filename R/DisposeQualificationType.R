@@ -56,7 +56,7 @@ DisposeQualificationType <-
 
     QualificationTypes <- emptydf(0, 2, c("QualificationTypeId", "Valid"))
 
-    response <- try(.pyMTurkRClient$delete_qualification_type(
+    response <- try(pyMTurkRClient$delete_qualification_type(
       QualificationTypeId = qual
     ), silent = !verbose)
 

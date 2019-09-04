@@ -119,7 +119,7 @@ CreateQualificationType <-
     args <- list()
 
     # Set the function to use later
-    fun <- .pyMTurkRClient$create_qualification_type
+    fun <- pyMTurkRClient$create_qualification_type
 
     # Add required arguments
     args <- c(args, list(Name = name,

@@ -69,7 +69,7 @@ SearchQualificationTypes <-
       args <- list()
 
       # Set the function to use later
-      fun <- .pyMTurkRClient$list_qualification_types
+      fun <- pyMTurkRClient$list_qualification_types
 
       # Add required arguments
       args <- c(args, list(MustBeRequestable = as.logical(must.be.requestable),

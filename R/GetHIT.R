@@ -60,7 +60,7 @@ GetHIT <-
   function(hit, verbose = getOption('pyMTurkR.verbose', TRUE)){
 
     GetClient() # Boto3 client
-    response <- try(.pyMTurkRClient$get_hit(HITId = hit), silent = !verbose)
+    response <- try(pyMTurkRClient$get_hit(HITId = hit), silent = !verbose)
 
     if (class(response) != "try-error") {
       hitdetails <- list(response$HIT) # Hack for 1 result
