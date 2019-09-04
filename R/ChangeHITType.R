@@ -199,7 +199,7 @@ ChangeHITType <-
     for (i in 1:length(hitlist)) {
 
       hit <- hitlist[i]
-      response <- try(pyMTurkRClient$update_hit_type_of_hit(
+      response <- try(pyMTurkR$Client$update_hit_type_of_hit(
         HITId = hit,
         HITTypeId = new.hit.type
       ), silent = !verbose)

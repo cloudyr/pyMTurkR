@@ -77,7 +77,7 @@ RevokeQualification <-
     }
 
     # Function for API call
-    fun <- pyMTurkRClient$disassociate_qualification_from_worker
+    fun <- pyMTurkR$Client$disassociate_qualification_from_worker
 
     Qualifications <- emptydf(0, 4, c("WorkerId", "QualificationTypeId", "Reason", "Valid"))
 

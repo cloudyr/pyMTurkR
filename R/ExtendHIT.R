@@ -144,7 +144,7 @@ ExtendHIT <-
         args <- list()
 
         # Set the function to use later
-        fun <- pyMTurkRClient$create_additional_assignments_for_hit
+        fun <- pyMTurkR$Client$create_additional_assignments_for_hit
 
         # Add required arguments
         args <- c(args, list(HITId = hit,
@@ -172,7 +172,7 @@ ExtendHIT <-
 
       if(!is.null(add.seconds)){
 
-        response <- try(pyMTurkRClient$update_expiration_for_hit(
+        response <- try(pyMTurkR$Client$update_expiration_for_hit(
           HITId = hit,
           ExpireAt = as.character(as.integer(expirations[i]) + as.integer(add.seconds))
         ), silent = !verbose)

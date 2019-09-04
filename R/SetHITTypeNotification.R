@@ -77,7 +77,7 @@ SetHITTypeNotification <-
     GetClient() # Boto3 client
 
     # The function we'll call
-    fun <- pyMTurkRClient$update_notification_settings
+    fun <- pyMTurkR$Client$update_notification_settings
 
     # The arguments we'll call in the function
     args <- list()

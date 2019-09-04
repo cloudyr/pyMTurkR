@@ -129,7 +129,7 @@ AssignQualification <-
 
     # Function to batch process
     batch <- function(worker, value) {
-      response <- try(pyMTurkRClient$associate_qualification_with_worker(
+      response <- try(pyMTurkR$Client$associate_qualification_with_worker(
         QualificationTypeId = qual,
         WorkerId = worker,
         IntegerValue = as.integer(value),

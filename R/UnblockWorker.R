@@ -27,7 +27,7 @@ UnblockWorker <-
 
     for (i in 1:length(workers)) {
 
-      fun <- pyMTurkRClient$delete_worker_block
+      fun <- pyMTurkR$Client$delete_worker_block
 
       args <- list(WorkerId = workers[i])
 

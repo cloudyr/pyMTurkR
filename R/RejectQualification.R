@@ -26,7 +26,7 @@ RejectQualification <-
 
     for (i in 1:length(qual.requests)) {
 
-      response <- try(pyMTurkRClient$reject_qualification_request(QualificationRequestId = qual.requests[i],
+      response <- try(pyMTurkR$Client$reject_qualification_request(QualificationRequestId = qual.requests[i],
                                                           Reason = reason[i]), silent = !verbose)
 
       if (is.null(reason[i])) {

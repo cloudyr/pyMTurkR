@@ -45,7 +45,7 @@ GetQualificationType <-
       qual <- as.character(qual)
     }
 
-    response <- try(pyMTurkRClient$get_qualification_type(QualificationTypeId = qual), silent = !verbose)
+    response <- try(pyMTurkR$Client$get_qualification_type(QualificationTypeId = qual), silent = !verbose)
 
     # Validity check response
     if(class(response) == "try-error") {

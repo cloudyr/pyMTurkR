@@ -77,7 +77,7 @@ GetQualificationScore <-
 
     for (i in 1:length(workers)) {
 
-      response <- try(pyMTurkRClient$get_qualification_score(QualificationTypeId = qual[i],
+      response <- try(pyMTurkR$Client$get_qualification_score(QualificationTypeId = qual[i],
                                                      WorkerId = workers[i]), silent = !verbose)
 
       # Validity check response

@@ -103,7 +103,7 @@ SetHITAsReviewing <-
 
       hit <- hitlist[i]
 
-      response <- try(pyMTurkRClient$update_hit_review_status(
+      response <- try(pyMTurkR$Client$update_hit_review_status(
         HITId = hit,
         Revert = revert
       ), silent = !verbose)

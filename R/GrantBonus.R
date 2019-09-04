@@ -144,7 +144,7 @@ GrantBonus <-
         args <- c(args, UniqueRequestToken = unique.request.token)
       }
 
-      fun <- pyMTurkRClient$send_bonus
+      fun <- pyMTurkR$Client$send_bonus
 
       # Execute the API call
       response <- try(

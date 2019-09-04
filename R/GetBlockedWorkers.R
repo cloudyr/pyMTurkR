@@ -12,10 +12,10 @@ GetBlockedWorkers <-
 
       # Use page token if given
       if(!is.null(pagetoken)){
-        response <- try(pyMTurkRClient$list_worker_blocks(NextToken = pagetoken,
+        response <- try(pyMTurkR$Client$list_worker_blocks(NextToken = pagetoken,
                                                   MaxResults = as.integer(results)), silent = !verbose)
       } else {
-        response <- try(pyMTurkRClient$list_worker_blocks(MaxResults = as.integer(results)), silent = !verbose)
+        response <- try(pyMTurkR$Client$list_worker_blocks(MaxResults = as.integer(results)), silent = !verbose)
       }
 
       # Validity check response

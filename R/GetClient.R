@@ -34,6 +34,9 @@ function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
          profile = getOption('pyMTurkR.profile', 'default'),
          restart.client = FALSE){
 
+  if(!exists('pyMTurkR')){
+    pyMTurkR <<- new.env()
+  }
 
   helper_mturk_client <- function(sandbox, profile, boto3){
 
@@ -49,7 +52,7 @@ function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
     }
 
     # Start client
-    pyMTurkRClient <- boto3$client('mturk', region_name='us-east-1',
+    pyMTurkR$Client <<- boto3$client('mturk', region_name='us-east-1',
                                     aws_access_key_id = key,
                                     aws_secret_access_key = secret_key,
                                     endpoint_url = endpoint_url)
@@ -62,15 +65,15 @@ function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
   helper_mturk_credentials_test <- function(){
 
     tryCatch({
-      invisible(pyMTurkRClient$get_account_balance()) # Test the credentials using a call to get_account_balance()
-      invisible(pyMTurkRClient)
+      invisible(pyMTurkR$Client$get_account_balance()) # Test the credentials using a call to get_account_balance()
+      invisible(pyMTurkR$Client)
     }, error = function(e) {
       message(paste(e, "    Check your AWS credentials."))
     })
   }
 
-  if(!exists('pyMTurkRClient') ||
-     !class(pyMTurkRClient)[[1]] == 'botocore.client.MTurk' ||
+  if(!exists('pyMTurkR$Client') ||
+     !class(pyMTurkR$Client)[[1]] == 'botocore.client.MTurk' ||
      restart.client){
 
     tryCatch({
@@ -100,4 +103,6 @@ CheckAWSKeys <- function(profile = getOption('pyMTurkR.profile', 'default')){
   }
 }
 
-if(getRversion() >= "2.15.1") utils::globalVariables(c("pyMTurkRClient"))
+if(getRversion() >= "2.15.1") {
+  utils::globalVariables(c("pyMTurkR"))
+}

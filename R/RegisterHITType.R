@@ -129,7 +129,7 @@ RegisterHITType <-
       args <- c(args, QualificationRequirements = qual.req)
     }
 
-    fun <- pyMTurkRClient$create_hit_type
+    fun <- pyMTurkR$Client$create_hit_type
 
     # Execute the API call
     response <- try(
