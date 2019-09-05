@@ -32,7 +32,7 @@ function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
     pyMTurkR <<- new.env()
   }
 
-  helper_mturk_client <- function(sandbox, profile, boto3){
+  helper_mturk_client <- function(sandbox, boto3){
 
     if(sandbox) endpoint_url <- 'https://mturk-requester-sandbox.us-east-1.amazonaws.com'
     else endpoint_url <- 'https://mturk-requester.us-east-1.amazonaws.com'
@@ -76,7 +76,7 @@ function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
       boto3 <- reticulate::import("boto3")
 
       tryCatch({ # Try starting client
-        helper_mturk_client(sandbox, profile, boto3) # If the module loaded, start the client
+        helper_mturk_client(sandbox, boto3) # If the module loaded, start the client
       }, error = function(e) {
         message(paste(e, "    Unable to authenticate with credentials."))
       })
@@ -89,7 +89,7 @@ function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
 }
 
 
-CheckAWSKeys <- function(profile = getOption('pyMTurkR.profile', 'default')){
+CheckAWSKeys <- function(){
   if(Sys.getenv("AWS_ACCESS_KEY_ID") != "" & Sys.getenv("AWS_SECRET_ACCESS_KEY") != ""){
     return(TRUE)
   } else {
