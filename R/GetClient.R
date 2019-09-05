@@ -9,8 +9,6 @@
 #' @aliases GetClient StartClient CheckAWSKeys
 #' @param sandbox A logical indicating whether the client should be in the
 #' sandbox environment or the live environment.
-#' @param profile A character string that specifies the profile to use
-#' from the .aws/credentials file, optional.
 #' @param restart.client A boolean that specifies whether to force the creation of a new client. This is useful if you want to change between sandbox and live environments within the same R session.
 #' @author Tyler Burleigh
 #' @references
@@ -28,7 +26,6 @@
 GetClient <-
 StartClient <-
 function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
-         profile = getOption('pyMTurkR.profile', 'default'),
          restart.client = FALSE){
 
   if(!exists('pyMTurkR')){

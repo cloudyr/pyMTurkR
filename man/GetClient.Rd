@@ -7,15 +7,11 @@
 \title{Creates an MTurk Client using the AWS SDK for Python (Boto3)}
 \usage{
 GetClient(sandbox = getOption("pyMTurkR.sandbox", TRUE),
-  profile = getOption("pyMTurkR.profile", "default"),
   restart.client = FALSE)
 }
 \arguments{
 \item{sandbox}{A logical indicating whether the client should be in the
 sandbox environment or the live environment.}
-
-\item{profile}{A character string that specifies the profile to use
-from the .aws/credentials file, optional.}
 
 \item{restart.client}{A boolean that specifies whether to force the creation of a new client. This is useful if you want to change between sandbox and live environments within the same R session.}
 }
