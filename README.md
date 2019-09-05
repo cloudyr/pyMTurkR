@@ -2,8 +2,8 @@
 
 <!-- badges: start -->
 [![travis-ci](https://travis-ci.org/cloudyr/pyMTurkR.svg?branch=master)](https://travis-ci.org/cloudyr/pyMTurkR?branch=master)
-[![Codecov test coverage](https://codecov.io/gh/cloudyr/pyMTurkR/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudyr/pyMTurkR?branch=master)
-![version](https://img.shields.io/badge/version-1.1-blue.svg)
+[![codecov test coverage](https://codecov.io/gh/cloudyr/pyMTurkR/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudyr/pyMTurkR?branch=master)
+![CRAN version](https://img.shields.io/cran/v/pyMTurkR)
 ![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)
 ![downloads](https://img.shields.io/badge/downloads-142-brightgreen)
 <!-- badges: end -->
@@ -99,6 +99,12 @@ For additional install options, [see "Installing Python Packages" in the `reticu
 ## 3. Install `pyMTurkR`
 
 3.1. Finally, you can install `pyMTurkR`.
+
+```
+install.packages("pyMTurkR")
+```
+
+Or the development version
 
 ```
 devtools::install_github("cloudyr/pyMTurkR")
