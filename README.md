@@ -4,7 +4,7 @@
 [![travis-ci](https://travis-ci.org/cloudyr/pyMTurkR.svg?branch=master)](https://travis-ci.org/cloudyr/pyMTurkR?branch=master)
 [![codecov test coverage](https://codecov.io/gh/cloudyr/pyMTurkR/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudyr/pyMTurkR?branch=master)
 [![CRAN version](https://img.shields.io/cran/v/pyMTurkR)](https://cran.r-project.org/package=pyMTurkR)
-![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle)
 ![downloads](https://img.shields.io/badge/downloads-142-brightgreen)
 <!-- badges: end -->
 
