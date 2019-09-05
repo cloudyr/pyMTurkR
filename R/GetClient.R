@@ -9,7 +9,7 @@
 #' @aliases GetClient StartClient CheckAWSKeys
 #' @param sandbox A logical indicating whether the client should be in the
 #' sandbox environment or the live environment.
-#' @param restart.client A boolean that specifies whether to force the creation of a new client. This is useful if you want to change between sandbox and live environments within the same R session.
+#' @param restart.client A boolean that specifies whether to force the creation of a new client.
 #' @author Tyler Burleigh
 #' @references
 #' \href{https://aws.amazon.com/sdk-for-python/}{AWS SDK for Python (Boto3)}

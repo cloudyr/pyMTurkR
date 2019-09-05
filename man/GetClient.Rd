@@ -13,7 +13,7 @@ GetClient(sandbox = getOption("pyMTurkR.sandbox", TRUE),
 \item{sandbox}{A logical indicating whether the client should be in the
 sandbox environment or the live environment.}
 
-\item{restart.client}{A boolean that specifies whether to force the creation of a new client. This is useful if you want to change between sandbox and live environments within the same R session.}
+\item{restart.client}{A boolean that specifies whether to force the creation of a new client.}
 }
 \description{
 Create an API client. Only advanced users will likely need to use this
