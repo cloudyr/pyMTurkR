@@ -2,6 +2,7 @@
 
 ## [1.11] - 2019-09-13
 Added a vignette for Qualification Tests
+Fix for GetAssignments() returning duplicate results
 
 ## [1.1] - 2019-09-04
 Major change to improve API requests by creating a stable client rather than creating a client each time a request is made

@@ -276,6 +276,7 @@ GetAssignment <-
         }
         total.results.found <- total.results.found + results.found
         to.return <- response
+        pagetoken <- response$NextToken
 
         Assignments <- rbind(Assignments, to.return$Assignments)
         Answers <- rbind(Answers, to.return$Answers)
