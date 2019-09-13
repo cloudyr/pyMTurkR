@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.11] - 2019-09-13
+Added a vignette for Qualification Tests
+
 ## [1.1] - 2019-09-04
 Major change to improve API requests by creating a stable client rather than creating a client each time a request is made
 Fix for bug in GrantBonus due to legacy code (thanks Chris Hydock!)

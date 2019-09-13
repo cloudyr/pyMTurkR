@@ -1,7 +1,7 @@
 Package: pyMTurkR
 Type: Package
 Title: A Client for the 'MTurk' Requester API
-Version: 1.1
+Version: 1.11
 Authors@R: c(person("Tyler", "Burleigh",
                     role = c("aut", "cre"), 
                     email = "tylerburleigh@gmail.com",
@@ -28,4 +28,7 @@ Imports:
 RoxygenNote: 6.1.1
 Suggests: 
     testthat (>= 2.1.0),
-    covr
+    covr,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

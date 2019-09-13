@@ -1,0 +1,169 @@
+---
+title: 'Using pyMTurkR to create a HIT with a Qualification Test (a.k.a. a "Screener Survey")'
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{qualification-test}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+knitr::knit_engines$set
+```
+
+In this vignette I'll show you how to create a *Custom Qualification* using a *Qualification Test* that automatically qualifies or disqualifies MTurk workers. But first, why would anyone want to use these?
+
+# Introduction
+
+Researchers are sometimes interested in recruiting people into a study who have certain traits or characteristics. For example, a researcher might be interested in surveying young adults between the ages of 18-24, or female executives over the age of 65. 
+
+Targeted recruitment of participants is useful if you're only interested in responses from a specific populations of individuals and not the "general population". But it is also useful when you want to oversample a class of participants in your study who were underrepresented in a different sample. For example, if a researcher wanted a sample of participants that mirrored the U.S. census distribution on race/ethnicity, they might first run a study that allowed everyone to participate, but then discover that one of the race/ethnicity "buckets" was underrepresented. In that case, they could run a targeted recruitment to supplement the original sample, this time collecting responses from participants who identify as members of the underrepresented sub-population.
+
+## Premium Qualifications
+
+Mechanical Turk offers [Premium Qualifications](https://requester.mturk.com/pricing) that can be used for targeted recruitment. But these can be expensive and in some cases they might not be exactly what you want. For example, let's say you wanted to target individuals over the age of 65 to survey individuals who are eligible for Medicare services. The Premium Qualification for age only goes up to "Age 55 or older," so you would end up with a lot of people between the ages of 55-64 who are not your target population.
+
+## Custom Qualifications and Qualification Tests
+
+This is where *Custom Qualifications* and *Qualification Tests* come into the picture. If you' have've ever heard someone talk about "screener surveys" on MTurk, there's a decent chance they were talking about Qualification Tests. (Screeners can also be implemented as part of external surveys.) 
+
+Custom Qualifications and Qualification Tests have other advantages too. One of the great benefits of a Qualification Test is that you don't pay for responses. Of course, you also don't get detailed response data from the tests either, so don't go thinking you can use it for free data because it's pretty limited in that sense. Custom Qualifications are also advantageous if you expect to collect data on MTurk in the future from the same population, because you can use the same Qualification again for another task.
+
+# Creating a Qualification Test
+
+Before we begin, if you want to be in the sandbox or live environment, you will want to toggle the option using one of these commands:
+
+```{r, eval = FALSE}
+options(pyMTurkR.sandbox = FALSE)
+options(pyMTurkR.sandbox = TRUE)
+```
+
+To create a Qualification Test, we will need to write some XML. XML stands for "eXtensible Markup Language" and it's a lot like HTML if you've had any experience with that. A sample is provided in the file located at `system.file("templates/qualificationtest1.xml", package = "pyMTurkR")`.
+
+The structure of the XML that we need to create is defined by the [*QuestionForm* Schema](https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_QuestionFormDataStructureArticle.html). There's a lot of useful information at that link, so if you want to go beyond this vignette, I suggest checking there.
+
+Let's say we're interested in recruiting "Millenials" corresponding to the birth years of 1980 to 1994. We could ask individuals to self-identify the year in which they were born, and provide ranges that correspond to the "generations".
+
+Here is an example of the XML that we might use to achieve this:
+
+```
+<QuestionForm xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2005-10-01/QuestionForm.xsd">
+    <Overview>
+    <Title>Qualification check</Title>
+    <Text>
+    Please tell us in what year you were born so we can determine if you're eligible for the HIT. Thanks!
+    </Text>
+    </Overview>
+    <Question>
+        <QuestionIdentifier>birthyear</QuestionIdentifier>
+        <IsRequired>true</IsRequired>
+        <QuestionContent>
+            <FormattedContent><![CDATA[
+            <p>In what year were you born?</p>
+            ]]></FormattedContent>
+       </QuestionContent>
+       <AnswerSpecification>
+            <SelectionAnswer>
+                <StyleSuggestion>dropdown</StyleSuggestion>
+                <Selections>
+                    <Selection>
+                        <SelectionIdentifier>1</SelectionIdentifier>
+                        <Text>Before 1980</Text>
+                    </Selection>
+                    <Selection>
+                        <SelectionIdentifier>2</SelectionIdentifier>
+                        <Text>1980 - 1994</Text>
+                    </Selection>
+                    <Selection>
+                        <SelectionIdentifier>3</SelectionIdentifier>
+                        <Text>1965 - 1979</Text>
+                    </Selection>
+                    <Selection>
+                        <SelectionIdentifier>4</SelectionIdentifier>
+                        <Text>1944 - 1964</Text>
+                    </Selection>
+                </Selections>
+            </SelectionAnswer>
+        </AnswerSpecification>
+    </Question>
+</QuestionForm>
+
+```
+
+# Creating an Answer Key
+
+Next, we need to define an *Answer Key*. An Answer Key tells MTurk how to derive a Qualification Score from answers to the Qualification Test. In our case, we want to give everyone who told us they were born between the years 1980-1994 a value of "1" and everyone else a value of "0".
+
+The AnswerKey is also defined by an XML document, but it uses a different schema called the [AnswerKey Schema](https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_AnswerKeyDataStructureArticle.html). A sample is provided in the file located at `system.file("templates/answerkey1.xml", package = "pyMTurkR")`.
+
+Our AnswerKey will look at the SelectionIdentifiers of the response options, and if it finds a "2" (corresponding to the 1980-1994 choice) it will give a score of "1"; otherwise it will give a score of "0". Here's what that XML might look like:
+
+```
+<AnswerKey xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2005-10-01/AnswerKey.xsd">
+    <Question>
+        <QuestionIdentifier>birthyear</QuestionIdentifier>
+        <AnswerOption>
+            <SelectionIdentifier>1</SelectionIdentifier>
+            <AnswerScore>0</AnswerScore>
+        </AnswerOption>
+    </Question>
+    <Question>
+        <QuestionIdentifier>birthyear</QuestionIdentifier>
+        <AnswerOption>
+            <SelectionIdentifier>2</SelectionIdentifier>
+            <AnswerScore>1</AnswerScore>
+        </AnswerOption>
+    </Question>
+    <Question>
+        <QuestionIdentifier>birthyear</QuestionIdentifier>
+        <AnswerOption>
+            <SelectionIdentifier>3</SelectionIdentifier>
+            <AnswerScore>0</AnswerScore>
+        </AnswerOption>
+    </Question>
+    <Question>
+        <QuestionIdentifier>birthyear</QuestionIdentifier>
+        <AnswerOption>
+            <SelectionIdentifier>4</SelectionIdentifier>
+            <AnswerScore>0</AnswerScore>
+        </AnswerOption>
+    </Question>
+</AnswerKey>
+```
+
+# Creating a Qualification Type
+
+Now that we've got our Qualification Test and Answer Keys together, we can create a Qualification Type. It's probably best if we put the Test and Key into XML files and read them in using R. Let's call them `test.xml` and `answers.xml`.
+
+At this point you will need to decide on a name, description, and test duration. You should not pick a name that tells participants what your eligibility criteria. For example, you *would not* want to call this qualification "Millenials" because then unscrupulous MTurk workers would know what to pick to gain access to the study. For a test duration, I would recommend a time that is comfortable, with a reasonable buffer. Say, 5 to 10 minutes.
+
+```{r, eval = FALSE}
+my_test <- paste0(readLines("test.xml", warn = FALSE), collapse = "")
+my_answerkey <- paste0(readLines("answers.xml", warn = FALSE), collapse = "")
+
+qual <- CreateQualificationType(name = "StudyQualification",
+                                description = "Qualification for my study",
+                                status = "Active",
+                                test.duration = seconds(minutes = 5),
+                                test = my_test,
+                                answerkey = my_answerkey)
+```
+
+# Fin
+
+Now you have a Qualification Test! You can use this Qualification when you create your next HIT to select for Millenials as participants. Even though you created this Qualification using the API, you can also find and use it in the MTurk web-interface, under Manage => Qualification Types, or when selecting Qualifications for a HIT. You can also find it again later if you search through your Qualifications using the `SearchQuals()` function.
+
+If you want to find MTurk workers who have been scored using your Qualification Test, and see what their scores were, you can find them by calling the `GetQualifications()` function.
+
+
+
+
+
+
+
+
