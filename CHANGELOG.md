@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.12] - 2019-09-28
+Fix a bug in AssignQualification() when assigning a single value to multiple workers (thanks Jennifer Kim!)
+
 ## [1.11] - 2019-09-13
 Added a vignette for Qualification Tests
 Fix for GetAssignments() returning duplicate results

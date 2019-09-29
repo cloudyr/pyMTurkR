@@ -116,6 +116,11 @@ AssignQualification <-
     if (!is.logical(notify) == TRUE) {
       stop("SendNotification must be TRUE or FALSE.")
     }
+    if (length(value) == 1) {
+      value <- rep(value[1], length(workers))
+    } else if (!length(subjects) == length(workers)) {
+      stop("Number of subjects is not 1 nor length(workers)")
+    }
     for (i in 1:length(value)) {
       if (is.null(value[i]) || is.na(value[i]) || value[i]=='') {
         warning("Value ", i," not assigned; value assumed to be 1")
