@@ -71,8 +71,8 @@
 #' amount of time, in seconds (for example, as returned by
 #' \code{\link{seconds}}), before a submitted assignment is automatically
 #' granted. Maximum of 30 days.
-#' @param qual.req An optional character string containing one or more
-#' QualificationRequirements data structures, for example as returned by
+#' @param qual.req An optional list containing one or more
+#' QualificationRequirements, for example as returned by
 #' \code{\link{GenerateQualificationRequirement}}.
 #' @param hitlayoutid An optional character string including a HITLayoutId
 #' retrieved from a HIT \dQuote{project} template generated in the Requester
@@ -146,6 +146,9 @@ CreateHIT <-
       if ( (!is.null(title) || !is.null(description) ||
             !is.null(reward) || !is.null(duration)) & verbose) {
         warning("HITType specified, HITType parameters (title, description, reward, duration) ignored")
+      }
+      if(!is.null(hit.type) & !is.null(qual.req)){
+        stop("Cannot use both hit.type and a qual.req at the same time.")
       }
 
       # Set the function to use later (this one has a hit type)

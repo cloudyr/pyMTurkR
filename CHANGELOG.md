@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.13] - 2019-10-02
+Added an error handler when hit.type and qual.req are both used in call to CreateHIT(). Both cannot be used at the same time. (thanks to Jeremy for identifying this problem!)
+
 ## [1.12] - 2019-09-28
 Fix a bug in AssignQualification() when assigning a single value to multiple workers (thanks Jennie!)
 

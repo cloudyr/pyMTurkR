@@ -1,7 +1,7 @@
 Package: pyMTurkR
 Type: Package
 Title: A Client for the 'MTurk' Requester API
-Version: 1.12
+Version: 1.13
 Authors@R: c(person("Tyler", "Burleigh",
                     role = c("aut", "cre"), 
                     email = "tylerburleigh@gmail.com",
