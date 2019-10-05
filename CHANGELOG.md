@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.14] - 2019-10-04
+Fix for "Error in as.POSIXlt.character(x, tz, ...) : character string is not in a standard unambiguous format" when running GetAssignments().
+
 ## [1.13] - 2019-10-02
 Added an error handler when hit.type and qual.req are both used in call to CreateHIT(). Both cannot be used at the same time. (thanks to Jeremy for identifying this problem!)
 

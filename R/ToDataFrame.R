@@ -148,19 +148,31 @@ ToDataFrameAssignment <- function(assignment) {
   Assignment[3] <- assignment$HITId
   Assignment[4] <- assignment$AssignmentStatus
   Assignment[5] <- reticulate::py_to_r(assignment$AutoApprovalTime)
+
   if (!is.null(assignment$AcceptTime)) {
     Assignment[6] <- reticulate::py_to_r(assignment$AcceptTime)
+  } else {
+    Assignment[6] <- as.POSIXct(NA, origin = '1970-01-01')
   }
+
   Assignment[7] <- reticulate::py_to_r(assignment$SubmitTime)
+
   if (!is.null(assignment$ApprovalTime)) {
     Assignment[8] <- reticulate::py_to_r(assignment$ApprovalTime)
+  } else {
+    Assignment[8] <- as.POSIXct(NA, origin = '1970-01-01')
   }
+
   if (!is.null(assignment$RejectionTime)) {
     Assignment[9] <- reticulate::py_to_r(assignment$RejectionTime)
+  } else {
+    Assignment[9] <- as.POSIXct(NA, origin = '1970-01-01')
   }
+
   if (!is.null(assignment$RequesterFeedback)) {
     Assignment[10] <- assignment$RequesterFeedback
   }
+
   if (!is.null(assignment$Answer)) {
     answers <- ToDataFrameQuestionFormAnswers(Assignment, assignment$Answer)
     return.answers <- rbind(return.answers, answers)
