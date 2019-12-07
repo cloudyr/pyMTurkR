@@ -158,7 +158,7 @@ GrantBonus <-
         valid <- FALSE
       }
 
-      Bonuses[i, ] <- c(workers[i], amounts[i], assignments[i], reasons[i], valid)
+      Bonuses[i, ] <- c(workers[i], assignments[i], amounts[i], reasons[i], valid)
 
       # Message with results
       if (valid != TRUE) {
