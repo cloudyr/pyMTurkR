@@ -242,7 +242,7 @@ CreateHIT <-
         args <- c(args, list(HITLayoutId = as.character(hitlayoutid)))
         if(!is.null(hitlayoutparameters)){
           for(i in 1:length(hitlayoutparameters)){
-            hitlayoutparameters[[1]] <- reticulate::dict(hitlayoutparameters[[1]] )
+            hitlayoutparameters[[i]] <- reticulate::dict(hitlayoutparameters[[i]] )
           }
           args <- c(args, list(HITLayoutParameters = hitlayoutparameters))
         }
