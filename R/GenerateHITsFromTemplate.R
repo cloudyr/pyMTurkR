@@ -22,7 +22,6 @@
 #' @param write.files A logical specifying whether HIT .html files should be
 #' created and stored in the working directory. Or, alternatively, whether HITs
 #' should be returned as character vectors in a list.
-#' @param \dots Additional arguments passed to \code{\link{CreateHIT}}.
 #' @return A list containing a character string for each HIT generated from the
 #' template.
 #' @author Thomas J. Leeper

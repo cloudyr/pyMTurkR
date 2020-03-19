@@ -118,7 +118,7 @@ AssignQualification <-
     }
     if (length(value) == 1) {
       value <- rep(value[1], length(workers))
-    } else if (!length(subjects) == length(workers)) {
+    } else if (!length(value) == length(workers)) {
       stop("Number of values is not 1 nor length(workers)")
     }
     for (i in 1:length(value)) {

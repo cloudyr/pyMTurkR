@@ -4,8 +4,8 @@ MTurkRlog.tsv
 ^\.travis\.yml$
 assets/*
 screenshots/*
-build/*
 traffic/*
 CHANGELOG.md
 ^codecov\.yml$
 ^.covrignore
+vignettes/*

@@ -20,8 +20,6 @@ Must be equal to the number of rows in \code{input}.}
 \item{write.files}{A logical specifying whether HIT .html files should be
 created and stored in the working directory. Or, alternatively, whether HITs
 should be returned as character vectors in a list.}
-
-\item{\dots}{Additional arguments passed to \code{\link{CreateHIT}}.}
 }
 \value{
 A list containing a character string for each HIT generated from the

@@ -71,8 +71,8 @@ amount of time, in seconds (for example, as returned by
 \code{\link{seconds}}), before a submitted assignment is automatically
 granted. Maximum of 30 days.}
 
-\item{qual.req}{An optional character string containing one or more
-QualificationRequirements data structures, for example as returned by
+\item{qual.req}{An optional list containing one or more
+QualificationRequirements, for example as returned by
 \code{\link{GenerateQualificationRequirement}}.}
 
 \item{hitlayoutid}{An optional character string including a HITLayoutId
