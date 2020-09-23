@@ -126,7 +126,7 @@ RegisterHITType <-
                   Description = description)
 
     if(!is.null(qual.req)){
-      args <- c(args, QualificationRequirements = qual.req)
+      args <- c(args, QualificationRequirements = list(qual.req))
     }
 
     fun <- pyMTurkR$Client$create_hit_type
