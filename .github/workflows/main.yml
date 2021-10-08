@@ -30,10 +30,10 @@ jobs:
         run: Rscript -e "install.packages('devtools', dependencies=T, repos='https://cloud.r-project.org')"
 
       - name: Install package dependencies
-        run: Rscript -e "library(devtools); devtools::install_dev_deps('pyMTurkR')"
+        run: Rscript -e "library(devtools); devtools::install_dev_deps('.')"
 
       - name: Check package
-        run: Rscript -e "library(devtools); devtools::check('pyMTurkR', cran=T, error_on='warning', manual=T)"
+        run: Rscript -e "library(devtools); devtools::check('.', cran=T, error_on='warning', manual=T)"
 
   mac-check:
     strategy:
@@ -66,10 +66,10 @@ jobs:
         run: Rscript -e "install.packages('devtools', dependencies=T, repos='https://cloud.r-project.org')"
 
       - name: Install package dependencies
-        run: Rscript -e "library(devtools); devtools::install_dev_deps('pyMTurkR')"
+        run: Rscript -e "library(devtools); devtools::install_dev_deps('.')"
 
       - name: Check package
-        run: Rscript -e "library(devtools); devtools::check('pyMTurkR', cran=T, error_on='warning', manual=F)"
+        run: Rscript -e "library(devtools); devtools::check('.', cran=T, error_on='warning', manual=F)"
 
   windows-check:
     strategy:
@@ -105,10 +105,10 @@ jobs:
         shell: powershell
 
       - name: Install package dependencies
-        run: Rscript.exe -e "library(devtools); devtools::install_dev_deps('pyMTurkR')"
+        run: Rscript.exe -e "library(devtools); devtools::install_dev_deps('.')"
         shell: powershell
 
       - name: Check package
-        run: Rscript.exe -e "library(devtools); devtools::check('pyMTurkR', cran=T, error_on='warning', manual=F)"
+        run: Rscript.exe -e "library(devtools); devtools::check('.', cran=T, error_on='warning', manual=F)"
         shell: powershell
 
