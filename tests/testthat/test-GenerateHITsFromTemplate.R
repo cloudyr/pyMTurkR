@@ -1,6 +1,7 @@
 
 test_that("GenerateHITsFromTemplate", {
 
+  skip_if_not(CheckAWSKeys())
   temp <- system.file("templates/htmlquestion2.xml", package = "pyMTurkR")
   readLines(temp)
 
@@ -19,6 +20,7 @@ test_that("GenerateHITsFromTemplate", {
 
 test_that("GenerateHITsFromTemplate write files", {
 
+  skip_if_not(CheckAWSKeys())
   temp <- system.file("templates/htmlquestion2.xml", package = "pyMTurkR")
   readLines(temp)
 

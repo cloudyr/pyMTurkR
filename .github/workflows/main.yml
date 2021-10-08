@@ -1,0 +1,114 @@
+name: CI
+
+on:
+  push:
+    branches: [ master, develop, ci ]
+  pull_request:
+    branches: [ master, develop, ci ]
+
+jobs:
+  linux-check:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+        R: [ '3.5.3', '3.6.1' ]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    name: R ${{ matrix.R }} ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: ${{ matrix.R }}
+
+      - name: Install system dependencies
+        run: sudo apt install build-essential libxml2-dev libssl-dev texinfo texlive-latex-base libcurl4-openssl-dev libcairo2-dev texlive-fonts-extra qpdf
+
+      - name: Install devtools
+        run: Rscript -e "install.packages('devtools', dependencies=T, repos='https://cloud.r-project.org')"
+
+      - name: Install package dependencies
+        run: Rscript -e "library(devtools); devtools::install_dev_deps('pyMTurkR')"
+
+      - name: Check package
+        run: Rscript -e "library(devtools); devtools::check('pyMTurkR', cran=T, error_on='warning', manual=T)"
+
+  mac-check:
+    strategy:
+      matrix:
+        os: [ macOS-latest ]
+        R: [ '3.5.3', '3.6.1' ]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    name: R ${{ matrix.R }} ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: ${{ matrix.R }}
+
+      - name: Install Homebrew
+        if: false
+        run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+      - name: Install tex on Homebrew
+        if: false
+        run: brew cask install mactex
+
+      - name: Install DT
+        run: Rscript -e "install.packages('DT', type='source', repos='https://cloud.r-project.org')"
+
+      - name: Install devtools
+        run: Rscript -e "install.packages('devtools', dependencies=T, repos='https://cloud.r-project.org')"
+
+      - name: Install package dependencies
+        run: Rscript -e "library(devtools); devtools::install_dev_deps('pyMTurkR')"
+
+      - name: Check package
+        run: Rscript -e "library(devtools); devtools::check('pyMTurkR', cran=T, error_on='warning', manual=F)"
+
+  windows-check:
+    strategy:
+      matrix:
+        os: [ windows-latest ]
+        R: [ '3.5.3', '3.6.1' ]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    name: R ${{ matrix.R }} ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: ${{ matrix.R }}
+
+      - name: Install MikTex
+        if: false
+        run: |
+          wget https://miktex.org/download/win/miktexsetup-x64.zip -OutFile miktexsetup-x64.zip
+          Expand-Archive miktexsetup-x64.zip
+          miktexsetup-x64\\miktexsetup.exe --verbose --local-package-repository=c:\temp\miktex --package-set=essential download
+          miktexsetup-x64\\miktexsetup.exe --quiet --local-package-repository=c:\temp\miktex --package-set=essential --modify-path=yes install
+        shell: powershell
+
+      - name: Install rematch2
+        run: Rscript.exe -e "install.packages('rematch2', repos='https://cloud.r-project.org')"
+        shell: powershell
+
+      - name: Install devtools
+        run: Rscript.exe -e "install.packages('devtools', dependencies=T, repos='https://cloud.r-project.org')"
+        shell: powershell
+
+      - name: Install package dependencies
+        run: Rscript.exe -e "library(devtools); devtools::install_dev_deps('pyMTurkR')"
+        shell: powershell
+
+      - name: Check package
+        run: Rscript.exe -e "library(devtools); devtools::check('pyMTurkR', cran=T, error_on='warning', manual=F)"
+        shell: powershell
+
