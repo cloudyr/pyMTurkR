@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest ]
-        R: [ '3.5.3', '3.6.1' ]
+        R: [ '4.1.0', '4.1.1' ]
       fail-fast: false
     runs-on: ${{ matrix.os }}
     name: R ${{ matrix.R }} ${{ matrix.os }}
@@ -39,7 +39,7 @@ jobs:
     strategy:
       matrix:
         os: [ macOS-latest ]
-        R: [ '3.5.3', '3.6.1' ]
+        R: [ '4.1.0', '4.1.1' ]
       fail-fast: false
     runs-on: ${{ matrix.os }}
     name: R ${{ matrix.R }} ${{ matrix.os }}
@@ -75,7 +75,7 @@ jobs:
     strategy:
       matrix:
         os: [ windows-latest ]
-        R: [ '3.5.3', '3.6.1' ]
+        R: [ '4.1.0', '4.1.1' ]
       fail-fast: false
     runs-on: ${{ matrix.os }}
     name: R ${{ matrix.R }} ${{ matrix.os }}
