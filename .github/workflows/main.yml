@@ -69,7 +69,7 @@ jobs:
         run: Rscript -e "library(devtools); devtools::install_dev_deps('.')"
 
       - name: Check package
-        run: Rscript -e "library(devtools); devtools::check('.', cran=T, error_on='warning', manual=F)"
+        run: Rscript -e "library(devtools); devtools::check('.', cran=T, error_on='warning', manual=T)"
 
   windows-check:
     strategy:
@@ -109,6 +109,6 @@ jobs:
         shell: powershell
 
       - name: Check package
-        run: Rscript.exe -e "library(devtools); devtools::check('.', cran=T, error_on='warning', manual=F)"
+        run: Rscript.exe -e "library(devtools); devtools::check('.', cran=T, error_on='warning', manual=T)"
         shell: powershell
 
