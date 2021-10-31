@@ -59,9 +59,6 @@ jobs:
         if: false
         run: brew cask install mactex
 
-      - name: Install DT
-        run: Rscript -e "install.packages('DT', type='source', repos='https://cloud.r-project.org')"
-
       - name: Install devtools
         run: Rscript -e "install.packages('devtools', dependencies=T, repos='https://cloud.r-project.org')"
 
@@ -94,10 +91,6 @@ jobs:
           Expand-Archive miktexsetup-x64.zip
           miktexsetup-x64\\miktexsetup.exe --verbose --local-package-repository=c:\temp\miktex --package-set=essential download
           miktexsetup-x64\\miktexsetup.exe --quiet --local-package-repository=c:\temp\miktex --package-set=essential --modify-path=yes install
-        shell: powershell
-
-      - name: Install rematch2
-        run: Rscript.exe -e "install.packages('rematch2', repos='https://cloud.r-project.org')"
         shell: powershell
 
       - name: Install devtools
