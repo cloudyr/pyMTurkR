@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ master, develop, ci, vineetbansal/cran ]
+    branches: [ master, develop ]
   pull_request:
-    branches: [ master, develop, ci ]
+    branches: [ master, develop ]
 
 jobs:
   linux-check:
