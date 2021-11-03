@@ -21,6 +21,7 @@ test_that("UpdateQualificationType", {
 
 
 test_that("UpdateQualificationType with Qualification Test", {
+  skip_if_not(CheckAWSKeys())
 
   f <- system.file("templates/qualificationtest1.xml", package = "pyMTurkR")
   QuestionForm <- paste0(readLines(f, warn = FALSE), collapse = "")
