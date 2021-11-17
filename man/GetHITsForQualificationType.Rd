@@ -6,8 +6,12 @@
 \alias{gethitsbyqual}
 \title{Get HITs by Qualification}
 \usage{
-GetHITsForQualificationType(qual, results = as.integer(100),
-  pagetoken = NULL, verbose = getOption("pyMTurkR.verbose", TRUE))
+GetHITsForQualificationType(
+  qual,
+  results = as.integer(100),
+  pagetoken = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{qual}{A character string containing a QualificationTypeId.}

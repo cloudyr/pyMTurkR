@@ -31,7 +31,7 @@ AccountBalance()
 
 }
 \references{
-\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_GetAccountBalanceOperation.html}{API
+\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_GetAccountBalanceOperation.html}{API
 Reference}
 
 \href{https://requester.mturk.com/pricing}{MTurk Pricing Structure}

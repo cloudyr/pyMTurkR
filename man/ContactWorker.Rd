@@ -9,8 +9,13 @@
 \alias{NotifyWorker}
 \title{Contact Worker(s)}
 \usage{
-ContactWorker(subjects, msgs, workers, batch = FALSE,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+ContactWorker(
+  subjects,
+  msgs,
+  workers,
+  batch = FALSE,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{subjects}{A character string containing subject line of an email, or a

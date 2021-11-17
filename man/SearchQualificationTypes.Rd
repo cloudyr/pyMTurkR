@@ -10,10 +10,15 @@
 \alias{ListQuals}
 \title{Search Qualification Types}
 \usage{
-SearchQualificationTypes(search.query = NULL,
-  must.be.requestable = FALSE, must.be.owner = FALSE,
-  results = as.integer(100), return.pages = NULL, pagetoken = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+SearchQualificationTypes(
+  search.query = NULL,
+  must.be.requestable = FALSE,
+  must.be.owner = FALSE,
+  results = as.integer(100),
+  return.pages = NULL,
+  pagetoken = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{search.query}{An optional character string to use as a search query}

@@ -53,7 +53,7 @@ DisposeHIT(hit1$HITId)
 
 }
 \references{
-\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ExternalQuestionArticle.html}{API Reference}
+\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ExternalQuestionArticle.html}{API Reference}
 }
 \seealso{
 \code{\link{CreateHIT}}

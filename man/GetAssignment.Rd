@@ -8,10 +8,18 @@
 \alias{ListAssignmentsForHIT}
 \title{Get Assignment(s)}
 \usage{
-GetAssignment(assignment = NULL, hit = NULL, hit.type = NULL,
-  annotation = NULL, status = NULL, results = as.integer(100),
-  pagetoken = NULL, get.answers = FALSE, persist.on.error = FALSE,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+GetAssignment(
+  assignment = NULL,
+  hit = NULL,
+  hit.type = NULL,
+  annotation = NULL,
+  status = NULL,
+  results = as.integer(100),
+  pagetoken = NULL,
+  get.answers = FALSE,
+  persist.on.error = FALSE,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{assignment}{An optional character string specifying the AssignmentId

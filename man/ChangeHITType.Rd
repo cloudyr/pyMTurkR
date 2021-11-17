@@ -6,11 +6,20 @@
 \alias{UpdateHITTypeOfHIT}
 \title{Change HITType Properties of a HIT}
 \usage{
-ChangeHITType(hit = NULL, old.hit.type = NULL, new.hit.type = NULL,
-  title = NULL, description = NULL, reward = NULL, duration = NULL,
-  keywords = NULL, auto.approval.delay = as.integer(2592000),
-  qual.req = NULL, old.annotation = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+ChangeHITType(
+  hit = NULL,
+  old.hit.type = NULL,
+  new.hit.type = NULL,
+  title = NULL,
+  description = NULL,
+  reward = NULL,
+  duration = NULL,
+  keywords = NULL,
+  auto.approval.delay = as.integer(2592000),
+  qual.req = NULL,
+  old.annotation = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{hit}{An optional character string containing the HITId whose HITTypeId
@@ -124,7 +133,7 @@ DeleteHIT(hit = hit$HITId)
 
 }
 \references{
-\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ChangeHITTypeOfHITOperation.html}{API
+\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ChangeHITTypeOfHITOperation.html}{API
 Reference}
 }
 \seealso{

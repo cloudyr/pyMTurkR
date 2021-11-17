@@ -4,8 +4,12 @@
 \alias{GenerateNotification}
 \title{Generate Notification}
 \usage{
-GenerateNotification(destination, transport = "Email", event.type,
-  version = "2006-05-05")
+GenerateNotification(
+  destination,
+  transport = "Email",
+  event.type,
+  version = "2006-05-05"
+)
 }
 \arguments{
 \item{destination}{Currently, a character string containing a complete email
@@ -38,9 +42,9 @@ Generate a Notification data structure for use in the \code{notification}
 option of \code{\link{SetHITTypeNotification}}.
 }
 \references{
-\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_NotificationDataStructureArticle.html}{API Reference}
+\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_NotificationDataStructureArticle.html}{API Reference}
 
-\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMechanicalTurkRequester/Concepts_NotificationsArticle.html}{API Reference: Concept}
+\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMechanicalTurkRequester/Concepts_NotificationsArticle.html}{API Reference: Concept}
 }
 \seealso{
 \code{\link{SetHITTypeNotification}}

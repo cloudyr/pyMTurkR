@@ -7,8 +7,12 @@
 \alias{DisassociateQualificationFromWorker}
 \title{Revoke a Qualification from a Worker}
 \usage{
-RevokeQualification(qual, workers, reasons = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+RevokeQualification(
+  qual,
+  workers,
+  reasons = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{qual}{A character string containing a QualificationTypeId.}

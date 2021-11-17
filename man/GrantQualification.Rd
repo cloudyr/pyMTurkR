@@ -11,8 +11,12 @@
 \alias{rejectrequest}
 \title{Grant/Accept or Reject a Qualification Request}
 \usage{
-GrantQualification(qual.requests, values, reason = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+GrantQualification(
+  qual.requests,
+  values,
+  reason = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{qual.requests}{A character string containing a QualificationRequestId (for example, returned by \code{\link{GetQualificationRequests}}), or a vector of QualificationRequestIds.}

@@ -5,10 +5,19 @@
 \alias{createqual}
 \title{Create QualificationType}
 \usage{
-CreateQualificationType(name, description, status, keywords = NULL,
-  retry.delay = NULL, test = NULL, answerkey = NULL,
-  test.duration = NULL, auto = NULL, auto.value = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+CreateQualificationType(
+  name,
+  description,
+  status,
+  keywords = NULL,
+  retry.delay = NULL,
+  test = NULL,
+  answerkey = NULL,
+  test.duration = NULL,
+  auto = NULL,
+  auto.value = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{name}{A name for the QualificationType. This is visible to workers. It
@@ -114,7 +123,7 @@ DisposeQualificationType(qual3$QualificationTypeId)
 
 }
 \references{
-\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_CreateQualificationTypeOperation.html}{API
+\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_CreateQualificationTypeOperation.html}{API
 Reference}
 }
 \author{

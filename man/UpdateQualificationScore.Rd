@@ -5,8 +5,13 @@
 \alias{updatequalscore}
 \title{Update a worker's score for a QualificationType}
 \usage{
-UpdateQualificationScore(qual, workers, values = NULL,
-  increment = NULL, verbose = getOption("pyMTurkR.verbose", TRUE))
+UpdateQualificationScore(
+  qual,
+  workers,
+  values = NULL,
+  increment = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{qual}{A character string containing a QualificationTypeId.}
@@ -68,7 +73,7 @@ DisposeQualificationType(qual1$QualificationTypeId)
 
 }
 \references{
-\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_UpdateQualificationScoreOperation.html}{API Reference}
+\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_UpdateQualificationScoreOperation.html}{API Reference}
 }
 \seealso{
 \code{\link{GetQualificationScore}}

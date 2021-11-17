@@ -8,8 +8,12 @@
 \alias{approveall}
 \title{Approve Assignment(s)}
 \usage{
-ApproveAssignment(assignments, feedback = NULL, rejected = FALSE,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+ApproveAssignment(
+  assignments,
+  feedback = NULL,
+  rejected = FALSE,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{assignments}{A character string containing an AssignmentId, or a
@@ -60,10 +64,10 @@ ApproveAssignment(assignments = c("26XXH0JPPSI23H54YVG7BKLEXAMPLE1",
 
 }
 \references{
-\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ApproveAssignmentOperation.html}{API
+\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ApproveAssignmentOperation.html}{API
 Reference: Approve Assignment}
 
-\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ApproveRejectedAssignmentOperation.html}{API
+\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ApproveRejectedAssignmentOperation.html}{API
 Reference: Approve Rejected Assignment}
 }
 \seealso{

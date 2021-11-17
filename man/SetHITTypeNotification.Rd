@@ -5,8 +5,12 @@
 \alias{setnotification}
 \title{Configure a HITType Notification}
 \usage{
-SetHITTypeNotification(hit.type, notification = NULL, active = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+SetHITTypeNotification(
+  hit.type,
+  notification = NULL,
+  active = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{hit.type}{A character string specifying the HITTypeId of the HITType
@@ -75,7 +79,7 @@ SendTestEventNotification(a, test.event.type = "AssignmentAccepted")
 \references{
 \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_UpdateNotificationSettingsOperation.html}{API Reference: Operation}
 
-\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMechanicalTurkRequester/Concepts_NotificationsArticle.html}{API Reference: Concept}
+\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMechanicalTurkRequester/Concepts_NotificationsArticle.html}{API Reference: Concept}
 }
 \seealso{
 \code{\link{GenerateNotification}}

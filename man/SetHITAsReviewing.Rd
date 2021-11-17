@@ -6,8 +6,13 @@
 \alias{UpdateHITReviewStatus}
 \title{Set HIT as \dQuote{Reviewing}}
 \usage{
-SetHITAsReviewing(hit = NULL, hit.type = NULL, annotation = NULL,
-  revert = FALSE, verbose = getOption("pyMTurkR.verbose", TRUE))
+SetHITAsReviewing(
+  hit = NULL,
+  hit.type = NULL,
+  annotation = NULL,
+  revert = FALSE,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{hit}{An optional character string containing a HITId, or a vector

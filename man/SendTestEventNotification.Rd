@@ -5,8 +5,11 @@
 \alias{notificationtest}
 \title{Test a Notification}
 \usage{
-SendTestEventNotification(notification, test.event.type,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+SendTestEventNotification(
+  notification,
+  test.event.type,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{notification}{A dictionary object Notification structure (e.g., returned by \code{\link{GenerateNotification}}).}

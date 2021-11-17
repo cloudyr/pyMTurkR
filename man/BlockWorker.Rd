@@ -15,8 +15,11 @@
 \alias{listworkerblocks}
 \title{Block Worker(s)}
 \usage{
-BlockWorker(workers, reasons = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+BlockWorker(
+  workers,
+  reasons = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{workers}{A character string containing a WorkerId, or a vector of

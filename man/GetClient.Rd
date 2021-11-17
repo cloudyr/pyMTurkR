@@ -6,8 +6,10 @@
 \alias{CheckAWSKeys}
 \title{Creates an MTurk Client using the AWS SDK for Python (Boto3)}
 \usage{
-GetClient(sandbox = getOption("pyMTurkR.sandbox", TRUE),
-  restart.client = FALSE)
+GetClient(
+  sandbox = getOption("pyMTurkR.sandbox", TRUE),
+  restart.client = FALSE
+)
 }
 \arguments{
 \item{sandbox}{A logical indicating whether the client should be in the

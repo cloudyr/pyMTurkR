@@ -5,10 +5,18 @@
 \alias{updatequal}
 \title{Update a Worker QualificationType}
 \usage{
-UpdateQualificationType(qual, description = NULL, status = NULL,
-  retry.delay = NULL, test = NULL, answerkey = NULL,
-  test.duration = NULL, auto = NULL, auto.value = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+UpdateQualificationType(
+  qual,
+  description = NULL,
+  status = NULL,
+  retry.delay = NULL,
+  test = NULL,
+  answerkey = NULL,
+  test.duration = NULL,
+  auto = NULL,
+  auto.value = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{qual}{A character string containing a QualificationTypeId.}
@@ -75,7 +83,7 @@ DisposeQualificationType(qual1$QualificationTypeId)
 
 }
 \references{
-\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_UpdateQualificationTypeOperation.html}{API Reference}
+\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_UpdateQualificationTypeOperation.html}{API Reference}
 }
 \seealso{
 \code{\link{GetQualificationType}}
