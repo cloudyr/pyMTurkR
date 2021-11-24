@@ -9,6 +9,9 @@ ToDataFrameAssignment(assignment)
 \arguments{
 \item{assignment}{assignment}
 }
+\value{
+A list of Data frames, for assignment information and answers
+}
 \description{
-ToDataFrameAssignment
+Get a list of assignment and answer information for an assignment
 }

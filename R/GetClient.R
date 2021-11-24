@@ -6,10 +6,11 @@
 #'
 #' \code{StartClient()} is an alias
 #'
-#' @aliases GetClient StartClient CheckAWSKeys
+#' @aliases GetClient StartClient
 #' @param sandbox A logical indicating whether the client should be in the
 #' sandbox environment or the live environment.
 #' @param restart.client A boolean that specifies whether to force the creation of a new client.
+#' @return No return value; Called to populate pyMTurkR$Client
 #' @author Tyler Burleigh
 #' @references
 #' \href{https://aws.amazon.com/sdk-for-python/}{AWS SDK for Python (Boto3)}
@@ -21,16 +22,11 @@
 #' }
 #' @export GetClient
 #' @export StartClient
-#' @export CheckAWSKeys
 
 GetClient <-
 StartClient <-
 function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
          restart.client = FALSE){
-
-  if(!exists('pyMTurkR')){
-    pyMTurkR <<- new.env()
-  }
 
   helper_mturk_client <- function(sandbox, boto3){
 
@@ -46,10 +42,12 @@ function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
     }
 
     # Start client
-    pyMTurkR$Client <<- boto3$client('mturk', region_name='us-east-1',
+    client <- boto3$client('mturk', region_name='us-east-1',
                                     aws_access_key_id = key,
                                     aws_secret_access_key = secret_key,
                                     endpoint_url = endpoint_url)
+
+    assign("Client", client, envir=pyMTurkR)
 
     # Test credentials with a simple API call
     helper_mturk_credentials_test()
@@ -89,6 +87,13 @@ function(sandbox = getOption('pyMTurkR.sandbox', TRUE),
 }
 
 
+#' Helper function to check AWS Keys
+#'
+#' Checks for the existence of environment variables AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY.
+#'
+#' @return A logical indicating whether AWS Keys were found as environment variables.
+#' @export CheckAWSKeys
+#'
 CheckAWSKeys <- function(){
   if(Sys.getenv("AWS_ACCESS_KEY_ID") != "" & Sys.getenv("AWS_SECRET_ACCESS_KEY") != ""){
     return(TRUE)

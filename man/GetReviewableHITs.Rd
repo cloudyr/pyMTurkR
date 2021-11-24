@@ -52,7 +52,7 @@ GetReviewableHITs()
 
 }
 \references{
-\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_GetReviewableHITsOperation.html}{API Reference}
+\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_GetReviewableHITsOperation.html}{API Reference}
 }
 \author{
 Tyler Burleigh, Thomas J. Leeper

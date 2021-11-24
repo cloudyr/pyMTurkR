@@ -45,7 +45,7 @@
 #'
 #' \code{\link{SearchQualificationTypes}}
 #' @references
-#' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_UpdateQualificationTypeOperation.html}{API Reference}
+#' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_UpdateQualificationTypeOperation.html}{API Reference}
 #' @keywords Qualifications
 #' @examples
 #'

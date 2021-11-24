@@ -11,6 +11,9 @@ ToDataFrameQuestionFormAnswers(assignment, answers)
 
 \item{answers}{answers}
 }
+\value{
+A Data frame of Answer information for the assignment
+}
 \description{
 ToDataFrameQuestionFormAnswers
 }

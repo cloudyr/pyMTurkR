@@ -9,6 +9,9 @@ ToDataFrameQualificationRequests(requests)
 \arguments{
 \item{requests}{requests}
 }
+\value{
+A Data frame of Qualification Request information
+}
 \description{
 ToDataFrameQualificationRequests
 }

@@ -67,6 +67,10 @@ numbers of Assignments are being retrieved.}
 standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
 TRUE)}.}
 }
+\value{
+A data frame representing an assignment or multiple assignments for
+one or more HITs (or a HITType).
+}
 \description{
 Get an assignment or multiple assignments for one or more HITs (or a
 HITType) as a data frame.

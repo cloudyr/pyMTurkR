@@ -41,7 +41,7 @@
 #'
 #' \code{\link{GetQualifications}}
 #' @references
-#' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_UpdateQualificationScoreOperation.html}{API Reference}
+#' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_UpdateQualificationScoreOperation.html}{API Reference}
 #' @keywords Qualifications
 #' @examples
 #'

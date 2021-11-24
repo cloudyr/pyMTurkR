@@ -83,7 +83,7 @@ DisposeQualificationType(qual1$QualificationTypeId)
 
 }
 \references{
-\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_UpdateQualificationTypeOperation.html}{API Reference}
+\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_UpdateQualificationTypeOperation.html}{API Reference}
 }
 \seealso{
 \code{\link{GetQualificationType}}

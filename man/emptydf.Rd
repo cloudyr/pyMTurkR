@@ -13,6 +13,9 @@ emptydf(nrow, ncol, names)
 
 \item{names}{Number of names of the columns}
 }
+\value{
+A data frame of NAs, with the given column names
+}
 \description{
 Helper function that creates an empty data.frame
 }

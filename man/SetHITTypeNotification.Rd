@@ -79,7 +79,7 @@ SendTestEventNotification(a, test.event.type = "AssignmentAccepted")
 \references{
 \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_UpdateNotificationSettingsOperation.html}{API Reference: Operation}
 
-\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMechanicalTurkRequester/Concepts_NotificationsArticle.html}{API Reference: Concept}
+\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMechanicalTurkRequester/Concepts_NotificationsArticle.html}{API Reference: Concept}
 }
 \seealso{
 \code{\link{GenerateNotification}}

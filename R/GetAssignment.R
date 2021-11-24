@@ -50,6 +50,8 @@
 #' @param verbose Optionally print the results of the API request to the
 #' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
 #' TRUE)}.
+#' @return A data frame representing an assignment or multiple assignments for
+#' one or more HITs (or a HITType).
 #' @author Tyler Burleigh, Thomas J. Leeper
 #' @references
 #' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_GetAssignmentOperation.html}{API

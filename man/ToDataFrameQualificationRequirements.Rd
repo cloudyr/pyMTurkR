@@ -9,6 +9,9 @@ ToDataFrameQualificationRequirements(hits)
 \arguments{
 \item{hits}{hits}
 }
+\value{
+A Data frame of Qualification Requirements for the given HITs
+}
 \description{
 ToDataFrameQualificationRequirements
 }

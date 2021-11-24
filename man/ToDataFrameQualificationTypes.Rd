@@ -9,6 +9,9 @@ ToDataFrameQualificationTypes(quals)
 \arguments{
 \item{quals}{qualifications}
 }
+\value{
+A Data frame of Qualification Types
+}
 \description{
 ToDataFrameQualificationTypes
 }
