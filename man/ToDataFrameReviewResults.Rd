@@ -9,6 +9,9 @@ ToDataFrameReviewResults(results)
 \arguments{
 \item{results}{results}
 }
+\value{
+A list of Data frames of Assignment Reviews/Actions and HIT Reviews/Actions.
+}
 \description{
 ToDataFrameReviewResults
 }

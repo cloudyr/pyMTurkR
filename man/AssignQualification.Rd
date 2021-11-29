@@ -7,11 +7,23 @@
 \alias{AssociateQualificationWithWorker}
 \title{Assign Qualification}
 \usage{
-AssignQualification(qual = NULL, workers, value = 1, notify = FALSE,
-  name = NULL, description = NULL, keywords = NULL, status = NULL,
-  retry.delay = NULL, test = NULL, answerkey = NULL,
-  test.duration = NULL, auto = NULL, auto.value = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+AssignQualification(
+  qual = NULL,
+  workers,
+  value = 1,
+  notify = FALSE,
+  name = NULL,
+  description = NULL,
+  keywords = NULL,
+  status = NULL,
+  retry.delay = NULL,
+  test = NULL,
+  answerkey = NULL,
+  test.duration = NULL,
+  auto = NULL,
+  auto.value = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{qual}{A character string containing a QualificationTypeId.}

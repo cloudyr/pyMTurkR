@@ -5,8 +5,12 @@
 \alias{setnotification}
 \title{Configure a HITType Notification}
 \usage{
-SetHITTypeNotification(hit.type, notification = NULL, active = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+SetHITTypeNotification(
+  hit.type,
+  notification = NULL,
+  active = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{hit.type}{A character string specifying the HITTypeId of the HITType

@@ -6,11 +6,20 @@
 \alias{UpdateHITTypeOfHIT}
 \title{Change HITType Properties of a HIT}
 \usage{
-ChangeHITType(hit = NULL, old.hit.type = NULL, new.hit.type = NULL,
-  title = NULL, description = NULL, reward = NULL, duration = NULL,
-  keywords = NULL, auto.approval.delay = as.integer(2592000),
-  qual.req = NULL, old.annotation = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+ChangeHITType(
+  hit = NULL,
+  old.hit.type = NULL,
+  new.hit.type = NULL,
+  title = NULL,
+  description = NULL,
+  reward = NULL,
+  duration = NULL,
+  keywords = NULL,
+  auto.approval.delay = as.integer(2592000),
+  qual.req = NULL,
+  old.annotation = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{hit}{An optional character string containing the HITId whose HITTypeId

@@ -5,8 +5,13 @@
 \alias{updatequalscore}
 \title{Update a worker's score for a QualificationType}
 \usage{
-UpdateQualificationScore(qual, workers, values = NULL,
-  increment = NULL, verbose = getOption("pyMTurkR.verbose", TRUE))
+UpdateQualificationScore(
+  qual,
+  workers,
+  values = NULL,
+  increment = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{qual}{A character string containing a QualificationTypeId.}

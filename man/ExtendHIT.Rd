@@ -5,10 +5,15 @@
 \alias{extend}
 \title{Extend HIT}
 \usage{
-ExtendHIT(hit = NULL, hit.type = NULL, annotation = NULL,
-  add.assignments = NULL, add.seconds = NULL,
-  unique.request.token = NULL, verbose = getOption("pyMTurkR.verbose",
-  TRUE))
+ExtendHIT(
+  hit = NULL,
+  hit.type = NULL,
+  annotation = NULL,
+  add.assignments = NULL,
+  add.seconds = NULL,
+  unique.request.token = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{hit}{An optional character string containing a HITId or a vector of

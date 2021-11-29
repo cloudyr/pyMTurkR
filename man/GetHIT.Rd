@@ -17,6 +17,9 @@ GetHIT(hit, verbose = getOption("pyMTurkR.verbose", TRUE))
 standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
 TRUE)}.}
 }
+\value{
+A list of data frames of various details of a HIT.
+}
 \description{
 Retrieve various details of a HIT as a data frame.
 }

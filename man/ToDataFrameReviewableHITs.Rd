@@ -9,6 +9,9 @@ ToDataFrameReviewableHITs(hits)
 \arguments{
 \item{hits}{hits}
 }
+\value{
+A Data frame of reviewable HIT information
+}
 \description{
 ToDataFrameReviewableHITs
 }

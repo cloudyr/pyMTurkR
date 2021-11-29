@@ -1,6 +1,9 @@
 #' ToDataFrameHITs
-#' @aliases ToDataFrameHITs
+#'
+#' Convert a list of HITs to a data frame
+#'
 #' @param hits hits
+#' @return A data frame of information on HITs, one per row.
 #' @export
 ToDataFrameHITs <- function(hits) {
 
@@ -46,8 +49,8 @@ ToDataFrameHITs <- function(hits) {
 
 
 #' ToDataFrameReviewableHITs
-#' @aliases ToDataFrameReviewableHITs
 #' @param hits hits
+#' @return A Data frame of reviewable HIT information 
 #' @export
 ToDataFrameReviewableHITs <- function(hits) {
 
@@ -69,8 +72,8 @@ ToDataFrameReviewableHITs <- function(hits) {
 # QUALIFICATION STRUCTURES
 
 #' ToDataFrameQualificationRequirements
-#' @aliases ToDataFrameQualificationRequirements
 #' @param hits hits
+#' @return A Data frame of Qualification Requirements for the given HITs
 #' @export
 ToDataFrameQualificationRequirements <- function(hits) {
 
@@ -130,8 +133,11 @@ ToDataFrameQualificationRequirements <- function(hits) {
 # ASSIGNMENTS
 
 #' ToDataFrameAssignment
-#' @aliases ToDataFrameAssignment
+#'
+#' Get a list of assignment and answer information for an assignment
+#' 
 #' @param assignment assignment
+#' @return A list of Data frames, for assignment information and answers
 #' @export
 ToDataFrameAssignment <- function(assignment) {
 
@@ -192,9 +198,9 @@ ToDataFrameAssignment <- function(assignment) {
 # QUESTION FORM ANSWERS
 
 #' ToDataFrameQuestionFormAnswers
-#' @aliases ToDataFrameQuestionFormAnswers
 #' @param assignment assignment
 #' @param answers answers
+#' @return A Data frame of Answer information for the assignment 
 #' @export
 ToDataFrameQuestionFormAnswers <- function(assignment, answers) {
 
@@ -245,8 +251,8 @@ ToDataFrameQuestionFormAnswers <- function(assignment, answers) {
 # BLOCKED WORKERS
 
 #' ToDataFrameWorkerBlock
-#' @aliases ToDataFrameWorkerBlock
 #' @param workers workers
+#' @return A Data frame of blocked workers
 #' @export
 ToDataFrameWorkerBlock <- function(workers) {
 
@@ -268,8 +274,9 @@ ToDataFrameWorkerBlock <- function(workers) {
 # BONUS PAYMENTS
 
 #' ToDataFrameBonusPayments
-#' @aliases ToDataFrameBonusPayments
+#'
 #' @param bonuses bonuses
+#' @return A Data frame of Bonus payment information
 #' @export
 ToDataFrameBonusPayments <- function(bonuses){
 
@@ -301,6 +308,7 @@ ToDataFrameBonusPayments <- function(bonuses){
 #' ToDataFrameQualificationRequests
 #' @aliases ToDataFrameQualificationRequests
 #' @param requests requests
+#' @return A Data frame of Qualification Request information
 #' @export
 ToDataFrameQualificationRequests <- function(requests){
 
@@ -338,8 +346,8 @@ ToDataFrameQualificationRequests <- function(requests){
 
 
 #' ToDataFrameQualifications
-#' @aliases ToDataFrameQualifications
 #' @param quals qualifications
+#' @return A Data frame of qualification information 
 #' @export
 ToDataFrameQualifications <- function(quals){
 
@@ -388,8 +396,8 @@ ToDataFrameQualifications <- function(quals){
 
 
 #' ToDataFrameQualificationTypes
-#' @aliases ToDataFrameQualificationTypes
 #' @param quals qualifications
+#' @return A Data frame of Qualification Types
 #' @export
 ToDataFrameQualificationTypes <- function(quals) {
 
@@ -437,8 +445,8 @@ ToDataFrameQualificationTypes <- function(quals) {
 # REVIEW RESULTS
 
 #' ToDataFrameReviewResults
-#' @aliases ToDataFrameReviewResults
 #' @param results results
+#' @return A list of Data frames of Assignment Reviews/Actions and HIT Reviews/Actions.
 #' @export
 ToDataFrameReviewResults <- function(results) {
 

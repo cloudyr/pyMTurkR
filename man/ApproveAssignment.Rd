@@ -8,8 +8,12 @@
 \alias{approveall}
 \title{Approve Assignment(s)}
 \usage{
-ApproveAssignment(assignments, feedback = NULL, rejected = FALSE,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+ApproveAssignment(
+  assignments,
+  feedback = NULL,
+  rejected = FALSE,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{assignments}{A character string containing an AssignmentId, or a

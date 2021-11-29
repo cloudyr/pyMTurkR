@@ -4,8 +4,12 @@
 \alias{GenerateNotification}
 \title{Generate Notification}
 \usage{
-GenerateNotification(destination, transport = "Email", event.type,
-  version = "2006-05-05")
+GenerateNotification(
+  destination,
+  transport = "Email",
+  event.type,
+  version = "2006-05-05"
+)
 }
 \arguments{
 \item{destination}{Currently, a character string containing a complete email

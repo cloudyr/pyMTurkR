@@ -5,9 +5,13 @@
 \alias{reviewable}
 \title{Get Reviewable HITs}
 \usage{
-GetReviewableHITs(hit.type = NULL, status = "Reviewable",
-  results = as.integer(100), pagetoken = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+GetReviewableHITs(
+  hit.type = NULL,
+  status = "Reviewable",
+  results = as.integer(100),
+  pagetoken = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{hit.type}{An optional character string containing a HITTypeId to

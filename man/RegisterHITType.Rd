@@ -7,9 +7,16 @@
 \alias{createhittype}
 \title{Register a HITType}
 \usage{
-RegisterHITType(title, description, reward, duration, keywords = NULL,
-  auto.approval.delay = as.integer(2592000), qual.req = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+RegisterHITType(
+  title,
+  description,
+  reward,
+  duration,
+  keywords = NULL,
+  auto.approval.delay = as.integer(2592000),
+  qual.req = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{title}{A character string containing the title for the HITType. All

@@ -4,8 +4,12 @@
 \alias{GenerateHITsFromTemplate}
 \title{Generate HITs from a Template}
 \usage{
-GenerateHITsFromTemplate(template, input, filenames = NULL,
-  write.files = FALSE)
+GenerateHITsFromTemplate(
+  template,
+  input,
+  filenames = NULL,
+  write.files = FALSE
+)
 }
 \arguments{
 \item{template}{A character string or filename for an .html HIT template}

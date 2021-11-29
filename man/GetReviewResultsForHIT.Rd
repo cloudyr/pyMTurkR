@@ -6,9 +6,13 @@
 \alias{ListReviewPolicyResultsForHIT}
 \title{Get ReviewPolicy Results for a HIT}
 \usage{
-GetReviewResultsForHIT(hit, policy.level = NULL,
-  results = as.integer(100), pagetoken = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+GetReviewResultsForHIT(
+  hit,
+  policy.level = NULL,
+  results = as.integer(100),
+  pagetoken = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{hit}{A character string containing a HITId.}

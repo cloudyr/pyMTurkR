@@ -4,8 +4,7 @@
 \alias{GenerateHTMLQuestion}
 \title{Generate HTMLQuestion}
 \usage{
-GenerateHTMLQuestion(character = NULL, file = NULL,
-  frame.height = 450)
+GenerateHTMLQuestion(character = NULL, file = NULL, frame.height = 450)
 }
 \arguments{
 \item{character}{An optional character string from which to construct the
