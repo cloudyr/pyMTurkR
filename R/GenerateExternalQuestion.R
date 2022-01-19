@@ -23,7 +23,7 @@
 #' @author Tyler Burleigh, Thomas J. Leeper
 #' @seealso \code{\link{CreateHIT}}
 #' @references
-#' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ExternalQuestionArticle.html}{API Reference}
+#' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ExternalQuestionArticle.html}{API Reference}
 #' @keywords HITs
 #' @examples
 #'

@@ -20,9 +20,9 @@ Tyler Burleigh
 Maintainer: Tyler Burleigh <tylerburleigh@gmail.com>
 }
 \references{
-\href{http://www.mturk.com}{Amazon Mechanical Turk}
+\href{https://www.mturk.com/}{Amazon Mechanical Turk}
 
-\href{http://aws.amazon.com/documentation/mturk/}{Amazon Mechanical Turk API Documentation}
+\href{https://docs.aws.amazon.com/mturk/index.html}{Amazon Mechanical Turk API Documentation}
 }
 \keyword{ package }
 \seealso{

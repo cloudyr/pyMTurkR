@@ -9,6 +9,9 @@ ToDataFrameBonusPayments(bonuses)
 \arguments{
 \item{bonuses}{bonuses}
 }
+\value{
+A Data frame of Bonus payment information
+}
 \description{
 ToDataFrameBonusPayments
 }

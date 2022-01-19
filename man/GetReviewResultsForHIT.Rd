@@ -6,9 +6,13 @@
 \alias{ListReviewPolicyResultsForHIT}
 \title{Get ReviewPolicy Results for a HIT}
 \usage{
-GetReviewResultsForHIT(hit, policy.level = NULL,
-  results = as.integer(100), pagetoken = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+GetReviewResultsForHIT(
+  hit,
+  policy.level = NULL,
+  results = as.integer(100),
+  pagetoken = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{hit}{A character string containing a HITId.}
@@ -47,9 +51,9 @@ further information or see the notes in
 \references{
 \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ListReviewPolicyResultsForHITOperation.html}{API Reference}
 
-\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ReviewPoliciesArticle.html}{API Reference (ReviewPolicies)}
+\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ReviewPoliciesArticle.html}{API Reference (ReviewPolicies)}
 
-\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_HITReviewPolicyDataStructureArticle.html}{API Reference (Data Structure)}
+\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_HITReviewPolicyDataStructureArticle.html}{API Reference (Data Structure)}
 }
 \seealso{
 \code{\link{CreateHIT}}

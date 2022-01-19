@@ -1,9 +1,9 @@
 Package: pyMTurkR
 Type: Package
 Title: A Client for the 'MTurk' Requester API
-Version: 1.1.4
+Version: 1.1.5
 Authors@R: c(person("Tyler", "Burleigh",
-                    role = c("aut", "cre"), 
+                    role = "aut", 
                     email = "tylerburleigh@gmail.com",
                     comment = c(twitter = "https://twitter.com/tylerburleigh")),
 			 person("Thomas J.", "Leeper",
@@ -13,8 +13,8 @@ Authors@R: c(person("Tyler", "Burleigh",
              person("Solomon", "Messing", role = "ctb"),
              person("Sean", "Murphy", role = "ctb"),
              person("Jonathan", "Chang", role = "ctb"),
-             person("Andrew", "Brown", role = "ctb"))
-Maintainer: Tyler Burleigh <tylerburleigh@gmail.com>
+             person("Andrew", "Brown", role = "ctb"),
+             person("Vineet", "Bansal", role = "cre", email = "vineetbansal@protonmail.com"))
 Description: Provides access to the latest 'Amazon Mechanical Turk' ('MTurk') <https://www.mturk.com> Requester API (version '2017–01–17'), replacing the now deprecated 'MTurkR' package.
 License: GPL-2
 Encoding: UTF-8
@@ -25,7 +25,7 @@ Imports:
 	stats,
 	utils,
 	XML
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.2
 Suggests: 
     testthat (>= 2.1.0),
     covr,

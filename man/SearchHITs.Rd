@@ -7,8 +7,12 @@
 \alias{listhits}
 \title{Search your HITs}
 \usage{
-SearchHITs(return.pages = NULL, results = as.integer(100),
-  pagetoken = NULL, verbose = getOption("pyMTurkR.verbose", TRUE))
+SearchHITs(
+  return.pages = NULL,
+  results = as.integer(100),
+  pagetoken = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{return.pages}{An integer indicating how many pages of results should

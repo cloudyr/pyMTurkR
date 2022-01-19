@@ -10,9 +10,14 @@
 \alias{deletehit}
 \title{Disable/Expire or Delete HIT}
 \usage{
-DisableHIT(hit = NULL, hit.type = NULL, annotation = NULL,
-  approve.pending.assignments = FALSE, skip.delete.prompt = FALSE,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+DisableHIT(
+  hit = NULL,
+  hit.type = NULL,
+  annotation = NULL,
+  approve.pending.assignments = FALSE,
+  skip.delete.prompt = FALSE,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{hit}{A character string containing a HITId or a vector of character

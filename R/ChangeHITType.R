@@ -63,7 +63,7 @@
 #'
 #' \code{\link{RegisterHITType}}
 #' @references
-#' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ChangeHITTypeOfHITOperation.html}{API
+#' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_ChangeHITTypeOfHITOperation.html}{API
 #' Reference}
 #' @keywords HITs
 #' @examples

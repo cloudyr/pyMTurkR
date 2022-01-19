@@ -9,6 +9,9 @@ ToDataFrameWorkerBlock(workers)
 \arguments{
 \item{workers}{workers}
 }
+\value{
+A Data frame of blocked workers
+}
 \description{
 ToDataFrameWorkerBlock
 }

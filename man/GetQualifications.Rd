@@ -6,8 +6,13 @@
 \alias{getquals}
 \title{Get Qualifications}
 \usage{
-GetQualifications(qual, status = NULL, results = as.integer(100),
-  pagetoken = NULL, verbose = getOption("pyMTurkR.verbose", TRUE))
+GetQualifications(
+  qual,
+  status = NULL,
+  results = as.integer(100),
+  pagetoken = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{qual}{A character string containing a QualificationTypeId for a custom

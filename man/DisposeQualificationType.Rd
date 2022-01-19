@@ -7,8 +7,7 @@
 \alias{deletequal}
 \title{Dispose QualificationType}
 \usage{
-DisposeQualificationType(qual, verbose = getOption("pyMTurkR.verbose",
-  TRUE))
+DisposeQualificationType(qual, verbose = getOption("pyMTurkR.verbose", TRUE))
 }
 \arguments{
 \item{qual}{A character string containing a QualificationTypeId.}

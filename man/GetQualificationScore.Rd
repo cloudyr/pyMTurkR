@@ -5,8 +5,11 @@
 \alias{qualscore}
 \title{Get a Worker's Qualification Score}
 \usage{
-GetQualificationScore(qual, workers,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+GetQualificationScore(
+  qual,
+  workers,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{qual}{A character string containing a QualificationTypeId for a custom

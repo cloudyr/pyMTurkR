@@ -7,9 +7,15 @@
 \alias{sendbonus}
 \title{Pay Bonus to Worker}
 \usage{
-GrantBonus(workers, assignments, amounts, reasons, skip.prompt = FALSE,
-  unique.request.token = NULL, verbose = getOption("pyMTurkR.verbose",
-  TRUE))
+GrantBonus(
+  workers,
+  assignments,
+  amounts,
+  reasons,
+  skip.prompt = FALSE,
+  unique.request.token = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{workers}{A character string containing a WorkerId, or a vector of
@@ -68,7 +74,7 @@ bonus.
 a <- "A1RO9UEXAMPLE"
 b <- "26XXH0JPPSI23H54YVG7BKLEXAMPLE"
 c <- ".50"
-d <- "Thanks for your great work on my HITs!\\nHope to work with you, again!"
+d <- "Thanks for your great work on my HITs!\nHope to work with you, again!"
 GrantBonus(workers=a, assignments=b, amounts=c, reasons=d)
 }
 \dontrun{

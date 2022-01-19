@@ -24,7 +24,7 @@
 #' @return A data frame containing HITIds and Requester Annotations.
 #' @author Tyler Burleigh, Thomas J. Leeper
 #' @references
-#' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_GetReviewableHITsOperation.html}{API Reference}
+#' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_GetReviewableHITsOperation.html}{API Reference}
 #' @keywords HITs
 #' @examples
 #'

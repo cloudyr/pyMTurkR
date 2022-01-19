@@ -4,8 +4,7 @@
 \alias{GenerateHTMLQuestion}
 \title{Generate HTMLQuestion}
 \usage{
-GenerateHTMLQuestion(character = NULL, file = NULL,
-  frame.height = 450)
+GenerateHTMLQuestion(character = NULL, file = NULL, frame.height = 450)
 }
 \arguments{
 \item{character}{An optional character string from which to construct the
@@ -68,7 +67,7 @@ DisposeHIT(hit1$HITId)
 
 }
 \references{
-\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_HTMLQuestionArticle.html}{API Reference}
+\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_HTMLQuestionArticle.html}{API Reference}
 }
 \seealso{
 \code{\link{CreateHIT}}

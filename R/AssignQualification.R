@@ -62,7 +62,7 @@
 #' valid.
 #' @author Tyler Burleigh, Thomas J. Leeper
 #' @references
-#' \href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_AssignQualificationOperation.html}{API Reference}
+#' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_AssignQualificationOperation.html}{API Reference}
 #' @keywords Qualifications
 #' @examples
 #'

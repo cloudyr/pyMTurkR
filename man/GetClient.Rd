@@ -3,17 +3,21 @@
 \name{GetClient}
 \alias{GetClient}
 \alias{StartClient}
-\alias{CheckAWSKeys}
 \title{Creates an MTurk Client using the AWS SDK for Python (Boto3)}
 \usage{
-GetClient(sandbox = getOption("pyMTurkR.sandbox", TRUE),
-  restart.client = FALSE)
+GetClient(
+  sandbox = getOption("pyMTurkR.sandbox", TRUE),
+  restart.client = FALSE
+)
 }
 \arguments{
 \item{sandbox}{A logical indicating whether the client should be in the
 sandbox environment or the live environment.}
 
 \item{restart.client}{A boolean that specifies whether to force the creation of a new client.}
+}
+\value{
+No return value; Called to populate pyMTurkR$Client
 }
 \description{
 Create an API client. Only advanced users will likely need to use this

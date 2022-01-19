@@ -6,8 +6,11 @@
 \alias{reject}
 \title{Reject Assignment}
 \usage{
-RejectAssignment(assignments, feedback,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+RejectAssignment(
+  assignments,
+  feedback,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{assignments}{A character string containing an AssignmentId, or a

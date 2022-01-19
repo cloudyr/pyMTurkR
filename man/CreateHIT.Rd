@@ -8,14 +8,26 @@
 \alias{createhitwithhittype}
 \title{Create HIT}
 \usage{
-CreateHIT(hit.type = NULL, question = NULL, expiration,
-  assignments = NULL, assignment.review.policy = NULL,
-  hit.review.policy = NULL, annotation = NULL,
-  unique.request.token = NULL, title = NULL, description = NULL,
-  reward = NULL, duration = NULL, keywords = NULL,
-  auto.approval.delay = NULL, qual.req = NULL, hitlayoutid = NULL,
-  hitlayoutparameters = NULL, verbose = getOption("pyMTurkR.verbose",
-  TRUE))
+CreateHIT(
+  hit.type = NULL,
+  question = NULL,
+  expiration,
+  assignments = NULL,
+  assignment.review.policy = NULL,
+  hit.review.policy = NULL,
+  annotation = NULL,
+  unique.request.token = NULL,
+  title = NULL,
+  description = NULL,
+  reward = NULL,
+  duration = NULL,
+  keywords = NULL,
+  auto.approval.delay = NULL,
+  qual.req = NULL,
+  hitlayoutid = NULL,
+  hitlayoutparameters = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{hit.type}{An optional character string specifying the HITTypeId that

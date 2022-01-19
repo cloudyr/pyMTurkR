@@ -15,6 +15,7 @@
 #' @param verbose Optionally print the results of the API request to the
 #' standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
 #' TRUE)}.
+#' @return A list of data frames of various details of a HIT.
 #' @author Tyler Burleigh, Thomas J. Leeper
 #' @references
 #' \href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_GetHITOperation.html}{API Reference}

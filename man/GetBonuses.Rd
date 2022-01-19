@@ -8,9 +8,15 @@
 \alias{listbonuspayments}
 \title{Get Bonus Payments}
 \usage{
-GetBonuses(assignment = NULL, hit = NULL, hit.type = NULL,
-  annotation = NULL, results = as.integer(100), pagetoken = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+GetBonuses(
+  assignment = NULL,
+  hit = NULL,
+  hit.type = NULL,
+  annotation = NULL,
+  results = as.integer(100),
+  pagetoken = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{assignment}{An optional character string containing an AssignmentId

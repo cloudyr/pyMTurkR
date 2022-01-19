@@ -8,10 +8,18 @@
 \alias{ListAssignmentsForHIT}
 \title{Get Assignment(s)}
 \usage{
-GetAssignment(assignment = NULL, hit = NULL, hit.type = NULL,
-  annotation = NULL, status = NULL, results = as.integer(100),
-  pagetoken = NULL, get.answers = FALSE, persist.on.error = FALSE,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+GetAssignment(
+  assignment = NULL,
+  hit = NULL,
+  hit.type = NULL,
+  annotation = NULL,
+  status = NULL,
+  results = as.integer(100),
+  pagetoken = NULL,
+  get.answers = FALSE,
+  persist.on.error = FALSE,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{assignment}{An optional character string specifying the AssignmentId
@@ -58,6 +66,10 @@ numbers of Assignments are being retrieved.}
 \item{verbose}{Optionally print the results of the API request to the
 standard output. Default is taken from \code{getOption('pyMTurkR.verbose',
 TRUE)}.}
+}
+\value{
+A data frame representing an assignment or multiple assignments for
+one or more HITs (or a HITType).
 }
 \description{
 Get an assignment or multiple assignments for one or more HITs (or a

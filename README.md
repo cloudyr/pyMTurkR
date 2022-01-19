@@ -2,10 +2,10 @@
 
 <!-- badges: start -->
 [![travis-ci](https://travis-ci.org/cloudyr/pyMTurkR.svg?branch=master)](https://travis-ci.org/cloudyr/pyMTurkR?branch=master)
-[![codecov test coverage](https://codecov.io/gh/cloudyr/pyMTurkR/branch/master/graph/badge.svg)](https://codecov.io/gh/cloudyr/pyMTurkR?branch=master)
+[![codecov test coverage](https://codecov.io/gh/cloudyr/pyMTurkR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/cloudyr/pyMTurkR?branch=master)
 [![CRAN version](https://img.shields.io/cran/v/pyMTurkR)](https://cran.r-project.org/package=pyMTurkR)
 ![dev version](https://img.shields.io/badge/dev-1.14-blue)
-[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle)
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 ![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/pyMTurkR)
 <!-- badges: end -->
 
@@ -20,14 +20,14 @@ Using this package, you can perform operations like: creating HITs, updating HIT
 
 pyMTurkR was created because on June 1, 2019 Amazon [deprecated the MTurk API (version '2014-08-15')](https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI-legacy/Welcome.html) that MTurkR was using, rendering it obsolete. This package was created to maintain MTurk access for R users while migrating to the new MTurk API (version '2017-01-17').
 
-pyMTurkR is not a native R language package. It uses [`reticulate`](https://rstudio.github.io/reticulate) to import and wrap the [`boto3`](https://aws.amazon.com/sdk-for-python) module for Python. Cross-language dependency is not necessarily a bad thing, and from the user perspective there is probably no difference, besides a few extra installation steps. Welcome to the wonderful world of R-python interoperability.
+pyMTurkR is not a native R language package. It uses [`reticulate`](https://rstudio.github.io/reticulate/) to import and wrap the [`boto3`](https://aws.amazon.com/sdk-for-python) module for Python. Cross-language dependency is not necessarily a bad thing, and from the user perspective there is probably no difference, besides a few extra installation steps. Welcome to the wonderful world of R-python interoperability.
 
 
 # Installation
 
 ## 1. Install `python` and `pip`
 
-1.1. Install `python 2` (>= 2.7) or `python 3` (>= 3.3) ([download page](https://www.python.org/downloads))
+1.1. Install `python 2` (>= 2.7) or `python 3` (>= 3.3) ([download page](https://www.python.org/downloads/))
 
 1.2. Install `pip` for `python` 
 

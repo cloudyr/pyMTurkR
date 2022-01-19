@@ -9,6 +9,9 @@ ToDataFrameQualifications(quals)
 \arguments{
 \item{quals}{qualifications}
 }
+\value{
+A Data frame of qualification information
+}
 \description{
 ToDataFrameQualifications
 }

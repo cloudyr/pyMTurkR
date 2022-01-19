@@ -9,6 +9,9 @@ ToDataFrameHITs(hits)
 \arguments{
 \item{hits}{hits}
 }
+\value{
+A data frame of information on HITs, one per row.
+}
 \description{
-ToDataFrameHITs
+Convert a list of HITs to a data frame
 }

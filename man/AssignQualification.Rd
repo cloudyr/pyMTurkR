@@ -7,11 +7,23 @@
 \alias{AssociateQualificationWithWorker}
 \title{Assign Qualification}
 \usage{
-AssignQualification(qual = NULL, workers, value = 1, notify = FALSE,
-  name = NULL, description = NULL, keywords = NULL, status = NULL,
-  retry.delay = NULL, test = NULL, answerkey = NULL,
-  test.duration = NULL, auto = NULL, auto.value = NULL,
-  verbose = getOption("pyMTurkR.verbose", TRUE))
+AssignQualification(
+  qual = NULL,
+  workers,
+  value = 1,
+  notify = FALSE,
+  name = NULL,
+  description = NULL,
+  keywords = NULL,
+  status = NULL,
+  retry.delay = NULL,
+  test = NULL,
+  answerkey = NULL,
+  test.duration = NULL,
+  auto = NULL,
+  auto.value = NULL,
+  verbose = getOption("pyMTurkR.verbose", TRUE)
+)
 }
 \arguments{
 \item{qual}{A character string containing a QualificationTypeId.}
@@ -115,7 +127,7 @@ AssignQualification(workers = "A1RO9UJNWXMU65",
 }
 }
 \references{
-\href{http://docs.amazonwebservices.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_AssignQualificationOperation.html}{API Reference}
+\href{https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_AssignQualificationOperation.html}{API Reference}
 }
 \author{
 Tyler Burleigh, Thomas J. Leeper
