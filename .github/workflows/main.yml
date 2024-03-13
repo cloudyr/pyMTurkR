@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest ]
-        R: [ '4.1.0', '4.1.1' ]
+        R: [ '4.1.0', '4.1.1', '4.2.0', '4.2.1']
       fail-fast: false
     runs-on: ${{ matrix.os }}
     name: R ${{ matrix.R }} ${{ matrix.os }}
@@ -24,7 +24,7 @@ jobs:
           r-version: ${{ matrix.R }}
 
       - name: Install system dependencies
-        run: sudo apt install build-essential libxml2-dev libssl-dev texinfo texlive-latex-base libcurl4-openssl-dev libcairo2-dev texlive-fonts-extra qpdf
+        run: sudo apt install build-essential libxml2-dev libssl-dev texinfo texlive-latex-base libcurl4-openssl-dev libcairo2-dev texlive-fonts-extra qpdf libharfbuzz-dev libfribidi-dev
 
       - name: Install devtools
         run: Rscript -e "install.packages('devtools', dependencies=T, repos='https://cloud.r-project.org')"
