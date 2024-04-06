@@ -24,7 +24,7 @@ Imports:
 	curl,
 	stats,
 	utils,
-	XML (<= 3.99-0.14)
+	XML
 RoxygenNote: 7.1.2
 Suggests: 
     testthat (>= 2.1.0),
