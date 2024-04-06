@@ -22,7 +22,7 @@ Maintainer: Tyler Burleigh <tylerburleigh@gmail.com>
 \references{
 \href{https://www.mturk.com/}{Amazon Mechanical Turk}
 
-\href{https://docs.aws.amazon.com/mturk/index.html}{Amazon Mechanical Turk API Documentation}
+\href{https://docs.aws.amazon.com/mturk/}{Amazon Mechanical Turk API Documentation}
 }
 \keyword{ package }
 \seealso{
