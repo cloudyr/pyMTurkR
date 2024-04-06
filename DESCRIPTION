@@ -25,7 +25,7 @@ Imports:
 	stats,
 	utils,
 	XML
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.1
 Suggests: 
     testthat (>= 2.1.0),
     covr,

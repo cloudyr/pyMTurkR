@@ -101,16 +101,16 @@ GrantQualification <-
 
 
       # Check if failure
-      if (class(response) != "try-error") {
-        valid <- TRUE
-      } else {
+      if (inherits(response, "try-error")) {
         valid <- FALSE
+      } else {
+        valid <- TRUE
       }
 
       QualificationRequests[i, ] <- c(qual.requests[i], values[i], valid)
 
       # Message with results
-      if (class(response) != "try-error" & valid == TRUE) {
+      if ((!(inherits(response, "try-error"))) & valid == TRUE) {
         if (verbose) {
           message(i, ": Qualification (", qual.requests[i],") Granted")
         }

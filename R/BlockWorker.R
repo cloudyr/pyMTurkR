@@ -88,7 +88,7 @@ BlockWorker <-
       ), silent = !verbose)
 
       # Validity check
-      if(class(response) == "try-error") {
+      if (inherits(response, "try-error")) {
         valid = FALSE
       }
       else {

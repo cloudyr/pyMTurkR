@@ -60,7 +60,7 @@ DisposeQualificationType <-
       QualificationTypeId = qual
     ), silent = !verbose)
 
-    if(class(response) == "try-error") {
+    if (inherits(response, "try-error")) {
       warning("Invalid request\n  Does this qualification exist?")
       return(emptydf(0, 2, c("QualificationTypeId", "Valid")))
     } else {

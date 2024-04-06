@@ -1,7 +1,7 @@
 # pyMTurkR: A Client for the MTurk Requester API <img src="https://raw.githubusercontent.com/cloudyr/pyMTurkR/master/assets/hex-pyMTurkR.png" align="right" width="200" />
 
 <!-- badges: start -->
-[![travis-ci](https://travis-ci.org/cloudyr/pyMTurkR.svg?branch=master)](https://travis-ci.org/cloudyr/pyMTurkR?branch=master)
+[![CI](https://github.com/cloudyr/pyMTurkR/actions/workflows/main.yml/badge.svg)](https://github.com/cloudyr/pyMTurkR/actions/workflows/main.yml)
 [![codecov test coverage](https://codecov.io/gh/cloudyr/pyMTurkR/branch/master/graph/badge.svg)](https://app.codecov.io/gh/cloudyr/pyMTurkR?branch=master)
 [![CRAN version](https://img.shields.io/cran/v/pyMTurkR)](https://cran.r-project.org/package=pyMTurkR)
 ![dev version](https://img.shields.io/badge/dev-1.14-blue)

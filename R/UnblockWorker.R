@@ -44,7 +44,7 @@ UnblockWorker <-
       )
 
       # Validity check
-      if(class(response) == "try-error") {
+      if (inherits(response, "try-error")) {
         valid = FALSE
         if(verbose){
           message(i, ": Worker ", workers[i], " Unblocked")

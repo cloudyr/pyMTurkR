@@ -160,7 +160,7 @@ ExtendHIT <-
           do.call('fun', args)
         )
 
-        if(class(response) == "try-error") {
+        if (inherits(response, "try-error")) {
           valid <- FALSE
           warning("Invalid Request")
         } else {
@@ -176,7 +176,7 @@ ExtendHIT <-
           HITId = hit,
           ExpireAt = as.character(as.integer(expirations[i]) + as.integer(add.seconds))
         ), silent = !verbose)
-        if(class(response) == "try-error") {
+        if (inherits(response, "try-error")) {
           warning("Invalid Request")
           valid <- FALSE
         } else {

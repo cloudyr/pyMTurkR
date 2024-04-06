@@ -300,7 +300,7 @@ CreateHIT <-
     )
 
     # Validity check
-    if(class(response) == "try-error") {
+    if (inherits(response, "try-error")) {
       warning("Invalid Request")
       warning(response)
     } else {

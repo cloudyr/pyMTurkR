@@ -162,7 +162,7 @@ DisableHIT <-
         ), silent = !verbose)
         operation <- "Disable/Expire"
 
-        if(class(response) == "try-error") {
+        if (inherits(response, "try-error")) {
           warning(i, ": Invalid Request for HIT ", hit)
           valid <- FALSE
         } else {
@@ -184,7 +184,7 @@ DisableHIT <-
         if(hitdetail$HITs$HITStatus %in% c("Reviewing", "Reviewable")){
           response <- try(pyMTurkR$Client$delete_hit(HITId = hit), silent = !verbose)
 
-          if(class(response) == "try-error") {
+          if (inherits(response, "try-error")) {
             warning(i, ": Unable to Delete HIT ", hit)
             valid <- FALSE
           } else {

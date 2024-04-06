@@ -34,7 +34,7 @@ RejectQualification <-
       }
 
       # Check if failure
-      if (class(response) == "try-error") {
+      if (inherits(response, "try-error")) {
         valid <- FALSE
         if (verbose) {
           warning(i, ": Invalid Request for QualificationRequestId ", qual.requests[i])

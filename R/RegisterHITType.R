@@ -136,7 +136,7 @@ RegisterHITType <-
       do.call('fun', args), silent = !verbose
     )
 
-    if (class(response) != "try-error") { # Valid
+    if (!(inherits(response, "try-error"))) { # Valid
       HITType[1, ] <- c(response$HITTypeId, TRUE)
       if (verbose) {
         message("HITType Registered: ", HITType$HITTypeId)

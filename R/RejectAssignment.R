@@ -73,7 +73,7 @@ RejectAssignment <-
       ), silent = !verbose)
 
       # Check if failure
-      if (class(response) == "try-error") {
+      if (inherits(response, "try-error")) {
         valid <- FALSE
         if (verbose) {
           warning(i, ": Invalid request for assignment ",assignments[i])

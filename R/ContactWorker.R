@@ -146,7 +146,7 @@ ContactWorker <-
           WorkerIds = as.list(workerbatch[[i]]),
           MessageText = msgs
         ), silent = !verbose)
-        if (class(response) != "try-error") {
+        if (!(inherits(response, "try-error"))) {
           Notifications$Valid[Notifications$WorkerId %in% workerbatch[[i]]] <- TRUE
           if (verbose) {
             message(i, ": Workers ", workerbatch[[i]][1], " to ", utils::tail(workerbatch[[i]],1), " Notified")
@@ -226,7 +226,7 @@ ContactWorker <-
                     response$NotifyWorkersFailureStatuses[[1]]$NotifyWorkersFailureMessage)
           }
         }
-        if (class(response) != "try-error" & valid == TRUE) {
+        if ((!(inherits(response, "try-error"))) & valid == TRUE) {
           if (verbose) {
             message(i, ": Worker (", workers[i], ") Notified")
           }

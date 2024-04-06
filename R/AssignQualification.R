@@ -142,7 +142,7 @@ AssignQualification <-
       ), silent = !verbose)
 
       # Validity check
-      if(class(response) == "try-error") {
+      if (inherits(response, "try-error")) {
         return(data.frame(valid = FALSE))
       }
       else response$valid = TRUE

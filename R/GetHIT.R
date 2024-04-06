@@ -63,7 +63,7 @@ GetHIT <-
     GetClient() # Boto3 client
     response <- try(pyMTurkR$Client$get_hit(HITId = hit), silent = !verbose)
 
-    if (class(response) != "try-error") {
+    if (!(inherits(response, "try-error"))) {
       hitdetails <- list(response$HIT) # Hack for 1 result
       return.list <- list(HITs = ToDataFrameHITs(hitdetails),
                             QualificationRequirements = ToDataFrameQualificationRequirements(hitdetails))
