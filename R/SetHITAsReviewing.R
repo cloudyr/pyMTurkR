@@ -114,7 +114,7 @@ SetHITAsReviewing <-
         status <- "Reviewable"
       }
 
-      if(class(response) == "try-error") {
+      if (inherits(response, "try-error")) {
         warning(i, ": Invalid Request for HIT ", hit)
         valid = FALSE
       } else {

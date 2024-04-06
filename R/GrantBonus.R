@@ -152,10 +152,10 @@ GrantBonus <-
       )
 
       # Check if failure
-      if (class(response) != "try-error") {
-        valid <- TRUE
-      } else {
+      if (inherits(response, "try-error")) {
         valid <- FALSE
+      } else {
+        valid <- TRUE
       }
 
       Bonuses[i, ] <- c(workers[i], assignments[i], amounts[i], reasons[i], valid)
@@ -167,7 +167,7 @@ GrantBonus <-
                   response[1])
         }
       }
-      if (class(response) != "try-error" & valid == TRUE) {
+      if ((!(inherits(response, "try-error"))) & valid == TRUE) {
         if (verbose) {
           message(i, ": Worker (", workers[i], ") Granted Bonus of ", amounts[i], " for Assignment ", assignments[i])
         }

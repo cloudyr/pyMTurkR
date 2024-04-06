@@ -54,7 +54,7 @@ function (return.pages = NULL,
     }
 
     # Validity check response
-    if(class(response) == "try-error") {
+    if (inherits(response, "try-error")) {
       stop("SearchHITs request failed!")
     }
 

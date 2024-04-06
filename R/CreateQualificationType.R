@@ -169,7 +169,7 @@ CreateQualificationType <-
 
     # Update Qualification with any other parameters,
     # but only if we've just created it
-    if(class(response) == "try-error") {
+    if (inherits(response, "try-error")) {
       stop("Unable to create qualification")
     } else {
 

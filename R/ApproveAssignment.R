@@ -118,7 +118,7 @@ function (assignments,
     )
 
     # Check if failure
-    if (class(response) != "try-error") {
+    if (!(inherits(response, "try-error"))) {
       valid <- TRUE
       if (verbose) {
         message(i, ": Assignment (", assignments[i], ") Approved")

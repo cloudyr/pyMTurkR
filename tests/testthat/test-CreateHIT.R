@@ -77,16 +77,16 @@ test_that("CreateHIT", {
   Sys.sleep(15)
 
   # Delete HIT
-  ExpireHIT(hit$HITId,
+  ExpireHIT(hit["HITId"],
             verbose = FALSE)
-  DeleteHIT(hit$HITId,
+  DeleteHIT(hit["HITId"],
             skip.delete.prompt = TRUE,
             verbose = FALSE)
 
   # Delete HIT
-  ExpireHIT(hit2$HITId,
+  ExpireHIT(hit2["HITId"],
             verbose = FALSE)
-  DeleteHIT(hit2$HITId,
+  DeleteHIT(hit2["HITId"],
             skip.delete.prompt = TRUE,
             verbose = FALSE)
 })

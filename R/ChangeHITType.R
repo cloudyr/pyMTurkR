@@ -162,7 +162,7 @@ ChangeHITType <-
                                         auto.approval.delay = auto.approval.delay,
                                         qual.req = qual.req), silent = !verbose)
 
-        if (class(register) == "try-error") {
+        if (inherits(register, "try-error")) {
           stop("Could not RegisterHITType(), check parameters")
         } else {
           new.hit.type <- register$HITTypeId
@@ -204,10 +204,10 @@ ChangeHITType <-
         HITTypeId = new.hit.type
       ), silent = !verbose)
 
-      if (class(response) != "try-error") { # Valid
-        valid <- TRUE
-      } else {
+      if (inherits(response, "try-error")) {
         valid <- FALSE
+      } else {
+        valid <- TRUE
       }
 
       if (is.null(old.hit.type)) {

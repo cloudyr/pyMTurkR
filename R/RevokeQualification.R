@@ -98,7 +98,7 @@ RevokeQualification <-
       )
 
       # Check if failure
-      if (class(response) != "try-error") {
+      if (!(inherits(response, "try-error"))) {
         message(i, ": Qualification (", qual, ") for worker ", workers[i], " Revoked")
         valid <- TRUE
       } else {

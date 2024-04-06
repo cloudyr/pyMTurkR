@@ -106,7 +106,7 @@ SetHITTypeNotification <-
     # Call the function with the arguments
     response <- try(do.call('fun', args), silent = !verbose)
 
-    if(class(response) == "try-error") {
+    if (inherits(response, "try-error")) {
       valid = FALSE
       if (verbose) {
         warning("Invalid Request")

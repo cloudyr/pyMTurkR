@@ -95,7 +95,7 @@ GetBonuses <-
       }
 
       # Validity check response
-      if(class(response) == "try-error") {
+      if (inherits(response, "try-error")) {
         stop("Request failed")
       }
 

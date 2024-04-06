@@ -83,7 +83,7 @@ SendTestEventNotification <-
     )
 
     # Check if failure
-    if (class(response) != "try-error") {
+    if (!(inherits(response, "try-error"))) {
       valid <- TRUE
       if (verbose) {
         message("TestEventNotification ", test.event.type," Sent")

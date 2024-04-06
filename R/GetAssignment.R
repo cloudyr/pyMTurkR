@@ -110,7 +110,7 @@ GetAssignment <-
       for (i in 1:length(assignment)) {
         response <- try(pyMTurkR$Client$get_assignment(AssignmentId = assignment[i]), silent = !verbose)
         QualificationRequirements <- list()
-        if (class(response) != "try-error") {
+        if (!(inherits(response, "try-error"))) {
           tmp <- ToDataFrameAssignment(response$Assignment)
           a <- tmp$assignments
           ans <- tmp$answers
@@ -185,7 +185,7 @@ GetAssignment <-
         }
 
         # Validity check response
-        if(class(response) == "try-error" & persist.on.error) {
+        if ((inherits(response, "try-error")) & persist.on.error) {
 
           # If the response was an error, then we should try again
           # but stop after 5 attempts

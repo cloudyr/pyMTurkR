@@ -48,7 +48,7 @@ GetQualificationType <-
     response <- try(pyMTurkR$Client$get_qualification_type(QualificationTypeId = qual), silent = !verbose)
 
     # Validity check response
-    if(class(response) == "try-error") {
+    if (inherits(response, "try-error")) {
       Qualifications <- emptydf(nrow=0, ncol=13, c("QualificationTypeId", "CreationTime", "Name", "Description",
                                    "Keywords", "QualificationTypeStatus", "AutoGranted", "AutoGrantedValue",
                                    "IsRequestable", "RetryDelayInSeconds", "TestDurationInSeconds",
